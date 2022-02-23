@@ -1,7 +1,7 @@
-// Import React dependencies.
-import React, { useState } from 'react'
-// Import the Slate editor factory.
-import { createEditor } from 'slate'
+import React, { useState } from 'react';
+import { createEditor } from 'slate';
+import { Slate, Editable, withReact } from 'slate-react';
+import { ITiddlerFields } from 'tiddlywiki';
+import type { ReactWidget } from 'tw-react';
 
-// Import the Slate components and React plugin.
-import { Slate, Editable, withReact } from 'slate-react'
+const Widget = require('$:/plugins/linonetwo/tw-react/widget.js').widget as typeof ReactWidget;

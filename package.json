@@ -1,5 +1,5 @@
 {
-  "description": "",
+  "description": " A WYSIWYG editor for TiddlyWiki.",
   "license": "MIT",
   "name": "slate-write",
   "version": "0.0.1",
@@ -101,6 +101,8 @@
     "styled-components": "^5.3.3",
     "typescript": "4.4.4",
     "typesync": "0.8.0",
+    "tw5-typed": "^0.1.4",
+    "tw-react": "^0.0.9",
     "unist-util-inspect": "^7.0.0"
   }
 }

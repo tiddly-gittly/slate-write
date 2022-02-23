@@ -1,6 +1,6 @@
 {
   "title": "$:/plugins/linonetwo/slate-write",
-  "name": "Slate Write",
+  "name": "Slate Write is a WYSIWYG editor for TiddlyWiki. ",
   "description": "",
   "author": "LinOnetwo",
   "core-version": ">=5.1.22",
