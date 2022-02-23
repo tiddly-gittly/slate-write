@@ -28,9 +28,12 @@ class SlateWriteWidget extends Widget {
     return {
       saver: {
         onSave,
+        interval: 1000,
       },
     };
   };
 }
 
 exports.slateWrite = SlateWriteWidget;
+// fix `Undefined widget 'edit-slateWrite'`
+exports['edit-slateWrite'] = SlateWriteWidget;

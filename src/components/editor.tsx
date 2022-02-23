@@ -44,11 +44,11 @@ export function EditorApp(props: IEditorAppProps) {
   ]);
   const onSave = useDebouncedCallback(
     (newValue: Descendant[]) => {
-      const isAstChange = editor.operations.some(
-        op => 'set_selection' !== op.type
-      )
+      // TODO: this seems buggy, sometimes editor.operations is empty array... So I have to add `editor.operations.length === 0 ||`
+      const isAstChange = editor.operations.length === 0 || editor.operations.some((op) => 'set_selection' !== op.type);
       if (isAstChange) {
-        props.saver.onSave(serialize(newValue));
+        const newText = serialize(newValue);
+        props.saver.onSave(newText);
       }
     },
     [props.saver.onSave, editor],

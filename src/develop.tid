@@ -1,0 +1,6 @@
+title: $:/plugins/linonetwo/slate-write/develop
+type: text/vnd.tiddlywiki
+
+!! How to make this the default editor
+
+By setting tiddler `$:/config/EditorTypeMappings/text/vnd.tiddlywiki` to `slateWrite`, then tiddlywiki will try to use widget `<$edit-slateWrite />` as the editor.
