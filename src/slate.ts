@@ -18,9 +18,9 @@ class SlateWriteWidget extends Widget {
     const currentTiddler = this.getAttribute('tiddler', this.getVariable('currentTiddler'));
 
     const onSave = (newText: string) => {
-      const prevText = $tw.wiki.getTiddlerText(currentTiddler) ?? '';
+      const previousText = $tw.wiki.getTiddlerText(currentTiddler) ?? '';
       // prevent useless call to addTiddler
-      if (prevText === newText) {
+      if (previousText === newText) {
         return;
       }
       $tw.wiki.setText(currentTiddler, undefined, undefined, newText);

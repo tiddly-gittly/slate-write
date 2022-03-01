@@ -6,17 +6,20 @@ import { useDebouncedCallback } from 'beautiful-react-hooks';
 import { serialize } from 'src/transform/serialize';
 
 export type CustomEditor = BaseEditor & ReactEditor & HistoryEditor;
-export type ParagraphElement = {
+export interface ParagraphElement {
+  children: CustomText[];
   type: 'paragraph';
+}
+export interface HeadingElement {
   children: CustomText[];
-};
-export type HeadingElement = {
-  type: 'heading';
   level: number;
-  children: CustomText[];
-};
+  type: 'heading';
+}
 export type CustomElement = ParagraphElement | HeadingElement;
-export type FormattedText = { text: string; bold?: true };
+export interface FormattedText {
+  bold?: true;
+  text: string;
+}
 export type CustomText = FormattedText;
 declare module 'slate' {
   interface CustomTypes {
@@ -28,9 +31,9 @@ declare module 'slate' {
 
 export interface IEditorAppProps {
   saver: {
-    onSave: (value: string) => void;
     /** ms about debounce how long between save */
     interval?: number;
+    onSave: (value: string) => void;
   };
 }
 export function EditorApp(props: IEditorAppProps) {
@@ -45,7 +48,7 @@ export function EditorApp(props: IEditorAppProps) {
   const onSave = useDebouncedCallback(
     (newValue: Descendant[]) => {
       // TODO: this seems buggy, sometimes editor.operations is empty array... So I have to add `editor.operations.length === 0 ||`
-      const isAstChange = editor.operations.length === 0 || editor.operations.some((op) => 'set_selection' !== op.type);
+      const isAstChange = editor.operations.length === 0 || editor.operations.some((op) => op.type !== 'set_selection');
       if (isAstChange) {
         const newText = serialize(newValue);
         props.saver.onSave(newText);
