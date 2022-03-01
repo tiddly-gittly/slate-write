@@ -31,9 +31,12 @@
   },
   "homepage": "https://github.com/tiddly-gittly/slate-write#readme",
   "dependencies": {
+    "md-to-tid": "^0.0.3",
+    "remark-slate-transformer": "^0.6.7",
     "slate": "0.72.8",
     "slate-history": "^0.66.0",
-    "slate-react": "0.72.9"
+    "slate-react": "0.72.9",
+    "unified": "^10.1.1"
   },
   "devDependencies": {
     "@babel/cli": "7.17.6",
