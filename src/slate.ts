@@ -1,6 +1,7 @@
 import type { ReactWidget } from 'tw-react';
 import { EditorApp, IEditorAppProps } from './components/editor';
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 const Widget = require('$:/plugins/linonetwo/tw-react/widget.js').widget as typeof ReactWidget;
 
 // TODO: implement things in https://github.com/Jermolene/TiddlyWiki5/blob/master/core/modules/editor/factory.js

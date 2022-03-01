@@ -84,6 +84,7 @@ module.exports = {
     'no-void': [0],
     'unicorn/prefer-ternary': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
     semi: [0],
     'no-use-before-define': [0],
     '@typescript-eslint/no-use-before-define': [1],
@@ -118,6 +119,8 @@ module.exports = {
     'react-hooks',
     'security',
     'security-node',
+    'autofix',
+    'unused-imports',
   ],
   env: {
     browser: true,
