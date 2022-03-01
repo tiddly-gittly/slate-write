@@ -4,7 +4,6 @@ export function fromWikiText(input: string): IParseTreeNode[] {
   if (typeof $tw === 'undefined') {
     return [];
   }
-  const parser = $tw?.wiki?.parseText?.bind?.($tw, 'text/vnd.tiddlywiki') ?? (() => ({ tree: [] }));
-  const rootNode = parser(input).tree;
+  const rootNode = $tw.wiki.parseText('text/vnd.tiddlywiki', input).tree;
   return rootNode;
 }
