@@ -73,7 +73,7 @@ export const builders = {
   footnoteDefinition,
   footnoteReference,
   heading,
-  html,
+  element: html,
   image,
   imageReference,
   inlineMath,

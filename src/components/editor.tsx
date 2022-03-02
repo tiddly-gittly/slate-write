@@ -6,16 +6,17 @@ import { useDebouncedCallback } from 'beautiful-react-hooks';
 import { serialize } from 'src/transform/serialize';
 
 export type CustomEditor = BaseEditor & ReactEditor & HistoryEditor;
-export interface ParagraphElement {
+export interface CustomRenderElement {
   children: CustomText[];
-  type: 'paragraph';
+  /** this can be `echarts` or `mermaid` */
+  type: string;
 }
-export interface HeadingElement {
+export interface ElementElement {
   children: CustomText[];
-  level: number;
-  type: 'heading';
+  tag: string;
+  type: 'element';
 }
-export type CustomElement = ParagraphElement | HeadingElement;
+export type CustomElement = CustomRenderElement | ElementElement;
 export interface FormattedText {
   bold?: true;
   text: string;

@@ -31,6 +31,7 @@
   },
   "homepage": "https://github.com/tiddly-gittly/slate-write#readme",
   "dependencies": {
+    "lodash": "^4.17.21",
     "md-to-tid": "^0.0.3",
     "remark-slate-transformer": "^0.6.7",
     "slate": "0.72.8",

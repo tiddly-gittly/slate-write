@@ -6,5 +6,5 @@ export type InlineCode = ReturnType<typeof inlineCode>;
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function inlineCode(builders: IBuilders, value: string, deco: Decoration) {
-  return text(builders, value, { ...deco, inlineCode: true });
+  return text(builders, { type: 'text', text: value }, { ...deco, inlineCode: true });
 }
