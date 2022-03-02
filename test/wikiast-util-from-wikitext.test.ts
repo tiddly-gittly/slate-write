@@ -1,3 +1,4 @@
+import { IDomParseTreeNode } from 'tiddlywiki';
 import { fromWikiText } from '../src/transform/wikiast-util-from-wikitext';
 describe('In env without $tw', () => {
   beforeEach(() => {
@@ -14,6 +15,7 @@ describe('fromWikiText', () => {
     expect(fromWikiText('')).toEqual([]);
   });
   test('parse text', () => {
-    expect(fromWikiText('AAA')).toEqual([{ type: 'element', tag: 'p', children: [{ type: 'text', text: 'AAA', start: 0, end: 3 }], start: 0, end: 3 }]);
+    const root: IDomParseTreeNode[] = [{ type: 'element', tag: 'p', children: [{ type: 'text', text: 'AAA', start: 0, end: 3 }], start: 0, end: 3 }];
+    expect(fromWikiText('AAA')).toEqual(root);
   });
 });
