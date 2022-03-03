@@ -1,3 +1,4 @@
 title: $:/plugins/linonetwo/slate-write/readme
 type: text/vnd.tiddlywiki
 
+`<$edit-slateWrite tiddler="AAA" />`

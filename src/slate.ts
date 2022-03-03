@@ -27,6 +27,7 @@ class SlateWriteWidget extends Widget {
       $tw.wiki.setText(currentTiddler, undefined, undefined, newText);
     };
     return {
+      initialText: $tw.wiki.getTiddlerText(currentTiddler) ?? '',
       saver: {
         onSave,
         interval: 1000,
@@ -35,6 +36,7 @@ class SlateWriteWidget extends Widget {
   };
 }
 
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 exports.slateWrite = SlateWriteWidget;
 // fix `Undefined widget 'edit-slateWrite'`
 exports['edit-slateWrite'] = SlateWriteWidget;

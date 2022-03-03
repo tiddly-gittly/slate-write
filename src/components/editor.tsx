@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { createEditor, BaseEditor, Descendant } from 'slate';
-import { Slate, Editable, withReact, ReactEditor } from 'slate-react';
+import { Slate, Editable, withReact, ReactEditor, RenderElementProps } from 'slate-react';
 import { HistoryEditor } from 'slate-history';
 import { useDebouncedCallback } from 'beautiful-react-hooks';
 import { serialize } from 'src/transform/serialize';
+import { fromWikiText } from 'src/transform/wikiast-util-from-wikitext';
+import { wikiAstToSlateAst } from 'src/transform/wikiast-util-to-slateast';
 
 export type CustomEditor = BaseEditor & ReactEditor & HistoryEditor;
 export interface CustomRenderElement {
@@ -31,21 +33,18 @@ declare module 'slate' {
 }
 
 export interface IEditorAppProps {
+  initialText: string;
   saver: {
     /** ms about debounce how long between save */
     interval?: number;
     onSave: (value: string) => void;
   };
 }
-export function EditorApp(props: IEditorAppProps) {
+export function EditorApp(props: IEditorAppProps): JSX.Element {
   const [editor] = useState(() => withReact(createEditor()));
   // Add the initial value when setting up our state.
-  const [value, setValue] = useState<Descendant[]>([
-    {
-      type: 'paragraph',
-      children: [{ text: 'A line of text in a paragraph.' }],
-    },
-  ]);
+  const initialAst = wikiAstToSlateAst(fromWikiText(props.initialText));
+  const [value, setValue] = useState<Descendant[]>(initialAst as Descendant[]);
   const onSave = useDebouncedCallback(
     (newValue: Descendant[]) => {
       // TODO: this seems buggy, sometimes editor.operations is empty array... So I have to add `editor.operations.length === 0 ||`
@@ -59,6 +58,17 @@ export function EditorApp(props: IEditorAppProps) {
     props.saver.interval,
   );
 
+  // Define a rendering function based on the element passed to `props`. We use
+  // `useCallback` here to memoize the function for subsequent renders.
+  const renderElement = useCallback((props: RenderElementProps): JSX.Element => {
+    switch (props.element.type) {
+      case 'element':
+        return <ElementRender {...props} />;
+      default:
+        return <DefaultElement {...props} />;
+    }
+  }, []);
+
   return (
     <Slate
       editor={editor}
@@ -67,7 +77,15 @@ export function EditorApp(props: IEditorAppProps) {
         setValue(newValue);
         onSave(newValue);
       }}>
-      <Editable />
+      <Editable renderElement={renderElement} />
     </Slate>
   );
 }
+
+const ElementRender = (props: RenderElementProps): JSX.Element => {
+  const { tag: HtmlTag } = props.element as ElementElement;
+  return <HtmlTag {...props.attributes}>{props.children}</HtmlTag>;
+};
+const DefaultElement = (props: RenderElementProps): JSX.Element => {
+  return <p {...props.attributes}>{props.children}</p>;
+};
