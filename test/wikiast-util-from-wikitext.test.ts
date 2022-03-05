@@ -1,5 +1,5 @@
 import { fromWikiText } from '../src/transform/wikiast-util-from-wikitext';
-import { wikiAstDict } from './constants';
+import { wikiAstDict, wikiTextDict } from './constants';
 describe('In env without $tw', () => {
   beforeEach(() => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
@@ -15,6 +15,6 @@ describe('fromWikiText', () => {
     expect(fromWikiText('')).toEqual([]);
   });
   test('parse text', () => {
-    expect(fromWikiText('AAA')).toEqual(wikiAstDict['p > text']);
+    expect(fromWikiText(wikiTextDict['p > text'])).toEqual(wikiAstDict['p > text']);
   });
 });
