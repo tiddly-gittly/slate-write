@@ -1,22 +1,18 @@
-import { IDomParseTreeNode, ITextParseTreeNode } from 'tiddlywiki';
+/* eslint-disable @typescript-eslint/dot-notation */
 import { wikiAstToSlateAst } from '../src/transform/wikiast-util-to-slateast';
-import * as slate from '../src/transform/slate';
+import { slateDict, wikiAstDict } from './constants';
 
 describe('Transform node', () => {
   test('wikiAstToSlateAst callable', () => {
     expect(typeof wikiAstToSlateAst).toBe('function');
   });
   test('text', () => {
-    const root: ITextParseTreeNode = { type: 'text', text: 'AAA', start: 0, end: 3 };
-    const result: slate.Text[] = [{ text: 'AAA' }];
-    expect(wikiAstToSlateAst(root)).toEqual(result);
+    expect(wikiAstToSlateAst(wikiAstDict['text'])).toEqual(slateDict['text']);
   });
 });
 
 describe('Transform tree', () => {
   test('p > text', () => {
-    const root: IDomParseTreeNode[] = [{ type: 'element', tag: 'p', children: [{ type: 'text', text: 'AAA', start: 0, end: 3 }], start: 0, end: 3 }];
-    const result: slate.Element[] = [{ type: 'element', tag: 'p', children: [{ text: 'AAA' }] }];
-    expect(wikiAstToSlateAst(root)).toEqual(result);
+    expect(wikiAstToSlateAst(wikiAstDict['p > text'])).toEqual(slateDict['p > text']);
   });
 });

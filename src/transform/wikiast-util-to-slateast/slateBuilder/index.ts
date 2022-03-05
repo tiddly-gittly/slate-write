@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import * as slate from '../../slate';
 import * as mdast from '../../mdast';
 
 import { Blockquote, blockquote } from './blockquote';
@@ -33,8 +32,6 @@ import { Math, math } from './math';
 export type Decoration = Readonly<{
   [key in (mdast.Emphasis | mdast.Strong | mdast.Delete | mdast.InlineCode)['type']]?: true;
 }>;
-
-export type SlateBuilder = (node: mdast.Content, deco: Decoration) => slate.Node[];
 
 export type SlateNode =
   | Paragraph

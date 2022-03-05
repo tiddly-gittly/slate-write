@@ -18,7 +18,7 @@ class SlateWriteWidget extends Widget {
   getProps = (): IEditorAppProps => {
     const currentTiddler = this.getAttribute('tiddler', this.getVariable('currentTiddler'));
 
-    const onSave = (newText: string) => {
+    const onSave = (newText: string): void => {
       const previousText = $tw.wiki.getTiddlerText(currentTiddler) ?? '';
       // prevent useless call to addTiddler
       if (previousText === newText) {
