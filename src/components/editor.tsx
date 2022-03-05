@@ -14,7 +14,7 @@ export interface CustomRenderElement {
   type: string;
 }
 export interface ElementElement {
-  children: CustomText[];
+  children: Array<CustomText | ElementElement>;
   tag: string;
   type: 'element';
 }

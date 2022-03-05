@@ -3,8 +3,9 @@ import { convertNodes } from '../../traverse';
 
 import { p } from './p';
 import { ul } from './ul';
+import { li } from './li';
 import { IContext } from '../..';
-export const elementBuilders = { p, ul, ol: ul };
+export const elementBuilders = { p, ul, ol: ul, li };
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function element(context: IContext, node: IDomParseTreeNode): string[] {

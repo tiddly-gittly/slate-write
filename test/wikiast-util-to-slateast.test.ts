@@ -15,4 +15,10 @@ describe('Transform tree', () => {
   test('p > text', () => {
     expect(wikiAstToSlateAst(wikiAstDict['p > text'])).toEqual(slateDict['p > text']);
   });
+  test('ul > li > text', () => {
+    expect(wikiAstToSlateAst(wikiAstDict['ul > li > text'])).toEqual(slateDict['ul > li > text']);
+  });
+  test('ol > li > text', () => {
+    expect(wikiAstToSlateAst(wikiAstDict['ol > li > text'])).toEqual(slateDict['ol > li > text']);
+  });
 });

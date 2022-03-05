@@ -19,4 +19,10 @@ describe('Transform tree', () => {
   test('p > text', () => {
     expect(wikiAstToWikiText(wikiAstDict['p > text'])).toEqual(wikiTextDict['p > text']);
   });
+  test('ul > li > text', () => {
+    expect(wikiAstToWikiText(wikiAstDict['ul > li > text'])).toEqual(wikiTextDict['ul > li > text']);
+  });
+  test('ol > li > text', () => {
+    expect(wikiAstToWikiText(wikiAstDict['ol > li > text'])).toEqual(wikiTextDict['ol > li > text']);
+  });
 });
