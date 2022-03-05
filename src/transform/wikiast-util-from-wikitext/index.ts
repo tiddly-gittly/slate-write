@@ -1,6 +1,6 @@
 import type { IParseTreeNode } from 'tiddlywiki';
 
-export function fromWikiText(input: string): IParseTreeNode[] {
+export function wikiAstFromWikiText(input: string): IParseTreeNode[] {
   if (typeof $tw === 'undefined') {
     return [];
   }

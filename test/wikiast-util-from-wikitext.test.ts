@@ -1,4 +1,4 @@
-import { fromWikiText } from '../src/transform/wikiast-util-from-wikitext';
+import { wikiAstFromWikiText } from '../src/transform/wikiast-util-from-wikitext';
 import { wikiAstDict, wikiTextDict } from './constants';
 
 describe('fromWikiText', () => {
@@ -8,23 +8,23 @@ describe('fromWikiText', () => {
       (global as any).$tw = undefined;
     });
     test("it should work in env that don't have $tw", () => {
-      expect(typeof fromWikiText).toBe('function');
-      expect(fromWikiText('')).toEqual([]);
+      expect(typeof wikiAstFromWikiText).toBe('function');
+      expect(wikiAstFromWikiText('')).toEqual([]);
     });
   });
   test('it run without error', () => {
-    expect(fromWikiText('')).toEqual([]);
+    expect(wikiAstFromWikiText('')).toEqual([]);
   });
 });
 
 describe('fromWikiText', () => {
   test('p > text', () => {
-    expect(fromWikiText(wikiTextDict['p > text'])).toEqual(wikiAstDict['p > text']);
+    expect(wikiAstFromWikiText(wikiTextDict['p > text'])).toEqual(wikiAstDict['p > text']);
   });
   test('ul > li > text', () => {
-    expect(fromWikiText(wikiTextDict['ul > li > text'])).toEqual(wikiAstDict['ul > li > text']);
+    expect(wikiAstFromWikiText(wikiTextDict['ul > li > text'])).toEqual(wikiAstDict['ul > li > text']);
   });
   test('ol > li > text', () => {
-    expect(fromWikiText(wikiTextDict['ol > li > text'])).toEqual(wikiAstDict['ol > li > text']);
+    expect(wikiAstFromWikiText(wikiTextDict['ol > li > text'])).toEqual(wikiAstDict['ol > li > text']);
   });
 });

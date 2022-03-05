@@ -3,9 +3,8 @@ import { createEditor, BaseEditor, Descendant } from 'slate';
 import { Slate, Editable, withReact, ReactEditor, RenderElementProps } from 'slate-react';
 import { HistoryEditor } from 'slate-history';
 import { useDebouncedCallback } from 'beautiful-react-hooks';
-import { serialize } from 'src/transform/serialize';
-import { fromWikiText } from 'src/transform/wikiast-util-from-wikitext';
-import { wikiAstToSlateAst } from 'src/transform/wikiast-util-to-slateast';
+
+import { deserialize, serialize } from '../../src/transform/serialize';
 
 export type CustomEditor = BaseEditor & ReactEditor & HistoryEditor;
 export interface CustomRenderElement {
@@ -43,7 +42,7 @@ export interface IEditorAppProps {
 export function EditorApp(props: IEditorAppProps): JSX.Element {
   const [editor] = useState(() => withReact(createEditor()));
   // Add the initial value when setting up our state.
-  const initialAst = wikiAstToSlateAst(fromWikiText(props.initialText));
+  const initialAst = deserialize(props.initialText);
   const [value, setValue] = useState<Descendant[]>(initialAst as Descendant[]);
   const onSave = useDebouncedCallback(
     (newValue: Descendant[]) => {

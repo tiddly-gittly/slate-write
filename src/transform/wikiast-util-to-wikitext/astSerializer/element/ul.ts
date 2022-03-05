@@ -11,5 +11,5 @@ export function ul(context: IContext, { type, tag, children }: IDomParseTreeNode
   const result = convertNodes(context, children).map((line) => repeat('  ', indentCount) + line);
   context.indentLevels -= 1;
   context.listMode = undefined;
-  return result;
+  return [...result, '\n'];
 }
