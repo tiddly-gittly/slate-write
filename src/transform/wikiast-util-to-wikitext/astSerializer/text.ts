@@ -1,7 +1,7 @@
 import type { ITextParseTreeNode } from 'tiddlywiki';
-import { IBuilders } from '.';
+import { IContext } from '..';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function text(builders: IBuilders, node: ITextParseTreeNode): string[] {
+export function text(context: IContext, node: ITextParseTreeNode): string[] {
   return [node.text];
 }
