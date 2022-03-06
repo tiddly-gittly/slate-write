@@ -2,22 +2,24 @@ import { Editor, Transforms, Range, Point, Element as SlateElement } from 'slate
 import type { CustomEditor, ElementElement } from './editor';
 
 const SHORTCUTS = {
-  '*': 'list-item',
-  '#': 'list-item',
-  '>': 'block-quote',
-  '》': 'block-quote',
-  '!': 'heading-one',
-  '!!': 'heading-two',
-  '!!!': 'heading-three',
-  '!!!!': 'heading-four',
-  '!!!!!': 'heading-five',
-  '!!!!!!': 'heading-six',
-  '！': 'heading-one',
-  '！！': 'heading-two',
-  '！！！': 'heading-three',
-  '！！！！': 'heading-four',
-  '！！！！！': 'heading-five',
-  '！！！！！！': 'heading-six',
+  '*': 'li',
+  '#': 'li',
+  '>': 'blockquote',
+  '》': 'blockquote',
+  '<<<': 'blockquote',
+  '《《《': 'blockquote',
+  '!': 'h1',
+  '!!': 'h2',
+  '!!!': 'h3',
+  '!!!!': 'h4',
+  '!!!!!': 'h5',
+  '!!!!!!': 'h6',
+  '！': 'h1',
+  '！！': 'h2',
+  '！！！': 'h3',
+  '！！！！': 'h4',
+  '！！！！！': 'h5',
+  '！！！！！！': 'h6',
 };
 
 export const withShortcuts = (editor: CustomEditor): CustomEditor => {
@@ -34,27 +36,28 @@ export const withShortcuts = (editor: CustomEditor): CustomEditor => {
       const path = block !== undefined ? block[1] : [];
       const start = Editor.start(editor, path);
       const range = { anchor, focus: start };
-      const beforeText = Editor.string(editor, range);
+      const triggerText = Editor.string(editor, range);
 
-      if (beforeText in SHORTCUTS) {
-        const type = SHORTCUTS[beforeText as keyof typeof SHORTCUTS];
+      if (triggerText in SHORTCUTS) {
+        const tag = SHORTCUTS[triggerText as keyof typeof SHORTCUTS];
         Transforms.select(editor, range);
         Transforms.delete(editor);
         const newProperties: Partial<SlateElement> = {
-          type,
+          type: 'element',
+          tag,
         };
         Transforms.setNodes<SlateElement>(editor, newProperties, {
           match: (n) => Editor.isBlock(editor, n),
         });
 
-        if (type === SHORTCUTS['*']) {
+        if (triggerText === '*' || triggerText === '#') {
           const list: ElementElement = {
             type: 'element',
-            tag: 'li',
+            tag: triggerText === '*' ? 'ul' : 'ol',
             children: [],
           };
           Transforms.wrapNodes(editor, list, {
-            match: (n) => !Editor.isEditor(n) && SlateElement.isElement(n) && n.type === 'list-item',
+            match: (n) => !Editor.isEditor(n) && SlateElement.isElement(n) && n.type === 'element' && (n as ElementElement).tag === 'li',
           });
         }
 
@@ -77,15 +80,27 @@ export const withShortcuts = (editor: CustomEditor): CustomEditor => {
         const [block, path] = match;
         const start = Editor.start(editor, path);
 
-        if (!Editor.isEditor(block) && SlateElement.isElement(block) && block.type !== 'paragraph' && Point.equals(selection.anchor, start)) {
+        /** delete `ul` `ol`, change them to a `p` when pressing backspace */
+        if (
+          !Editor.isEditor(block) &&
+          SlateElement.isElement(block) &&
+          block.type !== 'element' &&
+          (block as ElementElement).tag !== 'p' &&
+          Point.equals(selection.anchor, start)
+        ) {
           const newProperties: Partial<SlateElement> = {
-            type: 'paragraph',
+            type: 'element',
+            tag: 'p',
           };
           Transforms.setNodes(editor, newProperties);
 
-          if (block.type === 'list-item') {
+          if (block.type === 'element' && (block as ElementElement).tag === 'li') {
             Transforms.unwrapNodes(editor, {
-              match: (n) => !Editor.isEditor(n) && SlateElement.isElement(n) && n.type === 'bulleted-list',
+              match: (n) =>
+                !Editor.isEditor(n) &&
+                SlateElement.isElement(n) &&
+                n.type === 'element' &&
+                ((n as ElementElement).tag === 'ul' || (n as ElementElement).tag === 'ol'),
               split: true,
             });
           }
