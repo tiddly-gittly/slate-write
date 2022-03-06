@@ -27,4 +27,7 @@ describe('fromWikiText', () => {
   test('ol > li > text', () => {
     expect(wikiAstFromWikiText(wikiTextDict['ol > li > text'])).toEqual(wikiAstDict['ol > li > text']);
   });
+  test('ol > ol > ol > li', () => {
+    expect(wikiAstFromWikiText(wikiTextDict['ol > ol > ol > li'])).toEqual(wikiAstDict['ol > ol > ol > li']);
+  });
 });

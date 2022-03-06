@@ -12,6 +12,9 @@ export const wikiTextDict: Record<string, string> = {
   'ul > li > text': `* AAA
 * BBB
 * CCC`,
+  'ol > ol > ol > li': `# AAA
+## BBB
+### CCC`,
 };
 export const slateDict: Record<string, slate.Node[]> = {
   text: [{ text: 'AAA' }],
@@ -45,6 +48,59 @@ export const slateDict: Record<string, slate.Node[]> = {
           children: [
             {
               text: 'CCC',
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  'ol > ol > ol > li': [
+    {
+      type: 'element',
+      tag: 'ol',
+      children: [
+        {
+          type: 'element',
+          tag: 'li',
+          children: [
+            {
+              text: 'AAA',
+            },
+          ],
+        },
+        {
+          type: 'element',
+          tag: 'ol',
+          children: [
+            {
+              type: 'element',
+              tag: 'li',
+              children: [
+                {
+                  text: 'BBB',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          type: 'element',
+          tag: 'ol',
+          children: [
+            {
+              type: 'element',
+              tag: 'ol',
+              children: [
+                {
+                  type: 'element',
+                  tag: 'li',
+                  children: [
+                    {
+                      text: 'CCC',
+                    },
+                  ],
+                },
+              ],
             },
           ],
         },
@@ -96,6 +152,62 @@ export const wikiAstDict: Record<string, IParseTreeNode[] | IParseTreeNode> = {
               text: 'CCC',
               start: 14,
               end: 17,
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  'ol > ol > ol > li': [
+    {
+      type: 'element',
+      tag: 'ol',
+      children: [
+        {
+          type: 'element',
+          tag: 'li',
+          children: [
+            {
+              type: 'text',
+              text: 'AAA',
+              start: 2,
+              end: 5,
+            },
+            {
+              type: 'element',
+              tag: 'ol',
+              children: [
+                {
+                  type: 'element',
+                  tag: 'li',
+                  children: [
+                    {
+                      type: 'text',
+                      text: 'BBB',
+                      start: 9,
+                      end: 12,
+                    },
+                    {
+                      type: 'element',
+                      tag: 'ol',
+                      children: [
+                        {
+                          type: 'element',
+                          tag: 'li',
+                          children: [
+                            {
+                              type: 'text',
+                              text: 'CCC',
+                              start: 17,
+                              end: 20,
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
             },
           ],
         },
