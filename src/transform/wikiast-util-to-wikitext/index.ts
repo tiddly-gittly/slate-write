@@ -1,3 +1,4 @@
+import dropRightWhile from 'lodash/dropRightWhile';
 import type { IParseTreeNode } from 'tiddlywiki';
 import { builders, IBuilders } from './astSerializer';
 import { convertNodes, convertOneNode } from './traverse';
@@ -27,5 +28,6 @@ const defaultContext = {
 
 export function wikiAstToWikiText(input: IParseTreeNode | IParseTreeNode[]): string {
   const lines = convertNodes(defaultContext, Array.isArray(input) ? input : [input]);
-  return lines.join('\n');
+  // remove tailing \n
+  return dropRightWhile(lines, (line) => line === '\n').join('\n');
 }

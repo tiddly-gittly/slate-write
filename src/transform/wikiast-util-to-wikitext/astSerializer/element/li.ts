@@ -5,5 +5,5 @@ import { IContext } from '../..';
 export function li(context: IContext, { type, tag, children }: IDomParseTreeNode): string[] {
   const listItemDot = context.listMode === 'ul' ? '*' : '#';
   const textContent = convertNodes(context, children).join('');
-  return [`${listItemDot} ${textContent}`, '\n'];
+  return [`${listItemDot} ${textContent}`];
 }
