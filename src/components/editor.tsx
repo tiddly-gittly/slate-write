@@ -1,10 +1,11 @@
 import React, { useCallback, useState } from 'react';
 import { createEditor, BaseEditor, Descendant } from 'slate';
 import { Slate, Editable, withReact, ReactEditor, RenderElementProps } from 'slate-react';
-import { HistoryEditor } from 'slate-history';
+import { HistoryEditor, withHistory } from 'slate-history';
 import { useDebouncedCallback } from 'beautiful-react-hooks';
 
 import { deserialize, serialize } from '../../src/transform/serialize';
+import { withShortcuts } from './withShortcuts';
 
 export type CustomEditor = BaseEditor & ReactEditor & HistoryEditor;
 export interface CustomRenderElement {
@@ -40,7 +41,7 @@ export interface IEditorAppProps {
   };
 }
 export function EditorApp(props: IEditorAppProps): JSX.Element {
-  const [editor] = useState(() => withReact(createEditor()));
+  const [editor] = useState(() => withShortcuts(withReact(withHistory(createEditor()))));
   // Add the initial value when setting up our state.
   const initialAst = deserialize(props.initialText);
   const [value, setValue] = useState<Descendant[]>(initialAst as Descendant[]);
