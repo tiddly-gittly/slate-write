@@ -1,3 +1,4 @@
+import type { KeyboardEvent } from 'react';
 import { Editor, Transforms, Range, Point, Element as SlateElement } from 'slate';
 import type { CustomEditor, ElementElement } from './editor';
 
@@ -84,7 +85,7 @@ export const withShortcuts = (editor: CustomEditor): CustomEditor => {
         if (
           !Editor.isEditor(block) &&
           SlateElement.isElement(block) &&
-          block.type !== 'element' &&
+          block.type === 'element' &&
           (block as ElementElement).tag !== 'p' &&
           Point.equals(selection.anchor, start)
         ) {
@@ -114,4 +115,37 @@ export const withShortcuts = (editor: CustomEditor): CustomEditor => {
   };
 
   return editor;
+};
+
+export const withShortcutsOnKeyDown = (editor: CustomEditor, event: KeyboardEvent<HTMLDivElement>): void => {
+  const { selection } = editor;
+  // handle enter key on empty list item, turn node to `p`
+  if (!(event.key === 'Enter')) {
+    return;
+  }
+
+  if (selection !== null && Range.isCollapsed(selection)) {
+    const match = Editor.above(editor, {
+      match: (n) => Editor.isBlock(editor, n),
+    });
+
+    if (match !== undefined) {
+      const [block, path] = match;
+      const start = Editor.start(editor, path);
+
+      /** delete `ul` `ol`, change them to a `p` when pressing backspace */
+      if (
+        !Editor.isEditor(block) &&
+        SlateElement.isElement(block) &&
+        block.type === 'element' &&
+        (block as ElementElement).tag !== 'p' &&
+        Point.equals(selection.anchor, start)
+      ) {
+        // pressing enter is same as pressing backspace
+        editor.deleteBackward('block');
+        // prevent adding a new line
+        event.preventDefault();
+      }
+    }
+  }
 };

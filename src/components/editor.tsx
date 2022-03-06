@@ -1,11 +1,11 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, KeyboardEvent } from 'react';
 import { createEditor, BaseEditor, Descendant } from 'slate';
 import { Slate, Editable, withReact, ReactEditor, RenderElementProps } from 'slate-react';
 import { HistoryEditor, withHistory } from 'slate-history';
 import { useDebouncedCallback } from 'beautiful-react-hooks';
 
 import { deserialize, serialize } from '../../src/transform/serialize';
-import { withShortcuts } from './withShortcuts';
+import { withShortcuts, withShortcutsOnKeyDown } from './withShortcuts';
 
 export type CustomEditor = BaseEditor & ReactEditor & HistoryEditor;
 export interface CustomRenderElement {
@@ -42,6 +42,12 @@ export interface IEditorAppProps {
 }
 export function EditorApp(props: IEditorAppProps): JSX.Element {
   const [editor] = useState(() => withShortcuts(withReact(withHistory(createEditor()))));
+  const onKeyDown = useCallback(
+    (event: KeyboardEvent<HTMLDivElement>) => {
+      withShortcutsOnKeyDown(editor, event);
+    },
+    [editor],
+  );
   // Add the initial value when setting up our state.
   const initialAst = deserialize(props.initialText);
   const [value, setValue] = useState<Descendant[]>(initialAst as Descendant[]);
@@ -77,7 +83,12 @@ export function EditorApp(props: IEditorAppProps): JSX.Element {
         setValue(newValue);
         onSave(newValue);
       }}>
-      <Editable renderElement={renderElement} />
+      <Editable
+        renderElement={renderElement}
+        onKeyDown={(event) => {
+          onKeyDown(event);
+        }}
+      />
     </Slate>
   );
 }
