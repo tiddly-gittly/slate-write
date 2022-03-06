@@ -120,32 +120,64 @@ export const withShortcuts = (editor: CustomEditor): CustomEditor => {
 export const withShortcutsOnKeyDown = (editor: CustomEditor, event: KeyboardEvent<HTMLDivElement>): void => {
   const { selection } = editor;
   // handle enter key on empty list item, turn node to `p`
-  if (!(event.key === 'Enter')) {
-    return;
-  }
+  switch (event.key) {
+    case 'Enter': {
+      if (selection !== null && Range.isCollapsed(selection)) {
+        const match = Editor.above(editor, {
+          match: (n) => Editor.isBlock(editor, n),
+        });
 
-  if (selection !== null && Range.isCollapsed(selection)) {
-    const match = Editor.above(editor, {
-      match: (n) => Editor.isBlock(editor, n),
-    });
+        if (match !== undefined) {
+          const [block, path] = match;
+          const start = Editor.start(editor, path);
 
-    if (match !== undefined) {
-      const [block, path] = match;
-      const start = Editor.start(editor, path);
-
-      /** delete `ul` `ol`, change them to a `p` when pressing backspace */
-      if (
-        !Editor.isEditor(block) &&
-        SlateElement.isElement(block) &&
-        block.type === 'element' &&
-        (block as ElementElement).tag !== 'p' &&
-        Point.equals(selection.anchor, start)
-      ) {
-        // pressing enter is same as pressing backspace
-        editor.deleteBackward('block');
-        // prevent adding a new line
-        event.preventDefault();
+          /** delete `ul` `ol`, change them to a `p` when pressing backspace */
+          if (
+            !Editor.isEditor(block) &&
+            SlateElement.isElement(block) &&
+            block.type === 'element' &&
+            (block as ElementElement).tag !== 'p' &&
+            Point.equals(selection.anchor, start)
+          ) {
+            // pressing enter is same as pressing backspace
+            editor.deleteBackward('block');
+            // prevent adding a new line
+            event.preventDefault();
+          }
+        }
       }
+      break;
+    }
+    case 'Tab': {
+      if (selection !== null && Range.isCollapsed(selection)) {
+        const match = Editor.above(editor, {
+          match: (n) => Editor.isBlock(editor, n),
+        });
+
+        if (match !== undefined) {
+          const [block, path] = match;
+          const start = Editor.start(editor, path);
+
+          /** wrap list item with list to make it a level up */
+          if (
+            !Editor.isEditor(block) &&
+            SlateElement.isElement(block) &&
+            block.type === 'element' &&
+            (block as ElementElement).tag === 'li' &&
+            Point.equals(selection.anchor, start)
+          ) {
+            const newNodeWrapper: ElementElement = {
+              type: 'element',
+              tag: 'ol',
+              children: [],
+            };
+            Transforms.wrapNodes(editor, newNodeWrapper);
+            // prevent switching to next focus
+            event.preventDefault();
+          }
+        }
+      }
+      break;
     }
   }
 };
