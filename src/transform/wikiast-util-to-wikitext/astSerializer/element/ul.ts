@@ -9,7 +9,5 @@ export function ul(context: IContext, { type, tag, children }: IDomParseTreeNode
   const result = convertNodes(context, children);
   context.indentLevels -= 1;
   context.listMode = undefined;
-  // DEBUG: console
-  console.log(`result`, result);
   return [...result, '\n'];
 }
