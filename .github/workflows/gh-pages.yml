@@ -1,0 +1,47 @@
+name: Deploy Tiddlywiki To Github Pages
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+    paths-ignore:
+      - 'README.md'
+      - 'docs/**'
+      - '.vscode'
+  pull_request:
+    branches:
+      - master
+    paths-ignore:
+      - 'docs/**'
+      - 'README.md'
+      - '.vscode'
+
+concurrency: 
+  group: release-ci-group
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: '16'
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/package.json') }}
+      - name: Install Dependency
+        run: npm ci
+      - name: Build
+        run: npm run demo:build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist/output

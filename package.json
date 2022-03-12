@@ -8,8 +8,9 @@
     "make": "npm run clean && npm run build",
     "build": "zx ./scripts/before-build.mjs && rollup -c && zx ./scripts/buildJSONPlugins.mjs",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest --config=jest.config.js",
-    "dev:demo": "npm run make && zx ./scripts/makeDemo.mjs && npm run run:demo",
-    "run:demo": "cd ./dist && npx tiddlywiki --listen",
+    "demo:dev": "npm run make && zx ./scripts/makeDemo.mjs && npm run demo:run",
+    "demo:run": "cd ./dist && npx tiddlywiki --listen",
+    "demo:build": "npm run make && zx ./scripts/makeDemo.mjs && zx ./scripts/buildDemoHtml.mjs",
     "build:types": "tsc --emitDeclarationOnly",
     "clean": "rimraf dist",
     "installType": "typesync"
