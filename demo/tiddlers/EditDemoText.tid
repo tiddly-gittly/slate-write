@@ -5,4 +5,6 @@ modifier: 林一二
 title: EditDemoText
 type: text/vnd.tiddlywiki
 
+`<$edit-slateWrite tiddler="DemoText" />`
+
 <$edit-slateWrite tiddler="DemoText" />

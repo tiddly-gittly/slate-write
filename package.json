@@ -6,8 +6,9 @@
   "url": "https://github.com/tiddly-gittly/slate-write",
   "scripts": {
     "make": "npm run clean && npm run build",
-    "build": "zx ./scripts/before-build.mjs && rollup -c",
+    "build": "zx ./scripts/before-build.mjs && rollup -c && zx ./scripts/buildJSONPlugins.mjs",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest --config=jest.config.js",
+    "dev:demo": "npm run make && zx ./scripts/makeDemo.mjs && npm run run:demo",
     "run:demo": "cd ./dist && npx tiddlywiki --listen",
     "build:types": "tsc --emitDeclarationOnly",
     "clean": "rimraf dist",
