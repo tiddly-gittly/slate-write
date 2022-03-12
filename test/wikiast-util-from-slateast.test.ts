@@ -16,6 +16,9 @@ describe('fromSlateAst', () => {
   test('ul > li > text', () => {
     expect(wikiAstToSlateAst(wikiAstDict['ul > li > text'])).toEqual(slateDict['ul > li > text']);
   });
+  test('ol > ol > ol > li', () => {
+    expect(wikiAstToSlateAst(wikiAstDict['ol > ol > ol > li'])).toEqual(slateDict['ol > ol > ol > li']);
+  });
 });
 
 describe('Identical', () => {
@@ -27,5 +30,8 @@ describe('Identical', () => {
   });
   test('ul > li > text', () => {
     expect(wikiAstDict['ul > li > text']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDict['ul > li > text'])));
+  });
+  test('ol > ol > ol > li', () => {
+    expect(wikiAstDict['ol > ol > ol > li']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDict['ol > ol > ol > li'])));
   });
 });

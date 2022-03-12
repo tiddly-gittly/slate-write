@@ -25,4 +25,7 @@ describe('Transform tree', () => {
   test('ol > li > text', () => {
     expect(wikiAstToWikiText(wikiAstDict['ol > li > text'])).toEqual(wikiTextDict['ol > li > text']);
   });
+  test('ol > ol > ol > li', () => {
+    expect(wikiAstToWikiText(wikiAstDict['ol > ol > ol > li'])).toEqual(wikiTextDict['ol > ol > ol > li']);
+  });
 });
