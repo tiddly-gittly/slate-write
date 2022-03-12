@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/consistent-type-assertions */
 import { IDomParseTreeNode, IParseTreeNode } from 'tiddlywiki';
 import { cloneDeep } from 'lodash';
 import { ElementElement } from '../src/components/editor';

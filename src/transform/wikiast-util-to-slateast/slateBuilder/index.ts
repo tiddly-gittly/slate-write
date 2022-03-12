@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { Html, html } from './html';
+import { Element, element } from './element';
 import { Text, text } from './text';
 
-export type SlateNode = Html | Text | Math;
+export type SlateNode = Element | Text | Math;
 
 export const builders = {
-  element: html,
+  element,
   text,
 };
 export type IBuilders = typeof builders;

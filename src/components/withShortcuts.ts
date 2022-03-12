@@ -1,8 +1,9 @@
 import type { KeyboardEvent } from 'react';
 import { Editor, Transforms, Range, Point, Element as SlateElement } from 'slate';
+import { HTMLTags } from 'tiddlywiki';
 import type { CustomEditor, ElementElement } from './editor';
 
-const SHORTCUTS = {
+const SHORTCUTS: Record<string, HTMLTags> = {
   '*': 'li',
   '#': 'li',
   '>': 'blockquote',
@@ -40,7 +41,7 @@ export const withShortcuts = (editor: CustomEditor): CustomEditor => {
       const triggerText = Editor.string(editor, range);
 
       if (triggerText in SHORTCUTS) {
-        const tag = SHORTCUTS[triggerText as keyof typeof SHORTCUTS];
+        const tag = SHORTCUTS[triggerText];
         Transforms.select(editor, range);
         Transforms.delete(editor);
         const newProperties: Partial<SlateElement> = {

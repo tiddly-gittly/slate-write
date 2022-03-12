@@ -6,6 +6,7 @@ import { useDebouncedCallback } from 'beautiful-react-hooks';
 
 import { deserialize, serialize } from '../../src/transform/serialize';
 import { withShortcuts, withShortcutsOnKeyDown } from './withShortcuts';
+import { HTMLTags } from 'tiddlywiki';
 
 export type CustomEditor = BaseEditor & ReactEditor & HistoryEditor;
 export interface CustomRenderElement {
@@ -15,7 +16,7 @@ export interface CustomRenderElement {
 }
 export interface ElementElement {
   children: Array<CustomText | ElementElement>;
-  tag: string;
+  tag: HTMLTags;
   type: 'element';
 }
 export type CustomElement = CustomRenderElement | ElementElement;
@@ -94,7 +95,9 @@ export function EditorApp(props: IEditorAppProps): JSX.Element {
 }
 
 const ElementRender = (props: RenderElementProps): JSX.Element => {
-  const { tag: HtmlTag } = props.element as ElementElement;
+  const { tag } = props.element as ElementElement;
+  const HtmlTag = tag as keyof JSX.IntrinsicElements;
+  // @ts-expect-error Expression produces a union type that is too complex to represent.ts(2590)
   return <HtmlTag {...props.attributes}>{props.children}</HtmlTag>;
 };
 const DefaultElement = (props: RenderElementProps): JSX.Element => {
