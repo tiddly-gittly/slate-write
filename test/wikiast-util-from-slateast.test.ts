@@ -16,7 +16,7 @@ describe('fromSlateAst', () => {
   test('ul > li > text', () => {
     expect(wikiAstToSlateAst(wikiAstDict['ul > li > text'])).toEqual(slateDict['ul > li > text']);
   });
-  test('ol > ol > ol > li', () => {
+  test.skip('ol > ol > ol > li', () => {
     expect(wikiAstToSlateAst(wikiAstDict['ol > ol > ol > li'])).toEqual(slateDict['ol > ol > ol > li']);
   });
 });
