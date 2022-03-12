@@ -113,8 +113,8 @@ slateDict['ol > li > text'] = cloneDeep(slateDict['ul > li > text']);
 (slateDict['ol > li > text'] as ElementElement[])[0].tag = 'ol';
 
 export const wikiAstDict: Record<string, IParseTreeNode[] | IParseTreeNode> = {
-  text: { type: 'text', text: 'AAA', start: 0, end: 3 },
-  'p > text': [{ type: 'element', tag: 'p', children: [{ type: 'text', text: 'AAA', start: 0, end: 3 }], start: 0, end: 3 }],
+  text: { type: 'text' as const, text: 'AAA', start: 0, end: 3 },
+  'p > text': [{ type: 'element', tag: 'p', children: [{ type: 'text' as const, text: 'AAA', start: 0, end: 3 }], start: 0, end: 3 }],
   'ul > li > text': [
     {
       type: 'element',
@@ -125,7 +125,7 @@ export const wikiAstDict: Record<string, IParseTreeNode[] | IParseTreeNode> = {
           tag: 'li',
           children: [
             {
-              type: 'text',
+              type: 'text' as const,
               text: 'AAA',
               start: 2,
               end: 5,
@@ -137,7 +137,7 @@ export const wikiAstDict: Record<string, IParseTreeNode[] | IParseTreeNode> = {
           tag: 'li',
           children: [
             {
-              type: 'text',
+              type: 'text' as const,
               text: 'BBB',
               start: 8,
               end: 11,
@@ -149,7 +149,7 @@ export const wikiAstDict: Record<string, IParseTreeNode[] | IParseTreeNode> = {
           tag: 'li',
           children: [
             {
-              type: 'text',
+              type: 'text' as const,
               text: 'CCC',
               start: 14,
               end: 17,
@@ -169,7 +169,7 @@ export const wikiAstDict: Record<string, IParseTreeNode[] | IParseTreeNode> = {
           tag: 'li',
           children: [
             {
-              type: 'text',
+              type: 'text' as const,
               text: 'AAA',
               start: 2,
               end: 5,
@@ -183,7 +183,7 @@ export const wikiAstDict: Record<string, IParseTreeNode[] | IParseTreeNode> = {
                   tag: 'li',
                   children: [
                     {
-                      type: 'text',
+                      type: 'text' as const,
                       text: 'BBB',
                       start: 9,
                       end: 12,
@@ -197,7 +197,7 @@ export const wikiAstDict: Record<string, IParseTreeNode[] | IParseTreeNode> = {
                           tag: 'li',
                           children: [
                             {
-                              type: 'text',
+                              type: 'text' as const,
                               text: 'CCC',
                               start: 17,
                               end: 20,
