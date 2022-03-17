@@ -1,10 +1,11 @@
-import { Descendant, Node } from 'slate';
+import { AnyObject, TNode } from '@udecode/plate';
+import { Node } from 'slate';
 import { wikiAstFromSlateAst } from './wikiast-util-from-slateast';
 import { wikiAstFromWikiText } from './wikiast-util-from-wikitext';
 import { wikiAstToSlateAst } from './wikiast-util-to-slateast';
 import { wikiAstToWikiText } from './wikiast-util-to-wikitext';
 
-export function serialize(value: Descendant[]): string {
+export function serialize(value: Array<TNode<AnyObject>>): string {
   return wikiAstToWikiText(wikiAstFromSlateAst(value));
 }
 

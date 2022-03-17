@@ -4,13 +4,13 @@ import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 import typescript from '@rollup/plugin-typescript';
 import disablePackages from 'rollup-plugin-disable-packages';
+import { terser } from 'rollup-plugin-terser';
 
 export default {
-  input: 'src/slate.ts',
+  input: 'src/components/index.ts',
   output: {
-    file: './dist/plugins/linonetwo/slate-write/slate.js',
+    file: './dist/plugins/linonetwo/slate-write/components/index.js',
     format: 'commonjs',
-    sourcemap: 'inline',
     exports: 'named',
   },
   external: ['react', 'react-dom', 'events', 'fs', 'fsevents', 'util', 'path', 'os', 'stream'],
@@ -27,5 +27,6 @@ export default {
     // It will give us errors if we don't disable (replace it with noop) it.
     // We must also use `useFsEvents: false` when calling chokidar.watch.
     disablePackages('fsevents'),
+    terser(),
   ],
 };

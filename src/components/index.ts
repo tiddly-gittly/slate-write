@@ -1,12 +1,16 @@
 import type { ReactWidget } from 'tw-react';
-import { EditorApp, IEditorAppProps } from './components/editor';
+import { EditorApp, IEditorAppProps } from './editor';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 const Widget = require('$:/plugins/linonetwo/tw-react/widget.js').widget as typeof ReactWidget;
 
 // TODO: implement things in https://github.com/Jermolene/TiddlyWiki5/blob/master/core/modules/editor/factory.js
 
-class SlateWriteWidget extends Widget {
+export class SlateWriteWidget extends Widget {
+  refresh(changedTiddlers) {
+    console.log('changedTiddlers', changedTiddlers);
+  }
+
   editorOperations = {};
 
   constructor(parseTreeNode: any, options: any) {
@@ -35,8 +39,3 @@ class SlateWriteWidget extends Widget {
     };
   };
 }
-
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-exports.slateWrite = SlateWriteWidget;
-// fix `Undefined widget 'edit-slateWrite'`
-exports['edit-slateWrite'] = SlateWriteWidget;

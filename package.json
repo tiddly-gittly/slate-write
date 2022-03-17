@@ -34,11 +34,13 @@
   },
   "homepage": "https://github.com/tiddly-gittly/slate-write#readme",
   "dependencies": {
+    "@udecode/plate": "^10.4.0",
     "lodash": "^4.17.21",
     "md-to-tid": "^0.0.3",
     "remark-slate-transformer": "^0.6.7",
     "slate": "0.73.1",
     "slate-history": "^0.66.0",
+    "slate-hyperscript": "^0.67.0",
     "slate-react": "0.74.2",
     "unified": "^10.1.2"
   },
@@ -103,7 +105,8 @@
     "rollup-plugin-disable-packages": "^4.0.1",
     "rollup-plugin-livereload": "2.0.5",
     "rollup-plugin-serve": "1.1.0",
-    "styled-components": "5.3.3",
+    "rollup-plugin-terser": "^7.0.2",
+    "styled-components": "^5.3.3",
     "tiddlywiki": "^5.2.1",
     "ts-jest": "^27.1.3",
     "ts-node": "^10.7.0",

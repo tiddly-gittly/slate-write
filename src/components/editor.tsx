@@ -1,11 +1,26 @@
 import React, { useCallback, useState, KeyboardEvent } from 'react';
 import { createEditor, BaseEditor, Descendant } from 'slate';
+import {
+  AnyObject,
+  createBlockquotePlugin,
+  createBoldPlugin,
+  createCodeBlockPlugin,
+  createCodePlugin,
+  createHeadingPlugin,
+  createItalicPlugin,
+  createParagraphPlugin,
+  createPlateUI,
+  createPlugins,
+  createStrikethroughPlugin,
+  createUnderlinePlugin,
+  Plate,
+  TNode,
+} from '@udecode/plate';
 import { Slate, Editable, withReact, ReactEditor, RenderElementProps } from 'slate-react';
-import { HistoryEditor, withHistory } from 'slate-history';
+import { HistoryEditor } from 'slate-history';
 import { useDebouncedCallback } from 'beautiful-react-hooks';
 
 import { deserialize, serialize } from '../../src/transform/serialize';
-import { withShortcuts, withShortcutsOnKeyDown } from './withShortcuts';
 import { HTMLTags } from 'tiddlywiki';
 
 export type CustomEditor = BaseEditor & ReactEditor & HistoryEditor;
@@ -41,56 +56,62 @@ export interface IEditorAppProps {
     onSave: (value: string) => void;
   };
 }
+const plugins = createPlugins(
+  [
+    // elements
+    createParagraphPlugin(), // paragraph element
+    createBlockquotePlugin(), // blockquote element
+    createCodeBlockPlugin(), // code block element
+    createHeadingPlugin(), // heading elements
+
+    // marks
+    createBoldPlugin(), // bold mark
+    createItalicPlugin(), // italic mark
+    createUnderlinePlugin(), // underline mark
+    createStrikethroughPlugin(), // strikethrough mark
+    createCodePlugin(), // code mark
+  ],
+  {
+    // Plate components
+    components: createPlateUI(),
+  },
+);
+
 export function EditorApp(props: IEditorAppProps): JSX.Element {
-  const [editor] = useState(() => withShortcuts(withReact(withHistory(createEditor()))));
-  const onKeyDown = useCallback(
-    (event: KeyboardEvent<HTMLDivElement>) => {
-      withShortcutsOnKeyDown(editor, event);
-    },
-    [editor],
-  );
   // Add the initial value when setting up our state.
   const initialAst = deserialize(props.initialText);
-  const [value, setValue] = useState<Descendant[]>(initialAst as Descendant[]);
   const onSave = useDebouncedCallback(
-    (newValue: Descendant[]) => {
-      // TODO: this seems buggy, sometimes editor.operations is empty array... So I have to add `editor.operations.length === 0 ||`
-      const isAstChange = editor.operations.length === 0 || editor.operations.some((op) => op.type !== 'set_selection');
-      if (isAstChange) {
-        const newText = serialize(newValue);
-        props.saver.onSave(newText);
-      }
+    (newValue: Array<TNode<AnyObject>>) => {
+      const newText = serialize(newValue);
+      props.saver.onSave(newText);
     },
-    [props.saver.onSave, editor],
+    [props.saver.onSave],
     props.saver.interval,
   );
 
   // Define a rendering function based on the element passed to `props`. We use
   // `useCallback` here to memoize the function for subsequent renders.
-  const renderElement = useCallback((props: RenderElementProps): JSX.Element => {
-    switch (props.element.type) {
-      case 'element':
-        return <ElementRender {...props} />;
-      default:
-        return <DefaultElement {...props} />;
-    }
-  }, []);
+  // const renderElement = useCallback((props: RenderElementProps): JSX.Element => {
+  //   switch (props.element.type) {
+  //     case 'element':
+  //       return <ElementRender {...props} />;
+  //     default:
+  //       return <DefaultElement {...props} />;
+  //   }
+  // }, []);
+  if (typeof document === 'undefined') {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <Slate
-      editor={editor}
-      value={value}
+    <Plate
+      initialValue={initialAst}
       onChange={(newValue) => {
-        setValue(newValue);
         onSave(newValue);
-      }}>
-      <Editable
-        renderElement={renderElement}
-        onKeyDown={(event) => {
-          onKeyDown(event);
-        }}
-      />
-    </Slate>
+      }}
+      plugins={plugins}>
+      {props.initialText}
+    </Plate>
   );
 }
 
