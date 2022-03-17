@@ -46,7 +46,7 @@ export interface IEditorAppProps {
 }
 const plugins = createPlugins([...PLUGINS.basicElements, ...PLUGINS.basicMarks, ...PLUGINS.utils], {
   // Plate components
-  components: withStyledPlaceHolders(createPlateUI()),
+  components: withStyledDraggables(withStyledPlaceHolders(createPlateUI())),
 });
 
 export function EditorApp(props: IEditorAppProps): JSX.Element {

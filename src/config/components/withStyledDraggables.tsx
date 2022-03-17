@@ -24,7 +24,6 @@ import {
   withDraggables,
 } from '@udecode/plate';
 import { css } from 'styled-components';
-import tw from 'twin.macro';
 
 export const withStyledDraggables = (components: any): ReturnType<typeof createPlateUI> => {
   return withDraggables(components, [
@@ -71,7 +70,9 @@ export const withStyledDraggables = (components: any): ReturnType<typeof createP
           padding: 2em 0 4px;
           font-size: 1.875em;
         `,
-        blockToolbarWrapper: tw`height[1.3em]`,
+        blockToolbarWrapper: css`
+          height: 1.3em;
+        `,
       },
     },
     {
@@ -81,7 +82,9 @@ export const withStyledDraggables = (components: any): ReturnType<typeof createP
           padding: 1.4em 0 1px;
           font-size: 1.5em;
         `,
-        blockToolbarWrapper: tw`height[1.3em]`,
+        blockToolbarWrapper: css`
+          height: 1.3em;
+        `,
       },
     },
     {
@@ -91,7 +94,9 @@ export const withStyledDraggables = (components: any): ReturnType<typeof createP
           padding: 1em 0 1px;
           font-size: 1.25em;
         `,
-        blockToolbarWrapper: tw`height[1.3em]`,
+        blockToolbarWrapper: css`
+          height: 1.3em;
+        `,
       },
     },
     {
@@ -101,25 +106,33 @@ export const withStyledDraggables = (components: any): ReturnType<typeof createP
           padding: 0.75em 0 0;
           font-size: 1.1em;
         `,
-        blockToolbarWrapper: tw`height[1.3em]`,
+        blockToolbarWrapper: css`
+          height: 1.3em;
+        `,
       },
     },
     {
       keys: [ELEMENT_PARAGRAPH, ELEMENT_UL, ELEMENT_OL],
       styles: {
-        gutterLeft: tw`pt-1`,
+        gutterLeft: css`
+          padding-top: 1rem;
+        `,
       },
     },
     {
       key: ELEMENT_BLOCKQUOTE,
       styles: {
-        gutterLeft: tw`paddingTop[18px]`,
+        gutterLeft: css`
+          padding-top: 18px;
+        `,
       },
     },
     {
       key: ELEMENT_CODE_BLOCK,
       styles: {
-        gutterLeft: tw`pt-3`,
+        gutterLeft: css`
+          padding-top: 3rem;
+        `,
       },
     },
   ]);

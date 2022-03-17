@@ -4,6 +4,7 @@ import {
   createBoldPlugin,
   createCodeBlockPlugin,
   createCodePlugin,
+  createDndPlugin,
   createExitBreakPlugin,
   createHeadingPlugin,
   createHorizontalRulePlugin,
@@ -11,7 +12,6 @@ import {
   createItalicPlugin,
   createListPlugin,
   createParagraphPlugin,
-  createPlateUI,
   createPlugins,
   createSelectOnBackspacePlugin,
   createSoftBreakPlugin,
@@ -46,6 +46,7 @@ const utils = createPlugins([
   createSoftBreakPlugin(CONFIG.softBreak),
   createExitBreakPlugin(CONFIG.exitBreak),
   createAutoformatPlugin(CONFIG.autoformat),
+  createDndPlugin(),
 ]);
 
 export const PLUGINS = {
