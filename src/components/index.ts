@@ -35,6 +35,7 @@ export class SlateWriteWidget extends Widget {
       $tw.wiki.setText(currentTiddler, undefined, undefined, newText);
     };
     return {
+      currentTiddler,
       initialText: $tw.wiki.getTiddlerText(currentTiddler) ?? '',
       saver: {
         onSave,

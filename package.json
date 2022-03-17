@@ -34,6 +34,9 @@
   },
   "homepage": "https://github.com/tiddly-gittly/slate-write#readme",
   "dependencies": {
+    "@styled-icons/boxicons-regular": "^10.38.0",
+    "@styled-icons/foundation": "^10.34.0",
+    "@styled-icons/material": "^10.34.0",
     "@udecode/plate": "^10.4.0",
     "lodash": "^4.17.21",
     "md-to-tid": "^0.0.3",
