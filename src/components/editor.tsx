@@ -46,7 +46,7 @@ export interface IEditorAppProps {
 }
 const plugins = createPlugins([...PLUGINS.basicElements, ...PLUGINS.basicMarks, ...PLUGINS.utils], {
   // Plate components
-  components: withStyledPlaceHolders(withStyledDraggables(createPlateUI())),
+  components: withStyledPlaceHolders(createPlateUI()),
 });
 
 export function EditorApp(props: IEditorAppProps): JSX.Element {
@@ -56,13 +56,13 @@ export function EditorApp(props: IEditorAppProps): JSX.Element {
   const onSave = useDebouncedCallback(
     (newValue: Array<TNode<AnyObject>>) => {
       // TODO: this seems buggy, sometimes editor.operations is empty array... So I have to add `editor.operations.length === 0 ||`
-      const isAstChange = editor.operations.length === 0 || editor.operations.some((op) => op.type !== 'set_selection');
+      const isAstChange = editor?.operations?.length === 0 || editor?.operations?.some?.((op) => op.type !== 'set_selection');
       if (isAstChange) {
         const newText = serialize(newValue);
         props.saver.onSave(newText);
       }
     },
-    [props.saver.onSave],
+    [props.saver.onSave, editor],
     props.saver.interval,
   );
   if (typeof document === 'undefined') {
@@ -81,7 +81,6 @@ export function EditorApp(props: IEditorAppProps): JSX.Element {
             onSave(newValue);
           }}>
           <BallonToolbar />
-          {props.initialText}
         </Plate>
       </DndProvider>
     </>
