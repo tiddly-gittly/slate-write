@@ -7,8 +7,11 @@ const Widget = require('$:/plugins/linonetwo/tw-react/widget.js').widget as type
 // TODO: implement things in https://github.com/Jermolene/TiddlyWiki5/blob/master/core/modules/editor/factory.js
 
 export class SlateWriteWidget extends Widget {
-  refresh(changedTiddlers) {
-    console.log('changedTiddlers', changedTiddlers);
+  private currentTiddler: string | undefined;
+
+  refresh(): boolean {
+    // TODO: reflect change from editor command that change tiddler outside of editor
+    return false;
   }
 
   editorOperations = {};
@@ -21,6 +24,7 @@ export class SlateWriteWidget extends Widget {
   reactComponent = EditorApp;
   getProps = (): IEditorAppProps => {
     const currentTiddler = this.getAttribute('tiddler', this.getVariable('currentTiddler'));
+    this.currentTiddler = currentTiddler;
 
     const onSave = (newText: string): void => {
       const previousText = $tw.wiki.getTiddlerText(currentTiddler) ?? '';
