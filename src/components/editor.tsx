@@ -1,16 +1,26 @@
 import React from 'react';
-import { AnyObject, createPlateUI, createPlugins, Plate, TNode, usePlateEditorRef } from '@udecode/plate';
+import { AnyObject, createPlateUI, createPlugins, ImageToolbarButton, LinkToolbarButton, Plate, TNode } from '@udecode/plate';
 import { useDebouncedCallback } from 'beautiful-react-hooks';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { HeadingToolbar } from '@udecode/plate-ui-toolbar';
+import { Image } from '@styled-icons/material/Image';
 
 import { deserialize, serialize } from '../../src/transform/serialize';
 import { HTMLTags } from 'tiddlywiki';
 import { PLUGINS } from 'src/config/plugins';
-import { BallonToolbar } from 'src/config/components/Toolbars';
+import {
+  AlignToolbarButtons,
+  BallonToolbar,
+  BasicElementToolbarButtons,
+  BasicMarkToolbarButtons,
+  ListToolbarButtons,
+  TableToolbarButtons,
+} from 'src/config/components/Toolbars';
 import { GlobalStyle } from 'src/config/globalStyle';
 import { withStyledDraggables } from 'src/config/components/withStyledDraggables';
 import { withStyledPlaceHolders } from 'src/config/components/withStyledPlaceHolders';
+import { Link } from '@styled-icons/boxicons-regular';
 
 export interface CustomRenderElement {
   children: CustomText[];
@@ -52,17 +62,12 @@ const plugins = createPlugins([...PLUGINS.basicElements, ...PLUGINS.basicMarks, 
 export function EditorApp(props: IEditorAppProps): JSX.Element {
   // Add the initial value when setting up our state.
   const initialAst = deserialize(props.initialText);
-  const editor = usePlateEditorRef(props.currentTiddler);
   const onSave = useDebouncedCallback(
     (newValue: Array<TNode<AnyObject>>) => {
-      // TODO: this seems buggy, sometimes editor.operations is empty array... So I have to add `editor.operations.length === 0 ||`
-      const isAstChange = editor?.operations?.length === 0 || editor?.operations?.some?.((op) => op.type !== 'set_selection');
-      if (isAstChange) {
-        const newText = serialize(newValue);
-        props.saver.onSave(newText);
-      }
+      const newText = serialize(newValue);
+      props.saver.onSave(newText);
     },
-    [props.saver.onSave, editor],
+    [props.saver.onSave],
     props.saver.interval,
   );
   if (typeof document === 'undefined') {
@@ -80,6 +85,16 @@ export function EditorApp(props: IEditorAppProps): JSX.Element {
           onChange={(newValue) => {
             onSave(newValue);
           }}>
+          <HeadingToolbar>
+            <BasicElementToolbarButtons />
+            <ListToolbarButtons />
+            <BasicMarkToolbarButtons />
+            <AlignToolbarButtons />
+            <LinkToolbarButton icon={<Link />} />
+            <ImageToolbarButton icon={<Image />} />
+            <TableToolbarButtons />
+          </HeadingToolbar>
+
           <BallonToolbar />
         </Plate>
       </DndProvider>
