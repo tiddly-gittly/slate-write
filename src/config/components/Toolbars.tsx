@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import 'tippy.js/animations/scale.css';
 import 'tippy.js/dist/tippy.css';
 import React from 'react';
@@ -72,8 +73,9 @@ import {
   ToolbarButton,
   usePlateEditorRef,
 } from '@udecode/plate';
+import type { Placement } from 'tippy.js';
 
-export const BasicElementToolbarButtons = () => {
+export const BasicElementToolbarButtons = (): JSX.Element => {
   const editor = usePlateEditorRef()!;
 
   return (
@@ -90,8 +92,8 @@ export const BasicElementToolbarButtons = () => {
   );
 };
 
-export const IndentToolbarButtons = () => {
-  const editor = usePlateEditorRef()!;
+export const IndentToolbarButtons = (): JSX.Element => {
+  const editor = usePlateEditorRef();
 
   return (
     <>
@@ -101,7 +103,7 @@ export const IndentToolbarButtons = () => {
   );
 };
 
-export const ListToolbarButtons = () => {
+export const ListToolbarButtons = (): JSX.Element => {
   const editor = usePlateEditorRef()!;
 
   return (
@@ -112,7 +114,7 @@ export const ListToolbarButtons = () => {
   );
 };
 
-export const AlignToolbarButtons = () => {
+export const AlignToolbarButtons = (): JSX.Element => {
   return (
     <>
       <AlignToolbarButton value="left" icon={<FormatAlignLeft />} />
@@ -123,7 +125,7 @@ export const AlignToolbarButtons = () => {
   );
 };
 
-export const BasicMarkToolbarButtons = () => {
+export const BasicMarkToolbarButtons = (): JSX.Element => {
   const editor = usePlateEditorRef()!;
 
   return (
@@ -139,19 +141,19 @@ export const BasicMarkToolbarButtons = () => {
   );
 };
 
-export const KbdToolbarButton = () => {
+export const KbdToolbarButton = (): JSX.Element => {
   const editor = usePlateEditorRef()!;
 
   return <MarkToolbarButton type={getPluginType(editor, MARK_KBD)} icon={<Keyboard />} />;
 };
 
-export const HighlightToolbarButton = () => {
+export const HighlightToolbarButton = (): JSX.Element => {
   const editor = usePlateEditorRef()!;
 
   return <MarkToolbarButton type={getPluginType(editor, MARK_HIGHLIGHT)} icon={<Highlight />} />;
 };
 
-export const TableToolbarButtons = () => (
+export const TableToolbarButtons = (): JSX.Element => (
   <>
     <TableToolbarButton icon={<BorderAll />} transform={insertTable} />
     <TableToolbarButton icon={<BorderClear />} transform={deleteTable} />
@@ -162,18 +164,18 @@ export const TableToolbarButtons = () => (
   </>
 );
 
-export const MarkBallonToolbar = () => {
+export const BallonToolbar = (): JSX.Element => {
   const editor = usePlateEditorRef()!;
 
   const arrow = false;
   const theme = 'dark';
-  const tooltip: any = {
+  const tooltip = {
     arrow: true,
     delay: 0,
-    duration: [200, 0],
+    duration: [200, 0] as [number, number],
     hideOnClick: false,
-    offset: [0, 17],
-    placement: 'top',
+    offset: [0, 17] as [number, number],
+    placement: 'top' as Placement,
   };
 
   return (

@@ -1,11 +1,16 @@
-import React, { useMemo } from 'react';
-import { createEditor } from 'slate';
-import { AnyObject, createPlateUI, createPlugins, Plate, TNode, withPlate, PlateEditor } from '@udecode/plate';
+import React from 'react';
+import { AnyObject, createPlateUI, createPlugins, Plate, TNode, usePlateEditorRef } from '@udecode/plate';
 import { useDebouncedCallback } from 'beautiful-react-hooks';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import { deserialize, serialize } from '../../src/transform/serialize';
 import { HTMLTags } from 'tiddlywiki';
 import { PLUGINS } from 'src/config/plugins';
+import { BallonToolbar } from 'src/config/components/Toolbars';
+import { GlobalStyle } from 'src/config/globalStyle';
+import { withStyledDraggables } from 'src/config/components/withStyledDraggables';
+import { withStyledPlaceHolders } from 'src/config/components/withStyledPlaceHolders';
 
 export interface CustomRenderElement {
   children: CustomText[];
@@ -41,13 +46,13 @@ export interface IEditorAppProps {
 }
 const plugins = createPlugins([...PLUGINS.basicElements, ...PLUGINS.basicMarks, ...PLUGINS.utils], {
   // Plate components
-  components: createPlateUI(),
+  components: withStyledPlaceHolders(withStyledDraggables(createPlateUI())),
 });
 
 export function EditorApp(props: IEditorAppProps): JSX.Element {
   // Add the initial value when setting up our state.
   const initialAst = deserialize(props.initialText);
-  const editor = useMemo<PlateEditor>(() => withPlate(createEditor(), { id: props.currentTiddler, plugins }), []);
+  const editor = usePlateEditorRef(props.currentTiddler);
   const onSave = useDebouncedCallback(
     (newValue: Array<TNode<AnyObject>>) => {
       // TODO: this seems buggy, sometimes editor.operations is empty array... So I have to add `editor.operations.length === 0 ||`
@@ -65,13 +70,20 @@ export function EditorApp(props: IEditorAppProps): JSX.Element {
   }
 
   return (
-    <Plate
-      initialValue={initialAst}
-      editor={editor}
-      onChange={(newValue) => {
-        onSave(newValue);
-      }}>
-      {props.initialText}
-    </Plate>
+    <>
+      <GlobalStyle />
+      <DndProvider backend={HTML5Backend}>
+        <Plate
+          id={props.currentTiddler}
+          initialValue={initialAst}
+          plugins={plugins}
+          onChange={(newValue) => {
+            onSave(newValue);
+          }}>
+          <BallonToolbar />
+          {props.initialText}
+        </Plate>
+      </DndProvider>
+    </>
   );
 }

@@ -5,6 +5,7 @@ import json from '@rollup/plugin-json';
 import typescript from '@rollup/plugin-typescript';
 import disablePackages from 'rollup-plugin-disable-packages';
 import { terser } from 'rollup-plugin-terser';
+import css from 'rollup-plugin-import-css';
 
 export default {
   input: 'src/components/index.ts',
@@ -20,9 +21,9 @@ export default {
     }),
     nodeResolve({ browser: true }),
     commonjs(),
-    typescript(),
+    typescript({ sourceMap: false }),
     json(),
-
+    css(),
     // We are not able to bundle in fsevents since it is a native osx lib.
     // It will give us errors if we don't disable (replace it with noop) it.
     // We must also use `useFsEvents: false` when calling chokidar.watch.

@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React from 'react';
 import { DragIndicator } from '@styled-icons/material/DragIndicator';
 import Tippy from '@tippyjs/react';
 import {
+  createPlateUI,
   ELEMENT_BLOCKQUOTE,
   ELEMENT_CODE_BLOCK,
   ELEMENT_H1,
@@ -23,7 +26,7 @@ import {
 import { css } from 'styled-components';
 import tw from 'twin.macro';
 
-export const withStyledDraggables = (components: any) => {
+export const withStyledDraggables = (components: any): ReturnType<typeof createPlateUI> => {
   return withDraggables(components, [
     {
       keys: [ELEMENT_PARAGRAPH, ELEMENT_UL, ELEMENT_OL],
