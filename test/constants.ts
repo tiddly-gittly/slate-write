@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
 import { IDomParseTreeNode, IParseTreeNode } from 'tiddlywiki';
 import { cloneDeep } from 'lodash';
-import { ElementElement } from '../src/components/editor';
-import * as slate from '../src/transform/slate';
+import { TEditor, TElement, TText } from '@udecode/plate';
 
 export const wikiTextDict: Record<string, string> = {
   text: 'AAA',
@@ -17,100 +16,110 @@ export const wikiTextDict: Record<string, string> = {
 ## BBB
 ### CCC`,
 };
-export const slateDict: Record<string, slate.Node[]> = {
+export const slateDict: Record<string, TEditor | TElement | TText | Array<TEditor | TElement | TText>> = {
   text: [{ text: 'AAA' }],
-  'p > text': [{ type: 'element', tag: 'p', children: [{ text: 'AAA' }] }],
-  'ul > li > text': [
-    {
-      type: 'element',
-      tag: 'ul',
-      children: [
-        {
-          type: 'element',
-          tag: 'li',
-          children: [
-            {
-              text: 'AAA',
-            },
-          ],
-        },
-        {
-          type: 'element',
-          tag: 'li',
-          children: [
-            {
-              text: 'BBB',
-            },
-          ],
-        },
-        {
-          type: 'element',
-          tag: 'li',
-          children: [
-            {
-              text: 'CCC',
-            },
-          ],
-        },
-      ],
-    },
-  ],
-  'ol > ol > ol > li': [
-    {
-      type: 'element',
-      tag: 'ol',
-      children: [
-        {
-          type: 'element',
-          tag: 'li',
-          children: [
-            {
-              text: 'AAA',
-            },
-          ],
-        },
-        {
-          type: 'element',
-          tag: 'ol',
-          children: [
-            {
-              type: 'element',
-              tag: 'li',
-              children: [
-                {
-                  text: 'BBB',
-                },
-              ],
-            },
-          ],
-        },
-        {
-          type: 'element',
-          tag: 'ol',
-          children: [
-            {
-              type: 'element',
-              tag: 'ol',
-              children: [
-                {
-                  type: 'element',
-                  tag: 'li',
-                  children: [
-                    {
-                      text: 'CCC',
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-  ],
+  'p > text': { type: 'p', children: [{ text: 'AAA' }] },
+  'ul > li > text': {
+    type: 'ul',
+    children: [
+      {
+        type: 'li',
+        children: [
+          {
+            type: 'lic',
+            children: [
+              {
+                text: 'AAA',
+              },
+            ],
+          },
+        ],
+      } as TElement,
+      {
+        type: 'li',
+        children: [
+          {
+            type: 'lic',
+            children: [
+              {
+                text: 'BBB',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        type: 'li',
+        children: [
+          {
+            type: 'lic',
+            children: [
+              {
+                text: 'CCC',
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  'ol > ol > ol > li': {
+    type: 'ol',
+    children: [
+      {
+        type: 'li',
+        children: [
+          {
+            type: 'lic',
+            children: [
+              {
+                text: 'AAA',
+              },
+            ],
+          } as TElement,
+          {
+            type: 'ol',
+            children: [
+              {
+                type: 'li',
+                children: [
+                  {
+                    type: 'lic',
+                    children: [
+                      {
+                        text: 'BBB',
+                      },
+                    ],
+                  },
+                  {
+                    type: 'ol',
+                    children: [
+                      {
+                        type: 'li',
+                        children: [
+                          {
+                            type: 'lic',
+                            children: [
+                              {
+                                text: 'CCC',
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          } as TElement,
+        ],
+      },
+    ],
+  },
 };
 slateDict['ol > li > text'] = cloneDeep(slateDict['ul > li > text']);
-(slateDict['ol > li > text'] as ElementElement[])[0].tag = 'ol';
+(slateDict['ol > li > text'] as TElement).type = 'ol';
 
 export const wikiAstDict: Record<string, IParseTreeNode[] | IParseTreeNode> = {
   text: { type: 'text' as const, text: 'AAA', start: 0, end: 3 },
