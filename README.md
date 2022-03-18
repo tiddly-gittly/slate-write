@@ -1,6 +1,6 @@
 # Slate Write
 
-A WYSIWYG editor for TiddlyWiki.
+A WYSIWYG editor for [TiddlyWiki](https://tiddlywiki.com/).
 
 ## How this works
 
