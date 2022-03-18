@@ -22,29 +22,6 @@ import { withStyledDraggables } from 'src/config/components/withStyledDraggables
 import { withStyledPlaceHolders } from 'src/config/components/withStyledPlaceHolders';
 import { Link } from '@styled-icons/boxicons-regular';
 
-export interface CustomRenderElement {
-  children: CustomText[];
-  /** this can be `echarts` or `mermaid` */
-  type: string;
-}
-export interface ElementElement {
-  children: Array<CustomText | ElementElement>;
-  tag: HTMLTags;
-  type: 'element';
-}
-export type CustomElement = CustomRenderElement | ElementElement;
-export interface FormattedText {
-  bold?: true;
-  text: string;
-}
-export type CustomText = FormattedText;
-declare module 'slate' {
-  interface CustomTypes {
-    Element: CustomElement;
-    Text: CustomText;
-  }
-}
-
 export interface IEditorAppProps {
   currentTiddler: string;
   initialText: string;
