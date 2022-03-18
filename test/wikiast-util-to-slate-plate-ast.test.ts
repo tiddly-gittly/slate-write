@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/dot-notation */
-import { wikiAstToSlateAst } from '../src/transform/wikiast-util-to-slateast';
+import { wikiAstToSlateAst } from '../src/transform/wikiast-util-to-slate-plate-ast';
 import { slateDict, wikiAstDict } from './constants';
 
 describe('Transform node', () => {

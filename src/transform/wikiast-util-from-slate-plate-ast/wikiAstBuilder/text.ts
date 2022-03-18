@@ -1,4 +1,4 @@
-import { FormattedText } from '../../../../src/components/editor';
+import { FormattedText } from '../../../components/editor';
 import type { ITextParseTreeNode } from 'tiddlywiki';
 import { IBuilders } from '.';
 

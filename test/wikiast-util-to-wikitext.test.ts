@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 import { wikiAstToWikiText } from '../src/transform/wikiast-util-to-wikitext';
-import { wikiAstToSlateAst } from '../src/transform/wikiast-util-to-slateast';
+import { wikiAstToSlateAst } from '../src/transform/wikiast-util-to-slate-plate-ast';
 import { slateDict, wikiAstDict, wikiTextDict } from './constants';
 
 describe('wikiAstToWikiText', () => {

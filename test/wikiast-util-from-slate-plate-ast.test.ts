@@ -1,5 +1,5 @@
-import { wikiAstToSlateAst } from '../src/transform/wikiast-util-to-slateast';
-import { wikiAstFromSlateAst } from '../src/transform/wikiast-util-from-slateast';
+import { wikiAstToSlateAst } from '../src/transform/wikiast-util-to-slate-plate-ast';
+import { wikiAstFromSlateAst } from '../src/transform/wikiast-util-from-slate-plate-ast';
 import { slateDict, wikiAstDict } from './constants';
 
 describe('fromSlateAst', () => {

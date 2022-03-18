@@ -1,6 +1,6 @@
 import type { IDomParseTreeNode } from 'tiddlywiki';
 import { convertNodes } from '../../traverse';
-import { IBuilders } from '../';
+import { IBuilders } from '..';
 
 import { ul } from './ul';
 export const elementBuilders = { ul, ol: ul };
