@@ -1,8 +1,9 @@
-import { ELEMENT_CODE_BLOCK } from '@udecode/plate';
+import { ELEMENT_CODE_BLOCK, ELEMENT_LIC } from '@udecode/plate';
 import htmlTags from 'html-tags';
 
 import { codeBlock } from './codeBlock';
 import { element } from './element';
+import { lic } from './lic';
 import { text } from './text';
 
 /**
@@ -20,6 +21,7 @@ export const builders = {
     {} as IElementBuilders,
   ),
   [ELEMENT_CODE_BLOCK]: codeBlock,
+  [ELEMENT_LIC]: lic,
   text,
 };
 

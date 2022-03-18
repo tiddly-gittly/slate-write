@@ -5,16 +5,10 @@ import { TElement } from '@udecode/plate';
 import type { IDomParseTreeNode } from 'tiddlywiki';
 import { IBuilders } from '..';
 import { convertNodes } from '../../traverse';
-
-export interface IListItemDomParseTreeNode extends IDomParseTreeNode {
-  children: IDomParseTreeNode[];
-  tag: 'li';
-}
 export interface IListDomParseTreeNode extends IDomParseTreeNode {
   tag: 'ol' | 'ul';
 }
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function ul(builders: IBuilders, node: IDomParseTreeNode): TElement {
   const { tag, children } = node as IListDomParseTreeNode;
   return {

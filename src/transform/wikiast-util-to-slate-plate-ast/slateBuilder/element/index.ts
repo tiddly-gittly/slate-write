@@ -4,7 +4,8 @@ import { convertNodes } from '../../traverse';
 import { IBuilders } from '..';
 
 import { ul } from './ul';
-export const elementBuilders = { ul, ol: ul };
+import { li } from './li';
+export const elementBuilders = { ul, ol: ul, li };
 export type IElementBuilders = typeof elementBuilders;
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type

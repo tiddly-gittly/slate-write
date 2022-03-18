@@ -13,15 +13,15 @@ describe('Transform node', () => {
 
 describe('Transform tree', () => {
   test('p > text', () => {
-    expect(wikiAstToSlateAst(wikiAstDict['p > text'])).toEqual(slateDict['p > text']);
+    expect(wikiAstToSlateAst(wikiAstDict['p > text'])).toMatchObject([slateDict['p > text']]);
   });
   test('ul > li > text', () => {
-    expect(wikiAstToSlateAst(wikiAstDict['ul > li > text'])).toEqual(slateDict['ul > li > text']);
+    expect(wikiAstToSlateAst(wikiAstDict['ul > li > text'])).toMatchObject([slateDict['ul > li > text']]);
   });
   test('ol > li > text', () => {
-    expect(wikiAstToSlateAst(wikiAstDict['ol > li > text'])).toEqual(slateDict['ol > li > text']);
+    expect(wikiAstToSlateAst(wikiAstDict['ol > li > text'])).toMatchObject([slateDict['ol > li > text']]);
   });
-  test.skip('ol > ol > ol > li', () => {
-    expect(wikiAstToSlateAst(wikiAstDict['ol > ol > ol > li'])).toEqual(slateDict['ol > ol > ol > li']);
+  test('ol > ol > ol > li', () => {
+    expect(wikiAstToSlateAst(wikiAstDict['ol > ol > ol > li'])).toMatchObject([slateDict['ol > ol > ol > li']]);
   });
 });
