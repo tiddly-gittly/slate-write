@@ -30,4 +30,7 @@ describe('Transform tree', () => {
   test('p basic sequence marks', () => {
     expect(wikiAstToSlateAst(wikiAstDict['p basic sequence marks'])).toMatchObject(slateDict['p basic sequence marks']);
   });
+  test('ol > li > mark > text', () => {
+    expect(wikiAstToSlateAst(wikiAstDict['ol > li > mark > text'])).toMatchObject(slateDict['ol > li > mark > text']);
+  });
 });

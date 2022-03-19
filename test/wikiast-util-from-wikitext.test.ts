@@ -36,4 +36,7 @@ describe('fromWikiText', () => {
   test('p basic sequence marks', () => {
     expect(wikiAstFromWikiText(wikiTextDict['p basic sequence marks'])).toEqual(wikiAstDict['p basic sequence marks']);
   });
+  test('ol > li > mark > text', () => {
+    expect(wikiAstFromWikiText(wikiTextDict['ol > li > mark > text'])).toEqual(wikiAstDict['ol > li > mark > text']);
+  });
 });

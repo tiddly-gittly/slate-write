@@ -34,4 +34,7 @@ describe('Transform tree', () => {
   test('p basic sequence marks', () => {
     expect(wikiAstToWikiText(wikiAstDict['p basic sequence marks'])).toEqual(wikiTextDict['p basic sequence marks']);
   });
+  test('ol > li > mark > text', () => {
+    expect(wikiAstToWikiText(wikiAstDict['ol > li > mark > text'])).toEqual(wikiTextDict['ol > li > mark > text']);
+  });
 });

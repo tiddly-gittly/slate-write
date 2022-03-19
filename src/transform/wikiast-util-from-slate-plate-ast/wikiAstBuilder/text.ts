@@ -32,11 +32,10 @@ export function text(builders: IBuilders, node: TTextWithMark): ITextParseTreeNo
   // position in the list is the priority of the mark, code can't have mark, so it should be the last one to add (be the leaf node)
   for (const markType of ['bold', 'italic', 'underline', 'strikethrough', 'subscript', 'superscript', 'code'] as const) {
     if (node[markType] === true) {
-      node[markType] = undefined;
       return {
         type: 'element',
         tag: markTypeMap[markType],
-        children: [text(builders, node)],
+        children: [text(builders, { ...node, [markType]: undefined })],
       };
     }
   }

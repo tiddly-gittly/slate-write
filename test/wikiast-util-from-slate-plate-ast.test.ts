@@ -25,6 +25,9 @@ describe('fromSlateAst', () => {
   test('p basic sequence marks', () => {
     expect(wikiAstFromSlateAst(slateDict['p basic sequence marks'])).toEqual(wikiAstDictWithoutPos['p basic sequence marks']);
   });
+  test('ol > li > mark > text', () => {
+    expect(wikiAstFromSlateAst(slateDict['ol > li > mark > text'])).toEqual(wikiAstDictWithoutPos['ol > li > mark > text']);
+  });
 });
 
 describe('Identical', () => {
@@ -47,5 +50,8 @@ describe('Identical', () => {
   });
   test('p basic sequence marks', () => {
     expect(wikiAstDict['p basic sequence marks']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['p basic sequence marks'])));
+  });
+  test('ol > li > mark > text', () => {
+    expect(wikiAstDict['ol > li > mark > text']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['ol > li > mark > text'])));
   });
 });

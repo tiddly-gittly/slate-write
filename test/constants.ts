@@ -64,6 +64,9 @@ E\`EEE\`E
 F^^F^^,,F,,^^F^^F
 
 G,,G,,'',,G,,'',,G,,G`,
+  'ol > li > mark > text': `# A''//A//''A
+## B//B//B
+### C^^C^^C`,
 };
 
 /**
@@ -385,6 +388,84 @@ export const slateDict: Record<string, TEditor | TElement | TText | Array<TEdito
         },
       ],
     },
+  ],
+  'ol > li > mark > text': [
+    {
+      type: 'ol',
+      children: [
+        {
+          type: 'li',
+          children: [
+            {
+              type: 'lic',
+              children: [
+                {
+                  text: 'A',
+                },
+                {
+                  text: 'A',
+                  italic: true,
+                  bold: true,
+                },
+                {
+                  text: 'A',
+                },
+              ],
+            },
+            {
+              type: 'ol',
+              children: [
+                {
+                  type: 'li',
+                  children: [
+                    {
+                      type: 'lic',
+                      children: [
+                        {
+                          text: 'B',
+                        },
+                        {
+                          text: 'B',
+                          italic: true,
+                        },
+                        {
+                          text: 'B',
+                        },
+                      ],
+                    },
+                    {
+                      type: 'ol',
+                      children: [
+                        {
+                          type: 'li',
+                          children: [
+                            {
+                              type: 'lic',
+                              children: [
+                                {
+                                  text: 'C',
+                                },
+                                {
+                                  text: 'C',
+                                  superscript: true,
+                                },
+                                {
+                                  text: 'C',
+                                },
+                              ],
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    } as TElement,
   ],
 };
 slateDict['ol > li > text'] = cloneDeep(slateDict['ul > li > text']);
@@ -1394,6 +1475,122 @@ export const wikiAstDict: Record<string, IParseTreeNode[] | IParseTreeNode> = {
       ],
       start: 118,
       end: 139,
+    },
+  ],
+  'ol > li > mark > text': [
+    {
+      type: 'element',
+      tag: 'ol',
+      children: [
+        {
+          type: 'element',
+          tag: 'li',
+          children: [
+            {
+              type: 'text' as const,
+              text: 'A',
+              start: 2,
+              end: 3,
+            },
+            {
+              type: 'element',
+              tag: 'strong',
+              children: [
+                {
+                  type: 'element',
+                  tag: 'em',
+                  children: [
+                    {
+                      type: 'text' as const,
+                      text: 'A',
+                      start: 7,
+                      end: 8,
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              type: 'text' as const,
+              text: 'A',
+              start: 12,
+              end: 13,
+            },
+            {
+              type: 'element',
+              tag: 'ol',
+              children: [
+                {
+                  type: 'element',
+                  tag: 'li',
+                  children: [
+                    {
+                      type: 'text' as const,
+                      text: 'B',
+                      start: 17,
+                      end: 18,
+                    },
+                    {
+                      type: 'element',
+                      tag: 'em',
+                      children: [
+                        {
+                          type: 'text' as const,
+                          text: 'B',
+                          start: 20,
+                          end: 21,
+                        },
+                      ],
+                    },
+                    {
+                      type: 'text' as const,
+                      text: 'B',
+                      start: 23,
+                      end: 24,
+                    },
+                    {
+                      type: 'element',
+                      tag: 'ol',
+                      children: [
+                        {
+                          type: 'element',
+                          tag: 'li',
+                          children: [
+                            {
+                              type: 'text' as const,
+                              text: 'C',
+                              start: 29,
+                              end: 30,
+                            },
+                            {
+                              type: 'element',
+                              tag: 'sup',
+                              children: [
+                                {
+                                  type: 'text' as const,
+                                  text: 'C',
+                                  start: 32,
+                                  end: 33,
+                                },
+                              ],
+                            },
+                            {
+                              type: 'text' as const,
+                              text: 'C',
+                              start: 35,
+                              end: 36,
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
     },
   ],
 };
