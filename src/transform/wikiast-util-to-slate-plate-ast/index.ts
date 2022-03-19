@@ -1,9 +1,32 @@
 import { AnyObject, TNode } from '@udecode/plate';
 import { IParseTreeNode } from 'tiddlywiki';
 
-import { builders } from './slateBuilder';
-import { convertNodes } from './traverse';
+import { builders, type IBuilders } from './slateBuilder';
+import { convertNodes, type slateNode } from './traverse';
+
+export type IAnyBuilder = IBuilders & Record<string, typeof slateNode>;
+
+/**
+ * We need a context to know what parent node is wrapping the current node.
+ * For example, mark in wikiast is tree structure, but in slate-plate-ast is flat structure, so need context to convert.
+ */
+export interface IContext {
+  builders: IBuilders;
+  marks: {
+    bold?: boolean;
+    code?: boolean;
+    italic?: boolean;
+    strikethrough?: boolean;
+    subscript?: boolean;
+    superscript?: boolean;
+    underline?: boolean;
+  };
+}
+const initialContext: IContext = {
+  builders,
+  marks: {},
+};
 
 export function wikiAstToSlateAst(node: IParseTreeNode | IParseTreeNode[]): Array<TNode<AnyObject>> {
-  return convertNodes(builders, Array.isArray(node) ? node : [node]);
+  return convertNodes(initialContext, Array.isArray(node) ? node : [node]);
 }

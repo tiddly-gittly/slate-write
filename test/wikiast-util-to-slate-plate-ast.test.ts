@@ -27,4 +27,7 @@ describe('Transform tree', () => {
   test('p + ol + blockquote > div + ol', () => {
     expect(wikiAstToSlateAst(wikiAstDict['p + ol + blockquote > div + ol'])).toMatchObject(slateDict['p + ol + blockquote > div + ol']);
   });
+  test('p basic sequence marks', () => {
+    expect(wikiAstToSlateAst(wikiAstDict['p basic sequence marks'])).toMatchObject(slateDict['p basic sequence marks']);
+  });
 });
