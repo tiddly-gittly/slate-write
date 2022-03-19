@@ -33,4 +33,7 @@ describe('fromWikiText', () => {
   test('p + ol + blockquote > div + ol', () => {
     expect(wikiAstFromWikiText(wikiTextDict['p + ol + blockquote > div + ol'])).toEqual(wikiAstDict['p + ol + blockquote > div + ol']);
   });
+  test('p basic sequence marks', () => {
+    expect(wikiAstFromWikiText(wikiTextDict['p basic sequence marks'])).toEqual(wikiAstDict['p basic sequence marks']);
+  });
 });
