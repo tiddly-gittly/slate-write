@@ -30,4 +30,7 @@ describe('fromWikiText', () => {
   test('ol > ol > ol > li', () => {
     expect(wikiAstFromWikiText(wikiTextDict['ol > ol > ol > li'])).toEqual(wikiAstDict['ol > ol > ol > li']);
   });
+  test('p + ol + blockquote > div + ol', () => {
+    expect(wikiAstFromWikiText(wikiTextDict['p + ol + blockquote > div + ol'])).toEqual(wikiAstDict['p + ol + blockquote > div + ol']);
+  });
 });

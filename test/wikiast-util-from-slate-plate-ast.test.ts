@@ -19,6 +19,9 @@ describe('fromSlateAst', () => {
   test('ol > ol > ol > li', () => {
     expect(wikiAstFromSlateAst(slateDict['ol > ol > ol > li'])).toEqual(wikiAstDictWithoutPos['ol > ol > ol > li']);
   });
+  test('p + ol + blockquote > div + ol', () => {
+    expect(wikiAstFromSlateAst(slateDict['p + ol + blockquote > div + ol'])).toEqual(wikiAstDictWithoutPos['p + ol + blockquote > div + ol']);
+  });
 });
 
 describe('Identical', () => {
@@ -33,5 +36,8 @@ describe('Identical', () => {
   });
   test('ol > ol > ol > li', () => {
     expect(wikiAstDict['ol > ol > ol > li']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['ol > ol > ol > li'])));
+  });
+  test('p + ol + blockquote > div + ol', () => {
+    expect(wikiAstDict['p + ol + blockquote > div + ol']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['p + ol + blockquote > div + ol'])));
   });
 });

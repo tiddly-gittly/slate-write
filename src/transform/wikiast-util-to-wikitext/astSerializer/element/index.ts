@@ -2,10 +2,12 @@ import type { IDomParseTreeNode } from 'tiddlywiki';
 import { convertNodes } from '../../traverse';
 
 import { p } from './p';
+import { div } from './div';
 import { ul } from './ul';
 import { li } from './li';
+import { blockquote } from './blockquote';
 import { IContext } from '../..';
-export const elementBuilders = { p, ul, ol: ul, li };
+export const elementBuilders = { p, div, ul, ol: ul, li, blockquote };
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function element(context: IContext, node: IDomParseTreeNode): string[] {

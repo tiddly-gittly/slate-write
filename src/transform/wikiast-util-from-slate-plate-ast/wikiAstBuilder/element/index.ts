@@ -3,15 +3,18 @@ import type { IDomParseTreeNode } from 'tiddlywiki';
 import { convertNodes } from '../../traverse';
 import { IBuilders } from '..';
 
-// const elementBuilders = {
-// };
-// export type IElementBuilders = typeof elementBuilders;
+import { blockquote } from './blockquote';
+
+const elementBuilders: Partial<Record<keyof HTMLElementTagNameMap, (builders: IBuilders, node: TElement) => IDomParseTreeNode>> = {
+  blockquote,
+};
 
 export function element(builders: IBuilders, node: TElement & { type: keyof HTMLElementTagNameMap }): IDomParseTreeNode {
   const { type: tag, children } = node;
-  // if (typeof elementBuilders[tag as keyof IElementBuilders] === 'function') {
-  //   return elementBuilders[tag as keyof IElementBuilders](builders, node);
-  // }
+  const customElementHandler = elementBuilders[tag];
+  if (typeof customElementHandler === 'function') {
+    return customElementHandler(builders, node);
+  }
   return {
     type: 'element',
     tag,

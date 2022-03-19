@@ -24,4 +24,7 @@ describe('Transform tree', () => {
   test('ol > ol > ol > li', () => {
     expect(wikiAstToSlateAst(wikiAstDict['ol > ol > ol > li'])).toMatchObject([slateDict['ol > ol > ol > li']]);
   });
+  test('p + ol + blockquote > div + ol', () => {
+    expect(wikiAstToSlateAst(wikiAstDict['p + ol + blockquote > div + ol'])).toMatchObject(slateDict['p + ol + blockquote > div + ol']);
+  });
 });

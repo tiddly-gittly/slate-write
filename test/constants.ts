@@ -10,14 +10,44 @@ export const wikiTextDict: Record<string, string> = {
   'p > text': 'AAA',
   'ol > li > text': `# AAA
 # BBB
-# CCC`,
+# CCC
+`,
   'ul > li > text': `* AAA
 * BBB
-* CCC`,
+* CCC
+`,
   'ol > ol > ol > li': `# AAA
 ## BBB
-### CCC`,
+### CCC
+`,
+  'p + ol + blockquote > div + ol': `PPP
+
+# AAA
+
+> BBB
+> BBB2
+
+# CCC
+`,
+  'p + ol + blockquote > p + ol': `PPP
+
+# AAA
+
+<<<
+BBB
+
+BBB2
+<<<
+
+# CCC
+`,
 };
+
+/**
+ * Get value by adding `console.log(`newValue`, newValue);` in `onSave` of `src/components/editor.tsx`.
+ *
+ * Sometimes may need to add `as TElement` on nested `children: []` to prevent ts error.
+ */
 export const slateDict: Record<string, TEditor | TElement | TText | Array<TEditor | TElement | TText>> = {
   text: [{ text: 'AAA' }],
   'p > text': { type: 'p', children: [{ text: 'AAA' }] },
@@ -119,6 +149,60 @@ export const slateDict: Record<string, TEditor | TElement | TText | Array<TEdito
       },
     ],
   },
+  'p + ol + blockquote > div + ol': [
+    {
+      type: 'p',
+      children: [
+        {
+          text: 'PPP',
+        },
+      ],
+    },
+    {
+      type: 'ol',
+      children: [
+        {
+          type: 'li',
+          children: [
+            {
+              type: 'lic',
+              children: [
+                {
+                  text: 'AAA',
+                },
+              ],
+            } as TElement,
+          ],
+        },
+      ],
+    },
+    {
+      type: 'blockquote',
+      children: [
+        {
+          text: 'BBB\nBBB2',
+        },
+      ],
+    },
+    {
+      type: 'ol',
+      children: [
+        {
+          type: 'li',
+          children: [
+            {
+              type: 'lic',
+              children: [
+                {
+                  text: 'CCC',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };
 slateDict['ol > li > text'] = cloneDeep(slateDict['ul > li > text']);
 (slateDict['ol > li > text'] as TElement).type = 'ol';
@@ -220,6 +304,180 @@ export const wikiAstDict: Record<string, IParseTreeNode[] | IParseTreeNode> = {
                   ],
                 },
               ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  'p + ol + blockquote > div + ol': [
+    {
+      type: 'element',
+      tag: 'p',
+      children: [
+        {
+          type: 'text' as const,
+          text: 'PPP',
+          start: 0,
+          end: 3,
+        },
+      ],
+      start: 0,
+      end: 3,
+    },
+    {
+      type: 'element',
+      tag: 'ol',
+      children: [
+        {
+          type: 'element',
+          tag: 'li',
+          children: [
+            {
+              type: 'text' as const,
+              text: 'AAA',
+              start: 7,
+              end: 10,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      type: 'element',
+      tag: 'blockquote',
+      children: [
+        {
+          type: 'element',
+          tag: 'div',
+          children: [
+            {
+              type: 'text' as const,
+              text: 'BBB',
+              start: 14,
+              end: 17,
+            },
+          ],
+        },
+        {
+          type: 'element',
+          tag: 'div',
+          children: [
+            {
+              type: 'text' as const,
+              text: 'BBB2',
+              start: 20,
+              end: 24,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      type: 'element',
+      tag: 'ol',
+      children: [
+        {
+          type: 'element',
+          tag: 'li',
+          children: [
+            {
+              type: 'text' as const,
+              text: 'CCC',
+              start: 28,
+              end: 31,
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  'p + ol + blockquote > p + ol': [
+    {
+      type: 'element',
+      tag: 'p',
+      children: [
+        {
+          type: 'text' as const,
+          text: 'PPP',
+          start: 0,
+          end: 3,
+        },
+      ],
+      start: 0,
+      end: 3,
+    },
+    {
+      type: 'element',
+      tag: 'ol',
+      children: [
+        {
+          type: 'element',
+          tag: 'li',
+          children: [
+            {
+              type: 'text' as const,
+              text: 'AAA',
+              start: 7,
+              end: 10,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      type: 'element',
+      tag: 'blockquote',
+      attributes: {
+        class: {
+          type: 'string',
+          value: 'tc-quote',
+        },
+      },
+      children: [
+        {
+          type: 'element',
+          tag: 'p',
+          children: [
+            {
+              type: 'text' as const,
+              text: 'BBB',
+              start: 15,
+              end: 18,
+            },
+          ],
+          start: 15,
+          end: 18,
+        },
+        {
+          type: 'element',
+          tag: 'p',
+          children: [
+            {
+              type: 'text' as const,
+              text: 'BBB2\n',
+              start: 20,
+              end: 25,
+            },
+          ],
+          start: 20,
+          end: 25,
+        },
+      ],
+    },
+    {
+      type: 'element',
+      tag: 'ol',
+      children: [
+        {
+          type: 'element',
+          tag: 'li',
+          children: [
+            {
+              type: 'text' as const,
+              text: 'CCC',
+              start: 31,
+              end: 34,
             },
           ],
         },

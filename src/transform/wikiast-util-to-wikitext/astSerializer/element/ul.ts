@@ -9,5 +9,7 @@ export function ul(context: IContext, { type, tag, children }: IDomParseTreeNode
   const result = convertNodes(context, children);
   context.indentLevels -= 1;
   context.listMode = undefined;
-  return [...result, '\n'];
+  // add empty line between list and following content
+  // TODO: ol and inline blockquote don't need this, need to check sibling
+  return context.indentLevels === -1 ? [...result, ''] : result;
 }

@@ -5,7 +5,8 @@ import { IBuilders } from '..';
 
 import { ul } from './ul';
 import { li } from './li';
-export const elementBuilders = { ul, ol: ul, li };
+import { blockquote } from './blockquote';
+export const elementBuilders = { ul, ol: ul, li, blockquote };
 export type IElementBuilders = typeof elementBuilders;
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type

@@ -17,7 +17,7 @@ describe('Transform node', () => {
 
 describe('Transform tree', () => {
   test('p > text', () => {
-    expect(wikiAstToWikiText(wikiAstDict['p > text'])).toEqual(wikiTextDict['p > text']);
+    expect(wikiAstToWikiText(wikiAstDict['p > text'])).toEqual(wikiTextDict['p > text'] + '\n');
   });
   test('ul > li > text', () => {
     expect(wikiAstToWikiText(wikiAstDict['ul > li > text'])).toEqual(wikiTextDict['ul > li > text']);
@@ -27,5 +27,8 @@ describe('Transform tree', () => {
   });
   test('ol > ol > ol > li', () => {
     expect(wikiAstToWikiText(wikiAstDict['ol > ol > ol > li'])).toEqual(wikiTextDict['ol > ol > ol > li']);
+  });
+  test('p + ol + blockquote > div + ol', () => {
+    expect(wikiAstToWikiText(wikiAstDict['p + ol + blockquote > div + ol'])).toEqual(wikiTextDict['p + ol + blockquote > div + ol']);
   });
 });

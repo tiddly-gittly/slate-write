@@ -41,6 +41,8 @@ export function EditorApp(props: IEditorAppProps): JSX.Element {
   const initialAst = deserialize(props.initialText);
   const onSave = useDebouncedCallback(
     (newValue: Array<TNode<AnyObject>>) => {
+      // DEBUG: console
+      console.log(`newValue`, newValue);
       const newText = serialize(newValue);
       props.saver.onSave(newText);
     },
