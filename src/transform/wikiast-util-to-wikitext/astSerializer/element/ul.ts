@@ -11,5 +11,5 @@ export function ul(context: IContext, { type, tag, children }: IDomParseTreeNode
   context.listMode = undefined;
   // add empty line between list and following content
   // TODO: ol and inline blockquote don't need this, need to check sibling
-  return context.indentLevels === -1 ? [...result, ''] : result;
+  return context.indentLevels === -1 ? [...result, '\n'] : result;
 }

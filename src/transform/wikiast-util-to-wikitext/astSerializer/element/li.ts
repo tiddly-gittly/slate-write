@@ -7,5 +7,5 @@ export function li(context: IContext, { type, tag, children }: IDomParseTreeNode
   const listItemDot = context.listMode === 'ul' ? '*' : '#';
   // the `rest` here maybe another ol or ul, so we need to indent it by making it list element in the result
   const [textContent, ...rest] = convertNodes(context, children);
-  return [`${repeat(listItemDot, context.indentLevels + 1)} ${textContent ?? ''}`, ...rest];
+  return [`${repeat(listItemDot, context.indentLevels + 1)} ${textContent ?? ''}`, '\n', ...rest];
 }

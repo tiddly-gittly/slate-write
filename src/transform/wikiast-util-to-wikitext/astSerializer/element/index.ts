@@ -6,8 +6,9 @@ import { div } from './div';
 import { ul } from './ul';
 import { li } from './li';
 import { blockquote } from './blockquote';
+import { marks } from './marks';
 import { IContext } from '../..';
-export const elementBuilders = { p, div, ul, ol: ul, li, blockquote };
+export const elementBuilders = { p, div, ul, ol: ul, li, blockquote, ...marks };
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function element(context: IContext, node: IDomParseTreeNode): string[] {

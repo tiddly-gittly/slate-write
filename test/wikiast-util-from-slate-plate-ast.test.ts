@@ -45,4 +45,7 @@ describe('Identical', () => {
       wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['p + ol + blockquote > div + ol'])),
     );
   });
+  test('p basic sequence marks', () => {
+    expect(wikiAstDict['p basic sequence marks']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['p basic sequence marks'])));
+  });
 });

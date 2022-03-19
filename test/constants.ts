@@ -10,16 +10,13 @@ export const wikiTextDict: Record<string, string> = {
   'p > text': 'AAA',
   'ol > li > text': `# AAA
 # BBB
-# CCC
-`,
+# CCC`,
   'ul > li > text': `* AAA
 * BBB
-* CCC
-`,
+* CCC`,
   'ol > ol > ol > li': `# AAA
 ## BBB
-### CCC
-`,
+### CCC`,
   'p + ol + blockquote > div + ol': `PPP
 
 # AAA
@@ -27,8 +24,7 @@ export const wikiTextDict: Record<string, string> = {
 > BBB
 > BBB2
 
-# CCC
-`,
+# CCC`,
   'p + ol + blockquote > p + ol': `PPP
 
 # AAA

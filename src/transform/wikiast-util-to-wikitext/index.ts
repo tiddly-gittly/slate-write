@@ -18,16 +18,26 @@ export interface IContext {
   indentLevels: number;
   /** let li know it should use which symbol for list dot */
   listMode: 'ul' | 'ol' | undefined;
+  marks: {
+    code?: boolean;
+    em?: boolean;
+    strike?: boolean;
+    strong?: boolean;
+    sub?: boolean;
+    sup?: boolean;
+    u?: boolean;
+  };
 }
 // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
 const defaultContext = {
   builders,
   indentLevels: -1,
   listMode: undefined,
+  marks: {},
 } as IContext;
 
 export function wikiAstToWikiText(input: IParseTreeNode | IParseTreeNode[]): string {
   const lines = convertNodes(defaultContext, Array.isArray(input) ? input : [input]);
   // remove tailing \n
-  return dropRightWhile(lines, (line) => line === '\n').join('\n');
+  return dropRightWhile(lines, (line) => line === '\n' || line === '\n\n').join('');
 }
