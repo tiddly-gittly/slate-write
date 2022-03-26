@@ -6,7 +6,7 @@ const Widget = require('$:/plugins/linonetwo/tw-react/widget.js').widget as type
 
 // TODO: implement things in https://github.com/Jermolene/TiddlyWiki5/blob/master/core/modules/editor/factory.js
 
-export class SlateWriteWidget extends Widget {
+class SlateWriteWidget extends Widget {
   private currentTiddler: string | undefined;
 
   refresh(): boolean {
@@ -44,3 +44,4 @@ export class SlateWriteWidget extends Widget {
     };
   };
 }
+exports.SlateWriteWidget = SlateWriteWidget;

@@ -4,7 +4,8 @@
   if (!$tw.browser) {
     return;
   }
-  const { SlateWriteWidget } = require('$:/plugins/linonetwo/slate-write/components/index.js');
+  const components = require('$:/plugins/linonetwo/slate-write/components/index.js');
+  const { SlateWriteWidget } = components
   /* eslint-disable @typescript-eslint/no-unsafe-member-access */
   exports.slateWrite = SlateWriteWidget;
   // fix `Undefined widget 'edit-slateWrite'`

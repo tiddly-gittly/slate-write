@@ -22,7 +22,7 @@ esbuild
     format: 'cjs',
     external: ['$:/*', 'react', 'react-dom'],
     plugins: [
-      esbuildPluginBrowserslist(browserslist('last 2 versions'), {
+      esbuildPluginBrowserslist(browserslist('last 2 firefox versions'), {
         printUnknownTargets: false,
       }),
     ],

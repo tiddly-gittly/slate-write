@@ -15,7 +15,7 @@ const nodejsPluginOutDir = path.join(distDir, 'plugins', author, name);
 // cross platform cp -r ${repoDir}/src/ ${nodejsPluginOutDir}/
 const copyOptions = {
   filter: (src, dest) => {
-    if (!src.endsWith('.ts')) {
+    if (!(src.endsWith('.ts') || src.endsWith('.tsx'))) {
       // Return true to copy the item
       return true;
     }
