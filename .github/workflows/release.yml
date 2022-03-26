@@ -28,15 +28,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - id: setPackageJSON
+      - id: setPluginInfoJSON
         run: |
-          content=`cat ./package.json`
+          content=`cat ./src/plugin.info`
           # the following lines are only required for multi line json
           content="${content//'%'/'%25'}"
           content="${content//$'\n'/'%0A'}"
           content="${content//$'\r'/'%0D'}"
+          # here we replace "title": "$:/plugins/linonetwo/tw-example-plugin", to "title": "linonetwo/tw-example-plugin",
+          # so it can be used in tiddly-gittly/tw5-plugin-packer to find output path
+          content="${content//$\:\/plugins\//}"
           # end of optional handling for multi line json
-          echo "::set-output name=packageJson::$content"
+          echo "::set-output name=pluginInfoJSON::$content"
 
       - name: Get npm cache directory
         uses: actions/cache@v3
@@ -61,8 +64,8 @@ jobs:
       - uses: tiddly-gittly/tw5-plugin-packer@v0.0.10
         with:
           minify: 'true'
-          # here we read plugin author and name from packageJSON, and packageJSON is read in the step above with id `setPackageJSON`
-          source: 'dist/plugins/${{fromJson(steps.setPackageJSON.outputs.packageJson).author}}/${{fromJson(steps.setPackageJSON.outputs.packageJson).name}}'
+          # here we read plugin author and name from pluginInfoJSON, and pluginInfoJSON is read in the step above with id `setPluginInfoJSON`
+          source: 'dist/plugins/${{fromJson(steps.setPluginInfoJSON.outputs.pluginInfoJSON).title}}'
           output: 'dist/out'
           uglifyjs-options: '{ "warnings": false, "ie8": false, "safari10": false }'
           cleancss-options: '{ "compatibility": "*", "level": 2 }'
