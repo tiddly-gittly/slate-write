@@ -13,7 +13,7 @@
     "dev-demo": "npm run dev && zx ./scripts/build-demo-html.mjs && cd ./dist/output && serve .",
     "dev": "npm run make && npm run run-action",
     "clean": "rimraf dist",
-    "build": "node esbuild.config.js && zx scripts/after-build.mjs",
+    "build": "zx esbuild.config.mjs && zx scripts/after-build.mjs",
     "run-action": "zx scripts/run-action.mjs",
     "prepublishOnly": "npm run make && tsc --emitDeclarationOnly",
     "build:types": "tsc --emitDeclarationOnly",
