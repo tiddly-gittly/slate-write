@@ -1,0 +1,88 @@
+name: Release Plugins
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+    paths-ignore:
+      - 'README.md'
+      - 'docs/**'
+      - '.vscode'
+  pull_request:
+    branches:
+      - master
+    paths-ignore:
+      - 'docs/**'
+      - 'README.md'
+      - '.vscode'
+
+concurrency:
+  group: release-ci-group
+  cancel-in-progress: true
+
+jobs:
+  Plugins:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - id: setPackageJSON
+        run: |
+          content=`cat ./package.json`
+          # the following lines are only required for multi line json
+          content="${content//'%'/'%25'}"
+          content="${content//$'\n'/'%0A'}"
+          content="${content//$'\r'/'%0D'}"
+          # end of optional handling for multi line json
+          echo "::set-output name=packageJson::$content"
+
+      - name: Get npm cache directory
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Make Plugins
+        run: npm run make
+        env:
+          CI: true
+          CI_PULL_REQUEST: ${{ github.event_name == 'pull_request' }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # this should be the same as `scripts/run-action.mjs`
+      - uses: tiddly-gittly/tw5-plugin-packer@v0.0.10
+        with:
+          minify: 'true'
+          # here we read plugin author and name from packageJSON, and packageJSON is read in the step above with id `setPackageJSON`
+          source: 'dist/plugins/${{fromJson(steps.setPackageJSON.outputs.packageJson).author}}/${{fromJson(steps.setPackageJSON.outputs.packageJson).name}}'
+          output: 'dist/out'
+          uglifyjs-options: '{ "warnings": false, "ie8": false, "safari10": false }'
+          cleancss-options: '{ "compatibility": "*", "level": 2 }'
+
+      - name: Make Demo Site
+        run: npx zx ./scripts/build-demo-html.mjs
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            dist/out/*.json
+            dist/out/*.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # location is described in ./scripts/build-demo-html.mjs
+          publish_dir: ./dist/output

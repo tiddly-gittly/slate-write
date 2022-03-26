@@ -86,8 +86,15 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/no-var-requires': 'off',
     semi: [0],
-    'no-use-before-define': [0],
     '@typescript-eslint/no-use-before-define': [1],
+    '@typescript-eslint/no-unused-vars': [
+      'warn', // or error
+      {
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+        caughtErrorsIgnorePattern: '^_',
+      },
+    ],
   },
   extends: [
     'eslint:recommended',
