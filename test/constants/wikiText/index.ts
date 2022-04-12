@@ -31,7 +31,6 @@ BBB2
 # CCC
 `,
   'p basic nested marks': `A''A//A//A''A
-
 B//B__B__B//B
 
 C__C~~C~~C__C
