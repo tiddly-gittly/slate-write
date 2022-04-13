@@ -1,7 +1,7 @@
 import type { IDomParseTreeNode } from 'tiddlywiki';
 import { convertNodes } from '../../traverse';
 import { IContext } from '../..';
-import { dropExtraTailingN } from '../../tokenStreamUtils/dropExtraTailingN';
+import { dropExtraTailingN } from '../../../token-stream-utils/dropExtraTailingN';
 
 export function ul(context: IContext, { type, tag, children }: IDomParseTreeNode): string[] {
   // the initial indentation is -1, so we can add 1

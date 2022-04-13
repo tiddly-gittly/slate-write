@@ -1,7 +1,7 @@
 import cloneDeep from 'lodash/cloneDeep';
 import type { IParseTreeNode } from 'tiddlywiki';
 import { builders, IBuilders } from './astSerializer';
-import { dropExtraTailingN } from './tokenStreamUtils/dropExtraTailingN';
+import { dropExtraTailingN } from '../token-stream-utils/dropExtraTailingN';
 import { convertNodes, convertOneNode } from './traverse';
 
 export type IAnyBuilder = IBuilders & Record<string, typeof convertOneNode>;
