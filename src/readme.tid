@@ -2,3 +2,9 @@ title: $:/plugins/linonetwo/slate-write/readme
 type: text/vnd.tiddlywiki
 
 `<$edit-slateWrite tiddler="AAA" />`
+
+!! Install 安装
+
+[[Install from CPL|https://tw-cpl.netlify.app/]]
+
+[[使用社区插件源（CPL）安装|https://tw-cpl.netlify.app/]]
