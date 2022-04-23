@@ -166,8 +166,6 @@ export const TableToolbarButtons = (): JSX.Element => (
 
 export const BallonToolbar = (): JSX.Element => {
   const editor = usePlateEditorRef()!;
-  // DEBUG: console
-  console.log(`editortool`, editor);
 
   const arrow = false;
   const theme = 'dark';

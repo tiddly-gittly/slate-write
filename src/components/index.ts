@@ -57,7 +57,7 @@ class SlateWriteWidget extends Widget {
     };
     return {
       currentTiddler: this.editTitle ?? this.getVariable('currentTiddler'),
-      initialText: (this.editTitle && $tw.wiki.getTiddlerText(this.editTitle)) ?? '',
+      tiddlerText: (this.editTitle && $tw.wiki.getTiddlerText(this.editTitle)) ?? '',
       saver: {
         onSave,
         interval: 1000,
@@ -122,7 +122,7 @@ class SlateWriteWidget extends Widget {
       changedAttributes.disabled ||
       changedAttributes.fileDrop ||
       (this.editRefreshTitle !== undefined && changedTiddlers[this.editRefreshTitle]) ||
-      (this.editTitle && changedTiddlers[this.editTitle])
+      (this.editTitle && changedTiddlers[this.editTitle]?.modified)
     ) {
       this.refreshSelf();
       return this.refreshChildren(changedTiddlers);

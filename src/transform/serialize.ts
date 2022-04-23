@@ -9,6 +9,6 @@ export function serialize(value: Array<TNode<AnyObject>>): string {
   return wikiAstToWikiText(wikiAstFromSlateAst(value));
 }
 
-export function deserialize(input: string): Node[] {
+export function deserialize(input: string): Array<TNode<AnyObject>> {
   return wikiAstToSlateAst(wikiAstFromWikiText(input));
 }
