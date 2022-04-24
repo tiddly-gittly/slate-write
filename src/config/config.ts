@@ -36,6 +36,8 @@ import { css } from 'styled-components';
 import { autoformatRules } from './autoformat/autoformatRules';
 import { MENTIONABLES } from './mentionables';
 
+export const SAVE_DEBOUNCE_INTERVAL = 1000;
+
 const resetBlockTypesCommonRule = {
   types: [ELEMENT_BLOCKQUOTE, ELEMENT_TODO_LI],
   defaultType: ELEMENT_PARAGRAPH,

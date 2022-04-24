@@ -1,6 +1,8 @@
 import { IChangedTiddlers } from 'tiddlywiki';
 import type { ReactWidget } from 'tw-react';
+
 import { EditorApp, IEditorAppProps } from './editor';
+import { SAVE_DEBOUNCE_INTERVAL } from '../config/config';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 const Widget = require('$:/plugins/linonetwo/tw-react/widget.js').widget as typeof ReactWidget;
@@ -37,6 +39,10 @@ class SlateWriteWidget extends Widget {
   private isFileDropEnabled: boolean | undefined;
   private editShowToolbar: boolean | undefined;
 
+  /** a lock to prevent update from tiddler to slate, when update of tiddler is trigger by slate. */
+  private isUpdatingByUserInput: boolean = false;
+  private updatingLockTimeoutHandle: NodeJS.Timeout | undefined;
+
   constructor(parseTreeNode: any, options: any) {
     super(parseTreeNode, options);
     $tw.modules.applyMethods('texteditoroperation', this.editorOperations);
@@ -54,13 +60,22 @@ class SlateWriteWidget extends Widget {
         return;
       }
       $tw.wiki.setText(this.editTitle, undefined, undefined, newText);
+      this.updatingLockTimeoutHandle = setTimeout(() => {
+        this.isUpdatingByUserInput = false;
+      });
     };
     return {
       currentTiddler: this.editTitle ?? this.getVariable('currentTiddler'),
       tiddlerText: (this.editTitle && $tw.wiki.getTiddlerText(this.editTitle)) ?? '',
       saver: {
+        lock: () => {
+          this.isUpdatingByUserInput = true;
+          if (this.updatingLockTimeoutHandle) {
+            clearTimeout(this.updatingLockTimeoutHandle);
+          }
+        },
         onSave,
-        interval: 1000,
+        interval: SAVE_DEBOUNCE_INTERVAL,
       },
     };
   };
@@ -99,6 +114,10 @@ class SlateWriteWidget extends Widget {
   refresh(changedTiddlers: IChangedTiddlers): boolean {
     // copied from `core/modules/editor/factory.js`'s `refresh`
     const changedAttributes = this.computeAttributes();
+    // if tiddler change is triggered by slate, then skip the update of slate
+    if (this.isUpdatingByUserInput) {
+      return false;
+    }
     // Completely rerender if any of our attributes have changed
     if (
       changedAttributes.tiddler ||
