@@ -37,4 +37,13 @@ describe('Transform tree', () => {
   test('ol > li > mark > text', () => {
     expect(wikiAstToWikiText(wikiAstDict['ol > li > mark > text'])).toEqual(wikiTextDict['ol > li > mark > text']);
   });
+  test('image', () => {
+    expect(wikiAstToWikiText(wikiAstDict['image'])).toEqual(wikiTextDict['image']);
+  });
+  test('image with tooltip and width', () => {
+    expect(wikiAstToWikiText(wikiAstDict['image with tooltip and width'])).toEqual(wikiTextDict['image with tooltip and width']);
+  });
+  test('transclude', () => {
+    expect(wikiAstToWikiText(wikiAstDict['transclude'])).toEqual(wikiTextDict['transclude']);
+  });
 });

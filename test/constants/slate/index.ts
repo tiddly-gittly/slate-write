@@ -1,12 +1,15 @@
 import { TEditor, TElement, TText } from '@udecode/plate';
 import cloneDeep from 'lodash/cloneDeep';
 
+import { image } from './image';
+
 /**
  * Get value by adding `console.log(`newValue`, newValue);` in `onSave` of `src/components/editor.tsx`.
  *
  * Sometimes may need to add `as TElement` on nested `children: []` to prevent ts error.
  */
- export const slateDict: Record<string, TEditor | TElement | TText | Array<TEditor | TElement | TText>> = {
+export const slateDict: Record<string, TEditor | TElement | TText | Array<TEditor | TElement | TText>> = {
+  ...image,
   text: [{ text: 'AAA' }],
   'p > text': { type: 'p', children: [{ text: 'AAA' }] },
   'ul > li > text': {

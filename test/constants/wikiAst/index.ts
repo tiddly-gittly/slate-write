@@ -4,8 +4,10 @@ import { map } from 'unist-util-map';
 
 import { p } from './p';
 import { ol } from './ol';
+import { image } from './image';
+import { transclude } from './transclude';
 
-export const wikiAstDict: Record<string, IParseTreeNode[] | IParseTreeNode> = { ...p, ...ol };
+export const wikiAstDict: Record<string, IParseTreeNode[] | IParseTreeNode> = { ...p, ...ol, ...image, ...transclude };
 
 const mapToNoPosNode = (ast: IParseTreeNode): IParseTreeNode =>
   map(ast, (node) => {

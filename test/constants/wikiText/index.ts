@@ -59,4 +59,7 @@ G,,G,,'',,G,,'',,G,,G`,
   'ol > li > mark > text': `# A''//A//''A
 ## B//B//B
 ### C^^C^^C`,
+  image: `[img[TiddlyWikiIconBlack.png]]`,
+  'image with tooltip and width': `[img width=75% [black one|TiddlyWikiIconBlack.png]]`,
+  transclude: `{{favicon.ico}}`,
 };

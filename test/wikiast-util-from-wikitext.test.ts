@@ -39,4 +39,13 @@ describe('fromWikiText', () => {
   test('ol > li > mark > text', () => {
     expect(wikiAstFromWikiText(wikiTextDict['ol > li > mark > text'])).toEqual(wikiAstDict['ol > li > mark > text']);
   });
+  test('image', () => {
+    expect(wikiAstFromWikiText(wikiTextDict['image'])).toEqual(wikiAstDict['image']);
+  });
+  test('image with tooltip and width', () => {
+    expect(wikiAstFromWikiText(wikiTextDict['image with tooltip and width'])).toEqual(wikiAstDict['image with tooltip and width']);
+  });
+  test('transclude', () => {
+    expect(wikiAstFromWikiText(wikiTextDict['transclude'])).toEqual(wikiAstDict['transclude']);
+  });
 });

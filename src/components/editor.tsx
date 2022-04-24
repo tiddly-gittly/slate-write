@@ -46,6 +46,7 @@ export function EditorApp(props: IEditorAppProps): JSX.Element {
   const currentAstRef = useRef<Array<TNode<AnyObject>>>(deserialize(props.tiddlerText));
   /** current text is only used for compare, we don't want it trigger rerender, so use ref to store it */
   const currentTextRef = useRef<string>(props.tiddlerText);
+  // TODO: get dom node to add IME listener to prevent update when IME open https://github.com/udecode/plate/issues/239#issuecomment-1098052241
   // const editorRef = useRef();
   // useEffect(() => {
   //   editorRef.current = ReactEditor.toDOMNode();
@@ -53,12 +54,6 @@ export function EditorApp(props: IEditorAppProps): JSX.Element {
   // update current value from props
   useEffect(() => {
     // there will be cases that triple return replaced with double return (trim),  cause here rerender, but I think it is ok, not so frequent
-    // // DEBUG: console
-    // console.log(`currentTextRef.current !== props.tiddlerText`, currentTextRef.current !== props.tiddlerText);
-    // // DEBUG: console
-    // console.log(`currentTextRef.current`, currentTextRef.current);
-    // // DEBUG: console
-    // console.log(`props.tiddlerText`, props.tiddlerText);
     if (currentTextRef.current !== props.tiddlerText) {
       const newValue = deserialize(props.tiddlerText);
       currentAstRef.current = newValue;
@@ -68,6 +63,8 @@ export function EditorApp(props: IEditorAppProps): JSX.Element {
   }, [props.tiddlerText, currentTextRef, updateEditorValue, resetEditor]);
   const debouncedSaver = useDebouncedCallback(
     (newValue: Array<TNode<AnyObject>>) => {
+      // DEBUG: console
+      console.log(`newValue`, newValue);
       const newText = serialize(newValue);
       props.saver.onSave(newText);
       currentTextRef.current = newText;

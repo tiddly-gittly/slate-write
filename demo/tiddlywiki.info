@@ -15,16 +15,6 @@
       "text/plain"
     ],
     "externalimages": [
-      "--setfield",
-      "[is[binary]] [type[application/msword]]",
-      "_canonical_uri",
-      "$:/core/templates/canonical-uri-external-image",
-      "text/plain",
-      "--setfield",
-      "[is[binary]] [type[application/msword]]",
-      "text",
-      "",
-      "text/plain",
       "--rendertiddler",
       "$:/core/save/all-external-js",
       "index.html",
