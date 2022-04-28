@@ -21,8 +21,9 @@ import {
   createUnderlinePlugin,
 } from '@udecode/plate';
 import { CONFIG } from './config';
+import { createWidgetPlugin } from './plugins/widget';
 
-const basicElements = createPlugins([
+export const basicElements = createPlugins([
   createBlockquotePlugin(),
   createCodeBlockPlugin(),
   createHeadingPlugin(),
@@ -32,7 +33,7 @@ const basicElements = createPlugins([
   createImagePlugin(),
 ]);
 
-const basicMarks = createPlugins([
+export const basicMarks = createPlugins([
   createBoldPlugin(),
   createCodePlugin(),
   createItalicPlugin(),
@@ -41,16 +42,12 @@ const basicMarks = createPlugins([
   createSuperscriptPlugin(),
   createUnderlinePlugin(),
 ]);
-const utils = createPlugins([
+export const utils = createPlugins([
   createSelectOnBackspacePlugin(CONFIG.selectOnBackspace),
   createSoftBreakPlugin(CONFIG.softBreak),
   createExitBreakPlugin(CONFIG.exitBreak),
   createAutoformatPlugin(CONFIG.autoformat),
   createDndPlugin(),
 ]);
+export const twAdvancedElements = createPlugins([createWidgetPlugin()]);
 
-export const PLUGINS = {
-  basicElements,
-  basicMarks,
-  utils,
-};

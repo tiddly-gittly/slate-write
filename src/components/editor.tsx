@@ -5,10 +5,10 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { HeadingToolbar } from '@udecode/plate-ui-toolbar';
 import { Image } from '@styled-icons/material/Image';
+import { Link } from '@styled-icons/boxicons-regular';
 
 import { deserialize, serialize } from '../../src/transform/serialize';
-import { HTMLTags } from 'tiddlywiki';
-import { PLUGINS } from 'src/config/plugins';
+import * as PLUGINS from 'src/config/plugins';
 import {
   AlignToolbarButtons,
   BallonToolbar,
@@ -20,8 +20,6 @@ import {
 import { GlobalStyle } from 'src/config/globalStyle';
 import { withStyledDraggables } from 'src/config/components/withStyledDraggables';
 import { withStyledPlaceHolders } from 'src/config/components/withStyledPlaceHolders';
-import { Link } from '@styled-icons/boxicons-regular';
-import { Editable, ReactEditor } from 'slate-react';
 
 export interface IEditorAppProps {
   currentTiddler: string;
@@ -34,7 +32,7 @@ export interface IEditorAppProps {
     lock: () => void;
   };
 }
-const plugins = createPlugins([...PLUGINS.basicElements, ...PLUGINS.basicMarks, ...PLUGINS.utils], {
+const plugins = createPlugins([...PLUGINS.basicElements, ...PLUGINS.basicMarks, ...PLUGINS.utils, ...PLUGINS.twAdvancedElements], {
   // Plate components
   components: withStyledDraggables(withStyledPlaceHolders(createPlateUI())),
 });
@@ -80,6 +78,8 @@ export function EditorApp(props: IEditorAppProps): JSX.Element {
   if (typeof document === 'undefined') {
     return <div>Loading...</div>;
   }
+  // DEBUG: console
+  console.log(`currentAstRef.current`, currentAstRef.current);
 
   return (
     <>
