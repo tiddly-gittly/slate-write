@@ -41,5 +41,5 @@ export function widget(context: IContext, node: ICustomParseTreeNode): string[] 
     ? [`<${tag} ${attributeList.map(({ name, value }) => `${name}="${value}"`).join(' ')}/>`]
     : [`<${tag} ${attributeList.map(({ name, value }) => `${name}="${value}"`).join(' ')}>`, ...convertNodes(context, children), `</${tag}>`];
   // block level texts are separated with \n
-  return isBlock ? [...jsxResult, '\n'] : jsxResult;
+  return jsxResult;
 }

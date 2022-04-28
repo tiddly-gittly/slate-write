@@ -17,18 +17,19 @@ export function convertNodes(context: IContext, nodes: IParseTreeNode[] | undefi
 
 export function convertOneNode(context: IContext, node: IParseTreeNode): string[] {
   const { builders } = context;
+  let result: string[] = [];
   if (node.type in builders) {
     const builder = builders[node.type];
     if (typeof builder === 'function') {
       const builtSlateNodeOrNodes = builder(context, node);
-      return Array.isArray(builtSlateNodeOrNodes) ? builtSlateNodeOrNodes : [builtSlateNodeOrNodes];
+      result = Array.isArray(builtSlateNodeOrNodes) ? builtSlateNodeOrNodes : [builtSlateNodeOrNodes];
     }
   } else {
     // widget
     // I guess this rule is enough for judge the current node is a widget?
     if (typeof node.type === 'string' && 'tag' in node && typeof node.tag === 'string') {
-      return context.builders.widget(context, node as ICustomParseTreeNode);
+      result = context.builders.widget(context, node as ICustomParseTreeNode);
     }
   }
-  return [];
+  return node.isBlock ? [...result, '\n'] : result;
 }
