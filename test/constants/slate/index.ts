@@ -2,6 +2,7 @@ import { TEditor, TElement, TText } from '@udecode/plate';
 import cloneDeep from 'lodash/cloneDeep';
 
 import { image } from './image';
+import { transclude } from './transclude';
 
 /**
  * Get value by adding `console.log(`newValue`, newValue);` in `onSave` of `src/components/editor.tsx`.
@@ -10,6 +11,7 @@ import { image } from './image';
  */
 export const slateDict: Record<string, TEditor | TElement | TText | Array<TEditor | TElement | TText>> = {
   ...image,
+  ...transclude,
   text: [{ text: 'AAA' }],
   'p > text': { type: 'p', children: [{ text: 'AAA' }] },
   'ul > li > text': {

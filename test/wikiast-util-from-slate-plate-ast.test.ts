@@ -28,6 +28,12 @@ describe('fromSlateAst', () => {
   test('ol > li > mark > text', () => {
     expect(wikiAstFromSlateAst(slateDict['ol > li > mark > text'])).toEqual(wikiAstDictWithoutPos['ol > li > mark > text']);
   });
+  test('image', () => {
+    expect(wikiAstFromSlateAst(slateDict['image'])).toEqual(wikiAstDictWithoutPos['image']);
+  });
+  test('transclude', () => {
+    expect(wikiAstFromSlateAst(slateDict['transclude'])).toEqual(wikiAstDictWithoutPos['transclude']);
+  });
 });
 
 describe('Identical', () => {

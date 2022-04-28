@@ -5,6 +5,7 @@ import { codeBlock } from './codeBlock';
 import { element } from './element';
 import { lic } from './lic';
 import { text } from './text';
+import { widget } from './widget';
 
 /**
  * Key is `node.type`, value is node converter function.
@@ -23,6 +24,7 @@ export const builders = {
   [ELEMENT_CODE_BLOCK]: codeBlock,
   [ELEMENT_LIC]: lic,
   text,
+  widget,
 };
 
 export type IBuilders = typeof builders;
