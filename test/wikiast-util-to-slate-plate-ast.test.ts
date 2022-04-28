@@ -39,4 +39,10 @@ describe('Transform tree', () => {
   test('transclude', () => {
     expect(wikiAstToSlateAst(wikiAstDict['transclude'])).toMatchObject([slateDict['transclude']]);
   });
+  test('list widget', () => {
+    expect(wikiAstToSlateAst(wikiAstDict['list widget'])).toMatchObject([slateDict['list widget']]);
+  });
+  test('list widget block', () => {
+    expect(wikiAstToSlateAst(wikiAstDict['list widget block'])).toMatchObject(slateDict['list widget block']);
+  });
 });

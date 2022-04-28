@@ -1,4 +1,4 @@
-import { IParseTreeNode } from 'tiddlywiki';
+import { ICustomParseTreeNode, IParseTreeNode } from 'tiddlywiki';
 import type { IContext } from '.';
 
 export function convertNodes(context: IContext, nodes: IParseTreeNode[] | undefined): string[] {
@@ -22,6 +22,12 @@ export function convertOneNode(context: IContext, node: IParseTreeNode): string[
     if (typeof builder === 'function') {
       const builtSlateNodeOrNodes = builder(context, node);
       return Array.isArray(builtSlateNodeOrNodes) ? builtSlateNodeOrNodes : [builtSlateNodeOrNodes];
+    }
+  } else {
+    // widget
+    // I guess this rule is enough for judge the current node is a widget?
+    if (typeof node.type === 'string' && 'tag' in node && typeof node.tag === 'string') {
+      return context.builders.widget(context, node as ICustomParseTreeNode);
     }
   }
   return [];

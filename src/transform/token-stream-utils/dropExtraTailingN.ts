@@ -2,6 +2,7 @@ import dropRightWhile from 'lodash/dropRightWhile';
 
 /**
  * remove tailing \n
+ * 
  * We may have add extra \n when processing child tree, and those \n are too much after process the child
  * @param tokens
  * @returns

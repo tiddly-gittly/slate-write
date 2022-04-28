@@ -22,3 +22,5 @@ E`EEE`E
 [img[TiddlyWikiIconBlack.png]]
 
 {{favicon.ico}}
+
+<$list filter="[tag[ExampleTag]sort[title]]"/>

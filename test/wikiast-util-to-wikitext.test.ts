@@ -46,4 +46,10 @@ describe('Transform tree', () => {
   test('transclude', () => {
     expect(wikiAstToWikiText(wikiAstDict['transclude'])).toEqual(wikiTextDict['transclude']);
   });
+  test('list widget', () => {
+    expect(wikiAstToWikiText(wikiAstDict['list widget'])).toEqual(wikiTextDict['list widget']);
+  });
+  test('list widget block', () => {
+    expect(wikiAstToWikiText(wikiAstDict['list widget block'])).toEqual(wikiTextDict['list widget block']);
+  });
 });

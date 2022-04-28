@@ -60,4 +60,16 @@ describe('Identical', () => {
   test('ol > li > mark > text', () => {
     expect(wikiAstDict['ol > li > mark > text']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['ol > li > mark > text'])));
   });
+  test('image', () => {
+    expect(wikiAstDict['image']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['image'])));
+  });
+  test('transclude', () => {
+    expect(wikiAstDict['transclude']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['transclude'])));
+  });
+  test('list widget', () => {
+    expect(wikiAstDict['list widget']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['list widget'])));
+  });
+  test('list widget block', () => {
+    expect(wikiAstDict['list widget block']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['list widget block'])));
+  });
 });

@@ -6,8 +6,9 @@ import { p } from './p';
 import { ol } from './ol';
 import { image } from './image';
 import { transclude } from './transclude';
+import { widget } from './widget';
 
-export const wikiAstDict: Record<string, IParseTreeNode[] | IParseTreeNode> = { ...p, ...ol, ...image, ...transclude };
+export const wikiAstDict: Record<string, IParseTreeNode[] | IParseTreeNode> = { ...p, ...ol, ...image, ...transclude, ...widget };
 
 const mapToNoPosNode = (ast: IParseTreeNode): IParseTreeNode =>
   map(ast, (node) => {

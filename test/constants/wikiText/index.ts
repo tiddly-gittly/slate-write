@@ -62,4 +62,8 @@ G,,G,,'',,G,,'',,G,,G`,
   image: `[img[TiddlyWikiIconBlack.png]]`,
   'image with tooltip and width': `[img width=75% [black one|TiddlyWikiIconBlack.png]]`,
   transclude: `{{favicon.ico}}`,
+  'list widget': `<$list filter="[tag[ExampleTag]sort[title]]"/>`,
+  'list widget block': `<$list filter="[tag[ExampleTag]sort[title]]"/>
+
+aaa`,
 };

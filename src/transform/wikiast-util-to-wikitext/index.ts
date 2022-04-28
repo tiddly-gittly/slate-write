@@ -3,6 +3,7 @@ import type { IParseTreeNode } from 'tiddlywiki';
 import { builders, IBuilders } from './astSerializer';
 import { dropExtraTailingN } from '../token-stream-utils/dropExtraTailingN';
 import { convertNodes, convertOneNode } from './traverse';
+import repeat from 'lodash/repeat';
 
 export type IAnyBuilder = IBuilders & Record<string, typeof convertOneNode>;
 
@@ -42,7 +43,12 @@ const defaultContext = {
   marks: {},
 } as IContext;
 
-export function wikiAstToWikiText(input: IParseTreeNode | IParseTreeNode[]): string {
+export interface IWikiAstToWikiTextOptions {
+  /** Number of extra `\n` added to the end of file. We will remove extra `\n`, so if you still need them, you have to say you want to add some of them back by this. */
+  extraTailingNCount?: number;
+}
+export function wikiAstToWikiText(input: IParseTreeNode | IParseTreeNode[], options?: IWikiAstToWikiTextOptions): string {
+  const { extraTailingNCount = 0 } = options ?? {};
   const lines = convertNodes(cloneDeep(defaultContext), Array.isArray(input) ? input : [input]);
-  return dropExtraTailingN(lines).join('');
+  return dropExtraTailingN(lines).join('') + repeat('\n', extraTailingNCount)
 }

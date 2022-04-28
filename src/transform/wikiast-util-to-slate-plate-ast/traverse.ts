@@ -1,5 +1,5 @@
 import { AnyObject, TNode } from '@udecode/plate';
-import { IParseTreeNode } from 'tiddlywiki';
+import { ICustomParseTreeNode, IParseTreeNode } from 'tiddlywiki';
 import type { IContext } from '.';
 
 import { IBuilders } from './slateBuilder';
@@ -20,8 +20,15 @@ export function slateNode(context: IContext, node: IParseTreeNode): Array<TNode<
   if (node.type in context.builders) {
     const builder = (context.builders as IAnyBuilder)[node.type];
     if (typeof builder === 'function') {
+      // basic elements
       const builtSlateNodeOrNodes = builder(context, node);
       return Array.isArray(builtSlateNodeOrNodes) ? builtSlateNodeOrNodes : ([builtSlateNodeOrNodes] as Array<TNode<AnyObject>>);
+    }
+  } else {
+    // widget
+    // I guess this rule is enough for judge the current node is a widget? see `test/constants/wikiAst/widget.ts` for example.
+    if (typeof node.type === 'string' && 'tag' in node && typeof node.tag === 'string') {
+      return [context.builders.widget(context, node as ICustomParseTreeNode)];
     }
   }
   return [];

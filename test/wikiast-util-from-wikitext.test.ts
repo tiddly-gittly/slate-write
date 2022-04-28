@@ -48,4 +48,10 @@ describe('fromWikiText', () => {
   test('transclude', () => {
     expect(wikiAstFromWikiText(wikiTextDict['transclude'])).toEqual(wikiAstDict['transclude']);
   });
+  test('list widget', () => {
+    expect(wikiAstFromWikiText(wikiTextDict['list widget'])).toEqual(wikiAstDict['list widget']);
+  });
+  test('list widget block', () => {
+    expect(wikiAstFromWikiText(wikiTextDict['list widget block'])).toEqual(wikiAstDict['list widget block']);
+  });
 });
