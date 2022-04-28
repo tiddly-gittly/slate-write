@@ -1,12 +1,13 @@
 import { TElement } from '@udecode/plate';
-import React from 'react';
+import React, { createRef } from 'react';
 import { IParseTreeNode } from 'tiddlywiki';
+import { useWidget } from 'tw-react';
 
 export interface IWidgetBlockProps {
-  element: TElement<{ node: IParseTreeNode }>
+  element: TElement<{ node: IParseTreeNode }>;
 }
 export function WidgetBlock(props: IWidgetBlockProps): JSX.Element {
-  // DEBUG: console
-  console.log(`props`, props.element.node);
-  return <span>WidgetBlock</span>;
+  const widgetContainerRef = createRef<HTMLDivElement>();
+  useWidget(props.element.node, widgetContainerRef);
+  return <div ref={widgetContainerRef} />;
 }

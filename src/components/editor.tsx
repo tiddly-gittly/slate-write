@@ -6,6 +6,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { HeadingToolbar } from '@udecode/plate-ui-toolbar';
 import { Image } from '@styled-icons/material/Image';
 import { Link } from '@styled-icons/boxicons-regular';
+import type { IDefaultWidgetProps } from 'tw-react';
 
 import { deserialize, serialize } from '../../src/transform/serialize';
 import * as PLUGINS from 'src/config/plugins';
@@ -20,6 +21,7 @@ import {
 import { GlobalStyle } from 'src/config/globalStyle';
 import { withStyledDraggables } from 'src/config/components/withStyledDraggables';
 import { withStyledPlaceHolders } from 'src/config/components/withStyledPlaceHolders';
+import { ParentWidgetContext } from 'tw-react';
 
 export interface IEditorAppProps {
   currentTiddler: string;
@@ -37,7 +39,7 @@ const plugins = createPlugins([...PLUGINS.basicElements, ...PLUGINS.basicMarks, 
   components: withStyledDraggables(withStyledPlaceHolders(createPlateUI())),
 });
 
-export function EditorApp(props: IEditorAppProps): JSX.Element {
+export function EditorApp(props: IEditorAppProps & IDefaultWidgetProps): JSX.Element {
   const editorID = props.currentTiddler;
   const { resetEditor, value: updateEditorValue, editor } = getPlateActions(editorID);
   // Add the initial value when setting up our state.
@@ -82,7 +84,7 @@ export function EditorApp(props: IEditorAppProps): JSX.Element {
   console.log(`currentAstRef.current`, currentAstRef.current);
 
   return (
-    <>
+    <ParentWidgetContext.Provider value={props.parentWidget}>
       <GlobalStyle />
       <DndProvider backend={HTML5Backend}>
         <Plate id={editorID} initialValue={currentAstRef.current} plugins={plugins} onChange={onChange}>
@@ -99,6 +101,6 @@ export function EditorApp(props: IEditorAppProps): JSX.Element {
           <BallonToolbar />
         </Plate>
       </DndProvider>
-    </>
+    </ParentWidgetContext.Provider>
   );
 }

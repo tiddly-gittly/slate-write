@@ -15,7 +15,7 @@ const DEFAULT_MIN_TEXT_AREA_HEIGHT = '100px'; // Minimum height of textareas in 
 const HEIGHT_MODE_TITLE = '$:/config/TextEditor/EditorHeight/Mode';
 const ENABLE_TOOLBAR_TITLE = '$:/config/TextEditor/EnableToolbar';
 
-class SlateWriteWidget extends Widget {
+class SlateWriteWidget extends Widget<IEditorAppProps> {
   private currentTiddler: string | undefined;
   editorOperations = {};
   private editTitle: string | undefined;
@@ -49,7 +49,7 @@ class SlateWriteWidget extends Widget {
   }
 
   reactComponent = EditorApp;
-  getProps = (): IEditorAppProps => {
+  getProps = () => {
     const onSave = (newText: string): void => {
       if (!this.editTitle) {
         return;
