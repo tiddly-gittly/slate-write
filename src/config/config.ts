@@ -33,7 +33,7 @@ import {
 // import { ELEMENT_EXCALIDRAW, ExcalidrawElement } from '@udecode/plate-ui-excalidraw';
 import { EditableProps } from 'slate-react/dist/components/editable';
 import { css } from 'styled-components';
-import { autoformatRules } from './autoformat/autoformatRules';
+import { autoformatRules } from './autoformat';
 import { MENTIONABLES } from './mentionables';
 
 export const SAVE_DEBOUNCE_INTERVAL = 1000;

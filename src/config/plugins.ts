@@ -4,12 +4,18 @@ import {
   createBoldPlugin,
   createCodeBlockPlugin,
   createCodePlugin,
+  createTrailingBlockPlugin,
+  createTablePlugin,
   createDndPlugin,
   createExitBreakPlugin,
   createHeadingPlugin,
   createHorizontalRulePlugin,
   createImagePlugin,
   createItalicPlugin,
+  createIndentListPlugin,
+  createIndentPlugin,
+  createKbdPlugin,
+  createLinkPlugin,
   createListPlugin,
   createParagraphPlugin,
   createPlugins,
@@ -31,6 +37,8 @@ export const basicElements = createPlugins([
   createHorizontalRulePlugin(),
   createListPlugin(),
   createImagePlugin(),
+  createLinkPlugin(),
+  createTablePlugin(),
 ]);
 
 export const basicMarks = createPlugins([
@@ -48,6 +56,9 @@ export const utils = createPlugins([
   createExitBreakPlugin(CONFIG.exitBreak),
   createAutoformatPlugin(CONFIG.autoformat),
   createDndPlugin(),
+  createIndentListPlugin(),
+  createIndentPlugin(),
+  createKbdPlugin(),
 ]);
 export const twAdvancedElements = createPlugins([createWidgetPlugin()]);
 
