@@ -24,3 +24,5 @@ E`EEE`E
 {{favicon.ico}}
 
 <$list filter="[tag[ExampleTag]sort[title]]"/>
+
+[[ExampleTag]]
