@@ -4,6 +4,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import { image } from './image';
 import { transclude } from './transclude';
 import { widget } from './widget';
+import { link } from './link';
 
 /**
  * Get value by adding `console.log(`newValue`, newValue);` in `onSave` of `src/components/editor.tsx`.
@@ -14,6 +15,7 @@ export const slateDict: Record<string, TEditor | TElement | TText | Array<TEdito
   ...image,
   ...transclude,
   ...widget,
+  ...link,
   text: [{ text: 'AAA' }],
   'p > text': { type: 'p', children: [{ text: 'AAA' }] },
   'ul > li > text': {

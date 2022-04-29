@@ -2,6 +2,7 @@ import { TNode } from '@udecode/plate';
 import type { IDomParseTreeNode } from 'tiddlywiki';
 import { convertNodes } from '../../traverse';
 import { IContext } from '../..';
+import pick from 'lodash/pick';
 
 import { ul } from './ul';
 import { li } from './li';
@@ -17,6 +18,7 @@ export function element(context: IContext, node: IDomParseTreeNode): TNode | TNo
     return elementBuilders[tag as keyof IElementBuilders](context, node);
   }
   return {
+    ...pick(node, ['orderedAttributes', 'attributes', 'isBlock']),
     type: tag,
     children: convertNodes(context, children),
   };

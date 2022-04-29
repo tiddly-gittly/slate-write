@@ -54,4 +54,16 @@ describe('fromWikiText', () => {
   test('list widget block', () => {
     expect(wikiAstFromWikiText(wikiTextDict['list widget block'])).toEqual(wikiAstDict['list widget block']);
   });
+  test('link', () => {
+    expect(wikiAstFromWikiText(wikiTextDict['link'])).toEqual(wikiAstDict['link']);
+  });
+  test('empty link', () => {
+    expect(wikiAstFromWikiText(wikiTextDict['empty link'])).toEqual(wikiAstDict['empty link']);
+  });
+  test('alias link', () => {
+    expect(wikiAstFromWikiText(wikiTextDict['alias link'])).toEqual(wikiAstDict['alias link']);
+  });
+  test('external link', () => {
+    expect(wikiAstFromWikiText(wikiTextDict['external link'])).toEqual(wikiAstDict['external link']);
+  });
 });

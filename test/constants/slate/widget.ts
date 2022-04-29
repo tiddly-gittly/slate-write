@@ -40,28 +40,23 @@ export const widget: Record<string, TEditor | TElement | TText | Array<TEditor |
     {
       node: {
         type: 'list',
-        start: 0,
         attributes: {
           filter: {
-            start: 6,
             name: 'filter',
             type: 'string',
             value: '[tag[ExampleTag]sort[title]]',
-            end: 44,
           },
         },
         orderedAttributes: [
           {
-            start: 6,
             name: 'filter',
             type: 'string',
             value: '[tag[ExampleTag]sort[title]]',
-            end: 44,
           },
         ],
         tag: '$list',
         isSelfClosing: true,
-        end: 46,
+
         isBlock: true,
       },
       type: 'widget',

@@ -52,4 +52,16 @@ describe('Transform tree', () => {
   test('list widget block', () => {
     expect(wikiAstToWikiText(wikiAstDict['list widget block'])).toEqual(wikiTextDict['list widget block']);
   });
+  test('link', () => {
+    expect(wikiAstToWikiText(wikiAstDict['link'])).toEqual(wikiTextDict['link']);
+  });
+  test('empty link', () => {
+    expect(wikiAstToWikiText(wikiAstDict['empty link'])).toEqual(wikiTextDict['empty link']);
+  });
+  test('alias link', () => {
+    expect(wikiAstToWikiText(wikiAstDict['alias link'])).toEqual(wikiTextDict['alias link']);
+  });
+  test('external link', () => {
+    expect(wikiAstToWikiText(wikiAstDict['external link'])).toEqual(wikiTextDict['external link']);
+  });
 });

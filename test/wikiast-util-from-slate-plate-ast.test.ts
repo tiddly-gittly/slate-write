@@ -34,42 +34,22 @@ describe('fromSlateAst', () => {
   test('transclude', () => {
     expect(wikiAstFromSlateAst(slateDict['transclude'])).toEqual(wikiAstDictWithoutPos['transclude']);
   });
-});
-
-describe('Identical', () => {
-  test('p > text', () => {
-    expect(wikiAstDict['p > text']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['p > text'])));
-  });
-  test('ol > li > text', () => {
-    expect(wikiAstDict['ol > li > text']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['ol > li > text'])));
-  });
-  test('ul > li > text', () => {
-    expect(wikiAstDict['ul > li > text']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['ul > li > text'])));
-  });
-  test('ol > ol > ol > li', () => {
-    expect(wikiAstDict['ol > ol > ol > li']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['ol > ol > ol > li'])));
-  });
-  test('p + ol + blockquote > div + ol', () => {
-    expect(wikiAstDict['p + ol + blockquote > div + ol']).toMatchObject(
-      wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['p + ol + blockquote > div + ol'])),
-    );
-  });
-  test('p basic sequence marks', () => {
-    expect(wikiAstDict['p basic sequence marks']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['p basic sequence marks'])));
-  });
-  test('ol > li > mark > text', () => {
-    expect(wikiAstDict['ol > li > mark > text']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['ol > li > mark > text'])));
-  });
-  test('image', () => {
-    expect(wikiAstDict['image']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['image'])));
-  });
-  test('transclude', () => {
-    expect(wikiAstDict['transclude']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['transclude'])));
-  });
   test('list widget', () => {
-    expect(wikiAstDict['list widget']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['list widget'])));
+    expect(wikiAstFromSlateAst(slateDict['list widget'])).toEqual(wikiAstDictWithoutPos['list widget']);
   });
   test('list widget block', () => {
-    expect(wikiAstDict['list widget block']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['list widget block'])));
+    expect(wikiAstFromSlateAst(slateDict['list widget block'])).toEqual(wikiAstDictWithoutPos['list widget block']);
+  });
+  test('link', () => {
+    expect(wikiAstFromSlateAst(slateDict['link'])).toEqual(wikiAstDictWithoutPos['link']);
+  });
+  test('empty link', () => {
+    expect(wikiAstFromSlateAst(slateDict['empty link'])).toEqual(wikiAstDictWithoutPos['empty link']);
+  });
+  test('alias link', () => {
+    expect(wikiAstFromSlateAst(slateDict['alias link'])).toEqual(wikiAstDictWithoutPos['alias link']);
+  });
+  test('external link', () => {
+    expect(wikiAstFromSlateAst(slateDict['external link'])).toEqual(wikiAstDictWithoutPos['external link']);
   });
 });

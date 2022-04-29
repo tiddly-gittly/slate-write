@@ -66,4 +66,16 @@ G,,G,,'',,G,,'',,G,,G`,
   'list widget block': `<$list filter="[tag[ExampleTag]sort[title]]"/>
 
 aaa`,
+  link: `[[ExampleTag]]`,
+  'empty link': `[[]]`,
+  'alias link': `[[SomeText|ExampleTag]]`,
+  'external link': `<a id="#Top_of_tiddler"></a>
+
+[ext[TW5|https://tiddlywiki.com]]
+
+[ext[Mail me|mailto:me@where.net]]
+
+[ext[Open file|../README.md]]
+
+<a href="##Top_of_tiddler">Top</a>`
 };

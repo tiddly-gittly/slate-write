@@ -45,4 +45,16 @@ describe('Transform tree', () => {
   test('list widget block', () => {
     expect(wikiAstToSlateAst(wikiAstDict['list widget block'])).toMatchObject(slateDict['list widget block']);
   });
+  test('link', () => {
+    expect(wikiAstToSlateAst(wikiAstDict['link'])).toMatchObject(slateDict['link']);
+  });
+  test('empty link', () => {
+    expect(wikiAstToSlateAst(wikiAstDict['empty link'])).toMatchObject(slateDict['empty link']);
+  });
+  test('alias link', () => {
+    expect(wikiAstToSlateAst(wikiAstDict['alias link'])).toMatchObject(slateDict['alias link']);
+  });
+  test('external link', () => {
+    expect(wikiAstToSlateAst(wikiAstDict['external link'])).toMatchObject(slateDict['external link']);
+  });
 });
