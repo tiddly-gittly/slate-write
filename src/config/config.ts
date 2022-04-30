@@ -36,6 +36,7 @@ import { EditableProps } from 'slate-react/dist/components/editable';
 import { css } from 'styled-components';
 import { autoformatRules } from './autoformat';
 import { MENTIONABLES } from './mentionables';
+import { ELEMENT_WIDGET } from './plugins/widget';
 
 export const SAVE_DEBOUNCE_INTERVAL = 1000;
 
@@ -170,7 +171,7 @@ export const CONFIG: Config = {
   selectOnBackspace: {
     options: {
       query: {
-        allow: [ELEMENT_IMAGE, ELEMENT_MEDIA_EMBED, ELEMENT_HR],
+        allow: [ELEMENT_WIDGET],
       },
     },
   },
