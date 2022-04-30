@@ -22,6 +22,7 @@ import {
   isBlockAboveEmpty,
   isSelectionAtBlockStart,
   KEYS_HEADING,
+  LinkPlugin,
   NormalizeTypesPlugin,
   PlatePlugin,
   ResetNodePlugin,
@@ -46,6 +47,7 @@ const resetBlockTypesCommonRule = {
 interface Config {
   align: Partial<PlatePlugin>;
   autoformat: Partial<PlatePlugin<{}, AutoformatPlugin>>;
+  link: Partial<PlatePlugin<{}, LinkPlugin>>;
 
   components: Record<string, any>;
   editableProps: EditableProps;
@@ -62,6 +64,11 @@ interface Config {
 
 // TODO: load keyboard shortcuts from tw config
 export const CONFIG: Config = {
+  link: {
+    options: {
+      hotkey: 'ctrl+l',
+    },
+  },
   editableProps: {
     // autoFocus: process.env.NODE_ENV !== 'production',
     autoFocus: false,

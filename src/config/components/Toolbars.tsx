@@ -19,6 +19,8 @@ import { Looks5 } from '@styled-icons/material/Looks5';
 import { Looks6 } from '@styled-icons/material/Looks6';
 import { LooksOne } from '@styled-icons/material/LooksOne';
 import { LooksTwo } from '@styled-icons/material/LooksTwo';
+import { Link } from '@styled-icons/material/Link';
+import { Bracket } from '@styled-icons/boxicons-regular/Bracket';
 import {
   BalloonToolbar,
   BlockToolbarButton,
@@ -45,6 +47,8 @@ import {
   usePlateEditorRef,
 } from '@udecode/plate';
 import type { Placement } from 'tippy.js';
+import { LinkToolbarButton } from '../plugins/link/LinkToolbarButton';
+import { Editor } from 'slate';
 
 const tooltipStyle = {
   arrow: true,
@@ -66,8 +70,18 @@ export const BasicElementToolbarButtons = (): JSX.Element => {
       <BlockToolbarButton type={getPluginType(editor, ELEMENT_H4)} icon={<Looks4 />} tooltip={{ content: 'H4 (Ctrl+4) (!!!! )', ...tooltipStyle }} />
       <BlockToolbarButton type={getPluginType(editor, ELEMENT_H5)} icon={<Looks5 />} tooltip={{ content: 'H5 (Ctrl+5) (!!!!! )', ...tooltipStyle }} />
       <BlockToolbarButton type={getPluginType(editor, ELEMENT_H6)} icon={<Looks6 />} tooltip={{ content: 'H6 (Ctrl+6) (!!!!!! )', ...tooltipStyle }} />
-      <BlockToolbarButton type={getPluginType(editor, ELEMENT_BLOCKQUOTE)} icon={<FormatQuote />} tooltip={{ content: 'Quote (Ctrl+E) (> )', ...tooltipStyle }} />
+      <BlockToolbarButton
+        type={getPluginType(editor, ELEMENT_BLOCKQUOTE)}
+        icon={<FormatQuote />}
+        tooltip={{ content: 'Quote (Ctrl+E) (> )', ...tooltipStyle }}
+      />
       <BlockToolbarButton type={getPluginType(editor, ELEMENT_CODE_BLOCK)} icon={<CodeBlock />} tooltip={{ content: 'Code (Ctrl+K) (```)', ...tooltipStyle }} />
+      <LinkToolbarButton icon={<Link />} tooltip={{ content: 'Link to (Ctrl+L) ([[)', ...tooltipStyle }} />
+      <LinkToolbarButton
+        icon={<Bracket />}
+        getLinkUrl={(prevUrl: string | null) => (editor.selection === null ? prevUrl ?? '' : Editor.string(editor, editor.selection))}
+        tooltip={{ content: 'WikiLink ([[)', ...tooltipStyle }}
+      />
     </>
   );
 };
@@ -77,8 +91,16 @@ export const ListToolbarButtons = (): JSX.Element => {
 
   return (
     <>
-      <ListToolbarButton type={getPluginType(editor, ELEMENT_UL)} icon={<FormatListBulleted />} tooltip={{ content: `UnorderedList (-) (*)`, ...tooltipStyle }} />
-      <ListToolbarButton type={getPluginType(editor, ELEMENT_OL)} icon={<FormatListNumbered />} tooltip={{ content: `OrderedList (#) (1.)`, ...tooltipStyle }} />
+      <ListToolbarButton
+        type={getPluginType(editor, ELEMENT_UL)}
+        icon={<FormatListBulleted />}
+        tooltip={{ content: `UnorderedList (-) (*)`, ...tooltipStyle }}
+      />
+      <ListToolbarButton
+        type={getPluginType(editor, ELEMENT_OL)}
+        icon={<FormatListNumbered />}
+        tooltip={{ content: `OrderedList (#) (1.)`, ...tooltipStyle }}
+      />
     </>
   );
 };
@@ -90,11 +112,29 @@ export const BasicMarkToolbarButtons = (): JSX.Element => {
     <>
       <MarkToolbarButton type={getPluginType(editor, MARK_BOLD)} icon={<FormatBold />} tooltip={{ content: `Bold (⌘B) ('')`, ...tooltipStyle }} />
       <MarkToolbarButton type={getPluginType(editor, MARK_ITALIC)} icon={<FormatItalic />} tooltip={{ content: 'Italic (⌘I) (//)', ...tooltipStyle }} />
-      <MarkToolbarButton type={getPluginType(editor, MARK_UNDERLINE)} icon={<FormatUnderlined />} tooltip={{ content: 'Underline (⌘U) (__)', ...tooltipStyle }} />
-      <MarkToolbarButton type={getPluginType(editor, MARK_STRIKETHROUGH)} icon={<FormatStrikethrough />} tooltip={{ content: `Delete (~~)`, ...tooltipStyle }} />
+      <MarkToolbarButton
+        type={getPluginType(editor, MARK_UNDERLINE)}
+        icon={<FormatUnderlined />}
+        tooltip={{ content: 'Underline (⌘U) (__)', ...tooltipStyle }}
+      />
+      <MarkToolbarButton
+        type={getPluginType(editor, MARK_STRIKETHROUGH)}
+        icon={<FormatStrikethrough />}
+        tooltip={{ content: `Delete (~~)`, ...tooltipStyle }}
+      />
       <MarkToolbarButton type={getPluginType(editor, MARK_CODE)} icon={<CodeAlt />} tooltip={{ content: 'Code (`)', ...tooltipStyle }} />
-      <MarkToolbarButton type={getPluginType(editor, MARK_SUPERSCRIPT)} clear={getPluginType(editor, MARK_SUBSCRIPT)} icon={<Superscript />} tooltip={{ content: 'SuperScript (^^)', ...tooltipStyle }} />
-      <MarkToolbarButton type={getPluginType(editor, MARK_SUBSCRIPT)} clear={getPluginType(editor, MARK_SUPERSCRIPT)} icon={<Subscript />} tooltip={{ content: 'SubScript (,,)', ...tooltipStyle }} />
+      <MarkToolbarButton
+        type={getPluginType(editor, MARK_SUPERSCRIPT)}
+        clear={getPluginType(editor, MARK_SUBSCRIPT)}
+        icon={<Superscript />}
+        tooltip={{ content: 'SuperScript (^^)', ...tooltipStyle }}
+      />
+      <MarkToolbarButton
+        type={getPluginType(editor, MARK_SUBSCRIPT)}
+        clear={getPluginType(editor, MARK_SUPERSCRIPT)}
+        icon={<Subscript />}
+        tooltip={{ content: 'SubScript (,,)', ...tooltipStyle }}
+      />
     </>
   );
 };
