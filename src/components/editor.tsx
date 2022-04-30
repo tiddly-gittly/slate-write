@@ -56,8 +56,6 @@ export function EditorApp(props: IEditorAppProps & IDefaultWidgetProps): JSX.Ele
   }, [props.tiddlerText, currentTextRef, updateEditorValue, resetEditor]);
   const debouncedSaver = useDebouncedCallback(
     (newValue: Array<TNode<AnyObject>>) => {
-      // DEBUG: console
-      console.log(`newValue`, newValue);
       const newText = serialize(newValue);
       props.saver.onSave(newText);
       currentTextRef.current = newText;
@@ -73,8 +71,6 @@ export function EditorApp(props: IEditorAppProps & IDefaultWidgetProps): JSX.Ele
   if (typeof document === 'undefined') {
     return <div>Loading...</div>;
   }
-  // DEBUG: console
-  console.log(`currentAstRef.current`, currentAstRef.current);
 
   return (
     <ParentWidgetContext.Provider value={props.parentWidget}>
