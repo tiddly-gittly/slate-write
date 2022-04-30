@@ -1,0 +1,5 @@
+title: $:/plugins/linonetwo/slate-write/ui/ViewTemplate/body/edit-slate-write-cascade-filter
+tags: $:/tags/ViewTemplateBodyFilter
+list-before: $:/config/ViewTemplateBodyFilters/system
+
+[has:field[wysiwyg]then[$:/plugins/linonetwo/slate-write/ui/ViewTemplate/body/edit-slate-write]]
