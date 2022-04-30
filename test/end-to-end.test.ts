@@ -50,4 +50,7 @@ describe('Identical', () => {
   test('external link', () => {
     expect(wikiAstDict['external link']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['external link'])));
   });
+  test('heading', () => {
+    expect(wikiAstDict['heading']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['heading'])));
+  });
 });

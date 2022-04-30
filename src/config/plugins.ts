@@ -8,7 +8,6 @@ import {
   createTablePlugin,
   createDndPlugin,
   createExitBreakPlugin,
-  createHeadingPlugin,
   createHorizontalRulePlugin,
   createImagePlugin,
   createItalicPlugin,
@@ -27,6 +26,7 @@ import {
   createUnderlinePlugin,
 } from '@udecode/plate';
 import { CONFIG } from './config';
+import { createHeadingPlugin } from './plugins/heading';
 import { createWidgetPlugin } from './plugins/widget';
 
 export const basicElements = createPlugins([

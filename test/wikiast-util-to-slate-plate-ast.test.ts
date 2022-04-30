@@ -57,4 +57,7 @@ describe('Transform tree', () => {
   test('external link', () => {
     expect(wikiAstToSlateAst(wikiAstDict['external link'])).toMatchObject(slateDict['external link']);
   });
+  test('heading', () => {
+    expect(wikiAstToSlateAst(wikiAstDict['heading'])).toMatchObject(slateDict['heading']);
+  });
 });

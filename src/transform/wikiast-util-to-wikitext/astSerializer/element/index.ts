@@ -6,10 +6,11 @@ import { p } from './p';
 import { div } from './div';
 import { ul } from './ul';
 import { li } from './li';
+import { headings } from './h1';
 import { blockquote } from './blockquote';
 import { marks } from './marks';
 import { IContext } from '../..';
-export const elementBuilders = { a, p, div, ul, ol: ul, li, blockquote, ...marks };
+export const elementBuilders = { a, p, div, ul, ol: ul, li, blockquote, ...marks, ...headings };
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function element(context: IContext, node: IDomParseTreeNode): string[] {
@@ -18,5 +19,5 @@ export function element(context: IContext, node: IDomParseTreeNode): string[] {
   if (typeof builders[tag] === 'function') {
     return builders[tag](context, node);
   }
-  return [`<${tag}>`, ...convertNodes(context, children), `</${tag}>`];
+  return context.builders.jsx(context, node);
 }

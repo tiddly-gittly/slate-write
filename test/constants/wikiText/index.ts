@@ -77,5 +77,18 @@ aaa`,
 
 [ext[Open file|../README.md]]
 
-<a href="##Top_of_tiddler">Top</a>`
+<a href="##Top_of_tiddler">Top</a>`,
+  heading: `! AAA
+
+!! AAA
+
+!!! AAA
+
+!!!! AAA
+
+!!!!! AAA
+
+!!!!!! AAA
+
+AAA`,
 };

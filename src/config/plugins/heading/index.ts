@@ -1,0 +1,45 @@
+import { HeadingsPlugin, HeadingPlugin, KEYS_HEADING } from '@udecode/plate';
+import { createPluginFactory, onKeyDownToggleElement, PlatePlugin } from '@udecode/plate-core';
+
+/**
+ * Enables support for headings with configurable levels
+ * (from 1 to 6).
+ */
+export const createHeadingPlugin = createPluginFactory<HeadingsPlugin>({
+  key: 'heading',
+  options: {
+    levels: 6,
+  },
+  then: (editor, { options: { levels } = {} }) => {
+    const plugins: PlatePlugin<{}, HeadingPlugin>[] = [];
+
+    for (let level = 1; level <= levels!; level++) {
+      const key = KEYS_HEADING[level - 1];
+
+      const plugin: PlatePlugin<{}, HeadingPlugin> = {
+        key,
+        isElement: true,
+        deserializeHtml: {
+          rules: [
+            {
+              validNodeName: `H${level}`,
+            },
+          ],
+        },
+        handlers: {
+          onKeyDown: onKeyDownToggleElement,
+        },
+        options: {
+          // we need to change this, so fork the code
+          hotkey: [`ctrl+${level}`, `mod+shift+${level}`],
+        },
+      };
+
+      plugins.push(plugin);
+    }
+
+    return {
+      plugins,
+    };
+  },
+});
