@@ -6,8 +6,10 @@ title: Index
 tmap.id: 6053d381-8d79-4ecb-85d8-2e680926146c
 type: text/vnd.tiddlywiki
 
-[[DemoText]] [[EditDemoText]]
+[[DemoText]]
 
 Star me at [[Github|https://github.com/tiddly-gittly/slate-write]]
 
 Desktop App: [[TidGi|https://github.com/tiddly-gittly/TidGi-Desktop]]
+
+{{$:/plugins/linonetwo/slate-write/readme}}

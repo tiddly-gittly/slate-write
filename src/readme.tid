@@ -1,6 +1,18 @@
 title: $:/plugins/linonetwo/slate-write/readme
 type: text/vnd.tiddlywiki
 
+!! Usage 用法
+
+点击条目查看工具栏上的 {{$:/plugins/linonetwo/slate-write/ui/ViewToolbar/images/edit-wysiwyg-button}} 按钮即可在只读模式和编所见即所得辑模式之间切换。
+
+You can click on {{$:/plugins/linonetwo/slate-write/ui/ViewToolbar/images/edit-wysiwyg-button}} on view toolbar on your tiddler to switch between read-only mode and wysiwyg-edit mode.
+
+!!! Advanced Usage 高级用法
+
+如果你在开发自己的插件，那么你可以用这个微件来在任意地方显示一个编辑器，通过 `tiddler` 字段可以指定要编辑的条目，不填 `tiddler` 就会编辑 `currentTiddler` 环境变量指向的条目。
+
+If you are developing your own plugin, then you can use this widget to display an editor anywhere. The `tiddler` field allows you to specify the tiddler to edit, and leaving the `tiddler` field unfilled will edit the tiddler that `currentTiddler` environment variable pointed to.
+
 `<$edit-slateWrite tiddler="AAA" />`
 
 !! Install 安装
@@ -8,3 +20,13 @@ type: text/vnd.tiddlywiki
 [[Install from CPL|https://tw-cpl.netlify.app/]]
 
 [[使用社区插件源（CPL）安装|https://tw-cpl.netlify.app/]]
+
+!! Development 开发
+
+该项目在 [[GitHub tiddly-gittly/slate-write|https://github.com/tiddly-gittly/slate-write]] 仓库里开发，如果你喜欢，请点亮它的星，谢谢。
+
+如果你发现有什么太微语法未得到支持，或者编辑后文本发生了不符合预期的变化，也请到这个仓库里提出你的建议，并附带上完整的复现方式和条目内容。
+
+The project is under development in [[GitHub tiddly-gittly/slate-write|https://github.com/tiddly-gittly/slate-write]], give it a star if you like it, thanks.
+
+If you find some TiddlyWiki wikitext syntax is not supported yet, or if the text changes in a way that is not expected after editing, please also go to this repository and rise an issue, with a complete reproduction example text.
