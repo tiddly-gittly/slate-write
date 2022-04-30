@@ -91,4 +91,7 @@ aaa`,
 !!!!!! AAA
 
 AAA`,
+  'link in a list': `# AAA
+## [[BBB]]
+### CCC`,
 };

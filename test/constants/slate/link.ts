@@ -91,4 +91,71 @@ export const link: Record<string, TEditor | TElement | TText | Array<TEditor | T
       ],
     },
   ],
+  'link in a list': {
+    type: 'ol',
+    children: [
+      {
+        type: 'li',
+        children: [
+          {
+            type: 'lic',
+            children: [
+              {
+                text: 'AAA',
+              },
+            ],
+          } as TElement,
+          {
+            type: 'ol',
+            children: [
+              {
+                type: 'li',
+                children: [
+                  {
+                    type: 'lic',
+                    children: [
+                      {
+                        text: '',
+                      },
+                      {
+                        type: 'a',
+                        url: 'BBB',
+                        children: [
+                          {
+                            text: 'BBB',
+                          },
+                        ],
+                        'tw-type': 'link',
+                      },
+                      {
+                        text: '',
+                      },
+                    ],
+                  },
+                  {
+                    type: 'ol',
+                    children: [
+                      {
+                        type: 'li',
+                        children: [
+                          {
+                            type: 'lic',
+                            children: [
+                              {
+                                text: 'CCC',
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          } as TElement,
+        ],
+      },
+    ],
+  },
 };

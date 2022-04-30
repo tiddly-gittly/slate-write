@@ -66,6 +66,9 @@ describe('fromWikiText', () => {
   test('external link', () => {
     expect(wikiAstFromWikiText(wikiTextDict['external link'])).toEqual(wikiAstDict['external link']);
   });
+  test('link in a list', () => {
+    expect(wikiAstFromWikiText(wikiTextDict['link in a list'])).toEqual(wikiAstDict['link in a list']);
+  });
   test('heading', () => {
     expect(wikiAstFromWikiText(wikiTextDict['heading'])).toEqual(wikiAstDict['heading']);
   });

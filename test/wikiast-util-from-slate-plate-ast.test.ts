@@ -52,6 +52,9 @@ describe('fromSlateAst', () => {
   test('external link', () => {
     expect(wikiAstFromSlateAst(slateDict['external link'])).toEqual(wikiAstDictWithoutPos['external link']);
   });
+  test('link in a list', () => {
+    expect(wikiAstFromSlateAst(slateDict['link in a list'])).toEqual(wikiAstDictWithoutPos['link in a list']);
+  });
   test('heading', () => {
     expect(wikiAstFromSlateAst(slateDict['heading'])).toEqual(wikiAstDictWithoutPos['heading']);
   });
