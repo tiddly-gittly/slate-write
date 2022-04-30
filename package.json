@@ -1,7 +1,8 @@
 {
   "description": "A WYSIWYG editor for TiddlyWiki.",
   "tsFiles": [
-    "components/index"
+    "components/index",
+    "event-listeners/modify-navigator"
   ],
   "license": "MIT",
   "name": "slate-write",
