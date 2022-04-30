@@ -24,11 +24,12 @@ import {
   withDraggables,
 } from '@udecode/plate';
 import { css } from 'styled-components';
+import { ELEMENT_WIDGET } from '../../config/plugins/widget';
 
 export const withStyledDraggables = (components: any): ReturnType<typeof createPlateUI> => {
   return withDraggables(components, [
     {
-      keys: [ELEMENT_PARAGRAPH, ELEMENT_UL, ELEMENT_OL],
+      keys: [ELEMENT_PARAGRAPH, ELEMENT_UL, ELEMENT_OL, ELEMENT_WIDGET],
       level: 0,
     },
     {
@@ -48,6 +49,7 @@ export const withStyledDraggables = (components: any): ReturnType<typeof createP
         ELEMENT_TABLE,
         ELEMENT_MEDIA_EMBED,
         ELEMENT_CODE_BLOCK,
+        ELEMENT_WIDGET,
       ],
       onRenderDragHandle: ({ styles, ...props }) => (
         <Tippy {...grabberTooltipProps}>
@@ -100,7 +102,7 @@ export const withStyledDraggables = (components: any): ReturnType<typeof createP
       },
     },
     {
-      keys: [ELEMENT_H4, ELEMENT_H5, ELEMENT_H6],
+      keys: [ELEMENT_H4, ELEMENT_H5],
       styles: {
         gutterLeft: css`
           padding: 1em 0 0;
@@ -112,10 +114,10 @@ export const withStyledDraggables = (components: any): ReturnType<typeof createP
       },
     },
     {
-      keys: [ELEMENT_PARAGRAPH],
+      keys: [ELEMENT_PARAGRAPH, ELEMENT_H6],
       styles: {
         gutterLeft: css`
-          padding-top: 1rem;
+          padding-top: 0.3rem;
         `,
       },
     },
@@ -131,7 +133,15 @@ export const withStyledDraggables = (components: any): ReturnType<typeof createP
       key: ELEMENT_CODE_BLOCK,
       styles: {
         gutterLeft: css`
-          padding-top: 3rem;
+          padding-top: 1.2rem;
+        `,
+      },
+    },
+    {
+      key: ELEMENT_WIDGET,
+      styles: {
+        gutterLeft: css`
+          padding-top: 1.2rem;
         `,
       },
     },
