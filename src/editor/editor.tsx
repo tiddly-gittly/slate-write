@@ -8,12 +8,12 @@ import { Image } from '@styled-icons/material/Image';
 import { Link } from '@styled-icons/boxicons-regular';
 import type { IDefaultWidgetProps } from 'tw-react';
 
-import { deserialize, serialize } from '../../src/transform/serialize';
+import { deserialize, serialize } from '../transform/serialize';
 import * as PLUGINS from 'src/config/plugins';
-import { BallonToolbar } from 'src/config/components/Toolbars';
+import { BallonToolbar } from 'src/editor/components/Toolbars';
 import { GlobalStyle } from 'src/config/globalStyle';
-import { withStyledDraggables } from 'src/config/components/withStyledDraggables';
-import { withStyledPlaceHolders } from 'src/config/components/withStyledPlaceHolders';
+import { withStyledDraggables } from 'src/editor/components/withStyledDraggables';
+import { withStyledPlaceHolders } from 'src/editor/components/withStyledPlaceHolders';
 import { ParentWidgetContext } from 'tw-react';
 
 export interface IEditorAppProps {
