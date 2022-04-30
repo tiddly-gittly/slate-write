@@ -268,67 +268,69 @@ export const link: Record<string, IParseTreeNode[] | IParseTreeNode> = {
       end: 166,
     },
   ],
-  'link in a list': {
-    type: 'element',
-    tag: 'ol',
-    children: [
-      {
-        type: 'element',
-        tag: 'li',
-        children: [
-          {
-            type: 'text',
-            text: 'AAA',
-            start: 2,
-            end: 5,
-          },
-          {
-            type: 'element',
-            tag: 'ol',
-            children: [
-              {
-                type: 'element',
-                tag: 'li',
-                children: [
-                  {
-                    type: 'link',
-                    attributes: {
-                      to: {
-                        type: 'string',
-                        value: 'BBB',
+  'link in a list': [
+    {
+      type: 'element',
+      tag: 'ol',
+      children: [
+        {
+          type: 'element',
+          tag: 'li',
+          children: [
+            {
+              type: 'text',
+              text: 'AAA',
+              start: 2,
+              end: 5,
+            },
+            {
+              type: 'element',
+              tag: 'ol',
+              children: [
+                {
+                  type: 'element',
+                  tag: 'li',
+                  children: [
+                    {
+                      type: 'link',
+                      attributes: {
+                        to: {
+                          type: 'string',
+                          value: 'BBB',
+                        },
                       },
+                      children: [
+                        {
+                          type: 'text',
+                          text: 'BBB',
+                        },
+                      ],
+                    } as IParseTreeNode,
+                    {
+                      type: 'element',
+                      tag: 'ol',
+                      children: [
+                        {
+                          type: 'element',
+                          tag: 'li',
+                          children: [
+                            {
+                              type: 'text',
+                              text: 'CCC',
+                              start: 21,
+                              end: 24,
+                            },
+                          ],
+                        },
+                      ],
                     },
-                    children: [
-                      {
-                        type: 'text',
-                        text: 'BBB',
-                      },
-                    ],
-                  } as IParseTreeNode,
-                  {
-                    type: 'element',
-                    tag: 'ol',
-                    children: [
-                      {
-                        type: 'element',
-                        tag: 'li',
-                        children: [
-                          {
-                            type: 'text',
-                            text: 'CCC',
-                            start: 21,
-                            end: 24,
-                          },
-                        ],
-                      },
-                    ],
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };
