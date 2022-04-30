@@ -9,13 +9,13 @@ type: text/vnd.tiddlywiki
 ## BBB
 ### CCC
 
-A''AAA''A
+! A''AAA''A
 
-B//BBB//B
+!! B//BBB//B
 
-C__CCC__C
+!!! C__CCC__C
 
-D~~DDD~~D
+!!!! D~~DDD~~D
 
 E`EEE`E
 
@@ -26,3 +26,7 @@ E`EEE`E
 <$list filter="[tag[ExampleTag]sort[title]]"/>
 
 [[ExampleTag]]
+
+<<locator-view baseTitle:"TableOfContents">>
+
+<$macrocall $name="rpn" a=<<rpn 2 2 *>> b=pi operation="*" decimals="4"/>
