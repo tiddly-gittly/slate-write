@@ -13,6 +13,8 @@ type: text/vnd.tiddlywiki
 # handle keyboard shortcut and basic elements' rendering using slatejs plugins from [[Udecode's Plate framework|https://plate.udecode.io]].
 ## our custom keyboard shortcuts are configured in `src/config/autoformat`
 # There will be a floating toolbar when you selecting text, and you can click on the toolbar to change the text's decoration, this is a react component defined in `src/config/components/Toolbars.tsx`
+# When hover on the left of a block, there will be a Drag and drop handle, render by `src/editor/components/withStyledDraggables.tsx`
+## Different block have different line height, so we need to add different padding here to align them.
 
 !! TODO
 
