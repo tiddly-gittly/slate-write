@@ -10,14 +10,7 @@ import type { IDefaultWidgetProps } from 'tw-react';
 
 import { deserialize, serialize } from '../../src/transform/serialize';
 import * as PLUGINS from 'src/config/plugins';
-import {
-  AlignToolbarButtons,
-  BallonToolbar,
-  BasicElementToolbarButtons,
-  BasicMarkToolbarButtons,
-  ListToolbarButtons,
-  TableToolbarButtons,
-} from 'src/config/components/Toolbars';
+import { BallonToolbar } from 'src/config/components/Toolbars';
 import { GlobalStyle } from 'src/config/globalStyle';
 import { withStyledDraggables } from 'src/config/components/withStyledDraggables';
 import { withStyledPlaceHolders } from 'src/config/components/withStyledPlaceHolders';
@@ -88,16 +81,6 @@ export function EditorApp(props: IEditorAppProps & IDefaultWidgetProps): JSX.Ele
       <GlobalStyle />
       <DndProvider backend={HTML5Backend}>
         <Plate id={editorID} initialValue={currentAstRef.current} plugins={plugins} onChange={onChange}>
-          <HeadingToolbar>
-            <BasicElementToolbarButtons />
-            <ListToolbarButtons />
-            <BasicMarkToolbarButtons />
-            <AlignToolbarButtons />
-            <LinkToolbarButton icon={<Link />} />
-            <ImageToolbarButton icon={<Image />} />
-            <TableToolbarButtons />
-          </HeadingToolbar>
-
           <BallonToolbar />
         </Plate>
       </DndProvider>

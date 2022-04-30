@@ -59,6 +59,9 @@ export const utils = createPlugins([
   createIndentListPlugin(),
   createIndentPlugin(),
   createKbdPlugin(),
+  /**
+   * Add a trailing block when the last node type is not `type` and when the editor has .
+   */
+  createTrailingBlockPlugin(),
 ]);
 export const twAdvancedElements = createPlugins([createWidgetPlugin()]);
-

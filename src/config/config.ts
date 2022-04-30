@@ -60,6 +60,7 @@ interface Config {
   trailingBlock: Partial<PlatePlugin<{}, TrailingBlockPlugin>>;
 }
 
+// TODO: load keyboard shortcuts from tw config
 export const CONFIG: Config = {
   editableProps: {
     // autoFocus: process.env.NODE_ENV !== 'production',
