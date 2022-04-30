@@ -23,10 +23,24 @@ If you are developing your own plugin, then you can use this widget to display a
 
 !! Development 开发
 
+欢迎了解实现细节并参与开发，详见[[开发手册|$:/plugins/linonetwo/slate-write/develop]]。
+
 该项目在 [[GitHub tiddly-gittly/slate-write|https://github.com/tiddly-gittly/slate-write]] 仓库里开发，如果你喜欢，请点亮它的星，谢谢。
 
 如果你发现有什么太微语法未得到支持，或者编辑后文本发生了不符合预期的变化，也请到这个仓库里提出你的建议，并附带上完整的复现方式和条目内容。
 
+You are welcome to learn the implementation details and join the development, read the [[develop manual|$:/plugins/linonetwo/slate-write/develop]] for more information.
+
 The project is under development in [[GitHub tiddly-gittly/slate-write|https://github.com/tiddly-gittly/slate-write]], give it a star if you like it, thanks.
 
 If you find some TiddlyWiki wikitext syntax is not supported yet, or if the text changes in a way that is not expected after editing, please also go to this repository and rise an issue, with a complete reproduction example text.
+
+!! FAQ 答疑
+
+!!! How to make this the default editor 如何设为默认编辑器？
+
+* If you want it in edit mode (not recommended, because you may still want to see and edit the source text to use some advanced TW5 feature):
+** By setting tiddler `$:/config/EditorTypeMappings/text/vnd.tiddlywiki` to `slateWrite`, then tiddlywiki will try to use widget `<$edit-slateWrite />` as the editor.
+** Then you will have normal view mode and a WYSIWYG edit draft edit mode
+* If you want it replace the default view mode:
+** Not recommended, because Its macro and widget support is not completed. After its complete, I will make an config to allow set it to default.
