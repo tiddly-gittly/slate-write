@@ -29,10 +29,6 @@ import { ELEMENT_WIDGET } from '../../config/plugins/widget';
 export const withStyledDraggables = (components: any): ReturnType<typeof createPlateUI> => {
   return withDraggables(components, [
     {
-      keys: [ELEMENT_PARAGRAPH, ELEMENT_UL, ELEMENT_OL, ELEMENT_WIDGET],
-      level: 0,
-    },
-    {
       keys: [
         ELEMENT_PARAGRAPH,
         ELEMENT_BLOCKQUOTE,
