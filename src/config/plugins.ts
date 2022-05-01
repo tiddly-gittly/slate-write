@@ -24,6 +24,7 @@ import {
   createSubscriptPlugin,
   createSuperscriptPlugin,
   createUnderlinePlugin,
+  createNodeIdPlugin,
 } from '@udecode/plate';
 import { CONFIG } from './config';
 import { createHeadingPlugin } from './plugins/heading';
@@ -55,6 +56,7 @@ export const utils = createPlugins([
   createSoftBreakPlugin(CONFIG.softBreak),
   createExitBreakPlugin(CONFIG.exitBreak),
   createAutoformatPlugin(CONFIG.autoformat),
+  createNodeIdPlugin(),
   createDndPlugin(),
   createIndentListPlugin(),
   createIndentPlugin(),
