@@ -56,7 +56,7 @@ export const basicMarks = createPlugins([
 ]);
 export const utils = createPlugins([
   createComboboxPlugin(),
-  createMentionPlugin({ key: '/', component: MentionElement, options: { trigger: '/', inputCreation: {key: 'creationId', value: 'main'} } }),
+  createMentionPlugin(CONFIG.mention),
   createSelectOnBackspacePlugin(CONFIG.selectOnBackspace),
   createSoftBreakPlugin(CONFIG.softBreak),
   createExitBreakPlugin(CONFIG.exitBreak),

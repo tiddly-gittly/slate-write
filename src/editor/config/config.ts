@@ -11,9 +11,6 @@ import {
   ELEMENT_H4,
   ELEMENT_H5,
   ELEMENT_H6,
-  ELEMENT_HR,
-  ELEMENT_IMAGE,
-  ELEMENT_MEDIA_EMBED,
   ELEMENT_PARAGRAPH,
   ELEMENT_TD,
   ELEMENT_TODO_LI,
@@ -23,11 +20,14 @@ import {
   isSelectionAtBlockStart,
   KEYS_HEADING,
   LinkPlugin,
+  MentionNodeData,
+  MentionPlugin,
   NormalizeTypesPlugin,
   PlatePlugin,
   ResetNodePlugin,
   SelectOnBackspacePlugin,
   SoftBreakPlugin,
+  TComboboxItemBase,
   TrailingBlockPlugin,
   withProps,
 } from '@udecode/plate';
@@ -36,6 +36,7 @@ import { EditableProps } from 'slate-react/dist/components/editable';
 import { css } from 'styled-components';
 import { autoformatRules } from './autoformat';
 import { ELEMENT_WIDGET } from './plugins/widget';
+import { components } from '../components';
 
 export const SAVE_DEBOUNCE_INTERVAL = 1000;
 
@@ -51,6 +52,7 @@ interface Config {
 
   components: Record<string, any>;
   editableProps: EditableProps;
+  mention: Partial<PlatePlugin<{}, MentionPlugin<undefined>>>;
   exitBreak: Partial<PlatePlugin<{}, ExitBreakPlugin>>;
   forceLayout: Partial<PlatePlugin<{}, NormalizeTypesPlugin>>;
   indent: Partial<PlatePlugin<{}, IndentPlugin>>;
@@ -66,6 +68,22 @@ export const CONFIG: Config = {
   link: {
     options: {
       hotkey: 'ctrl+l',
+    },
+  },
+  mention: {
+    key: '/',
+    component: components[ELEMENT_PARAGRAPH],
+    options: {
+      trigger: '/',
+      insertSpaceAfterMention: false,
+      createMentionNode: (item: TComboboxItemBase): MentionNodeData => {
+        return {
+          // override type and children in plate's packages/nodes/mention/src/getMentionOnSelectItem.ts
+          // its default type is '/' (the same as the key above), but we want it to be normal text
+          type: ELEMENT_PARAGRAPH,
+          children: [{ text: item.text }],
+        } as any;
+      },
     },
   },
   editableProps: {

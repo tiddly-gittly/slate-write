@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef } from 'react';
-import { AnyObject, createPlateUI, createPlugins, Plate, TNode, getPlateActions } from '@udecode/plate';
+import { AnyObject, createPlugins, Plate, TNode, getPlateActions } from '@udecode/plate';
 import { useDebouncedCallback } from 'beautiful-react-hooks';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -8,10 +8,9 @@ import { deserialize, serialize } from '../transform/serialize';
 import * as PLUGINS from 'src/editor/config/plugins';
 import { BallonToolbar } from 'src/editor/components/Toolbars';
 import { GlobalStyle } from 'src/editor/config/globalStyle';
-import { withStyledDraggables } from 'src/editor/components/withStyledDraggables';
-import { withStyledPlaceHolders } from 'src/editor/components/withStyledPlaceHolders';
 import { IDefaultWidgetProps, ParentWidgetContext } from 'tw-react';
 import { SnippetCombobox } from './components/SnippetCombobox';
+import { components } from './components';
 
 export interface IEditorAppProps {
   currentTiddler: string;
@@ -26,7 +25,7 @@ export interface IEditorAppProps {
 }
 const plugins = createPlugins([...PLUGINS.basicElements, ...PLUGINS.basicMarks, ...PLUGINS.utils, ...PLUGINS.twAdvancedElements], {
   // Plate components
-  components: withStyledDraggables(withStyledPlaceHolders(createPlateUI())),
+  components,
 });
 
 export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Element {

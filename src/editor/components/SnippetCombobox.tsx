@@ -43,7 +43,7 @@ export const LazyTippy = (props: TippyProps) => {
 
   return <Tippy {...computedProps} />;
 };
-const memorizedRenderText = memorize((text: string) => $tw.wiki.renderText('text/html', 'text/vnd.tiddlywiki', text))
+const memorizedRenderText = memorize((text: string) => $tw.wiki.renderText('text/html', 'text/vnd.tiddlywiki', text));
 
 function SnippetListItem(props: ComboboxItemProps<ISnippetComboboxItem>): JSX.Element {
   function PreviewWithWikiText() {
