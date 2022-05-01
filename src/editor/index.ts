@@ -2,7 +2,7 @@ import { IChangedTiddlers } from 'tiddlywiki';
 import type { ReactWidget } from 'tw-react';
 
 import { App, IEditorAppProps } from './editor';
-import { SAVE_DEBOUNCE_INTERVAL } from '../config/config';
+import { SAVE_DEBOUNCE_INTERVAL } from './config/config';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 const Widget = require('$:/plugins/linonetwo/tw-react/widget.js').widget as typeof ReactWidget;

@@ -5,9 +5,9 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import { deserialize, serialize } from '../transform/serialize';
-import * as PLUGINS from 'src/config/plugins';
+import * as PLUGINS from 'src/editor/config/plugins';
 import { BallonToolbar } from 'src/editor/components/Toolbars';
-import { GlobalStyle } from 'src/config/globalStyle';
+import { GlobalStyle } from 'src/editor/config/globalStyle';
 import { withStyledDraggables } from 'src/editor/components/withStyledDraggables';
 import { withStyledPlaceHolders } from 'src/editor/components/withStyledPlaceHolders';
 import { IDefaultWidgetProps, ParentWidgetContext } from 'tw-react';
