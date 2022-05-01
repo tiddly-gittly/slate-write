@@ -6,7 +6,7 @@ export const withStyledPlaceHolders = (components: any): ReturnType<typeof creat
   withPlaceholders(components, [
     {
       key: ELEMENT_PARAGRAPH,
-      placeholder: 'Type a paragraph',
+      placeholder: 'Type / for commands',
       hideOnBlur: true,
     },
   ]);

@@ -11,6 +11,7 @@ import { GlobalStyle } from 'src/editor/config/globalStyle';
 import { withStyledDraggables } from 'src/editor/components/withStyledDraggables';
 import { withStyledPlaceHolders } from 'src/editor/components/withStyledPlaceHolders';
 import { IDefaultWidgetProps, ParentWidgetContext } from 'tw-react';
+import { SnippetCombobox } from './components/SnippetCombobox';
 
 export interface IEditorAppProps {
   currentTiddler: string;
@@ -75,6 +76,7 @@ export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Elemen
   return (
     <Plate id={editorID} initialValue={currentAstRef.current} plugins={plugins} onChange={onChange}>
       <BallonToolbar />
+      <SnippetCombobox id={editorID} trigger="/" />
     </Plate>
   );
 }

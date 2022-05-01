@@ -25,6 +25,9 @@ import {
   createSuperscriptPlugin,
   createUnderlinePlugin,
   createNodeIdPlugin,
+  createComboboxPlugin,
+  createMentionPlugin,
+  MentionElement,
 } from '@udecode/plate';
 import { CONFIG } from './config';
 import { createHeadingPlugin } from './plugins/heading';
@@ -52,6 +55,8 @@ export const basicMarks = createPlugins([
   createUnderlinePlugin(),
 ]);
 export const utils = createPlugins([
+  createComboboxPlugin(),
+  createMentionPlugin({ key: '/', component: MentionElement, options: { trigger: '/', inputCreation: {key: 'creationId', value: 'main'} } }),
   createSelectOnBackspacePlugin(CONFIG.selectOnBackspace),
   createSoftBreakPlugin(CONFIG.softBreak),
   createExitBreakPlugin(CONFIG.exitBreak),

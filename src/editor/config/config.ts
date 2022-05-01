@@ -35,7 +35,6 @@ import {
 import { EditableProps } from 'slate-react/dist/components/editable';
 import { css } from 'styled-components';
 import { autoformatRules } from './autoformat';
-import { MENTIONABLES } from './mentionables';
 import { ELEMENT_WIDGET } from './plugins/widget';
 
 export const SAVE_DEBOUNCE_INTERVAL = 1000;
@@ -56,7 +55,6 @@ interface Config {
   forceLayout: Partial<PlatePlugin<{}, NormalizeTypesPlugin>>;
   indent: Partial<PlatePlugin<{}, IndentPlugin>>;
   lineHeight: Partial<PlatePlugin>;
-  mentionItems: any;
   resetBlockType: Partial<PlatePlugin<{}, ResetNodePlugin>>;
   selectOnBackspace: Partial<PlatePlugin<{}, SelectOnBackspacePlugin>>;
   softBreak: Partial<PlatePlugin<{}, SoftBreakPlugin>>;
@@ -74,7 +72,7 @@ export const CONFIG: Config = {
     // autoFocus: process.env.NODE_ENV !== 'production',
     autoFocus: false,
     spellCheck: false,
-    placeholder: 'Type…',
+    placeholder: 'Type / for commands, or write down what is in your mind',
     style: {
       padding: '15px',
     },
@@ -180,7 +178,6 @@ export const CONFIG: Config = {
       rules: autoformatRules,
     },
   },
-  mentionItems: MENTIONABLES,
   forceLayout: {
     options: {
       rules: [{ path: [0], strictType: ELEMENT_H1 }],
