@@ -6,9 +6,9 @@
   }
   // separate the widget from the exports here, so we can skip the require of react code if `!$tw.browser`. Those ts code will error if loaded in the nodejs side.
   const components = require('$:/plugins/linonetwo/slate-write/components/index.js');
-  const { SlateWriteWidget } = components
+  const { widget } = components
   /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-  exports.slateWrite = SlateWriteWidget;
+  exports.slateWrite = widget;
   // fix `Undefined widget 'edit-slateWrite'`
-  exports['edit-slateWrite'] = SlateWriteWidget;
+  exports['edit-slateWrite'] = widget;
 })();

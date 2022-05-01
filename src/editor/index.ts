@@ -1,7 +1,7 @@
 import { IChangedTiddlers } from 'tiddlywiki';
 import type { ReactWidget } from 'tw-react';
 
-import { EditorApp, IEditorAppProps } from './editor';
+import { App, IEditorAppProps } from './editor';
 import { SAVE_DEBOUNCE_INTERVAL } from '../config/config';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
@@ -48,7 +48,7 @@ class SlateWriteWidget extends Widget<IEditorAppProps> {
     $tw.modules.applyMethods('texteditoroperation', this.editorOperations);
   }
 
-  reactComponent = EditorApp;
+  reactComponent = App;
   getProps = () => {
     const onSave = (newText: string): void => {
       if (!this.editTitle) {
@@ -149,4 +149,4 @@ class SlateWriteWidget extends Widget<IEditorAppProps> {
     return false;
   }
 }
-exports.SlateWriteWidget = SlateWriteWidget;
+exports.widget = SlateWriteWidget;

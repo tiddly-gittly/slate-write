@@ -1,12 +1,8 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { AnyObject, createPlateUI, createPlugins, ImageToolbarButton, LinkToolbarButton, Plate, TNode, getPlateActions } from '@udecode/plate';
+import React, { useCallback, useEffect, useRef } from 'react';
+import { AnyObject, createPlateUI, createPlugins, Plate, TNode, getPlateActions } from '@udecode/plate';
 import { useDebouncedCallback } from 'beautiful-react-hooks';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { HeadingToolbar } from '@udecode/plate-ui-toolbar';
-import { Image } from '@styled-icons/material/Image';
-import { Link } from '@styled-icons/boxicons-regular';
-import type { IDefaultWidgetProps } from 'tw-react';
 
 import { deserialize, serialize } from '../transform/serialize';
 import * as PLUGINS from 'src/config/plugins';
@@ -14,7 +10,7 @@ import { BallonToolbar } from 'src/editor/components/Toolbars';
 import { GlobalStyle } from 'src/config/globalStyle';
 import { withStyledDraggables } from 'src/editor/components/withStyledDraggables';
 import { withStyledPlaceHolders } from 'src/editor/components/withStyledPlaceHolders';
-import { ParentWidgetContext } from 'tw-react';
+import { IDefaultWidgetProps, ParentWidgetContext } from 'tw-react';
 
 export interface IEditorAppProps {
   currentTiddler: string;
@@ -32,9 +28,9 @@ const plugins = createPlugins([...PLUGINS.basicElements, ...PLUGINS.basicMarks, 
   components: withStyledDraggables(withStyledPlaceHolders(createPlateUI())),
 });
 
-export function EditorApp(props: IEditorAppProps & IDefaultWidgetProps): JSX.Element {
+export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Element {
   const editorID = props.currentTiddler;
-  const { resetEditor, value: updateEditorValue, editor } = getPlateActions(editorID);
+  const { resetEditor, value: updateEditorValue } = getPlateActions(editorID);
   // Add the initial value when setting up our state.
   const currentAstRef = useRef<Array<TNode<AnyObject>>>(deserialize(props.tiddlerText));
   /** current text is only used for compare, we don't want it trigger rerender, so use ref to store it */
@@ -56,6 +52,8 @@ export function EditorApp(props: IEditorAppProps & IDefaultWidgetProps): JSX.Ele
   }, [props.tiddlerText, currentTextRef, updateEditorValue, resetEditor]);
   const debouncedSaver = useDebouncedCallback(
     (newValue: Array<TNode<AnyObject>>) => {
+      // DEBUG: console
+      console.log(`newValue`, newValue);
       const newText = serialize(newValue);
       props.saver.onSave(newText);
       currentTextRef.current = newText;
@@ -71,14 +69,22 @@ export function EditorApp(props: IEditorAppProps & IDefaultWidgetProps): JSX.Ele
   if (typeof document === 'undefined') {
     return <div>Loading...</div>;
   }
+  // DEBUG: console
+  console.log(`currentAstRef.current`, currentAstRef.current);
 
+  return (
+    <Plate id={editorID} initialValue={currentAstRef.current} plugins={plugins} onChange={onChange}>
+      <BallonToolbar />
+    </Plate>
+  );
+}
+
+export function App(props: IEditorAppProps & IDefaultWidgetProps): JSX.Element {
   return (
     <ParentWidgetContext.Provider value={props.parentWidget}>
       <GlobalStyle />
       <DndProvider backend={HTML5Backend}>
-        <Plate id={editorID} initialValue={currentAstRef.current} plugins={plugins} onChange={onChange}>
-          <BallonToolbar />
-        </Plate>
+        <Editor {...props} />
       </DndProvider>
     </ParentWidgetContext.Provider>
   );
