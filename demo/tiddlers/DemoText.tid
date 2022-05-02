@@ -28,6 +28,10 @@ E`EEE`E
 
 [[ExampleTag]]
 
+[ext[TW5|https://tiddlywiki.com]]
+
+[ext[Mail me|mailto:me@where.net]]
+
 <<locator-view baseTitle:"TableOfContents">>
 
 <$macrocall $name="rpn" a=<<rpn 2 2 *>> b=pi operation="*" decimals="4"/>

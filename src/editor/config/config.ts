@@ -19,7 +19,6 @@ import {
   isBlockAboveEmpty,
   isSelectionAtBlockStart,
   KEYS_HEADING,
-  LinkElement,
   LinkPlugin,
   MentionNodeData,
   MentionPlugin,
@@ -30,13 +29,12 @@ import {
   SoftBreakPlugin,
   TComboboxItemBase,
   TrailingBlockPlugin,
-  withProps,
 } from '@udecode/plate';
 // import { ELEMENT_EXCALIDRAW, ExcalidrawElement } from '@udecode/plate-ui-excalidraw';
 import { EditableProps } from 'slate-react/dist/components/editable';
-import { css } from 'styled-components';
 import { autoformatRules } from './autoformat';
 import { ELEMENT_WIDGET } from '../plugins/widget';
+import { LinkElement } from '../plugins/link/LinkElement';
 // import { components } from '../components';
 
 export const SAVE_DEBOUNCE_INTERVAL = 1000;
@@ -96,10 +94,7 @@ export const CONFIG: Config = {
     },
   },
   components: createPlateUI({
-    [ELEMENT_LINK]: withProps(LinkElement, {
-      className: 'tc-tiddlylink tc-tiddlylink-resolves'
-    }),
-    // [ELEMENT_EXCALIDRAW]: ExcalidrawElement,
+    [ELEMENT_LINK]: LinkElement,
   }),
 
   align: {
