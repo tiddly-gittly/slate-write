@@ -19,11 +19,27 @@ export function li(context: IContext, node: IDomParseTreeNode): TElement {
       return { type: ELEMENT_LIC, children: convertNodes(context, [child]) };
     }
     return convertNodes(context, [child]);
-  })
+  });
+
+  // wikiast have li > text, but slate-plate-ast have li > lic > text
+  // and merge multiple lic > text created by the flatMap, into a single lic containing multiple text
+  const childrenWithLicMerged = mergeAdjacent(childrenWithLic, ELEMENT_LIC) as TElement[];
+  const childrenWithLicPadded = childrenWithLicMerged.map((child: TElement) => {
+    if (child.type === ELEMENT_LIC) {
+      if (child.children.length > 0) {
+        // if first child is not a text, we need to add an empty text to pad first, because plate will generate ast like this
+        if (!child.children[0].text) {
+          child.children.push({ text: '' });
+        }
+        if (!child.children[child.children.length - 1].text) {
+          child.children.unshift({ text: '' });
+        }
+      }
+    }
+    return child;
+  });
   return {
     type: ELEMENT_LI,
-    // wikiast have li > text, but slate-plate-ast have li > lic > text
-    // and merge multiple lic > text created by the flatMap, into a single lic containing multiple text
-    children: mergeAdjacent(childrenWithLic, 'lic'),
+    children: childrenWithLicPadded,
   };
 }

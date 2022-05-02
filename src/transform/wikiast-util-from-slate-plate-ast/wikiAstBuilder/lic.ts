@@ -5,5 +5,10 @@ import { convertNodes } from '../traverse';
 
 export function lic(builders: IBuilders, node: TElement<{ children: (TText | TElement)[]; type: typeof ELEMENT_LIC }>): Array<IParseTreeNode> {
   const { children } = node;
-  return convertNodes(builders, children);
+  const nodesSpreadIntoList = convertNodes(builders, children);
+  if (nodesSpreadIntoList.length > 0) {
+    // when there is a list element in the lic, plate will generate two empty text child for lic, we don't need that in wikiast
+    return nodesSpreadIntoList.filter((child) => child.type !== 'text' || child.text !== '');
+  }
+  return nodesSpreadIntoList;
 }

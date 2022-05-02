@@ -127,6 +127,15 @@ export const link: Record<string, TEditor | TElement | TText | Array<TEditor | T
                         {
                           type: 'a',
                           url: 'BBB',
+                          attributes: {
+                            to: 'BBB',
+                          },
+                          'tw-attributes': {
+                            to: {
+                              type: 'string',
+                              value: 'BBB',
+                            },
+                          },
                           children: [
                             {
                               text: 'BBB',
