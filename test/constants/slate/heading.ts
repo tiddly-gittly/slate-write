@@ -4,7 +4,8 @@ export const heading: Record<string, TEditor | TElement | TText | Array<TEditor 
   heading: [
     {
       type: 'h1',
-      attributes: {
+      attributes: { class: '' },
+      'tw-attributes': {
         class: {
           type: 'string',
           value: '',
@@ -18,7 +19,8 @@ export const heading: Record<string, TEditor | TElement | TText | Array<TEditor 
     },
     {
       type: 'h2',
-      attributes: {
+      attributes: { class: '' },
+      'tw-attributes': {
         class: {
           type: 'string',
           value: '',
@@ -32,7 +34,8 @@ export const heading: Record<string, TEditor | TElement | TText | Array<TEditor 
     },
     {
       type: 'h3',
-      attributes: {
+      attributes: { class: '' },
+      'tw-attributes': {
         class: {
           type: 'string',
           value: '',
@@ -46,7 +49,8 @@ export const heading: Record<string, TEditor | TElement | TText | Array<TEditor 
     },
     {
       type: 'h4',
-      attributes: {
+      attributes: { class: '' },
+      'tw-attributes': {
         class: {
           type: 'string',
           value: '',
@@ -60,7 +64,8 @@ export const heading: Record<string, TEditor | TElement | TText | Array<TEditor 
     },
     {
       type: 'h5',
-      attributes: {
+      attributes: { class: '' },
+      'tw-attributes': {
         class: {
           type: 'string',
           value: '',
@@ -74,7 +79,8 @@ export const heading: Record<string, TEditor | TElement | TText | Array<TEditor 
     },
     {
       type: 'h6',
-      attributes: {
+      attributes: { class: '' },
+      'tw-attributes': {
         class: {
           type: 'string',
           value: '',

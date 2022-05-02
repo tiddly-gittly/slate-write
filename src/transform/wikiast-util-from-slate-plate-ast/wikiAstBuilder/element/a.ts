@@ -29,7 +29,6 @@ export function a(builders: IBuilders, node: TElement): ILinkParseTreeNode | IDo
     return result;
   }
   const result: IDomParseTreeNode = {
-    ...pick(node, ['orderedAttributes', 'attributes', 'isBlock']),
     type: 'element',
     tag: 'a',
     // slate will add empty text child to it, we don't need that in wikiast

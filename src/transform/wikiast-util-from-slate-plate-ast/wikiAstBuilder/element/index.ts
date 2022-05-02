@@ -1,6 +1,5 @@
 import { TElement } from '@udecode/plate';
 import type { IDomParseTreeNode, IWikiASTNode } from 'tiddlywiki';
-import pick from 'lodash/pick';
 
 import { convertNodes } from '../../traverse';
 import { IBuilders } from '..';
@@ -20,7 +19,6 @@ export function element(builders: IBuilders, node: TElement & { type: keyof HTML
     return customElementHandler(builders, node);
   }
   return {
-    ...pick(node, ['orderedAttributes', 'attributes', 'isBlock']),
     type: 'element',
     tag,
     children: convertNodes(builders, children),

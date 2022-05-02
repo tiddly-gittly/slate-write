@@ -2,6 +2,7 @@ import { AnyObject, TNode, isText, isElement } from '@udecode/plate';
 import { IParseTreeNode } from 'tiddlywiki';
 
 import { IBuilders } from './wikiAstBuilder';
+import { getSlatePlateASTAdditionalProperties } from '../ast-utils/getNodeAdditionalProperties';
 
 export type IAnyBuilder = IBuilders & Record<string, typeof convertWikiAstNode>;
 
@@ -25,7 +26,9 @@ export function convertWikiAstNode(builders: IAnyBuilder, node: TNode<AnyObject>
     if (typeof builder === 'function') {
       // @ts-expect-error Type 'TElement<AnyObject>' is not assignable to type '{ type: keyof HTMLElementTagNameMap; }'. Types of property 'type' are incompatible. Type 'string' is not assignable to type 'keyof HTMLElementTagNameMap'.ts(2345)
       const builtSlateNodeOrNodes = builder(builders, node);
-      return Array.isArray(builtSlateNodeOrNodes) ? builtSlateNodeOrNodes : ([builtSlateNodeOrNodes] as IParseTreeNode[]);
+      return Array.isArray(builtSlateNodeOrNodes)
+        ? builtSlateNodeOrNodes.map((child) => ({ ...getSlatePlateASTAdditionalProperties(node), ...child }))
+        : ([{ ...getSlatePlateASTAdditionalProperties(node), ...builtSlateNodeOrNodes }] as IParseTreeNode[]);
     }
   }
   // it might be a root or pure parent node, reduce it

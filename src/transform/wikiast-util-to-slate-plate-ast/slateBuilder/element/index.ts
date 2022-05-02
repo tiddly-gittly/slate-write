@@ -8,6 +8,7 @@ import { ul } from './ul';
 import { li } from './li';
 import { blockquote } from './blockquote';
 import { marks } from './marks';
+
 export const elementBuilders = { ul, ol: ul, li, blockquote, ...marks };
 export type IElementBuilders = typeof elementBuilders;
 
@@ -18,7 +19,6 @@ export function element(context: IContext, node: IDomParseTreeNode): TNode | TNo
     return elementBuilders[tag as keyof IElementBuilders](context, node);
   }
   return {
-    ...pick(node, ['orderedAttributes', 'attributes', 'isBlock']),
     type: tag,
     children: convertNodes(context, children),
   };
