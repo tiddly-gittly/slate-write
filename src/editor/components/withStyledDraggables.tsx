@@ -28,6 +28,11 @@ import { ELEMENT_WIDGET } from '../plugins/widget';
 
 export const withStyledDraggables = (components: any): ReturnType<typeof createPlateUI> => {
   return withDraggables(components, [
+    // TODO: after allow li reorder, delete this level 0 constrain
+    {
+      keys: [ELEMENT_PARAGRAPH, ELEMENT_UL, ELEMENT_OL, ELEMENT_WIDGET],
+      level: 0,
+    },
     {
       keys: [
         ELEMENT_PARAGRAPH,
