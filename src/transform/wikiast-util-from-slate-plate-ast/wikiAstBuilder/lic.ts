@@ -1,9 +1,9 @@
 import { TElement, ELEMENT_LIC, TText } from '@udecode/plate';
-import type { ITextParseTreeNode, IDomParseTreeNode } from 'tiddlywiki';
+import type { IParseTreeNode } from 'tiddlywiki';
 import type { IBuilders } from '.';
+import { convertNodes } from '../traverse';
 
-export function lic(builders: IBuilders, node: TElement<{ children: TText[]; type: typeof ELEMENT_LIC }>): Array<ITextParseTreeNode | IDomParseTreeNode> {
+export function lic(builders: IBuilders, node: TElement<{ children: (TText | TElement)[]; type: typeof ELEMENT_LIC }>): Array<IParseTreeNode> {
   const { children } = node;
-  const texts = children.map((child: TText) => builders.text(builders, child));
-  return texts;
+  return convertNodes(builders, children);
 }
