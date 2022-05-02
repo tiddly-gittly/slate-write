@@ -35,7 +35,7 @@ import {
 import { EditableProps } from 'slate-react/dist/components/editable';
 import { css } from 'styled-components';
 import { autoformatRules } from './autoformat';
-import { ELEMENT_WIDGET } from './plugins/widget';
+import { ELEMENT_WIDGET } from '../plugins/widget';
 import { components } from '../components';
 
 export const SAVE_DEBOUNCE_INTERVAL = 1000;

@@ -30,8 +30,8 @@ import {
   MentionElement,
 } from '@udecode/plate';
 import { CONFIG } from './config';
-import { createHeadingPlugin } from './plugins/heading';
-import { createWidgetPlugin } from './plugins/widget';
+import { createHeadingPlugin } from '../plugins/heading';
+import { createWidgetPlugin } from '../plugins/widget';
 
 export const basicElements = createPlugins([
   createBlockquotePlugin(),

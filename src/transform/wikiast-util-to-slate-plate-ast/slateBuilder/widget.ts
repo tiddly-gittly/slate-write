@@ -1,7 +1,7 @@
 import { TElement } from '@udecode/plate';
 import type { ICustomParseTreeNode } from 'tiddlywiki';
 
-import { ELEMENT_WIDGET } from '../../../editor/config/plugins/widget';
+import { ELEMENT_WIDGET } from '../../../editor/plugins/widget';
 import { IContext } from '..';
 
 /**

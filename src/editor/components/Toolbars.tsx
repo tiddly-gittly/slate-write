@@ -47,7 +47,7 @@ import {
   usePlateEditorRef,
 } from '@udecode/plate';
 import type { Placement } from 'tippy.js';
-import { LinkToolbarButton } from '../config/plugins/link/LinkToolbarButton';
+import { LinkToolbarButton } from '../plugins/link/LinkToolbarButton';
 import { Editor } from 'slate';
 
 const tooltipStyle = {

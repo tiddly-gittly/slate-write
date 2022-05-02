@@ -24,7 +24,7 @@ import {
   withDraggables,
 } from '@udecode/plate';
 import { css } from 'styled-components';
-import { ELEMENT_WIDGET } from '../config/plugins/widget';
+import { ELEMENT_WIDGET } from '../plugins/widget';
 
 export const withStyledDraggables = (components: any): ReturnType<typeof createPlateUI> => {
   return withDraggables(components, [
