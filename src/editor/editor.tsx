@@ -37,10 +37,7 @@ export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Elemen
   /** current text is only used for compare, we don't want it trigger rerender, so use ref to store it */
   const currentTextRef = useRef<string>(props.tiddlerText);
   // TODO: get dom node to add IME listener to prevent update when IME open https://github.com/udecode/plate/issues/239#issuecomment-1098052241
-  // const editorRef = useRef();
-  // useEffect(() => {
-  //   editorRef.current = ReactEditor.toDOMNode();
-  // }, []);
+
   // update current value from props
   useEffect(() => {
     // there will be cases that triple return replaced with double return (trim),  cause here rerender, but I think it is ok, not so frequent
