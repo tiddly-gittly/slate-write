@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import {
   AutoformatPlugin,
-  CodeBlockElement,
   createPlateUI,
   ELEMENT_BLOCKQUOTE,
   ELEMENT_CODE_BLOCK,
@@ -11,6 +10,7 @@ import {
   ELEMENT_H4,
   ELEMENT_H5,
   ELEMENT_H6,
+  ELEMENT_LINK,
   ELEMENT_PARAGRAPH,
   ELEMENT_TD,
   ELEMENT_TODO_LI,
@@ -19,6 +19,7 @@ import {
   isBlockAboveEmpty,
   isSelectionAtBlockStart,
   KEYS_HEADING,
+  LinkElement,
   LinkPlugin,
   MentionNodeData,
   MentionPlugin,
@@ -36,7 +37,7 @@ import { EditableProps } from 'slate-react/dist/components/editable';
 import { css } from 'styled-components';
 import { autoformatRules } from './autoformat';
 import { ELEMENT_WIDGET } from '../plugins/widget';
-import { components } from '../components';
+// import { components } from '../components';
 
 export const SAVE_DEBOUNCE_INTERVAL = 1000;
 
@@ -72,7 +73,6 @@ export const CONFIG: Config = {
   },
   mention: {
     key: '/',
-    component: components[ELEMENT_PARAGRAPH],
     options: {
       trigger: '/',
       insertSpaceAfterMention: false,
@@ -96,17 +96,8 @@ export const CONFIG: Config = {
     },
   },
   components: createPlateUI({
-    [ELEMENT_CODE_BLOCK]: withProps(CodeBlockElement, {
-      styles: {
-        root: [
-          css`
-            background-color: #111827;
-            code {
-              color: white;
-            }
-          `,
-        ],
-      },
+    [ELEMENT_LINK]: withProps(LinkElement, {
+      className: 'tc-tiddlylink tc-tiddlylink-resolves'
     }),
     // [ELEMENT_EXCALIDRAW]: ExcalidrawElement,
   }),
