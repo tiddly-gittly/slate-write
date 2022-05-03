@@ -3,7 +3,7 @@ import { convertNodes } from '../../traverse';
 import { IContext } from '../..';
 
 /**
- * P can be omitted, just return the children with `\n` (by adding empty string in list)
+ * P can be omitted, just return the children with `\n`, so wikitext result will have \n\n
  */
 export function p(context: IContext, { type, tag, children }: IDomParseTreeNode): string[] {
   return [...convertNodes(context, children), '\n'];

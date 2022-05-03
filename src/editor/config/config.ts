@@ -11,6 +11,7 @@ import {
   ELEMENT_H5,
   ELEMENT_H6,
   ELEMENT_LINK,
+  ELEMENT_OL,
   ELEMENT_PARAGRAPH,
   ELEMENT_TD,
   ELEMENT_TODO_LI,
@@ -27,14 +28,17 @@ import {
   ResetNodePlugin,
   SelectOnBackspacePlugin,
   SoftBreakPlugin,
+  StyledElement,
   TComboboxItemBase,
   TrailingBlockPlugin,
+  withProps,
 } from '@udecode/plate';
 // import { ELEMENT_EXCALIDRAW, ExcalidrawElement } from '@udecode/plate-ui-excalidraw';
 import { EditableProps } from 'slate-react/dist/components/editable';
 import { autoformatRules } from './autoformat';
 import { ELEMENT_WIDGET } from '../plugins/widget';
 import { LinkElement } from '../plugins/link/LinkElement';
+import { css } from 'styled-components';
 // import { components } from '../components';
 
 export const SAVE_DEBOUNCE_INTERVAL = 1000;
@@ -95,6 +99,15 @@ export const CONFIG: Config = {
   },
   components: createPlateUI({
     [ELEMENT_LINK]: LinkElement,
+    [ELEMENT_OL]: withProps(StyledElement, {
+      as: 'ol',
+      styles: {
+        root: css`
+          margin: 0;
+          padding-inline-start: 2em;
+        `,
+      },
+    }),
   }),
 
   align: {
