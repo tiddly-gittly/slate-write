@@ -34,13 +34,17 @@ export const findAllEntries = async (previousEntryList) => {
   const entryList = [];
   const outputMetaMap = {};
   await walkFilesAsync(SOURCE_DIRECTORY, (dir) => {
-    if (ENTRANCE_EXT_LIST.indexOf(path.extname(dir).toLowerCase()) === -1) return;
     const metaDir = `${dir.replace(path.extname(dir), '.js')}.meta`;
-    if (!fs.existsSync(metaDir)) return;
-    let dirInfo = path.parse(dir);
-    entryList.push(dir);
-    if (!entryChanged && previousEntryList.indexOf(dir) === -1) entryChanged = true;
-    outputMetaMap[`${path.join(dirInfo.dir, dirInfo.name)}.js`] = fs.readFileSync(metaDir).toString('utf-8');
+    const dirInfo = path.parse(dir);
+    if (ENTRANCE_EXT_LIST.indexOf(path.extname(dir).toLowerCase()) !== -1) {
+      if (fs.existsSync(metaDir)) {
+        entryList.push(dir);
+        if (!entryChanged && previousEntryList.indexOf(dir) === -1) entryChanged = true;
+        outputMetaMap[`${path.join(dirInfo.dir, dirInfo.name)}.js`] = fs.readFileSync(metaDir).toString('utf-8');
+      }
+    } else if (dir.endsWith('.css.meta')) {
+      outputMetaMap[path.join(dirInfo.dir, dirInfo.name)] = fs.readFileSync(metaDir.replace('.js', '')).toString('utf-8');
+    }
   });
   if (!entryChanged) {
     const len = previousEntryList.length;
