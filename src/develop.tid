@@ -24,3 +24,30 @@ type: text/vnd.tiddlywiki
 # TODO: optimization: use section splitter in section-editor to ensure only a small potion of text will `onChange` and rerender. And we can get start-end of section from section splitter, so replace the section of text onChange.
 # TODO: replace codeblock with codemirror or monaco, so its prism highlight won't need to bundle with plugin, which is big
 # TODO: treeshaking serialize-md related things, they are bundled with plate package https://github.com/udecode/plate/discussions/363
+
+!! Development
+
+Install and run
+
+```sh
+npm i
+npm run dev
+```
+
+Run tests
+
+```sh
+npm test
+```
+
+Test JSON plugin
+
+```sh
+npm run dev-html
+```
+
+Make production build: See `.github/workflows/release.yml`, adding a tag like `v0.1.1` to a commit and push to github will make a build.
+
+!!! Modify build scripts
+
+Scripts is based on [[Gk0Wk's|https://github.com/Gk0Wk]] [[tiddly-gittly/Modern.TiddlyDev|https://github.com/tiddly-gittly/Modern.TiddlyDev]] and [[LinOnetwo's|https://github.com/linonetwo]] [[tiddly-gittly/TiddlyWiki-TS-Plugin-Template|https://github.com/tiddly-gittly/TiddlyWiki-TS-Plugin-Template]]. With some modification to adapt react dom.
