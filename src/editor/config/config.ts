@@ -85,8 +85,8 @@ export const CONFIG: Config = {
     },
   },
   editableProps: {
-    // autoFocus: process.env.NODE_ENV !== 'production',
-    autoFocus: false,
+    // we need this to reset cursor selection on every remount of widget, otherwise there will be IME problem, don't know why... https://github.com/tiddly-gittly/slate-write/issues/3#issuecomment-1114274656
+    autoFocus: true,
     spellCheck: false,
     placeholder: 'Type / for commands, or write down what is in your mind',
     style: {
