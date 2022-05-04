@@ -110,6 +110,7 @@
     "typesync": "0.9.1",
     "unist-util-inspect": "7.0.0",
     "unist-util-map": "3.0.1",
+    "unist-util-select": "^4.0.1",
     "ws": "^8.6.0",
     "zx": "6.1.0"
   }

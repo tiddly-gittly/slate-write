@@ -33,6 +33,9 @@ describe('Transform tree', () => {
   test('ol > li > mark > text', () => {
     expect(wikiAstToSlateAst(wikiAstDict['ol > li > mark > text'])).toMatchObject(slateDict['ol > li > mark > text']);
   });
+  test('ol > ol > p + empty p', () => {
+    expect(wikiAstToSlateAst(wikiAstDict['ol > ol > p + empty p'])).toMatchObject(slateDict['ol > ol > p + empty p']);
+  });
   test('image', () => {
     expect(wikiAstToSlateAst(wikiAstDict['image'])).toMatchObject([slateDict['image']]);
   });

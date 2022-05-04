@@ -34,12 +34,16 @@ export function li(context: IContext, node: IDomParseTreeNode): TElement {
         if (!child.children[child.children.length - 1].text) {
           child.children.unshift({ text: '' });
         }
+      } else {
+        // slate don't allow empty element, we need to provide at least one empty text node
+        child.children.push({ text: '' });
       }
     }
     return child;
   });
   return {
     type: ELEMENT_LI,
-    children: childrenWithLicPadded,
+    // slate don't allow empty element, we need to provide at least one empty lic node
+    children: childrenWithLicPadded.length > 0 ? childrenWithLicPadded : [{ type: ELEMENT_LIC, children: [{ text: '' }] }],
   };
 }

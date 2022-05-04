@@ -396,6 +396,65 @@ export const ol: Record<string, IParseTreeNode[] | IParseTreeNode> = {
       ],
     },
   ],
+  'ol > ol > p + empty p': [
+    {
+      type: 'element',
+      tag: 'ol',
+      children: [
+        {
+          type: 'element',
+          tag: 'li',
+          children: [
+            {
+              type: 'text',
+              text: '逐字输入',
+              start: 2,
+              end: 6,
+            },
+            {
+              type: 'element',
+              tag: 'ol',
+              children: [
+                {
+                  type: 'element',
+                  tag: 'li',
+                  children: [
+                    {
+                      type: 'text',
+                      text: '先通过 ',
+                      start: 10,
+                      end: 14,
+                    },
+                    {
+                      type: 'element',
+                      tag: 'code',
+                      children: [
+                        {
+                          type: 'text',
+                          text: '/',
+                        },
+                      ],
+                    },
+                    {
+                      type: 'text',
+                      text: ' 菜单将当前块转换为特殊块，其实就是告诉编辑器进入实时预览模式',
+                      start: 17,
+                      end: 48,
+                    },
+                  ],
+                },
+                {
+                  type: 'element',
+                  tag: 'li',
+                  children: [],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };
 ol['ol > li > text'] = cloneDeep(ol['ul > li > text']);
 (ol['ol > li > text'] as IDomParseTreeNode[])[0].tag = 'ol';

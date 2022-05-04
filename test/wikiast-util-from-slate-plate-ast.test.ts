@@ -1,6 +1,7 @@
-import { wikiAstToSlateAst } from '../src/transform/wikiast-util-to-slate-plate-ast';
+import { IParseTreeNode } from 'tiddlywiki';
+import { select } from 'unist-util-select';
 import { wikiAstFromSlateAst } from '../src/transform/wikiast-util-from-slate-plate-ast';
-import { slateDict, wikiAstDict, wikiAstDictWithoutPos } from './constants';
+import { slateDict, wikiAstDictWithoutPos } from './constants';
 
 describe('fromSlateAst', () => {
   test('it run without error', () => {
@@ -27,6 +28,15 @@ describe('fromSlateAst', () => {
   });
   test('ol > li > mark > text', () => {
     expect(wikiAstFromSlateAst(slateDict['ol > li > mark > text'])).toEqual(wikiAstDictWithoutPos['ol > li > mark > text']);
+  });
+  test('ol > ol > p + empty p', () => {
+    const result = wikiAstFromSlateAst(slateDict['ol > ol > p + empty p']);
+    // in this case we are mainly testing wiki to slate's bad case, so in this slate to wiki, we need to adjust bad data in wikiast
+    const emptyLicNode = select('element[tag=ol] > element[tag=li] > element[tag=ol] > element[tag=li]:nth-child(2)', result[0]);
+    if (emptyLicNode !== null) {
+      (emptyLicNode as IParseTreeNode).children = [];
+    }
+    expect(result).toEqual(wikiAstDictWithoutPos['ol > ol > p + empty p']);
   });
   test('image', () => {
     expect(wikiAstFromSlateAst(slateDict['image'])).toEqual(wikiAstDictWithoutPos['image']);

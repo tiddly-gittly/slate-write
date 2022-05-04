@@ -39,6 +39,9 @@ describe('fromWikiText', () => {
   test('ol > li > mark > text', () => {
     expect(wikiAstFromWikiText(wikiTextDict['ol > li > mark > text'])).toEqual(wikiAstDict['ol > li > mark > text']);
   });
+  test('ol > ol > p + empty p', () => {
+    expect(wikiAstFromWikiText(wikiTextDict['ol > ol > p + empty p'])).toEqual(wikiAstDict['ol > ol > p + empty p']);
+  });
   test('image', () => {
     expect(wikiAstFromWikiText(wikiTextDict['image'])).toEqual(wikiAstDict['image']);
   });

@@ -30,6 +30,10 @@ BBB2
 
 # CCC
 `,
+  'ol > ol > p + empty p': `# 逐字输入
+## 先通过 \`/\` 菜单将当前块转换为特殊块，其实就是告诉编辑器进入实时预览模式
+## 
+`,
   'p basic nested marks': `A''A//A//A''A
 B//B__B__B//B
 
