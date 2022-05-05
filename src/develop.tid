@@ -12,6 +12,8 @@ type: text/vnd.tiddlywiki
 ## All supported wikitext syntax are tested in the `test` folder, and the tests are run with `npm run test`, you should also add test if you are adding new transformers for new syntax.
 # handle keyboard shortcut and basic elements' rendering using slatejs plugins from [[Udecode's Plate framework|https://plate.udecode.io]].
 ## our custom keyboard shortcuts are configured in `src/config/autoformat`
+## re-support `/` menu in [[Gk0Wk/TW5-CodeMirror-Enhanced|https://github.com/Gk0Wk/TW5-CodeMirror-Enhanced]] to add snippets and advanced elements like table and widget and any wikitext source code
+### `/` menu component is at `src/editor/components/SnippetCombobox.tsx`, and snippets are loaded in `src/editor/config/snippets.ts`
 # There will be a floating toolbar when you selecting text, and you can click on the toolbar to change the text's decoration, this is a react component defined in `src/config/components/Toolbars.tsx`
 # When hover on the left of a block, there will be a Drag and drop handle, render by `src/editor/components/withStyledDraggables.tsx`
 ## Different block have different line height, so we need to add different padding here to align them.
@@ -20,9 +22,15 @@ type: text/vnd.tiddlywiki
 
 # TODO: allow editing widget and any block's source code, and get preview at real time.
 # TODO: allow use tw's default editor toolbar's buttons and their keyboard shortcuts
-# TODO: re-support `/` menu in [[Gk0Wk/TW5-CodeMirror-Enhanced|https://github.com/Gk0Wk/TW5-CodeMirror-Enhanced]] to add snippets and advanced elements like table and widget and any wikitext source code
 # TODO: optimization: use section splitter in section-editor to ensure only a small potion of text will `onChange` and rerender. And we can get start-end of section from section splitter, so replace the section of text onChange.
+# TODO: allow drag to reorder blocks
+# TODO: context menu when click on the drag handle
+# TODO: autocomplete `[[`'s and `{{`'s linkable tiddlers result
+# TODO: autocomplete `<$`'s available widget and fields
+# TODO: autocomplete `<<`'s available macros
+# TODO: open context aware autocomplete using `ctrl+space`, show corresponding dropdown menu using prefix of the selection
 # TODO: replace codeblock with codemirror or monaco, so its prism highlight won't need to bundle with plugin, which is big
+# TODO: add excalidraw widget support
 # TODO: treeshaking serialize-md related things, they are bundled with plate package https://github.com/udecode/plate/discussions/363
 
 !! Development
