@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef } from 'react';
-import { AnyObject, createPlugins, Plate, TNode, getPlateActions } from '@udecode/plate';
+import { AnyObject, createPlugins, Plate, TNode, getPlateActions, usePlateEditorRef, platesActions } from '@udecode/plate';
 import { useDebouncedCallback } from 'beautiful-react-hooks';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -32,6 +32,7 @@ const plugins = createPlugins([...PLUGINS.basicElements, ...PLUGINS.basicMarks, 
 export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Element {
   const editorID = props.currentTiddler;
   const { resetEditor, value: updateEditorValue } = getPlateActions(editorID);
+  const editorRef = usePlateEditorRef(editorID);
   // Add the initial value when setting up our state.
   const currentAstRef = useRef<Array<TNode<AnyObject>>>(deserialize(props.tiddlerText));
   /** current text is only used for compare, we don't want it trigger rerender, so use ref to store it */
@@ -44,10 +45,19 @@ export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Elemen
     if (currentTextRef.current !== props.tiddlerText) {
       const newValue = deserialize(props.tiddlerText);
       currentAstRef.current = newValue;
-      updateEditorValue(newValue);
+      // reset selection, so if you delete wikitext, selection won't goto some empty space and cause error
       resetEditor();
+      updateEditorValue(newValue);
     }
   }, [props.tiddlerText, currentTextRef, updateEditorValue, resetEditor]);
+  useEffect(() => {
+    // reset selection, so if you delete wikitext, selection won't goto some empty space and cause error
+    resetEditor();
+  }, []);
+  const onBlur = useCallback(() => {
+    // reset selection, so if you delete wikitext, selection won't goto some empty space and cause error
+    resetEditor();
+  }, []);
   const debouncedSaver = useDebouncedCallback(
     (newValue: Array<TNode<AnyObject>>) => {
       // DEBUG: console
@@ -71,7 +81,7 @@ export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Elemen
   console.log(`currentAstRef.current`, currentAstRef.current);
 
   return (
-    <Plate id={editorID} initialValue={currentAstRef.current} plugins={plugins} onChange={onChange} editableProps={CONFIG.editableProps}>
+    <Plate id={editorID} initialValue={currentAstRef.current} plugins={plugins} onChange={onChange} editableProps={{ ...CONFIG.editableProps, onBlur }}>
       <BallonToolbar />
       <SnippetCombobox id={editorID} trigger="/" />
     </Plate>
