@@ -17,14 +17,17 @@ type: text/vnd.tiddlywiki
 # There will be a floating toolbar when you selecting text, and you can click on the toolbar to change the text's decoration, this is a react component defined in `src/config/components/Toolbars.tsx`
 # When hover on the left of a block, there will be a Drag and drop handle, render by `src/editor/components/withStyledDraggables.tsx`
 ## Different block have different line height, so we need to add different padding here to align them.
+# allow drag to reorder blocks
+## code are copy from udecode/plate's repo to `src/editor/plugins/dnd` folder, and have modification in `src/editor/plugins/dnd/hooks/useDragBlock.ts` to set `$tw.dragInProgress = true`
 
 !! TODO
 
 # TODO: allow editing widget and any block's source code, and get preview at real time.
 # TODO: allow use tw's default editor toolbar's buttons and their keyboard shortcuts
 # TODO: optimization: use section splitter in section-editor to ensure only a small potion of text will `onChange` and rerender. And we can get start-end of section from section splitter, so replace the section of text onChange.
-# TODO: allow drag to reorder blocks
+# TODO: allow drag images in and import the image
 # TODO: context menu when click on the drag handle
+# TODO: allow 3rd party plugin to control the editor, for example, the command palette and the fishing plugin.
 # TODO: autocomplete `[[`'s and `{{`'s linkable tiddlers result
 # TODO: autocomplete `<$`'s available widget and fields
 # TODO: autocomplete `<<`'s available macros
