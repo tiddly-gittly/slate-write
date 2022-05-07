@@ -1,8 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import React from 'react';
-import { DragIndicator } from '@styled-icons/material/DragIndicator';
-import Tippy from '@tippyjs/react';
 import {
   createPlateUI,
   ELEMENT_BLOCKQUOTE,
@@ -13,18 +10,13 @@ import {
   ELEMENT_H4,
   ELEMENT_H5,
   ELEMENT_H6,
-  ELEMENT_IMAGE,
-  ELEMENT_MEDIA_EMBED,
   ELEMENT_OL,
   ELEMENT_PARAGRAPH,
-  ELEMENT_TABLE,
-  ELEMENT_TODO_LI,
   ELEMENT_UL,
-  grabberTooltipProps,
-  withDraggables,
 } from '@udecode/plate';
 import { css } from 'styled-components';
 import { ELEMENT_WIDGET } from '../plugins/widget';
+import { withDraggables } from '../plugins/dnd';
 
 export const withStyledDraggables = (components: any): ReturnType<typeof createPlateUI> => {
   return withDraggables(components, [
@@ -33,39 +25,7 @@ export const withStyledDraggables = (components: any): ReturnType<typeof createP
       keys: [ELEMENT_PARAGRAPH, ELEMENT_UL, ELEMENT_OL, ELEMENT_WIDGET],
       level: 0,
     },
-    {
-      keys: [
-        ELEMENT_PARAGRAPH,
-        ELEMENT_BLOCKQUOTE,
-        ELEMENT_TODO_LI,
-        ELEMENT_H1,
-        ELEMENT_H2,
-        ELEMENT_H3,
-        ELEMENT_H4,
-        ELEMENT_H5,
-        ELEMENT_H6,
-        ELEMENT_IMAGE,
-        ELEMENT_OL,
-        ELEMENT_UL,
-        ELEMENT_TABLE,
-        ELEMENT_MEDIA_EMBED,
-        ELEMENT_CODE_BLOCK,
-        ELEMENT_WIDGET,
-      ],
-      onRenderDragHandle: ({ styles, ...props }) => (
-        <Tippy {...grabberTooltipProps}>
-          <button type="button" {...props} css={styles}>
-            <DragIndicator
-              style={{
-                width: 18,
-                height: 18,
-                color: 'rgba(55, 53, 47, 0.3)',
-              }}
-            />
-          </button>
-        </Tippy>
-      ),
-    },
+
     {
       key: ELEMENT_H1,
       styles: {

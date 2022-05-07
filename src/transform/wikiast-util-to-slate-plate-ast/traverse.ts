@@ -18,20 +18,21 @@ export function convertNodes(context: IContext, nodes: IParseTreeNode[] | undefi
 }
 
 export function slateNode(context: IContext, node: IParseTreeNode): Array<TNode<AnyObject>> {
+  const id = context.idCreator?.();
   if (node.type in context.builders) {
     const builder = context.builders[node.type as keyof IContext['builders']];
     if (typeof builder === 'function') {
       // basic elements
       const builtSlateNodeOrNodes = builder(context, node as never);
       return Array.isArray(builtSlateNodeOrNodes)
-        ? builtSlateNodeOrNodes.map((child) => ({ ...getWikiASTAdditionalProperties(node), ...child }))
-        : ([{ ...getWikiASTAdditionalProperties(node), ...builtSlateNodeOrNodes }] as Array<TNode<AnyObject>>);
+        ? builtSlateNodeOrNodes.map((child) => ({ ...getWikiASTAdditionalProperties(node), id, ...child }))
+        : ([{ ...getWikiASTAdditionalProperties(node), ...builtSlateNodeOrNodes, id }] as Array<TNode<AnyObject>>);
     }
   } else {
     // widget
     // I guess this rule is enough for judge the current node is a widget? see `test/constants/wikiAst/widget.ts` for example.
     if (typeof node.type === 'string' && 'tag' in node && typeof node.tag === 'string') {
-      const widgetNode = { ...getWikiASTAdditionalProperties, ...context.builders.widget(context, node as ICustomParseTreeNode) };
+      const widgetNode = { ...getWikiASTAdditionalProperties, id, ...context.builders.widget(context, node as ICustomParseTreeNode) };
       return [widgetNode];
     }
   }

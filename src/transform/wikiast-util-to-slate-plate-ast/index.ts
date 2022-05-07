@@ -21,12 +21,13 @@ export interface IContext {
     superscript?: boolean;
     underline?: boolean;
   };
+  idCreator?: () => string;
 }
 const initialContext: IContext = {
   builders,
   marks: {},
 };
 
-export function wikiAstToSlateAst(node: IParseTreeNode | IParseTreeNode[]): Array<TNode<AnyObject>> {
-  return convertNodes(initialContext, Array.isArray(node) ? node : [node]);
+export function wikiAstToSlateAst(node: IParseTreeNode | IParseTreeNode[], options?: { idCreator?: () => string }): Array<TNode<AnyObject>> {
+  return convertNodes({ ...initialContext, ...options }, Array.isArray(node) ? node : [node]);
 }

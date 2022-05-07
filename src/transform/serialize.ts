@@ -11,6 +11,6 @@ export function serialize(value: Array<TNode<AnyObject>>): string {
   return wikiAstToWikiText(wikiAst, { extraTailingNCount: shouldAddTailingN ? 1 : 0 });
 }
 
-export function deserialize(input: string): Array<TNode<AnyObject>> {
-  return wikiAstToSlateAst(wikiAstFromWikiText(input));
+export function deserialize(input: string, options?: { idCreator?: () => string }): Array<TNode<AnyObject>> {
+  return wikiAstToSlateAst(wikiAstFromWikiText(input), options);
 }

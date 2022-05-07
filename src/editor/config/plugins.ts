@@ -6,7 +6,6 @@ import {
   createCodePlugin,
   createTrailingBlockPlugin,
   createTablePlugin,
-  createDndPlugin,
   createExitBreakPlugin,
   createHorizontalRulePlugin,
   createImagePlugin,
@@ -27,11 +26,11 @@ import {
   createNodeIdPlugin,
   createComboboxPlugin,
   createMentionPlugin,
-  MentionElement,
 } from '@udecode/plate';
 import { CONFIG } from './config';
 import { createHeadingPlugin } from '../plugins/heading';
 import { createWidgetPlugin } from '../plugins/widget';
+import { createDndPlugin } from '../plugins/dnd';
 
 export const basicElements = createPlugins([
   createBlockquotePlugin(),
@@ -61,7 +60,6 @@ export const utils = createPlugins([
   createSoftBreakPlugin(CONFIG.softBreak),
   createExitBreakPlugin(CONFIG.exitBreak),
   createAutoformatPlugin(CONFIG.autoformat),
-  createNodeIdPlugin(),
   createDndPlugin(),
   createIndentListPlugin(),
   createIndentPlugin(),

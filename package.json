@@ -52,6 +52,7 @@
     "slate-history": "0.66.0",
     "slate-hyperscript": "0.77.0",
     "slate-react": "0.78.1",
+    "typescript-styled-is": "^2.1.0",
     "unified": "10.1.2"
   },
   "devDependencies": {
