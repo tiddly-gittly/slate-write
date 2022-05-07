@@ -7,5 +7,5 @@
   "plugin-type": "plugin",
   "version": "0.1.12",
   "dependents": ["$:/plugins/linonetwo/tw-react"],
-  "list": "readme"
+  "list": "readme develop"
 }
