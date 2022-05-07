@@ -24,8 +24,6 @@ export const useDropBlockOnEditor = (
     accept: 'block',
     drop: (dragItem: DragItemBlock, monitor: DropTargetMonitor) => {
       const direction = getHoverDirection(dragItem, monitor, blockRef, id);
-      // DEBUG: console
-      console.log(`drop direction`, direction);
       if (!direction) return;
 
       const dragEntry = findNode(editor, {
@@ -77,10 +75,6 @@ export const useDropBlockOnEditor = (
     hover(item: DragItemBlock, monitor: DropTargetMonitor) {
       const direction = getHoverDirection(item, monitor, blockRef, id);
       const dropLineDir = getNewDirection(dropLine, direction);
-      // DEBUG: console
-      console.log(`hover direction`, direction);
-      // DEBUG: console
-      console.log(`hover dropLineDir`, dropLineDir);
       if (dropLineDir) setDropLine(dropLineDir);
 
       if (direction && isExpanded(editor.selection)) {

@@ -15,10 +15,6 @@ export const getHoverDirection = (
 
   const dragId = dragItem.id;
 
-  // DEBUG: console
-  console.log(`dragId, hoverId`, dragId, hoverId);
-  // DEBUG: console
-  console.log(`dragItem`, dragItem);
   // Don't replace items with themselves
   if (dragId === hoverId) return;
 

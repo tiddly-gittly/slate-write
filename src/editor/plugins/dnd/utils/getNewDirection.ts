@@ -1,16 +1,17 @@
 /**
  * Get new direction if updated
  */
-export const getNewDirection = (previousDir: string, dir?: string) => {
-  if (!dir && previousDir) {
+export const getNewDirection = (previousDirection: string, direction?: string) => {
+  if (!direction && previousDirection) {
     return '';
   }
 
-  if (dir === 'top' && previousDir !== 'top') {
+  if (direction === 'top' && previousDirection !== 'top') {
     return 'top';
   }
 
-  if (dir === 'bottom' && previousDir !== 'bottom') {
+  if (direction === 'bottom' && previousDirection !== 'bottom') {
     return 'bottom';
   }
+  return '';
 };

@@ -53,13 +53,15 @@ const BlockToolbar = styled.div`
   margin-right: 0.25rem;
   pointer-events: auto;
 `;
-const DropLine = styled.div`
+const DropLine = styled.div<{ dropLine: '' | 'top' | 'bottom' }>`
   position: absolute;
   margin-left: 0;
   margin-right: 0;
   opacity: 100%;
   height: 0.125rem;
   background: #b4d5ff;
+  width: 100%;
+  ${({ dropLine }) => (dropLine === 'top' ? 'top: -1px;' : dropLine === 'bottom' ? 'bottom: -1px;' : '')}
 `;
 
 export const Draggable = (props: DraggableProps) => {
@@ -75,17 +77,13 @@ export const Draggable = (props: DraggableProps) => {
     blockRef: rootRef,
   });
 
-  // DEBUG: console
-  console.log(`dropLine`, dropLine);
-  console.log(`isDragging, element, rootRef`, isDragging, element, rootRef);
-
   const multiDragRef = useMergedRef(dragRef, dragWrapperRef);
 
   return (
     <DraggableRoot ref={multiRootRef} isDragging={isDragging}>
       <BlockAndGutter ref={blockRef}>
         {children}
-        {!!dropLine && <DropLine contentEditable={false} />}
+        {!!dropLine && <DropLine contentEditable={false} dropLine={dropLine} />}
       </BlockAndGutter>
 
       <GutterLeft className="slate-Draggable-gutterLeft" mod={styles?.gutterLeft} contentEditable={false}>
