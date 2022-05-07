@@ -6,6 +6,10 @@ export const useDragBlock = (editor: TEditor, id: string) => {
     () => ({
       type: 'block',
       item() {
+        /**
+         * @url https://github.com/Jermolene/TiddlyWiki5/discussions/6627
+         */
+        $tw.dragInProgress = true;
         editor.isDragging = true;
         document.body.classList.add('dragging');
         return { id };
@@ -14,10 +18,11 @@ export const useDragBlock = (editor: TEditor, id: string) => {
         isDragging: monitor.isDragging(),
       }),
       end: () => {
+        $tw.dragInProgress = false;
         editor.isDragging = false;
         document.body.classList.remove('dragging');
       },
     }),
-    []
+    [],
   );
 };
