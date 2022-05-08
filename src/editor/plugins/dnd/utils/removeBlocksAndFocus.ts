@@ -7,10 +7,7 @@ import { getNodesRange } from './getNodesRange';
 /**
  * Remove blocks with an id and focus the editor.
  */
-export const removeBlocksAndFocus = (
-  editor: ReactEditor,
-  options: EditorNodesOptions
-) => {
+export const removeBlocksAndFocus = (editor: ReactEditor, options: EditorNodesOptions) => {
   unhangRange(editor, options);
 
   const nodeEntries = getBlocksWithId(editor, options);

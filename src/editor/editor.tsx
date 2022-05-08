@@ -16,14 +16,14 @@ import { getIdFactory } from './plugins/id/getId';
 
 export interface IEditorAppProps {
   currentTiddler: string;
-  tiddlerText: string;
   saver: {
     /** ms about debounce how long between save */
     interval?: number;
-    onSave: (value: string) => void;
     /** a lock to prevent update from tiddler to slate, when update of tiddler is trigger by slate. */
     lock: () => void;
+    onSave: (value: string) => void;
   };
+  tiddlerText: string;
 }
 const defaultPlugins = createPlugins([...PLUGINS.basicElements, ...PLUGINS.basicMarks, ...PLUGINS.utils, ...PLUGINS.twAdvancedElements], {
   // Plate components
@@ -36,11 +36,11 @@ export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Elemen
   const idCreator = useMemo(() => {
     return getIdFactory(props.currentTiddler);
   }, [props.currentTiddler]);
-  const editorRef = usePlateEditorRef(editorID);
+  const editorReference = usePlateEditorRef(editorID);
   // Add the initial value when setting up our state.
-  const currentAstRef = useRef<Array<TNode<AnyObject>>>(deserialize(props.tiddlerText, { idCreator }));
+  const currentAstReference = useRef<Array<TNode<AnyObject>>>(deserialize(props.tiddlerText, { idCreator }));
   /** current text is only used for compare, we don't want it trigger rerender, so use ref to store it */
-  const currentTextRef = useRef<string>(props.tiddlerText);
+  const currentTextReference = useRef<string>(props.tiddlerText);
   // TODO: get dom node to add IME listener to prevent update when IME open https://github.com/udecode/plate/issues/239#issuecomment-1098052241
 
   // id plugin is vital for drag&drop
@@ -58,14 +58,14 @@ export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Elemen
   // update current value from props
   useEffect(() => {
     // there will be cases that triple return replaced with double return (trim),  cause here rerender, but I think it is ok, not so frequent
-    if (currentTextRef.current !== props.tiddlerText) {
+    if (currentTextReference.current !== props.tiddlerText) {
       const newValue = deserialize(props.tiddlerText, { idCreator });
-      currentAstRef.current = newValue;
+      currentAstReference.current = newValue;
       // reset selection, so if you delete wikitext, selection won't goto some empty space and cause error
       resetEditor();
       updateEditorValue(newValue);
     }
-  }, [props.tiddlerText, currentTextRef, updateEditorValue, resetEditor]);
+  }, [props.tiddlerText, currentTextReference, updateEditorValue, resetEditor]);
   useEffect(() => {
     // reset selection, so if you delete wikitext, selection won't goto some empty space and cause error
     resetEditor();
@@ -80,24 +80,24 @@ export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Elemen
       console.log(`newValue`, newValue);
       const newText = serialize(newValue);
       props.saver.onSave(newText);
-      currentTextRef.current = newText;
+      currentTextReference.current = newText;
     },
     [props.saver.onSave],
     props.saver.interval,
   );
   const onChange = useCallback((newValue: Array<TNode<AnyObject>>) => {
     props.saver.lock();
-    currentAstRef.current = newValue;
+    currentAstReference.current = newValue;
     debouncedSaver(newValue);
   }, []);
   if (typeof document === 'undefined') {
     return <div>Loading...</div>;
   }
   // DEBUG: console
-  console.log(`currentAstRef.current`, currentAstRef.current);
+  console.log(`currentAstRef.current`, currentAstReference.current);
 
   return (
-    <Plate id={editorID} initialValue={currentAstRef.current} plugins={plugins} onChange={onChange} editableProps={{ ...CONFIG.editableProps, onBlur }}>
+    <Plate id={editorID} initialValue={currentAstReference.current} plugins={plugins} onChange={onChange} editableProps={{ ...CONFIG.editableProps, onBlur }}>
       <BallonToolbar />
       <SnippetCombobox id={editorID} trigger="/" />
     </Plate>

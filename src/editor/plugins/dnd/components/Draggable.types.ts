@@ -13,31 +13,25 @@ export interface DraggableStyleProps extends DraggableProps {
 
 export interface DraggableStyles {
   /**
-   * Block and gutter.
-   */
-  blockAndGutter: CSSProp;
-
-  /**
    * Block.
    */
   block: CSSProp;
 
   /**
-   * Gutter at the left side of the editor.
-   * It has the height of the block
+   * Block and gutter.
    */
-  gutterLeft: CSSProp;
+  blockAndGutter: CSSProp;
+
+  /**
+   * Block toolbar in the gutter.
+   */
+  blockToolbar: CSSProp;
 
   /**
    * Block toolbar wrapper in the gutter left.
    * It has the height of a line of the block.
    */
   blockToolbarWrapper: CSSProp;
-
-  /**
-   * Block toolbar in the gutter.
-   */
-  blockToolbar: CSSProp;
 
   /**
    * Button to dnd the block, in the block toolbar.
@@ -53,12 +47,17 @@ export interface DraggableStyles {
    * Show a dropline above or below the block when dragging a block.
    */
   dropLine: CSSProp;
+
+  /**
+   * Gutter at the left side of the editor.
+   * It has the height of the block
+   */
+  gutterLeft: CSSProp;
 }
 
-export interface DraggableProps
-  extends StyledElementProps<{}, DraggableStyles> {
-  componentRef?: any;
-  level?: number;
-  filter?: (editor: TEditor, path: Path) => boolean;
+export interface DraggableProps extends StyledElementProps<{}, DraggableStyles> {
   allowReadOnly?: boolean;
+  componentRef?: any;
+  filter?: (editor: TEditor, path: Path) => boolean;
+  level?: number;
 }

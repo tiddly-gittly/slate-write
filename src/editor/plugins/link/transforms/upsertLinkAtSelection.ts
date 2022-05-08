@@ -21,7 +21,7 @@ export const upsertLinkAtSelection = <T = {}>(
     wrap?: boolean;
   },
 ) => {
-  if (!editor.selection) return;
+  if (editor.selection == undefined) return;
 
   const type = getPluginType(editor, ELEMENT_LINK);
 

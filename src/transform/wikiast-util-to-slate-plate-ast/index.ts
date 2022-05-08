@@ -12,6 +12,7 @@ export type IAnyBuilder = IBuilders & Record<string, typeof slateNode>;
  */
 export interface IContext {
   builders: IBuilders;
+  idCreator?: () => string;
   marks: {
     bold?: boolean;
     code?: boolean;
@@ -21,7 +22,6 @@ export interface IContext {
     superscript?: boolean;
     underline?: boolean;
   };
-  idCreator?: () => string;
 }
 const initialContext: IContext = {
   builders,

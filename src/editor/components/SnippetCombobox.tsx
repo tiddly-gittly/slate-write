@@ -32,11 +32,11 @@ export const LazyTippy = (props: TippyProps) => {
 
   const computedProps = { ...props };
 
-  computedProps.plugins = [lazyPlugin, ...(props.plugins || [])];
+  computedProps.plugins = [lazyPlugin, ...(props.plugins != undefined || [])];
 
-  if (props.render) {
+  if (props.render != undefined) {
     const render = props.render; // let TypeScript safely derive that render is not undefined
-    computedProps.render = (...args) => (mounted ? render(...args) : '');
+    computedProps.render = (...arguments_) => (mounted ? render(...arguments_) : '');
   } else {
     computedProps.content = mounted ? props.content : '';
   }

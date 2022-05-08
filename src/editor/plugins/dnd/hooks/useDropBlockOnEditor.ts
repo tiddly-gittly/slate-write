@@ -15,8 +15,8 @@ export const useDropBlockOnEditor = (
     setDropLine,
   }: {
     blockRef: any;
-    id: string;
     dropLine: string;
+    id: string;
     setDropLine: Function;
   },
 ) => {
@@ -30,7 +30,7 @@ export const useDropBlockOnEditor = (
         at: [],
         match: { id: dragItem.id },
       });
-      if (!dragEntry) return;
+      if (dragEntry == undefined) return;
       const [, dragPath] = dragEntry;
 
       ReactEditor.focus(editor);
@@ -38,7 +38,7 @@ export const useDropBlockOnEditor = (
       let dropPath: Path | undefined;
       if (direction === 'bottom') {
         dropPath = findNode(editor, { at: [], match: { id } })?.[1];
-        if (!dropPath) return;
+        if (dropPath == undefined) return;
 
         if (Path.equals(dragPath, Path.next(dropPath))) return;
       }
@@ -46,7 +46,7 @@ export const useDropBlockOnEditor = (
       if (direction === 'top') {
         const nodePath = findNode(editor, { at: [], match: { id } })?.[1];
 
-        if (!nodePath) return;
+        if (nodePath == undefined) return;
         dropPath = [...nodePath.slice(0, -1), nodePath[nodePath.length - 1] - 1];
 
         if (Path.equals(dragPath, dropPath)) return;

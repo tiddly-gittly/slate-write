@@ -67,28 +67,28 @@ const DropLine = styled.div<{ dropLine: '' | 'top' | 'bottom' }>`
 export const Draggable = (props: DraggableProps) => {
   const { children, element, componentRef, styles } = props;
 
-  const blockRef = useRef<HTMLDivElement>(null);
-  const rootRef = useRef<HTMLDivElement>(null);
-  const dragWrapperRef = useRef(null);
-  const multiRootRef = useMergedRef(componentRef, rootRef);
+  const blockReference = useRef<HTMLDivElement>(null);
+  const rootReference = useRef<HTMLDivElement>(null);
+  const dragWrapperReference = useRef(null);
+  const multiRootReference = useMergedRef(componentRef, rootReference);
 
   const { dropLine, dragRef, isDragging } = useDndBlock({
     id: element.id,
-    blockRef: rootRef,
+    blockRef: rootReference,
   });
 
-  const multiDragRef = useMergedRef(dragRef, dragWrapperRef);
+  const multiDragReference = useMergedRef(dragRef, dragWrapperReference);
 
   return (
-    <DraggableRoot ref={multiRootRef} isDragging={isDragging}>
-      <BlockAndGutter ref={blockRef}>
+    <DraggableRoot ref={multiRootReference} isDragging={isDragging}>
+      <BlockAndGutter ref={blockReference}>
         {children}
         {!!dropLine && <DropLine contentEditable={false} dropLine={dropLine} />}
       </BlockAndGutter>
 
       <GutterLeft className="slate-Draggable-gutterLeft" mod={styles?.gutterLeft} contentEditable={false}>
         <BlockToolbarWrapper mod={styles?.blockToolbarWrapper}>
-          <BlockToolbar ref={multiDragRef}>
+          <BlockToolbar ref={multiDragReference}>
             <Tippy {...grabberTooltipProps}>
               <DragHandle type="button" onMouseDown={(e: any) => e.stopPropagation()}>
                 <DragIndicator

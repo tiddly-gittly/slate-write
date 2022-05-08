@@ -5,7 +5,7 @@ import { Editor, NodeEntry } from 'slate';
  * Get node entries range.
  */
 export const getNodesRange = (editor: TEditor, nodeEntries: NodeEntry[]) => {
-  if (!nodeEntries.length) return;
+  if (nodeEntries.length === 0) return;
 
   const firstBlockPath = nodeEntries[0][1];
   const lastBlockPath = nodeEntries[nodeEntries.length - 1][1];

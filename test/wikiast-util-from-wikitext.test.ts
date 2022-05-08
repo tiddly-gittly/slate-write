@@ -43,13 +43,13 @@ describe('fromWikiText', () => {
     expect(wikiAstFromWikiText(wikiTextDict['ol > ol > p + empty p'])).toEqual(wikiAstDict['ol > ol > p + empty p']);
   });
   test('image', () => {
-    expect(wikiAstFromWikiText(wikiTextDict['image'])).toEqual(wikiAstDict['image']);
+    expect(wikiAstFromWikiText(wikiTextDict.image)).toEqual(wikiAstDict.image);
   });
   test('image with tooltip and width', () => {
     expect(wikiAstFromWikiText(wikiTextDict['image with tooltip and width'])).toEqual(wikiAstDict['image with tooltip and width']);
   });
   test('transclude', () => {
-    expect(wikiAstFromWikiText(wikiTextDict['transclude'])).toEqual(wikiAstDict['transclude']);
+    expect(wikiAstFromWikiText(wikiTextDict.transclude)).toEqual(wikiAstDict.transclude);
   });
   test('list widget', () => {
     expect(wikiAstFromWikiText(wikiTextDict['list widget'])).toEqual(wikiAstDict['list widget']);
@@ -58,7 +58,7 @@ describe('fromWikiText', () => {
     expect(wikiAstFromWikiText(wikiTextDict['list widget block'])).toEqual(wikiAstDict['list widget block']);
   });
   test('link', () => {
-    expect(wikiAstFromWikiText(wikiTextDict['link'])).toEqual(wikiAstDict['link']);
+    expect(wikiAstFromWikiText(wikiTextDict.link)).toEqual(wikiAstDict.link);
   });
   test('empty link', () => {
     expect(wikiAstFromWikiText(wikiTextDict['empty link'])).toEqual(wikiAstDict['empty link']);
@@ -73,6 +73,6 @@ describe('fromWikiText', () => {
     expect(wikiAstFromWikiText(wikiTextDict['link in a list'])).toEqual(wikiAstDict['link in a list']);
   });
   test('heading', () => {
-    expect(wikiAstFromWikiText(wikiTextDict['heading'])).toEqual(wikiAstDict['heading']);
+    expect(wikiAstFromWikiText(wikiTextDict.heading)).toEqual(wikiAstDict.heading);
   });
 });

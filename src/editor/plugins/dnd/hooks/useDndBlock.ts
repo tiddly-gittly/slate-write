@@ -4,20 +4,12 @@ import { useEditorRef } from '@udecode/plate-core';
 import { useDragBlock } from './useDragBlock';
 import { useDropBlockOnEditor } from './useDropBlockOnEditor';
 
-export const useDndBlock = ({
-  id,
-  blockRef,
-  removePreview,
-}: {
-  id: string;
-  blockRef: any;
-  removePreview?: boolean;
-}) => {
+export const useDndBlock = ({ id, blockRef, removePreview }: { blockRef: any; id: string; removePreview?: boolean }) => {
   const editor = useEditorRef();
 
   const [dropLine, setDropLine] = useState<'' | 'top' | 'bottom'>('');
 
-  const [{ isDragging }, dragRef, preview] = useDragBlock(editor, id);
+  const [{ isDragging }, dragReference, preview] = useDragBlock(editor, id);
   const [{ isOver }, drop] = useDropBlockOnEditor(editor, {
     id,
     blockRef,
@@ -40,6 +32,6 @@ export const useDndBlock = ({
   return {
     isDragging,
     dropLine,
-    dragRef,
+    dragRef: dragReference,
   };
 };

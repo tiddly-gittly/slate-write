@@ -30,10 +30,10 @@ describe('Identical', () => {
     expect(wikiAstDict['ol > ol > p + empty p']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['ol > ol > p + empty p'])));
   });
   test('image', () => {
-    expect(wikiAstDict['image']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['image'])));
+    expect(wikiAstDict.image).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos.image)));
   });
   test('transclude', () => {
-    expect(wikiAstDict['transclude']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['transclude'])));
+    expect(wikiAstDict.transclude).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos.transclude)));
   });
   test('list widget', () => {
     expect(wikiAstDict['list widget']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['list widget'])));
@@ -42,7 +42,7 @@ describe('Identical', () => {
     expect(wikiAstDict['list widget block']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['list widget block'])));
   });
   test('link', () => {
-    expect(wikiAstDict['link']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['link'])));
+    expect(wikiAstDict.link).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos.link)));
   });
   test('empty link', () => {
     expect(wikiAstDict['empty link']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['empty link'])));
@@ -57,6 +57,6 @@ describe('Identical', () => {
     expect(wikiAstDict['link in a list']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['link in a list'])));
   });
   test('heading', () => {
-    expect(wikiAstDict['heading']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['heading'])));
+    expect(wikiAstDict.heading).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos.heading)));
   });
 });

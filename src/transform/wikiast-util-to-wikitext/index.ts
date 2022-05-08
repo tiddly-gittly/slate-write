@@ -11,8 +11,6 @@ export type IAnyBuilder = IBuilders & Record<string, typeof convertOneNode>;
  * Wikitext is context aware, we need to know how current indentation is affected by the former code, and current list mode, etc.
  */
 export interface IContext {
-  /** is root's children, we add \n between root's children */
-  root: boolean;
   /** Builders from node to text
    * Using dependency injection (pass-in via function parameter) to avoid circular dependency */
   builders: IAnyBuilder;
@@ -33,6 +31,8 @@ export interface IContext {
     sup?: boolean;
     u?: boolean;
   };
+  /** is root's children, we add \n between root's children */
+  root: boolean;
 }
 // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
 const defaultContext = {
@@ -50,5 +50,5 @@ export interface IWikiAstToWikiTextOptions {
 export function wikiAstToWikiText(input: IParseTreeNode | IParseTreeNode[], options?: IWikiAstToWikiTextOptions): string {
   const { extraTailingNCount = 0 } = options ?? {};
   const lines = convertNodes(cloneDeep(defaultContext), Array.isArray(input) ? input : [input]);
-  return dropExtraTailingN(lines).join('') + repeat('\n', extraTailingNCount)
+  return dropExtraTailingN(lines).join('') + repeat('\n', extraTailingNCount);
 }

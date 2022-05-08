@@ -16,7 +16,7 @@ const HEIGHT_MODE_TITLE = '$:/config/TextEditor/EditorHeight/Mode';
 const ENABLE_TOOLBAR_TITLE = '$:/config/TextEditor/EnableToolbar';
 
 class SlateWriteWidget extends Widget<IEditorAppProps> {
-  private currentTiddler: string | undefined;
+  private readonly currentTiddler: string | undefined;
   editorOperations = {};
   private editTitle: string | undefined;
   private editField: string | undefined;
@@ -40,7 +40,7 @@ class SlateWriteWidget extends Widget<IEditorAppProps> {
   private editShowToolbar: boolean | undefined;
 
   /** a lock to prevent update from tiddler to slate, when update of tiddler is trigger by slate. */
-  private isUpdatingByUserInput: boolean = false;
+  private isUpdatingByUserInput = false;
   private updatingLockTimeoutHandle: NodeJS.Timeout | undefined;
 
   constructor(parseTreeNode: any, options: any) {
@@ -70,7 +70,7 @@ class SlateWriteWidget extends Widget<IEditorAppProps> {
       saver: {
         lock: () => {
           this.isUpdatingByUserInput = true;
-          if (this.updatingLockTimeoutHandle) {
+          if (this.updatingLockTimeoutHandle != undefined) {
             clearTimeout(this.updatingLockTimeoutHandle);
           }
         },
@@ -123,10 +123,10 @@ class SlateWriteWidget extends Widget<IEditorAppProps> {
       changedAttributes.tiddler ||
       changedAttributes.field ||
       changedAttributes.index ||
-      changedAttributes['default'] ||
-      changedAttributes['class'] ||
+      changedAttributes.default ||
+      changedAttributes.class ||
       changedAttributes.placeholder ||
-      changedAttributes.size ||
+      changedAttributes.size > 0 ||
       changedAttributes.autoHeight ||
       changedAttributes.minHeight ||
       changedAttributes.focusPopup ||

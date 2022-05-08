@@ -3,13 +3,13 @@ import { IWikiASTNode } from 'tiddlywiki';
 
 /**
  * Merge all specific node (for example, `lic`) into a single node, currently only merge their children
- * @returns 
+ * @returns
  */
-export function mergeAdjacent<T extends IWikiASTNode | TNode>(nodes: Array<T>, typeToMerge?: string): Array<T> {
-  const result: Array<T> = [];
-  let current: T | undefined = undefined;
+export function mergeAdjacent<T extends IWikiASTNode | TNode>(nodes: T[], typeToMerge?: string): T[] {
+  const result: T[] = [];
+  let current: T | undefined;
   for (const node of nodes) {
-    if (current && current.type === node.type && (typeToMerge ? node.type === typeToMerge : true)) {
+    if (current != undefined && current.type === node.type && (typeToMerge ? node.type === typeToMerge : true)) {
       if (!Array.isArray(current.children)) {
         current.children = [];
       }

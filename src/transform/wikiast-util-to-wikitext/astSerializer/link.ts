@@ -6,7 +6,7 @@ export interface ILinkOptions {
 }
 
 export function link(context: IContext, node: ILinkParseTreeNode, options?: ILinkOptions): string[] {
-  const { prefix = '' } = options ?? {}
+  const { prefix = '' } = options ?? {};
   // we always have these attributes and child, even in empty link `[[]]`
   const {
     to: { value: to },

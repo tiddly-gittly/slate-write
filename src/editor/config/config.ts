@@ -51,15 +51,15 @@ const resetBlockTypesCommonRule = {
 interface Config {
   align: Partial<PlatePlugin>;
   autoformat: Partial<PlatePlugin<{}, AutoformatPlugin>>;
-  link: Partial<PlatePlugin<{}, LinkPlugin>>;
-
   components: Record<string, any>;
+
   editableProps: EditableProps;
-  mention: Partial<PlatePlugin<{}, MentionPlugin<undefined>>>;
   exitBreak: Partial<PlatePlugin<{}, ExitBreakPlugin>>;
   forceLayout: Partial<PlatePlugin<{}, NormalizeTypesPlugin>>;
   indent: Partial<PlatePlugin<{}, IndentPlugin>>;
   lineHeight: Partial<PlatePlugin>;
+  link: Partial<PlatePlugin<{}, LinkPlugin>>;
+  mention: Partial<PlatePlugin<{}, MentionPlugin<undefined>>>;
   resetBlockType: Partial<PlatePlugin<{}, ResetNodePlugin>>;
   selectOnBackspace: Partial<PlatePlugin<{}, SelectOnBackspacePlugin>>;
   softBreak: Partial<PlatePlugin<{}, SoftBreakPlugin>>;

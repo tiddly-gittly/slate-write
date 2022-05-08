@@ -3,29 +3,29 @@ import { getAbove, getPluginType, isCollapsed, PlateEditor, unwrapNodes } from '
 import { Editor } from 'slate';
 import { upsertLinkAtSelection } from './upsertLinkAtSelection';
 
-export const getAndUpsertLink = async <T = {}>(editor: PlateEditor<T>, getLinkUrl?: (prevUrl: string | null) => Promise<string | null> | string | null) => {
+export const getAndUpsertLink = async <T = {}>(editor: PlateEditor<T>, getLinkUrl?: (previousUrl: string | null) => Promise<string | null> | string | null) => {
   const type = getPluginType(editor, ELEMENT_LINK);
-  let prevUrl = '';
+  let previousUrl = '';
   const selectedText = editor.selection === null ? '' : Editor.string(editor, editor.selection);
 
   const linkNode = getAbove(editor, {
     match: { type },
   });
-  if (linkNode) {
-    prevUrl = linkNode[0].url as string;
+  if (linkNode != undefined) {
+    previousUrl = linkNode[0].url as string;
   }
 
   let url: string | null = null;
-  if (getLinkUrl) {
-    url = await getLinkUrl(prevUrl);
+  if (getLinkUrl != undefined) {
+    url = await getLinkUrl(previousUrl);
   } else {
-    url = window.prompt(`Enter the URL of the link:`, prevUrl || selectedText);
+    url = window.prompt(`Enter the URL of the link:`, previousUrl || selectedText);
   }
   // if canceled
   if (url === null) return;
 
   // remove the url
-  if (url === '' && editor.selection) {
+  if (url === '' && editor.selection != undefined) {
     return unwrapNodes(editor, {
       at: editor.selection,
       match: { type: getPluginType(editor, ELEMENT_LINK) },

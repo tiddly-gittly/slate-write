@@ -8,7 +8,7 @@ export const builders = {
   element,
   text,
   link,
-  /** 
+  /**
    * We render most tw widgets using tw-react
    */
   widget,

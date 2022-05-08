@@ -12,9 +12,9 @@ export const LinkElement = (props: StyledElementProps<LinkNodeData & ISlateAstEx
 
   const onClick = useCallback(
     (event: React.MouseEvent) => {
-      if (!parentWidget) return;
+      if (parentWidget == undefined) return;
       const domNode = attributes.ref.current as HTMLLinkElement | undefined;
-      if (!domNode) return;
+      if (domNode == undefined) return;
       event.stopPropagation();
       if (element.attributes?.to?.value) {
         const bounds = domNode.getBoundingClientRect();

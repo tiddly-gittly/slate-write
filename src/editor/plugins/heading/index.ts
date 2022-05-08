@@ -11,7 +11,7 @@ export const createHeadingPlugin = createPluginFactory<HeadingsPlugin>({
     levels: 6,
   },
   then: (editor, { options: { levels } = {} }) => {
-    const plugins: PlatePlugin<{}, HeadingPlugin>[] = [];
+    const plugins: Array<PlatePlugin<{}, HeadingPlugin>> = [];
 
     for (let level = 1; level <= levels!; level++) {
       const key = KEYS_HEADING[level - 1];

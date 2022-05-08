@@ -13,7 +13,7 @@ export function a(context: IContext, node: IDomParseTreeNode): string[] {
       {
         type: 'link',
         attributes: {
-          to: attributes.href as IParseTreeAttribute,
+          to: attributes.href,
         },
         children,
       } as ILinkParseTreeNode,

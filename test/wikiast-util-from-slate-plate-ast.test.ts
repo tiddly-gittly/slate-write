@@ -39,10 +39,10 @@ describe('fromSlateAst', () => {
     expect(result).toEqual(wikiAstDictWithoutPos['ol > ol > p + empty p']);
   });
   test('image', () => {
-    expect(wikiAstFromSlateAst(slateDict['image'])).toEqual(wikiAstDictWithoutPos['image']);
+    expect(wikiAstFromSlateAst(slateDict.image)).toEqual(wikiAstDictWithoutPos.image);
   });
   test('transclude', () => {
-    expect(wikiAstFromSlateAst(slateDict['transclude'])).toEqual(wikiAstDictWithoutPos['transclude']);
+    expect(wikiAstFromSlateAst(slateDict.transclude)).toEqual(wikiAstDictWithoutPos.transclude);
   });
   test('list widget', () => {
     expect(wikiAstFromSlateAst(slateDict['list widget'])).toEqual(wikiAstDictWithoutPos['list widget']);
@@ -51,7 +51,7 @@ describe('fromSlateAst', () => {
     expect(wikiAstFromSlateAst(slateDict['list widget block'])).toEqual(wikiAstDictWithoutPos['list widget block']);
   });
   test('link', () => {
-    expect(wikiAstFromSlateAst(slateDict['link'])).toEqual(wikiAstDictWithoutPos['link']);
+    expect(wikiAstFromSlateAst(slateDict.link)).toEqual(wikiAstDictWithoutPos.link);
   });
   test('empty link', () => {
     expect(wikiAstFromSlateAst(slateDict['empty link'])).toEqual(wikiAstDictWithoutPos['empty link']);
@@ -66,6 +66,6 @@ describe('fromSlateAst', () => {
     expect(wikiAstFromSlateAst(slateDict['link in a list'])).toEqual(wikiAstDictWithoutPos['link in a list']);
   });
   test('heading', () => {
-    expect(wikiAstFromSlateAst(slateDict['heading'])).toEqual(wikiAstDictWithoutPos['heading']);
+    expect(wikiAstFromSlateAst(slateDict.heading)).toEqual(wikiAstDictWithoutPos.heading);
   });
 });

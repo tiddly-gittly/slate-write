@@ -7,7 +7,7 @@ export function getWikiASTAdditionalProperties(node: IParseTreeNode) {
   const result = {
     ...pick(node, ['orderedAttributes', 'isBlock']),
   } as Partial<TElement>;
-  if (node.attributes) {
+  if (node.attributes != undefined) {
     result.attributes = removeTypeFromAttributes(node.attributes);
     // store here, so we can retrieve it back later
     result['tw-attributes'] = node.attributes;

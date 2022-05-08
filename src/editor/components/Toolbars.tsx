@@ -79,7 +79,7 @@ export const BasicElementToolbarButtons = (): JSX.Element => {
       <LinkToolbarButton icon={<Link />} tooltip={{ content: 'Link to (Ctrl+L) ([[)', ...tooltipStyle }} />
       <LinkToolbarButton
         icon={<Bracket />}
-        getLinkUrl={(prevUrl: string | null) => (editor.selection === null ? prevUrl ?? '' : Editor.string(editor, editor.selection))}
+        getLinkUrl={(previousUrl: string | null) => (editor.selection === null ? previousUrl ?? '' : Editor.string(editor, editor.selection))}
         tooltip={{ content: 'WikiLink ([[)', ...tooltipStyle }}
       />
     </>

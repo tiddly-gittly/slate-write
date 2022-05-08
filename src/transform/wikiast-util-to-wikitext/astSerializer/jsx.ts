@@ -9,10 +9,11 @@ export interface IJSXOptions {
  * Rendering tag like `<a />` is basically the same for widget and elements
  */
 export function jsx(context: IContext, node: ICustomParseTreeNode | IDomParseTreeNode, options?: IJSXOptions): string[] {
-  const { prefix = '' } = options ?? {}
+  const { prefix = '' } = options ?? {};
   const { tag, isSelfClosing, orderedAttributes, attributes, children } = node;
   /** list of attributes, prevent `orderedAttributes` or `attributes` to be undefined */
-  const attributeList = orderedAttributes ? orderedAttributes : attributes ? Object.keys(attributes).map((key) => attributes[key]) : [];
+  const attributeList =
+    orderedAttributes != undefined ? orderedAttributes : attributes != undefined ? Object.keys(attributes).map((key) => attributes[key]) : [];
   const jsxResult = isSelfClosing
     ? [`<${prefix}${tag} ${attributeList.map(({ name, value }) => `${name}="${value}"`).join(' ')}/>`]
     : [`<${prefix}${tag} ${attributeList.map(({ name, value }) => `${name}="${value}"`).join(' ')}>`, ...convertNodes(context, children), `</${prefix}${tag}>`];

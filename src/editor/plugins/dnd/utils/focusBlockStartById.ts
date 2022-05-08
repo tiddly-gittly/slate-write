@@ -7,7 +7,7 @@ import { ReactEditor } from 'slate-react';
  */
 export const focusBlockStartById = (editor: ReactEditor, id: string) => {
   const path = findNode(editor, { at: [], match: { id } })?.[1];
-  if (!path) return;
+  if (path == undefined) return;
 
   Transforms.select(editor, Editor.start(editor, path));
   ReactEditor.focus(editor);
