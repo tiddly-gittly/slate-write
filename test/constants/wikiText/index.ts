@@ -34,6 +34,15 @@ BBB2
 ## 先通过 \`/\` 菜单将当前块转换为特殊块，其实就是告诉编辑器进入实时预览模式
 ## 
 `,
+  'ol + ol > ol > p': `# AAA
+## CCC
+## DDD
+## EEE
+# BBB
+## FF \`/\` FFF
+## FFF
+## GGG
+## `,
   'p basic nested marks': `A''A//A//A''A
 B//B__B__B//B
 

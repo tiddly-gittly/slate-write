@@ -29,6 +29,9 @@ describe('Identical', () => {
   test('ol > ol > p + empty p', () => {
     expect(wikiAstDict['ol > ol > p + empty p']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['ol > ol > p + empty p'])));
   });
+  test('ol + ol > ol > p', () => {
+    expect(wikiAstDict['ol + ol > ol > p']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['ol + ol > ol > p'])));
+  });
   test('image', () => {
     expect(wikiAstDict.image).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos.image)));
   });

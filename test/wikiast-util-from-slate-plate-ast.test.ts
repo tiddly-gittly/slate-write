@@ -38,6 +38,9 @@ describe('fromSlateAst', () => {
     }
     expect(result).toEqual(wikiAstDictWithoutPos['ol > ol > p + empty p']);
   });
+  test('ol + ol > ol > p', () => {
+    expect(wikiAstFromSlateAst(slateDict['ol + ol > ol > p'])).toEqual(wikiAstDictWithoutPos['ol + ol > ol > p']);
+  });
   test('image', () => {
     expect(wikiAstFromSlateAst(slateDict.image)).toEqual(wikiAstDictWithoutPos.image);
   });

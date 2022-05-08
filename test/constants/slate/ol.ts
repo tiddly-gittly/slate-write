@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/consistent-type-assertions */
 import { TEditor, TElement, TText } from '@udecode/plate';
 import cloneDeep from 'lodash/cloneDeep';
 
@@ -452,6 +453,147 @@ export const ol: Record<string, TEditor | TElement | TText | Array<TEditor | TEl
             } as TElement,
           ],
         },
+      ],
+    },
+  ],
+  'ol + ol > ol > p': [
+    {
+      type: 'ol',
+      children: [
+        {
+          type: 'li',
+          children: [
+            {
+              type: 'lic',
+              children: [
+                {
+                  text: 'AAA',
+                },
+              ],
+            },
+            {
+              type: 'ol',
+              children: [
+                {
+                  type: 'li',
+                  children: [
+                    {
+                      type: 'lic',
+                      children: [
+                        {
+                          text: 'CCC',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  type: 'li',
+                  children: [
+                    {
+                      type: 'lic',
+                      children: [
+                        {
+                          text: 'DDD',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  type: 'li',
+                  children: [
+                    {
+                      type: 'lic',
+                      children: [
+                        {
+                          text: 'EEE',
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        } as TElement,
+        {
+          type: 'li',
+          children: [
+            {
+              type: 'lic',
+              children: [
+                {
+                  text: 'BBB',
+                },
+              ],
+            },
+            {
+              type: 'ol',
+              children: [
+                {
+                  type: 'li',
+                  children: [
+                    {
+                      type: 'lic',
+                      children: [
+                        {
+                          text: 'FF ',
+                        },
+                        {
+                          text: '/',
+                          code: true,
+                        },
+                        {
+                          text: ' FFF',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  type: 'li',
+                  children: [
+                    {
+                      type: 'lic',
+                      children: [
+                        {
+                          text: 'FFF',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  type: 'li',
+                  children: [
+                    {
+                      type: 'lic',
+                      children: [
+                        {
+                          text: 'GGG',
+                        },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  type: 'li',
+                  children: [
+                    {
+                      type: 'lic',
+                      children: [
+                        {
+                          text: '',
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        } as TElement,
       ],
     },
   ],

@@ -40,6 +40,9 @@ describe('Transform tree', () => {
   test('ol > ol > p + empty p', () => {
     expect(wikiAstToWikiText(wikiAstDict['ol > ol > p + empty p']) + '\n').toEqual(wikiTextDict['ol > ol > p + empty p']);
   });
+  test('ol + ol > ol > p', () => {
+    expect(wikiAstToWikiText(wikiAstDict['ol + ol > ol > p']) + '\n').toEqual(wikiTextDict['ol + ol > ol > p']);
+  });
   test('image', () => {
     expect(wikiAstToWikiText(wikiAstDict['image'])).toEqual(wikiTextDict['image']);
   });

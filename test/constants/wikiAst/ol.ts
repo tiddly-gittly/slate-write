@@ -455,6 +455,143 @@ export const ol: Record<string, IParseTreeNode[] | IParseTreeNode> = {
       ],
     },
   ],
+  'ol + ol > ol > p': [
+    {
+      type: 'element',
+      tag: 'ol',
+      children: [
+        {
+          type: 'element',
+          tag: 'li',
+          children: [
+            {
+              type: 'text',
+              text: 'AAA',
+              start: 2,
+              end: 5,
+            },
+            {
+              type: 'element',
+              tag: 'ol',
+              children: [
+                {
+                  type: 'element',
+                  tag: 'li',
+                  children: [
+                    {
+                      type: 'text',
+                      text: 'CCC',
+                      start: 9,
+                      end: 12,
+                    },
+                  ],
+                },
+                {
+                  type: 'element',
+                  tag: 'li',
+                  children: [
+                    {
+                      type: 'text',
+                      text: 'DDD',
+                      start: 16,
+                      end: 19,
+                    },
+                  ],
+                },
+                {
+                  type: 'element',
+                  tag: 'li',
+                  children: [
+                    {
+                      type: 'text',
+                      text: 'EEE',
+                      start: 23,
+                      end: 26,
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          type: 'element',
+          tag: 'li',
+          children: [
+            {
+              type: 'text',
+              text: 'BBB',
+              start: 29,
+              end: 32,
+            },
+            {
+              type: 'element',
+              tag: 'ol',
+              children: [
+                {
+                  type: 'element',
+                  tag: 'li',
+                  children: [
+                    {
+                      type: 'text',
+                      text: 'FF ',
+                      start: 36,
+                      end: 39,
+                    },
+                    {
+                      type: 'element',
+                      tag: 'code',
+                      children: [
+                        {
+                          type: 'text',
+                          text: '/',
+                        },
+                      ],
+                    },
+                    {
+                      type: 'text',
+                      text: ' FFF',
+                      start: 42,
+                      end: 46,
+                    },
+                  ],
+                },
+                {
+                  type: 'element',
+                  tag: 'li',
+                  children: [
+                    {
+                      type: 'text',
+                      text: 'FFF',
+                      start: 50,
+                      end: 53,
+                    },
+                  ],
+                },
+                {
+                  type: 'element',
+                  tag: 'li',
+                  children: [
+                    {
+                      type: 'text',
+                      text: 'GGG',
+                      start: 57,
+                      end: 60,
+                    },
+                  ],
+                },
+                {
+                  type: 'element',
+                  tag: 'li',
+                  children: [],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };
 ol['ol > li > text'] = cloneDeep(ol['ul > li > text']);
 (ol['ol > li > text'] as IDomParseTreeNode[])[0].tag = 'ol';
