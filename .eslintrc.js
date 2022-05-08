@@ -32,7 +32,7 @@ module.exports = {
     },
   },
   rules: {
-    'no-use-before-define': ['error', { ignoreTypeReferences: true, functions: false }],
+    // 'no-use-before-define': ['error', { ignoreTypeReferences: true, functions: false }],
     'unicorn/prevent-abbreviations': [
       'error',
       {
