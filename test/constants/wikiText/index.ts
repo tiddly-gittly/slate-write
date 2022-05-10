@@ -9,7 +9,8 @@ export const wikiTextDict: Record<string, string> = {
 * CCC`,
   'ol > ol > ol > li': `# AAA
 ## BBB
-### CCC`,
+### CCC
+`,
   'p + ol + blockquote > div + ol': `PPP
 
 # AAA
@@ -42,7 +43,8 @@ BBB2
 ## FF \`/\` FFF
 ## FFF
 ## GGG
-## `,
+## 
+`,
   'p basic nested marks': `A''A//A//A''A
 B//B__B__B//B
 
@@ -71,7 +73,8 @@ F^^F^^,,F,,^^F^^F
 G,,G,,'',,G,,'',,G,,G`,
   'ol > li > mark > text': `# A''//A//''A
 ## B//B//B
-### C^^C^^C`,
+### C^^C^^C
+`,
   image: `[img[TiddlyWikiIconBlack.png]]`,
   'image with tooltip and width': `[img width=75% [black one|TiddlyWikiIconBlack.png]]`,
   transclude: `{{favicon.ico}}`,
@@ -106,5 +109,6 @@ aaa`,
 AAA`,
   'link in a list': `# AAA
 ## [[BBB]]
-### CCC`,
+### CCC
+`,
 };

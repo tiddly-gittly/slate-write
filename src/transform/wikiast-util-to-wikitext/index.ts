@@ -1,5 +1,6 @@
 import cloneDeep from 'lodash/cloneDeep';
 import type { IParseTreeNode } from 'tiddlywiki';
+import { parents } from 'unist-util-parents';
 import { builders, IBuilders } from './astSerializer';
 import { dropExtraTailingN } from '../token-stream-utils/dropExtraTailingN';
 import { convertNodes, convertOneNode } from './traverse';
@@ -18,6 +19,8 @@ export interface IContext {
    * ul or ol will indent the following lines if they are inside other ul or ol, this counter variable tracks how much should we indent, it starts at -1, and may +1 for each ul or ol level before generating text (so it becomes 0 for the first ul or ol)
    */
   indentLevels: number;
+  /** when working on children array, we provide child index in this property */
+  index: number;
   /** let li know it should use which symbol for list dot
    * If this is not undefined, means we are in a li
    */
@@ -31,17 +34,24 @@ export interface IContext {
     sup?: boolean;
     u?: boolean;
   };
+  /** the root nodes array */
+  nodes: IParseTreeNode[];
   /** is root's children, we add \n between root's children */
   root: boolean;
 }
 // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
 const defaultContext = {
-  root: true,
   builders,
   indentLevels: -1,
+  index: 0,
   listMode: undefined,
   marks: {},
+  nodes: [] as IParseTreeNode[],
+  root: true,
 } as IContext;
+export interface IWithParent {
+  parent: IParseTreeNode;
+}
 
 export interface IWikiAstToWikiTextOptions {
   /** Number of extra `\n` added to the end of file. We will remove extra `\n`, so if you still need them, you have to say you want to add some of them back by this. */
@@ -49,6 +59,7 @@ export interface IWikiAstToWikiTextOptions {
 }
 export function wikiAstToWikiText(input: IParseTreeNode | IParseTreeNode[], options?: IWikiAstToWikiTextOptions): string {
   const { extraTailingNCount = 0 } = options ?? {};
-  const lines = convertNodes(cloneDeep(defaultContext), Array.isArray(input) ? input : [input]);
+  const nodes = Array.isArray(input) ? input.map((node) => parents(node) as IParseTreeNode) : [parents(input) as IParseTreeNode];
+  const lines = convertNodes(cloneDeep(cloneDeep({ ...defaultContext, nodes })), nodes);
   return dropExtraTailingN(lines).join('') + repeat('\n', extraTailingNCount);
 }

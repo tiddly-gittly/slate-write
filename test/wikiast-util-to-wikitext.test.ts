@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 import { wikiAstToWikiText } from '../src/transform/wikiast-util-to-wikitext';
-import { wikiAstToSlateAst } from '../src/transform/wikiast-util-to-slate-plate-ast';
-import { slateDict, wikiAstDict, wikiTextDict } from './constants';
+import { wikiAstDict, wikiTextDict } from './constants';
 
 describe('wikiAstToWikiText', () => {
   test('it works', () => {
@@ -38,10 +37,10 @@ describe('Transform tree', () => {
     expect(wikiAstToWikiText(wikiAstDict['ol > li > mark > text'])).toEqual(wikiTextDict['ol > li > mark > text']);
   });
   test('ol > ol > p + empty p', () => {
-    expect(wikiAstToWikiText(wikiAstDict['ol > ol > p + empty p']) + '\n').toEqual(wikiTextDict['ol > ol > p + empty p']);
+    expect(wikiAstToWikiText(wikiAstDict['ol > ol > p + empty p'])).toEqual(wikiTextDict['ol > ol > p + empty p']);
   });
   test('ol + ol > ol > p', () => {
-    expect(wikiAstToWikiText(wikiAstDict['ol + ol > ol > p']) + '\n').toEqual(wikiTextDict['ol + ol > ol > p']);
+    expect(wikiAstToWikiText(wikiAstDict['ol + ol > ol > p'])).toEqual(wikiTextDict['ol + ol > ol > p']);
   });
   test('image', () => {
     expect(wikiAstToWikiText(wikiAstDict['image'])).toEqual(wikiTextDict['image']);
