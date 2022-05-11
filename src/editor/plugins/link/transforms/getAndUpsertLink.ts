@@ -1,22 +1,25 @@
+/* eslint-disable unicorn/no-null */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { ELEMENT_LINK, LinkPlugin } from '@udecode/plate';
-import { getAbove, getPluginType, isCollapsed, PlateEditor, unwrapNodes } from '@udecode/plate-core';
+import { getAboveNode, getPluginType, isCollapsed, PlateEditor, unwrapNodes, Value } from '@udecode/plate-core';
 import { Editor } from 'slate';
 import { upsertLinkAtSelection } from './upsertLinkAtSelection';
 
-export const getAndUpsertLink = async <T = {}>(editor: PlateEditor<T>, getLinkUrl?: (previousUrl: string | null) => Promise<string | null> | string | null) => {
+export const getAndUpsertLink = async <V extends Value>(editor: PlateEditor<V>, getLinkUrl?: LinkPlugin['getLinkUrl']) => {
   const type = getPluginType(editor, ELEMENT_LINK);
   let previousUrl = '';
-  const selectedText = editor.selection === null ? '' : Editor.string(editor, editor.selection);
+  const selectedText = editor.selection === null ? '' : Editor.string(editor as Editor, editor.selection);
 
-  const linkNode = getAbove(editor, {
+  const linkNode = getAboveNode(editor, {
     match: { type },
   });
-  if (linkNode != undefined) {
+  if (linkNode !== undefined) {
     previousUrl = linkNode[0].url as string;
   }
 
   let url: string | null = null;
-  if (getLinkUrl != undefined) {
+  if (getLinkUrl !== undefined) {
     url = await getLinkUrl(previousUrl);
   } else {
     url = window.prompt(`Enter the URL of the link:`, previousUrl || selectedText);
@@ -25,7 +28,7 @@ export const getAndUpsertLink = async <T = {}>(editor: PlateEditor<T>, getLinkUr
   if (url === null) return;
 
   // remove the url
-  if (url === '' && editor.selection != undefined) {
+  if (url === '' && editor.selection !== undefined && editor.selection !== null) {
     return unwrapNodes(editor, {
       at: editor.selection,
       match: { type: getPluginType(editor, ELEMENT_LINK) },
