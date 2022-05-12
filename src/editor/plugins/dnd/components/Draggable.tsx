@@ -80,8 +80,6 @@ export const Draggable = <V extends Value>(props: DraggableProps<V>): JSX.Elemen
     id: element.id as string,
     blockRef: rootReference,
   });
-  // DEBUG: console
-  console.log(`element`, element);
 
   const multiDragReference = useMergedRef(dragRef, dragWrapperReference);
 
