@@ -15,9 +15,9 @@ export const LinkElement = <V extends Value>(props: StyledElementProps<V, TLinkE
 
   const onClick = useCallback(
     (event: React.MouseEvent) => {
-      if (parentWidget == undefined) return;
+      if (parentWidget === undefined) return;
       const domNode = attributes.ref.current as HTMLLinkElement | undefined;
-      if (domNode == undefined) return;
+      if (domNode === undefined) return;
       event.stopPropagation();
       if (element.attributes?.to?.value) {
         const bounds = domNode.getBoundingClientRect();

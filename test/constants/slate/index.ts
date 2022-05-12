@@ -1,4 +1,4 @@
-import { TEditor, TElement, TText } from '@udecode/plate';
+import { TEditor, Value, TElement, TText } from '@udecode/plate';
 
 import { image } from './image';
 import { ol } from './ol';
@@ -12,7 +12,7 @@ import { heading } from './heading';
  *
  * Sometimes may need to add `as TElement` on nested `children: []` to prevent ts error.
  */
-export const slateDict: Record<string, TEditor | TElement | TText | Array<TEditor | TElement | TText>> = {
+export const slateDict: Record<string, TEditor<Value> | TElement | TText | Array<TEditor<Value> | TElement | TText>> = {
   ...image,
   ...transclude,
   ...widget,

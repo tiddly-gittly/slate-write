@@ -2,7 +2,7 @@ import { TText } from '@udecode/plate';
 import type { ITextParseTreeNode, IDomParseTreeNode } from 'tiddlywiki';
 import { IBuilders } from '.';
 
-export type TTextWithMark = TText<{
+export type TTextWithMark = TText & {
   bold?: boolean;
   code?: boolean;
   italic?: boolean;
@@ -10,7 +10,7 @@ export type TTextWithMark = TText<{
   subscript?: boolean;
   superscript?: boolean;
   underline?: boolean;
-}>;
+};
 
 function textWithoutMark(builders: IBuilders, node: TTextWithMark): ITextParseTreeNode | IDomParseTreeNode {
   return {

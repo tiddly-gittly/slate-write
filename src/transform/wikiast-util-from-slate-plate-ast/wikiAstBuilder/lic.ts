@@ -3,7 +3,7 @@ import type { IParseTreeNode } from 'tiddlywiki';
 import type { IBuilders } from '.';
 import { convertNodes } from '../traverse';
 
-export function lic(builders: IBuilders, node: TElement<{ children: Array<TText | TElement>; type: typeof ELEMENT_LIC }>): IParseTreeNode[] {
+export function lic(builders: IBuilders, node: TElement & { children: Array<TText | TElement>; type: typeof ELEMENT_LIC }): IParseTreeNode[] {
   const { children } = node;
   const nodesSpreadIntoList = convertNodes(builders, children);
   if (nodesSpreadIntoList.length > 0) {

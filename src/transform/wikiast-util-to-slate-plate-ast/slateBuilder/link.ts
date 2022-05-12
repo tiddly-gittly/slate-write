@@ -1,10 +1,10 @@
-import { LinkNodeData, TElement } from '@udecode/plate';
+import { TElement } from '@udecode/plate';
 import type { ILinkParseTreeNode, ITextParseTreeNode } from 'tiddlywiki';
 
 import { ISlateAstExtraTwMarkers } from '../../ast-common-types';
 import { IContext } from '..';
 
-export function link(context: IContext, node: ILinkParseTreeNode): TElement<LinkNodeData & ISlateAstExtraTwMarkers> {
+export function link(context: IContext, node: ILinkParseTreeNode): TElement & ISlateAstExtraTwMarkers {
   // we always have these attributes and child, even in empty link `[[]]`
   const {
     to: { value: to },

@@ -1,6 +1,7 @@
-import { TEditor, TElement, TText } from '@udecode/plate';
+/* eslint-disable @typescript-eslint/consistent-type-assertions */
+import { TEditor, Value, TElement, TText } from '@udecode/plate';
 
-export const link: Record<string, TEditor | TElement | TText | Array<TEditor | TElement | TText>> = {
+export const link: Record<string, TEditor<Value> | TElement | TText | Array<TEditor<Value> | TElement | TText>> = {
   link: [
     {
       type: 'p',

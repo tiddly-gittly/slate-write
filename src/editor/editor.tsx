@@ -38,7 +38,7 @@ export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Elemen
   }, [props.currentTiddler]);
   const editorReference = usePlateEditorRef(editorID);
   // Add the initial value when setting up our state.
-  const currentAstReference = useRef<Array<TNode<AnyObject>>>(deserialize(props.tiddlerText, { idCreator }));
+  const currentAstReference = useRef<TNode[]>(deserialize(props.tiddlerText, { idCreator }));
   /** current text is only used for compare, we don't want it trigger rerender, so use ref to store it */
   const currentTextReference = useRef<string>(props.tiddlerText);
   // TODO: get dom node to add IME listener to prevent update when IME open https://github.com/udecode/plate/issues/239#issuecomment-1098052241
@@ -75,7 +75,7 @@ export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Elemen
     resetEditor();
   }, []);
   const debouncedSaver = useDebouncedCallback(
-    (newValue: Array<TNode<AnyObject>>) => {
+    (newValue: TNode[]) => {
       // DEBUG: console
       console.log(`newValue`, newValue);
       const newText = serialize(newValue);
@@ -85,7 +85,7 @@ export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Elemen
     [props.saver.onSave],
     props.saver.interval,
   );
-  const onChange = useCallback((newValue: Array<TNode<AnyObject>>) => {
+  const onChange = useCallback((newValue: TNode[]) => {
     props.saver.lock();
     currentAstReference.current = newValue;
     debouncedSaver(newValue);

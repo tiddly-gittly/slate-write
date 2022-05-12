@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { IChangedTiddlers } from 'tiddlywiki';
 import type { ReactWidget } from 'tw-react';
 
@@ -70,7 +72,7 @@ class SlateWriteWidget extends Widget<IEditorAppProps> {
       saver: {
         lock: () => {
           this.isUpdatingByUserInput = true;
-          if (this.updatingLockTimeoutHandle != undefined) {
+          if (this.updatingLockTimeoutHandle !== undefined) {
             clearTimeout(this.updatingLockTimeoutHandle);
           }
         },
@@ -126,7 +128,7 @@ class SlateWriteWidget extends Widget<IEditorAppProps> {
       changedAttributes.default ||
       changedAttributes.class ||
       changedAttributes.placeholder ||
-      changedAttributes.size > 0 ||
+      (changedAttributes.size as unknown as number) > 0 ||
       changedAttributes.autoHeight ||
       changedAttributes.minHeight ||
       changedAttributes.focusPopup ||

@@ -1,6 +1,6 @@
-import { TEditor, TElement, TText } from '@udecode/plate';
+import { TEditor, Value, TElement, TText } from '@udecode/plate';
 
-export const image: Record<string, TEditor | TElement | TText | Array<TEditor | TElement | TText>> = {
+export const image: Record<string, TEditor<Value> | TElement | TText | Array<TEditor<Value> | TElement | TText>> = {
   image: {
     type: 'p',
     children: [

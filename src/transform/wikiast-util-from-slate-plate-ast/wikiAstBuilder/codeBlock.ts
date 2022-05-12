@@ -1,14 +1,14 @@
 import compact from 'lodash/compact';
-import { CodeBlockNodeData, ELEMENT_CODE_LINE, TElement, TText } from '@udecode/plate';
+import { ELEMENT_CODE_LINE, TElement, TText } from '@udecode/plate';
 import type { ICodeBlockParseTreeNode } from 'tiddlywiki';
 import type { IBuilders } from '.';
 
-export function codeBlock(builders: IBuilders, node: TElement<CodeBlockNodeData>): ICodeBlockParseTreeNode {
+export function codeBlock(builders: IBuilders, node: TElement): ICodeBlockParseTreeNode {
   const { children, lang } = node;
   const codeLines = compact(
-    children.map((child: TElement): string | undefined | null => {
+    children.map((child: TElement | TText): string | undefined | null => {
       if (child?.type === ELEMENT_CODE_LINE) {
-        return (child.children?.[0] as TText | undefined)?.text;
+        return ((child as TElement).children?.[0] as TText | undefined)?.text;
       }
       return undefined;
     }),
@@ -17,7 +17,7 @@ export function codeBlock(builders: IBuilders, node: TElement<CodeBlockNodeData>
   if (lang !== undefined) {
     attributes.language = {
       type: 'string',
-      value: lang,
+      value: lang as string,
     };
   }
   if (codeLines.length > 0) {

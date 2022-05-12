@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { TNode } from '@udecode/plate';
 import { IWikiASTNode } from 'tiddlywiki';
 
@@ -5,11 +6,11 @@ import { IWikiASTNode } from 'tiddlywiki';
  * Merge all specific node (for example, `lic`) into a single node, currently only merge their children
  * @returns
  */
-export function mergeAdjacent<T extends IWikiASTNode | TNode>(nodes: T[], typeToMerge?: string): T[] {
+export function mergeAdjacent<T extends (IWikiASTNode | TNode) & { children: TNode[] }>(nodes: T[], typeToMerge?: string): T[] {
   const result: T[] = [];
   let current: T | undefined;
   for (const node of nodes) {
-    if (current != undefined && current.type === node.type && (typeToMerge ? node.type === typeToMerge : true)) {
+    if (current !== undefined && current.type === node.type && (typeToMerge ? node.type === typeToMerge : true)) {
       if (!Array.isArray(current.children)) {
         current.children = [];
       }

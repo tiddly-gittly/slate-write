@@ -1,4 +1,4 @@
-import { AnyObject, TNode } from '@udecode/plate';
+import { TNode } from '@udecode/plate';
 import { IParseTreeNode } from 'tiddlywiki';
 
 import { builders, type IBuilders } from './slateBuilder';
@@ -28,6 +28,6 @@ const initialContext: IContext = {
   marks: {},
 };
 
-export function wikiAstToSlateAst(node: IParseTreeNode | IParseTreeNode[], options?: { idCreator?: () => string }): Array<TNode<AnyObject>> {
+export function wikiAstToSlateAst(node: IParseTreeNode | IParseTreeNode[], options?: { idCreator?: () => string }): TNode[] {
   return convertNodes({ ...initialContext, ...options }, Array.isArray(node) ? node : [node]);
 }

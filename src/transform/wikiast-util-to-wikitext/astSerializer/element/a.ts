@@ -1,4 +1,5 @@
-import type { IDomParseTreeNode, IParseTreeAttribute, ILinkParseTreeNode } from 'tiddlywiki';
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
+import type { IDomParseTreeNode, ILinkParseTreeNode } from 'tiddlywiki';
 import { IContext } from '../..';
 
 /**

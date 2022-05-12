@@ -1,4 +1,4 @@
-import { AnyObject, TNode, isText, isElement } from '@udecode/plate';
+import { TNode, isText, isElement } from '@udecode/plate';
 import { IParseTreeNode } from 'tiddlywiki';
 
 import { IBuilders } from './wikiAstBuilder';
@@ -6,7 +6,7 @@ import { getSlatePlateASTAdditionalProperties } from '../ast-utils/getNodeAdditi
 
 export type IAnyBuilder = IBuilders & Record<string, typeof convertWikiAstNode>;
 
-export function convertNodes(builders: IBuilders, nodes: Array<TNode<AnyObject>> | undefined): IParseTreeNode[] {
+export function convertNodes(builders: IBuilders, nodes: TNode[] | undefined): IParseTreeNode[] {
   if (nodes === undefined || nodes.length === 0) {
     return [];
   }
@@ -16,7 +16,7 @@ export function convertNodes(builders: IBuilders, nodes: Array<TNode<AnyObject>>
   }, []);
 }
 
-export function convertWikiAstNode(builders: IAnyBuilder, node: TNode<AnyObject>): IParseTreeNode[] {
+export function convertWikiAstNode(builders: IAnyBuilder, node: TNode): IParseTreeNode[] {
   // only text and root node don't have a `type` field, deal with it first
   if (isText(node)) {
     return [builders.text(builders, node)];
@@ -24,7 +24,6 @@ export function convertWikiAstNode(builders: IAnyBuilder, node: TNode<AnyObject>
   if (isElement(node)) {
     const builder = builders[node.type as keyof IBuilders];
     if (typeof builder === 'function') {
-      // @ts-expect-error Type 'TElement<AnyObject>' is not assignable to type '{ type: keyof HTMLElementTagNameMap; }'. Types of property 'type' are incompatible. Type 'string' is not assignable to type 'keyof HTMLElementTagNameMap'.ts(2345)
       const builtSlateNodeOrNodes = builder(builders, node);
       return Array.isArray(builtSlateNodeOrNodes)
         ? builtSlateNodeOrNodes.map((child) => ({ ...getSlatePlateASTAdditionalProperties(node), ...child }))

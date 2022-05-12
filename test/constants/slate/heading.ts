@@ -1,6 +1,6 @@
-import { TEditor, TElement, TText } from '@udecode/plate';
+import { TEditor, Value, TElement, TText } from '@udecode/plate';
 
-export const heading: Record<string, TEditor | TElement | TText | Array<TEditor | TElement | TText>> = {
+export const heading: Record<string, TEditor<Value> | TElement | TText | Array<TEditor<Value> | TElement | TText>> = {
   heading: [
     {
       type: 'h1',

@@ -20,7 +20,7 @@ const filter = (text: string) => (value: TComboboxItemBase) =>
   (value as ComboboxItemProps<ISnippetComboboxItem>['item']).data.name.toLowerCase().startsWith(text.toLowerCase());
 
 /** from https://gist.github.com/atomiks/520f4b0c7b537202a23a3059d4eec908 */
-export const LazyTippy = (props: TippyProps) => {
+export const LazyTippy = (props: TippyProps): JSX.Element => {
   const [mounted, setMounted] = React.useState(false);
 
   const lazyPlugin = {
@@ -32,9 +32,9 @@ export const LazyTippy = (props: TippyProps) => {
 
   const computedProps = { ...props };
 
-  computedProps.plugins = [lazyPlugin, ...(props.plugins != undefined || [])];
+  computedProps.plugins = [lazyPlugin, ...(props.plugins ?? [])];
 
-  if (props.render != undefined) {
+  if (props.render !== undefined) {
     const render = props.render; // let TypeScript safely derive that render is not undefined
     computedProps.render = (...arguments_) => (mounted ? render(...arguments_) : '');
   } else {
@@ -46,7 +46,7 @@ export const LazyTippy = (props: TippyProps) => {
 const memorizedRenderText = memorize((text: string) => $tw.wiki.renderText('text/html', 'text/vnd.tiddlywiki', text));
 
 function SnippetListItem(props: ComboboxItemProps<ISnippetComboboxItem>): JSX.Element {
-  function PreviewWithWikiText() {
+  function PreviewWithWikiText(): JSX.Element {
     const renderResult = memorizedRenderText(props.item.data.preview);
     return <Preview dangerouslySetInnerHTML={{ __html: renderResult }} />;
   }

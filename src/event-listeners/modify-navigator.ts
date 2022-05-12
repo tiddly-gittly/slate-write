@@ -1,17 +1,17 @@
-import { IWidgetEvent, Widget } from 'tiddlywiki';
+import { IWidgetEvent, Widget, Wiki } from 'tiddlywiki';
 
 const NavigatorWidget = require('$:/core/modules/widgets/navigator.js').navigator;
 
 NavigatorWidget.prototype.handleEditWYSIWYGTiddlerEvent = function (event: IWidgetEvent) {
   const editTiddler = $tw.hooks.invokeHook('th-editing-wysiwyg-tiddler', event);
-  if (editTiddler == undefined) {
+  if (editTiddler === undefined) {
     return false;
   }
   const isUnmodifiedShadow = (title: string) => {
-    return this.wiki.isShadowTiddler(title) && !this.wiki.tiddlerExists(title);
+    return (this.wiki as Wiki).isShadowTiddler(title) && !(this.wiki as Wiki).tiddlerExists(title);
   };
   const confirmEditShadow = (title: string) => {
-    const win = event.event && 'view' in event.event && event.event.view != undefined ? event.event.view : window;
+    const win = event.event && 'view' in event.event && event.event.view !== undefined ? event.event.view : window;
     return win.confirm($tw.language.getString('ConfirmEditShadowTiddler', { variables: { title } }));
   };
   const title = event.param || event.tiddlerTitle;
@@ -19,7 +19,7 @@ NavigatorWidget.prototype.handleEditWYSIWYGTiddlerEvent = function (event: IWidg
     return false;
   }
   // switch view template to wysiwyg edit mode
-  if (event.paramObject == undefined || event.paramObject.suppressNavigation !== 'yes') {
+  if (event.paramObject === undefined || event.paramObject.suppressNavigation !== 'yes') {
     const tiddler = $tw.wiki.getTiddler(title);
     $tw.wiki.addTiddler({ ...tiddler?.fields, wysiwyg: tiddler?.fields?.wysiwyg === 'yes' ? undefined : 'yes' });
     return false;

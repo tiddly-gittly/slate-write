@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { IParseTreeAttribute } from 'tiddlywiki';
 
 export function removeTypeFromAttributes(attributes?: Record<string, IParseTreeAttribute>): Record<string, any> | undefined {
-  if (attributes == undefined) {
+  if (attributes === undefined) {
     return;
   }
   return Object.keys(attributes).reduce<Record<string, any>>((accumulator, key) => {
@@ -14,7 +15,7 @@ export function removeTypeFromAttributes(attributes?: Record<string, IParseTreeA
 }
 
 export function addTypeToAttributes(attributes?: Record<string, any>): Record<string, IParseTreeAttribute> | undefined {
-  if (attributes == undefined) {
+  if (attributes === undefined) {
     return;
   }
   return Object.keys(attributes).reduce<Record<string, IParseTreeAttribute>>((accumulator, key) => {

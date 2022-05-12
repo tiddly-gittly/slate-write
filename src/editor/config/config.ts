@@ -21,7 +21,6 @@ import {
   isSelectionAtBlockStart,
   KEYS_HEADING,
   LinkPlugin,
-  MentionNodeData,
   MentionPlugin,
   NormalizeTypesPlugin,
   PlatePlugin,
@@ -29,17 +28,14 @@ import {
   SelectOnBackspacePlugin,
   SoftBreakPlugin,
   StyledElement,
-  TComboboxItemBase,
   TrailingBlockPlugin,
   withProps,
 } from '@udecode/plate';
-// import { ELEMENT_EXCALIDRAW, ExcalidrawElement } from '@udecode/plate-ui-excalidraw';
 import { EditableProps } from 'slate-react/dist/components/editable';
 import { autoformatRules } from './autoformat';
 import { ELEMENT_WIDGET } from '../plugins/widget';
 import { LinkElement } from '../plugins/link/LinkElement';
 import { css } from 'styled-components';
-// import { components } from '../components';
 
 export const SAVE_DEBOUNCE_INTERVAL = 1000;
 
@@ -50,20 +46,20 @@ const resetBlockTypesCommonRule = {
 
 interface Config {
   align: Partial<PlatePlugin>;
-  autoformat: Partial<PlatePlugin<{}, AutoformatPlugin>>;
+  autoformat: Partial<PlatePlugin<AutoformatPlugin>>;
   components: Record<string, any>;
 
   editableProps: EditableProps;
-  exitBreak: Partial<PlatePlugin<{}, ExitBreakPlugin>>;
-  forceLayout: Partial<PlatePlugin<{}, NormalizeTypesPlugin>>;
-  indent: Partial<PlatePlugin<{}, IndentPlugin>>;
+  exitBreak: Partial<PlatePlugin<ExitBreakPlugin>>;
+  forceLayout: Partial<PlatePlugin<NormalizeTypesPlugin>>;
+  indent: Partial<PlatePlugin<IndentPlugin>>;
   lineHeight: Partial<PlatePlugin>;
-  link: Partial<PlatePlugin<{}, LinkPlugin>>;
-  mention: Partial<PlatePlugin<{}, MentionPlugin<undefined>>>;
-  resetBlockType: Partial<PlatePlugin<{}, ResetNodePlugin>>;
-  selectOnBackspace: Partial<PlatePlugin<{}, SelectOnBackspacePlugin>>;
-  softBreak: Partial<PlatePlugin<{}, SoftBreakPlugin>>;
-  trailingBlock: Partial<PlatePlugin<{}, TrailingBlockPlugin>>;
+  link: Partial<PlatePlugin<LinkPlugin>>;
+  mention: Partial<PlatePlugin<MentionPlugin<undefined>>>;
+  resetBlockType: Partial<PlatePlugin<ResetNodePlugin>>;
+  selectOnBackspace: Partial<PlatePlugin<SelectOnBackspacePlugin>>;
+  softBreak: Partial<PlatePlugin<SoftBreakPlugin>>;
+  trailingBlock: Partial<PlatePlugin<TrailingBlockPlugin>>;
 }
 
 // TODO: load keyboard shortcuts from tw config
@@ -78,13 +74,13 @@ export const CONFIG: Config = {
     options: {
       trigger: '/',
       insertSpaceAfterMention: false,
-      createMentionNode: (item: TComboboxItemBase): MentionNodeData => {
+      createMentionNode: (item) => {
         return {
           // override type and children in plate's packages/nodes/mention/src/getMentionOnSelectItem.ts
           // its default type is '/' (the same as the key above), but we want it to be normal text
           type: ELEMENT_PARAGRAPH,
-          children: [{ text: item.text }],
-        } as any;
+          children: [{ text: item.text as string }],
+        };
       },
     },
   },

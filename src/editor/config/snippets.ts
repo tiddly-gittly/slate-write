@@ -20,7 +20,7 @@ function getSnippetName(tiddler: Tiddler): string {
 $tw.utils.each($tw.wiki.filterTiddlers('[all[tiddlers+shadows]tag[$:/tags/TextEditor/Snippet]]'), (snippetTiddlerTitle) => {
   if (!snippetTiddlerTitle) return;
   const snippet = $tw.wiki.getTiddler(snippetTiddlerTitle);
-  if (snippet == undefined) return;
+  if (snippet === undefined) return;
   snippets.push({
     key: snippetTiddlerTitle,
     data: {
@@ -35,7 +35,7 @@ $tw.utils.each($tw.wiki.filterTiddlers('[all[tiddlers+shadows]tag[$:/tags/TextEd
 $tw.utils.each($tw.wiki.filterTiddlers('[all[tiddlers+shadows]tag[$:/tags/KaTeX/Snippet]]'), (snippetTiddlerTitle) => {
   if (!snippetTiddlerTitle) return;
   const snippet = $tw.wiki.getTiddler(snippetTiddlerTitle);
-  if (snippet == undefined) return;
+  if (snippet === undefined) return;
   const name = getSnippetName(snippet);
   snippets.push({
     key: snippetTiddlerTitle,

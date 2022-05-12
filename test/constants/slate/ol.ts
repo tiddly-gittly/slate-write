@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
-import { TEditor, TElement, TText } from '@udecode/plate';
+import { TEditor, Value, TElement, TText } from '@udecode/plate';
 import cloneDeep from 'lodash/cloneDeep';
 
 /**
@@ -7,7 +7,7 @@ import cloneDeep from 'lodash/cloneDeep';
  *
  * Sometimes may need to add `as TElement` on nested `children: []` to prevent ts error.
  */
-export const ol: Record<string, TEditor | TElement | TText | Array<TEditor | TElement | TText>> = {
+export const ol: Record<string, TEditor<Value> | TElement | TText | Array<TEditor<Value> | TElement | TText>> = {
   'ul > li > text': {
     type: 'ul',
     children: [

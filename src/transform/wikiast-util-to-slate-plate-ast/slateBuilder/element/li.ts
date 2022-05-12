@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /**
  * This is an example of custom element processing. The logic here is the same as `src/transform/wikiast-util-to-slate-plate-ast/slateBuilder/element/index.ts`, purely for example.
  */
-import { ELEMENT_LI, ELEMENT_LIC, TElement } from '@udecode/plate';
+import { ELEMENT_LI, ELEMENT_LIC, TElement, TNode } from '@udecode/plate';
 import { mergeAdjacent } from '../../../../transform/ast-utils/mergeAdjacent';
 import type { IDomParseTreeNode, ITextParseTreeNode } from 'tiddlywiki';
 import { IContext } from '../..';
@@ -16,7 +17,7 @@ export function li(context: IContext, node: IDomParseTreeNode): TElement {
   const { children } = node as IListItemDomParseTreeNode;
   const childrenWithLic = children.flatMap((child) => {
     if (child.type === 'text' || (child.tag !== 'ol' && child.tag !== 'ul')) {
-      return { type: ELEMENT_LIC, children: convertNodes(context, [child]) };
+      return { type: ELEMENT_LIC, children: convertNodes(context, [child]) } as TNode;
     }
     return convertNodes(context, [child]);
   });

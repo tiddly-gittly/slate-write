@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import repeat from 'lodash/repeat';
-import type { IDomParseTreeNode, IParseTreeAttribute, ILinkParseTreeNode } from 'tiddlywiki';
+import type { IDomParseTreeNode } from 'tiddlywiki';
 import { IContext } from '../..';
 import { convertNodes } from '../../traverse';
 
@@ -7,10 +8,10 @@ import { convertNodes } from '../../traverse';
  * Basic h1 tag will turn into `! xxx`
  */
 export function h1(context: IContext, node: IDomParseTreeNode): string[] {
-  const { attributes, children } = node;
+  const { attributes, children, tag } = node;
   if (!attributes?.class?.value) {
     // don't need a html tag to render
-    const level = Number(node.tag.replace('h', ''));
+    const level = Number(tag.replace('h', ''));
     return [repeat('!', level), ' ', ...convertNodes(context, children), '\n'];
   }
   // is real a tag

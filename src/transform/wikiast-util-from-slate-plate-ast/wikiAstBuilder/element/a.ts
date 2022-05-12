@@ -1,4 +1,4 @@
-import { LinkNodeData, TElement } from '@udecode/plate';
+import { TElement } from '@udecode/plate';
 import type { IDomParseTreeNode, ILinkParseTreeNode } from 'tiddlywiki';
 import { IBuilders } from '..';
 import { convertNodes } from '../../traverse';
@@ -7,22 +7,22 @@ import pick from 'lodash/pick';
 
 export function a(builders: IBuilders, node: TElement): ILinkParseTreeNode | IDomParseTreeNode {
   if (node['tw-type'] === 'link') {
-    node = node as TElement<LinkNodeData & ISlateAstExtraTwMarkers>;
+    const typedNode = node as TElement & ISlateAstExtraTwMarkers & { attributes: Record<string, any>; isBlock: boolean };
     // we have a metadata to tell we can restore it to a `[[]]` link
     const result: ILinkParseTreeNode = {
-      ...pick(node, ['orderedAttributes', 'isBlock']),
+      ...pick(typedNode, ['orderedAttributes', 'isBlock']),
       type: 'link',
       attributes: {
-        ...node.attributes,
+        ...typedNode.attributes,
         to: {
           type: 'string',
-          value: node.url,
+          value: typedNode.url as string,
         },
       },
       children: [
         {
           type: 'text',
-          text: node.children[0].text,
+          text: typedNode.children[0].text as string,
         },
       ],
     };
