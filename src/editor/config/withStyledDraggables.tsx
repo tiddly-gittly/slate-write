@@ -23,7 +23,7 @@ export const withStyledDraggables = (components: any): ReturnType<typeof createP
   return withDraggables(components, [
     {
       // only element that registered keys here will have dnd grabber
-      keys: [ELEMENT_UL, ELEMENT_OL, ELEMENT_LI],
+      keys: [ELEMENT_LI],
     },
     {
       key: ELEMENT_H1,
