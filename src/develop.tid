@@ -16,9 +16,10 @@ type: text/vnd.tiddlywiki
 ### `/` menu component is at `src/editor/components/SnippetCombobox.tsx`, and snippets are loaded in `src/editor/config/snippets.ts`
 # There will be a floating toolbar when you selecting text, and you can click on the toolbar to change the text's decoration, this is a react component defined in `src/config/components/Toolbars.tsx`
 # When hover on the left of a block, there will be a Drag and drop handle, render by `src/editor/components/withStyledDraggables.tsx`
-## Different block have different line height, so we need to add different padding here to align them.
-# allow drag to reorder blocks
-## code are copy from udecode/plate's repo to `src/editor/plugins/dnd` folder, and have modification in `src/editor/plugins/dnd/hooks/useDragBlock.ts` to set `$tw.dragInProgress = true`
+## Different block have different line height, so we need to add different padding here to align drag handle with the block.
+## allow drag to reorder blocks, onDrop listeners are in `src/editor/plugins/dnd/hooks` that copied from plate's source
+### code are copy from udecode/plate's repo to `src/editor/plugins/dnd` folder, and have modification in `src/editor/plugins/dnd/hooks/useDragBlock.ts` to set `$tw.dragInProgress = true`
+## support drag to reorder list items and widget, components registered in `src/editor/components/index.ts` will be draggable
 
 !! TODO
 
@@ -27,10 +28,13 @@ type: text/vnd.tiddlywiki
 # TODO: optimization: use section splitter in section-editor to ensure only a small potion of text will `onChange` and rerender. And we can get start-end of section from section splitter, so replace the section of text onChange.
 # TODO: allow drag images in and import the image
 # TODO: context menu when click on the drag handle
+# TODO: i18n for readme and placeholder
 # TODO: allow 3rd party plugin to control the editor, for example, the command palette and the fishing plugin.
+# TODO: add more selection operation, or maybe in command palette, like "refactor to new tiddler"
 # TODO: autocomplete `[[`'s and `{{`'s linkable tiddlers result
 # TODO: autocomplete `<$`'s available widget and fields
 # TODO: autocomplete `<<`'s available macros
+# TODO: insert latex math using `$$` or `￥￥` shortcut
 # TODO: open context aware autocomplete using `ctrl+space`, show corresponding dropdown menu using prefix of the selection
 # TODO: replace codeblock with codemirror or monaco, so its prism highlight won't need to bundle with plugin, which is big
 # TODO: add excalidraw widget support

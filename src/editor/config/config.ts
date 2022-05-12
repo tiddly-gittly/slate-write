@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import {
   AutoformatPlugin,
-  createPlateUI,
   ELEMENT_BLOCKQUOTE,
   ELEMENT_CODE_BLOCK,
   ELEMENT_H1,
@@ -10,8 +9,6 @@ import {
   ELEMENT_H4,
   ELEMENT_H5,
   ELEMENT_H6,
-  ELEMENT_LINK,
-  ELEMENT_OL,
   ELEMENT_PARAGRAPH,
   ELEMENT_TD,
   ELEMENT_TODO_LI,
@@ -27,15 +24,11 @@ import {
   ResetNodePlugin,
   SelectOnBackspacePlugin,
   SoftBreakPlugin,
-  StyledElement,
   TrailingBlockPlugin,
-  withProps,
 } from '@udecode/plate';
 import { EditableProps } from 'slate-react/dist/components/editable';
 import { autoformatRules } from './autoformat';
 import { ELEMENT_WIDGET } from '../plugins/widget';
-import { LinkElement } from '../plugins/link/LinkElement';
-import { css } from 'styled-components';
 
 export const SAVE_DEBOUNCE_INTERVAL = 1000;
 
@@ -47,8 +40,6 @@ const resetBlockTypesCommonRule = {
 interface Config {
   align: Partial<PlatePlugin>;
   autoformat: Partial<PlatePlugin<AutoformatPlugin>>;
-  components: Record<string, any>;
-
   editableProps: EditableProps;
   exitBreak: Partial<PlatePlugin<ExitBreakPlugin>>;
   forceLayout: Partial<PlatePlugin<NormalizeTypesPlugin>>;
@@ -93,18 +84,6 @@ export const CONFIG: Config = {
       padding: '15px',
     },
   },
-  components: createPlateUI({
-    [ELEMENT_LINK]: LinkElement,
-    [ELEMENT_OL]: withProps(StyledElement, {
-      as: 'ol',
-      styles: {
-        root: css`
-          margin: 0;
-          padding-inline-start: 2em;
-        `,
-      },
-    }),
-  }),
 
   align: {
     inject: {

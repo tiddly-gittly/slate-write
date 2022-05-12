@@ -18,7 +18,9 @@ export function WidgetBlock(props: WidgetBlockElementProps): JSX.Element {
   return (
     <div {...attributes} {...rootProps}>
       {children}
-      <div style={{ userSelect: 'none' }} contentEditable={false} {...nodeProps} ref={widgetContainerReference} />
+      <div style={{ userSelect: 'none' }} contentEditable={false} {...nodeProps}>
+        <div ref={widgetContainerReference} />
+      </div>
     </div>
   );
 }

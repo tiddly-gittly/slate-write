@@ -13,6 +13,7 @@ import {
   ELEMENT_OL,
   ELEMENT_PARAGRAPH,
   ELEMENT_UL,
+  ELEMENT_LI,
 } from '@udecode/plate';
 import { css } from 'styled-components';
 import { ELEMENT_WIDGET } from '../plugins/widget';
@@ -20,12 +21,10 @@ import { withDraggables } from '../plugins/dnd';
 
 export const withStyledDraggables = (components: any): ReturnType<typeof createPlateUI> => {
   return withDraggables(components, [
-    // TODO: after allow li reorder, delete this level 0 constrain
     {
-      keys: [ELEMENT_PARAGRAPH, ELEMENT_UL, ELEMENT_OL, ELEMENT_WIDGET],
-      level: 0,
+      // only element that registered keys here will have dnd grabber
+      keys: [ELEMENT_UL, ELEMENT_OL, ELEMENT_LI],
     },
-
     {
       key: ELEMENT_H1,
       styles: {
