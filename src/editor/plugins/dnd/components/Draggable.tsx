@@ -1,4 +1,6 @@
-import React, { useRef } from 'react';
+/** copied from plate's packages/ui/dnd/src/components/Draggable.tsx , change to use styled-components */
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
+import React, { useRef, MouseEvent } from 'react';
 import Tippy from '@tippyjs/react';
 import styled, { CSSProp } from 'styled-components';
 import is from 'typescript-styled-is';
@@ -7,6 +9,7 @@ import { DragIndicator } from '@styled-icons/material/DragIndicator';
 import { useDndBlock } from '../hooks/useDndBlock';
 import { DraggableProps } from './Draggable.types';
 import { grabberTooltipProps } from './grabberTooltipProps';
+import { Value } from '@udecode/plate';
 
 interface IStyleMod {
   mod?: string | CSSProp<any>;
@@ -64,7 +67,8 @@ const DropLine = styled.div<{ dropLine: '' | 'top' | 'bottom' }>`
   ${({ dropLine }) => (dropLine === 'top' ? 'top: -1px;' : dropLine === 'bottom' ? 'bottom: -1px;' : '')}
 `;
 
-export const Draggable = (props: DraggableProps) => {
+export const Draggable = <V extends Value>(props: DraggableProps<V>): JSX.Element => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { children, element, componentRef, styles } = props;
 
   const blockReference = useRef<HTMLDivElement>(null);
@@ -73,7 +77,7 @@ export const Draggable = (props: DraggableProps) => {
   const multiRootReference = useMergedRef(componentRef, rootReference);
 
   const { dropLine, dragRef, isDragging } = useDndBlock({
-    id: element.id,
+    id: element.id as string,
     blockRef: rootReference,
   });
 
@@ -90,7 +94,7 @@ export const Draggable = (props: DraggableProps) => {
         <BlockToolbarWrapper mod={styles?.blockToolbarWrapper}>
           <BlockToolbar ref={multiDragReference}>
             <Tippy {...grabberTooltipProps}>
-              <DragHandle type="button" onMouseDown={(e: any) => e.stopPropagation()}>
+              <DragHandle type="button" onMouseDown={(event: MouseEvent) => event.stopPropagation()}>
                 <DragIndicator
                   style={{
                     width: 18,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { TippyProps } from '@tippyjs/react';
 
-const GrabberTooltipContent = () => (
+const GrabberTooltipContent = (): JSX.Element => (
   <div style={{ fontSize: 12 }}>
     <div>
       Drag <span style={{ color: 'rgba(255, 255, 255, 0.45)' }}>to move</span>

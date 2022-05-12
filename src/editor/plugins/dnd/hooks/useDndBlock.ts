@@ -1,3 +1,7 @@
+/** copied from plate's packages/ui/dnd/src/hooks/useDndBlock.ts, without modification */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { useState } from 'react';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 import { useEditorRef } from '@udecode/plate-core';
@@ -18,14 +22,14 @@ export const useDndBlock = ({ id, blockRef, removePreview }: { blockRef: any; id
   });
 
   // TODO: previewElement option
-  if (removePreview) {
+  if (removePreview === true) {
     drop(blockRef);
     preview(getEmptyImage(), { captureDraggingState: true });
   } else {
     preview(drop(blockRef));
   }
 
-  if (!isOver && dropLine) {
+  if (!isOver && dropLine !== '') {
     setDropLine('');
   }
 

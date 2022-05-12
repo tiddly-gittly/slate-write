@@ -16,7 +16,7 @@ const removeStartEnd = (node: { end?: number; start?: number } & Record<string, 
 };
 export const mapToNoPosNode = (ast: IParseTreeNode): IParseTreeNode =>
   map(ast, (node) => {
-    const newNode = removeStartEnd(node as IParseTreeNode) as IParseTreeNode;
+    const newNode = removeStartEnd(node) as IParseTreeNode;
     if (newNode.attributes !== undefined) {
       newNode.attributes = mapValues(newNode.attributes, (item) => item && removeStartEnd(item)) as IParseTreeNode['attributes'];
     }

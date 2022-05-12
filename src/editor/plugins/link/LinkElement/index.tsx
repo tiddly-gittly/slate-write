@@ -1,10 +1,13 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React, { useCallback, useContext, useMemo } from 'react';
-import { LinkNodeData } from '@udecode/plate-link';
 import { getRootProps, StyledElementProps } from '@udecode/plate-styled-components';
 import { ISlateAstExtraTwMarkers } from 'src/transform/ast-common-types';
 import { ParentWidgetContext } from 'tw-react';
+import { Value, TLinkElement } from '@udecode/plate';
 
-export const LinkElement = (props: StyledElementProps<LinkNodeData & ISlateAstExtraTwMarkers>) => {
+export const LinkElement = <V extends Value>(props: StyledElementProps<V, TLinkElement & ISlateAstExtraTwMarkers>): JSX.Element => {
   const { attributes, children, nodeProps, element } = props;
 
   const rootProps = getRootProps(props);
@@ -55,11 +58,14 @@ export const LinkElement = (props: StyledElementProps<LinkNodeData & ISlateAstEx
     [parentWidget],
   );
 
-  const isMissing = useMemo(() => !parentWidget?.wiki?.tiddlerExists(element.attributes?.to?.value ?? ''), [parentWidget]);
-  const isShadow = useMemo(() => parentWidget?.wiki?.isShadowTiddler(element.attributes?.to?.value ?? ''), [parentWidget]);
+  const isMissing = useMemo(
+    () => !(parentWidget?.wiki?.tiddlerExists(element.attributes?.to?.value ?? '') ?? false),
+    [element.attributes?.to?.value, parentWidget?.wiki],
+  );
+  const isShadow = useMemo(() => parentWidget?.wiki?.isShadowTiddler(element.attributes?.to?.value ?? ''), [element.attributes?.to?.value, parentWidget?.wiki]);
 
   const attributesFromTw = useMemo(() => {
-    const results: Record<string, any> = {};
+    const results: Record<string, unknown> = {};
     Object.keys(element.attributes ?? {}).forEach((key) => {
       results[key] = element.attributes![key].value;
     });
@@ -97,7 +103,7 @@ export const LinkElement = (props: StyledElementProps<LinkNodeData & ISlateAstEx
       {...rootProps}
       {...nodeProps}
       {...attributesFromTw}
-      className={`${rootProps.className} ${classesFromTw}`}
+      className={`${rootProps.className ?? ''} ${classesFromTw}`}
       style={{ cursor: 'pointer' }}>
       {children}
     </a>

@@ -1,7 +1,10 @@
+/** copied from plate's packages/ui/dnd/src/hooks/useDragBlock.ts, add $tw things */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { useDrag } from 'react-dnd';
 import { TEditor } from '@udecode/plate-core';
+import { Value } from '@udecode/plate';
 
-export const useDragBlock = (editor: TEditor, id: string) => {
+export const useDragBlock = <V extends Value>(editor: TEditor<V>, id: string) => {
   return useDrag(
     () => ({
       type: 'block',
