@@ -57,8 +57,6 @@ export interface DraggableStyles {
 }
 
 export interface DraggableProps<V extends Value> extends StyledElementProps<V, EElement<V>, DraggableStyles> {
-  allowReadOnly?: boolean;
-
   componentRef: React.Ref<any>;
 
   filter?: (editor: TEditor<V>, path: Path) => boolean;

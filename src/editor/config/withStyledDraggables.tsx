@@ -10,8 +10,8 @@ import {
   ELEMENT_H4,
   ELEMENT_H5,
   ELEMENT_H6,
-  ELEMENT_OL,
   ELEMENT_PARAGRAPH,
+  ELEMENT_OL,
   ELEMENT_UL,
   ELEMENT_LI,
 } from '@udecode/plate';
@@ -21,10 +21,14 @@ import { withDraggables } from '../plugins/dnd';
 
 export const withStyledDraggables = (components: any): ReturnType<typeof createPlateUI> => {
   return withDraggables(components, [
+    // only element that registered keys here will have dnd grabber
     {
-      // only element that registered keys here will have dnd grabber
-      keys: [ELEMENT_LI],
+      key: ELEMENT_LI,
+      filter: (editor, path) => {
+        return path[path.length - 1] === 0;
+      },
     },
+    { keys: [ELEMENT_OL, ELEMENT_UL] },
     {
       key: ELEMENT_H1,
       styles: {
@@ -104,6 +108,7 @@ export const withStyledDraggables = (components: any): ReturnType<typeof createP
           padding-top: 1.2rem;
         `,
       },
+      level: 0,
     },
   ]);
 };
