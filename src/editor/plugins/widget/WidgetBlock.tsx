@@ -16,8 +16,7 @@ export function WidgetBlock(props: WidgetBlockElementProps): JSX.Element {
   useWidget(element.node, widgetContainerReference);
   const rootProps = getRootProps(props);
   return (
-    <div {...attributes} {...rootProps}>
-      {children}
+    <div data-role="tw-widget-container" {...attributes} {...rootProps}>
       <div style={{ userSelect: 'none' }} contentEditable={false} {...nodeProps}>
         <div ref={widgetContainerReference} />
       </div>

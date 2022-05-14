@@ -24,7 +24,7 @@ export const withStyledDraggables = (components: any): ReturnType<typeof createP
       key: ELEMENT_LI,
       styles: {
         gutterLeft: css`
-          padding: 0 2em 0 0;
+          transform: translateX(-6em);
         `,
       },
     },
@@ -65,7 +65,7 @@ export const withStyledDraggables = (components: any): ReturnType<typeof createP
       },
     },
     {
-      keys: [ELEMENT_H4, ELEMENT_H5],
+      key: ELEMENT_H4,
       styles: {
         gutterLeft: css`
           padding: 0 0 0;
@@ -77,20 +77,19 @@ export const withStyledDraggables = (components: any): ReturnType<typeof createP
       },
     },
     {
-      keys: [ELEMENT_PARAGRAPH, ELEMENT_H6],
+      keys: [ELEMENT_H5, ELEMENT_H6],
       styles: {
         gutterLeft: css`
-          padding-top: 0.3rem;
+          padding: 0;
+          margin-top: -0.4em;
         `,
       },
     },
     {
+      key: ELEMENT_PARAGRAPH,
+    },
+    {
       key: ELEMENT_BLOCKQUOTE,
-      styles: {
-        gutterLeft: css`
-          padding-top: 18px;
-        `,
-      },
     },
     {
       key: ELEMENT_CODE_BLOCK,
@@ -102,11 +101,6 @@ export const withStyledDraggables = (components: any): ReturnType<typeof createP
     },
     {
       key: ELEMENT_WIDGET,
-      styles: {
-        gutterLeft: css`
-          padding-top: 1.2rem;
-        `,
-      },
       level: 0,
     },
   ]);

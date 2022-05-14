@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
-import { createPlugins, Plate, TNode, getPlateActions, usePlateEditorRef, platesActions, createNodeIdPlugin, TElement } from '@udecode/plate';
+import { createPlugins, Plate, TNode, getPlateActions, usePlateEditorRef, createNodeIdPlugin, TElement } from '@udecode/plate';
 import { useDebouncedCallback } from 'beautiful-react-hooks';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
