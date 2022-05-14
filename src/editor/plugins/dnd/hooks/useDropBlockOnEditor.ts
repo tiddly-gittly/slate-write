@@ -7,7 +7,8 @@ import { findNode, isExpanded } from '@udecode/plate-core';
 import { Path, Transforms } from 'slate';
 import { ReactEditor } from 'slate-react';
 import { DragItemBlock } from '../types';
-import { EElement, getHoverDirection, getNewDirection, TReactEditor, Value } from '@udecode/plate';
+import { EElement, getHoverDirection, getNewDirection, TReactEditor, Value, withoutNormalizing } from '@udecode/plate';
+import { postDropNormalize } from './postDropNormalize';
 
 export const useDropBlockOnEditor = <V extends Value>(
   editor: TReactEditor<V>,
@@ -61,9 +62,12 @@ export const useDropBlockOnEditor = <V extends Value>(
         const before = Path.isBefore(dragPath, dropPath) && Path.isSibling(dragPath, dropPath);
         const to = before ? dropPath : Path.next(dropPath);
 
-        Transforms.moveNodes(editor as ReactEditor, {
-          at: dragPath,
-          to,
+        withoutNormalizing(editor, () => {
+          Transforms.moveNodes(editor as ReactEditor, {
+            at: dragPath,
+            to,
+          });
+          postDropNormalize(editor, dragItem, to);
         });
       }
     },

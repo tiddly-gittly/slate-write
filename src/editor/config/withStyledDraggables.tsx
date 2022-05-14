@@ -24,11 +24,7 @@ export const withStyledDraggables = (components: any): ReturnType<typeof createP
     // only element that registered keys here will have dnd grabber
     {
       key: ELEMENT_LI,
-      filter: (editor, path) => {
-        return path[path.length - 1] === 0;
-      },
     },
-    { keys: [ELEMENT_OL, ELEMENT_UL] },
     {
       key: ELEMENT_H1,
       styles: {

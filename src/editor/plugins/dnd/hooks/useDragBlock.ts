@@ -2,14 +2,17 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { useDrag } from 'react-dnd';
 import { TEditor, Value } from '@udecode/plate-core';
-import { EElement, findNode } from '@udecode/plate';
+import { DragItemBlock, EElement } from '@udecode/plate';
 import { Editor, Path } from 'slate';
 
+export interface DragItemWithParent extends DragItemBlock {
+  parentType?: string;
+}
 export const useDragBlock = <V extends Value>(editor: TEditor<V>, element: EElement<V>, path: Path) => {
   return useDrag(
     () => ({
       type: 'block',
-      item() {
+      item(): DragItemWithParent {
         /**
          * @url https://github.com/Jermolene/TiddlyWiki5/discussions/6627
          */
@@ -17,7 +20,7 @@ export const useDragBlock = <V extends Value>(editor: TEditor<V>, element: EElem
         editor.isDragging = true;
         document.body.classList.add('dragging');
         const parentNode = Editor.above(editor as Editor, { at: path })?.[0] as EElement<V> | undefined;
-        return { id: element.id, type: element.type, parentType: parentNode?.type };
+        return { id: element.id as string, type: element.type, parentType: parentNode?.type };
       },
       collect: (monitor) => ({
         isDragging: monitor.isDragging(),
