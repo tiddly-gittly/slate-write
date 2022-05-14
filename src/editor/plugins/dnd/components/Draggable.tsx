@@ -38,7 +38,7 @@ const DraggableRoot = styled.div`
   ${is('isDragging')`
     opacity: 50%;
   `}
-  &:hover .slate-Draggable-gutterLeft {
+  & .slate-Draggable-gutterLeft:hover {
     opacity: 100%;
   }
 `;

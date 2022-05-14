@@ -5,7 +5,7 @@ import { Path } from 'slate';
 import { ReactEditor, useReadOnly } from 'slate-react';
 import { Draggable } from './Draggable';
 import { DraggableProps } from './Draggable.types';
-import { EElement, Value } from '@udecode/plate';
+import { Value } from '@udecode/plate';
 
 export interface WithDraggableOptions<V extends Value> extends Pick<DraggableProps<V>, 'onRenderDragHandle' | 'styles'> {
   /**

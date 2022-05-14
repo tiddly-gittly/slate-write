@@ -80,9 +80,6 @@ export const CONFIG: Config = {
     autoFocus: true,
     spellCheck: false,
     placeholder: 'Type / for commands, or write down what is in your mind',
-    style: {
-      padding: '15px',
-    },
   },
 
   align: {

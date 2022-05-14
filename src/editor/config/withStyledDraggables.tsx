@@ -11,8 +11,6 @@ import {
   ELEMENT_H5,
   ELEMENT_H6,
   ELEMENT_PARAGRAPH,
-  ELEMENT_OL,
-  ELEMENT_UL,
   ELEMENT_LI,
 } from '@udecode/plate';
 import { css } from 'styled-components';
@@ -24,12 +22,17 @@ export const withStyledDraggables = (components: any): ReturnType<typeof createP
     // only element that registered keys here will have dnd grabber
     {
       key: ELEMENT_LI,
+      styles: {
+        gutterLeft: css`
+          padding: 0 2em 0 0;
+        `,
+      },
     },
     {
       key: ELEMENT_H1,
       styles: {
         gutterLeft: css`
-          padding: 0.8em 0 4px;
+          padding: 0 0 4px;
           font-size: 1.875em;
         `,
         blockToolbarWrapper: css`
@@ -41,7 +44,7 @@ export const withStyledDraggables = (components: any): ReturnType<typeof createP
       key: ELEMENT_H2,
       styles: {
         gutterLeft: css`
-          padding: 0.8em 0 1px;
+          padding: 0 0 1px;
           font-size: 1.5em;
         `,
         blockToolbarWrapper: css`
@@ -53,7 +56,7 @@ export const withStyledDraggables = (components: any): ReturnType<typeof createP
       key: ELEMENT_H3,
       styles: {
         gutterLeft: css`
-          padding: 0.8em 0 1px;
+          padding: 0 0 1px;
           font-size: 1.25em;
         `,
         blockToolbarWrapper: css`
@@ -65,8 +68,8 @@ export const withStyledDraggables = (components: any): ReturnType<typeof createP
       keys: [ELEMENT_H4, ELEMENT_H5],
       styles: {
         gutterLeft: css`
-          padding: 1em 0 0;
-          font-size: 1.1em;
+          padding: 0 0 0;
+          font-size: 0.9em;
         `,
         blockToolbarWrapper: css`
           height: 1.3em;
