@@ -2,8 +2,10 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { useDrag } from 'react-dnd';
 import { TEditor, Value } from '@udecode/plate-core';
+import { EElement, findNode } from '@udecode/plate';
+import { Editor, Path } from 'slate';
 
-export const useDragBlock = <V extends Value>(editor: TEditor<V>, id: string) => {
+export const useDragBlock = <V extends Value>(editor: TEditor<V>, element: EElement<V>, path: Path) => {
   return useDrag(
     () => ({
       type: 'block',
@@ -14,7 +16,8 @@ export const useDragBlock = <V extends Value>(editor: TEditor<V>, id: string) =>
         $tw.dragInProgress = true;
         editor.isDragging = true;
         document.body.classList.add('dragging');
-        return { id };
+        const parentNode = Editor.above(editor as Editor, { at: path })?.[0] as EElement<V> | undefined;
+        return { id: element.id, type: element.type, parentType: parentNode?.type };
       },
       collect: (monitor) => ({
         isDragging: monitor.isDragging(),

@@ -7,22 +7,23 @@ import { findNode, isExpanded } from '@udecode/plate-core';
 import { Path, Transforms } from 'slate';
 import { ReactEditor } from 'slate-react';
 import { DragItemBlock } from '../types';
-import { getHoverDirection, getNewDirection, TReactEditor, Value } from '@udecode/plate';
+import { EElement, getHoverDirection, getNewDirection, TReactEditor, Value } from '@udecode/plate';
 
 export const useDropBlockOnEditor = <V extends Value>(
   editor: TReactEditor<V>,
   {
     blockRef,
-    id,
+    element,
     dropLine,
     setDropLine,
   }: {
     blockRef: any;
     dropLine: string;
-    id: string;
+    element: EElement<V>;
     setDropLine: Function;
   },
 ) => {
+  const id = element.id as string;
   return useDrop({
     accept: 'block',
     drop: (dragItem: DragItemBlock, monitor: DropTargetMonitor) => {
@@ -39,27 +40,26 @@ export const useDropBlockOnEditor = <V extends Value>(
       ReactEditor.focus(editor as ReactEditor);
 
       let dropPath: Path | undefined;
-      if (direction === 'bottom') {
-        dropPath = findNode(editor, { at: [], match: { id } })?.[1];
-        if (dropPath === undefined) return;
-
-        if (Path.equals(dragPath, Path.next(dropPath))) return;
-      }
-
-      if (direction === 'top') {
-        const nodePath = findNode(editor, { at: [], match: { id } })?.[1];
-
-        if (nodePath === undefined) return;
-        dropPath = [...nodePath.slice(0, -1), nodePath[nodePath.length - 1] - 1];
-
-        if (Path.equals(dragPath, dropPath)) return;
-      }
 
       if (direction) {
-        const _dropPath = dropPath as Path;
+        if (direction === 'bottom') {
+          dropPath = findNode(editor, { at: [], match: { id } })?.[1];
+          if (dropPath === undefined) return;
+          if (Path.equals(dragPath, Path.next(dropPath))) return;
+        }
 
-        const before = Path.isBefore(dragPath, _dropPath) && Path.isSibling(dragPath, _dropPath);
-        const to = before ? _dropPath : Path.next(_dropPath);
+        if (direction === 'top') {
+          const nodePath = findNode(editor, { at: [], match: { id } })?.[1];
+          if (nodePath === undefined) return;
+          const parentPath = nodePath.slice(0, -1);
+          dropPath = [...parentPath, nodePath[nodePath.length - 1] - 1];
+
+          if (Path.equals(dragPath, dropPath)) return;
+        }
+        if (!dropPath) return;
+
+        const before = Path.isBefore(dragPath, dropPath) && Path.isSibling(dragPath, dropPath);
+        const to = before ? dropPath : Path.next(dropPath);
 
         Transforms.moveNodes(editor as ReactEditor, {
           at: dragPath,

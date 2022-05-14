@@ -43,7 +43,7 @@ const DraggableRoot = styled.div`
   }
 `;
 const BlockAndGutter = styled.div`
-  overflow: auto;
+  /* overflow: auto; */
 `;
 const BlockToolbarWrapper = styled.div<IStyleMod>`
   display: flex;
@@ -69,7 +69,7 @@ const DropLine = styled.div<{ dropLine: '' | 'top' | 'bottom' }>`
 
 export const Draggable = <V extends Value>(props: DraggableProps<V>): JSX.Element => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const { children, element, componentRef, styles } = props;
+  const { children, element, componentRef, styles, path } = props;
 
   const blockReference = useRef<HTMLDivElement>(null);
   const rootReference = useRef<HTMLDivElement>(null);
@@ -77,7 +77,8 @@ export const Draggable = <V extends Value>(props: DraggableProps<V>): JSX.Elemen
   const multiRootReference = useMergedRef(componentRef, rootReference);
 
   const { dropLine, dragRef, isDragging } = useDndBlock({
-    id: element.id as string,
+    element,
+    path,
     blockRef: rootReference,
   });
 

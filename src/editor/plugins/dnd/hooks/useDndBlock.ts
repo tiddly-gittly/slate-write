@@ -7,15 +7,27 @@ import { getEmptyImage } from 'react-dnd-html5-backend';
 import { useEditorRef } from '@udecode/plate-core';
 import { useDragBlock } from './useDragBlock';
 import { useDropBlockOnEditor } from './useDropBlockOnEditor';
+import { EElement, Value } from '@udecode/plate';
+import { Path } from 'slate';
 
-export const useDndBlock = ({ id, blockRef, removePreview }: { blockRef: any; id: string; removePreview?: boolean }) => {
+export const useDndBlock = <V extends Value>({
+  element,
+  blockRef,
+  path,
+  removePreview,
+}: {
+  blockRef: any;
+  element: EElement<V>;
+  path: Path;
+  removePreview?: boolean;
+}) => {
   const editor = useEditorRef();
 
   const [dropLine, setDropLine] = useState<'' | 'top' | 'bottom'>('');
 
-  const [{ isDragging }, dragReference, preview] = useDragBlock(editor, id);
+  const [{ isDragging }, dragReference, preview] = useDragBlock(editor, element, path);
   const [{ isOver }, drop] = useDropBlockOnEditor(editor, {
-    id,
+    element,
     blockRef,
     dropLine,
     setDropLine,

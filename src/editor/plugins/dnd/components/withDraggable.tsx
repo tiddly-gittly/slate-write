@@ -33,7 +33,7 @@ export const withDraggable = <V extends Value>(Component: React.ComponentClass, 
     }
 
     return (
-      <Draggable editor={editor} attributes={attributes} element={element} componentRef={reference} styles={styles}>
+      <Draggable editor={editor} attributes={attributes} element={element} componentRef={reference} styles={styles} path={path}>
         <Component {...props} />
       </Draggable>
     );
