@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
-import { AnyObject, createPlugins, Plate, TNode, getPlateActions, usePlateEditorRef, platesActions, createNodeIdPlugin, TElement } from '@udecode/plate';
+import { createPlugins, Plate, TNode, getPlateActions, usePlateEditorRef, platesActions, createNodeIdPlugin, TElement } from '@udecode/plate';
 import { useDebouncedCallback } from 'beautiful-react-hooks';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -70,11 +70,15 @@ export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Elemen
   useEffect(() => {
     // reset selection, so if you delete wikitext, selection won't goto some empty space and cause error
     resetEditor();
-  }, [resetEditor]);
+    // this only work as didMount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const onBlur = useCallback(() => {
     // reset selection, so if you delete wikitext, selection won't goto some empty space and cause error
     resetEditor();
-  }, [resetEditor]);
+    // resetEditor is different every time, and allow it causing rerender will make dnd not draggable
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const debouncedSaver = useDebouncedCallback(
     (newValue: TNode[]) => {
       // DEBUG: console
