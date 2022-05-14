@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
-import { AnyObject, createPlugins, Plate, TNode, getPlateActions, usePlateEditorRef, platesActions, createNodeIdPlugin } from '@udecode/plate';
+import { AnyObject, createPlugins, Plate, TNode, getPlateActions, usePlateEditorRef, platesActions, createNodeIdPlugin, TElement } from '@udecode/plate';
 import { useDebouncedCallback } from 'beautiful-react-hooks';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -13,6 +13,7 @@ import { SnippetCombobox } from './components/SnippetCombobox';
 import { components } from './components';
 import { CONFIG } from './config/config';
 import { getIdFactory } from './plugins/id/getId';
+import { ReactEditor } from 'slate-react';
 
 export interface IEditorAppProps {
   currentTiddler: string;
@@ -38,7 +39,7 @@ export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Elemen
   }, [props.currentTiddler]);
   const editorReference = usePlateEditorRef(editorID);
   // Add the initial value when setting up our state.
-  const currentAstReference = useRef<TNode[]>(deserialize(props.tiddlerText, { idCreator }));
+  const currentAstReference = useRef<TElement[]>(deserialize(props.tiddlerText, { idCreator }));
   /** current text is only used for compare, we don't want it trigger rerender, so use ref to store it */
   const currentTextReference = useRef<string>(props.tiddlerText);
   // TODO: get dom node to add IME listener to prevent update when IME open https://github.com/udecode/plate/issues/239#issuecomment-1098052241
@@ -65,15 +66,15 @@ export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Elemen
       resetEditor();
       updateEditorValue(newValue);
     }
-  }, [props.tiddlerText, currentTextReference, updateEditorValue, resetEditor]);
+  }, [props.tiddlerText, currentTextReference, updateEditorValue, resetEditor, idCreator]);
   useEffect(() => {
     // reset selection, so if you delete wikitext, selection won't goto some empty space and cause error
     resetEditor();
-  }, []);
+  }, [resetEditor]);
   const onBlur = useCallback(() => {
     // reset selection, so if you delete wikitext, selection won't goto some empty space and cause error
     resetEditor();
-  }, []);
+  }, [resetEditor]);
   const debouncedSaver = useDebouncedCallback(
     (newValue: TNode[]) => {
       // DEBUG: console
@@ -85,11 +86,21 @@ export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Elemen
     [props.saver.onSave],
     props.saver.interval,
   );
-  const onChange = useCallback((newValue: TNode[]) => {
-    props.saver.lock();
-    currentAstReference.current = newValue;
-    debouncedSaver(newValue);
-  }, []);
+  const onChange = useCallback(
+    (newValue: TElement[]) => {
+      // check isComposing and if user is just set_selection
+      if (editorReference === null || ReactEditor.isComposing(editorReference as ReactEditor)) {
+        return;
+      }
+      if (editorReference.operations.every((op) => op.type === 'set_selection')) {
+        return;
+      }
+      props.saver.lock();
+      currentAstReference.current = newValue;
+      debouncedSaver(newValue);
+    },
+    [debouncedSaver, editorReference, props.saver],
+  );
   if (typeof document === 'undefined') {
     return <div>Loading...</div>;
   }
