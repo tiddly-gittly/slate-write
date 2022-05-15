@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
-import { IParseTreeNode } from 'tiddlywiki';
+import { IMacroCallParseTreeNode, IParseTreeNode } from 'tiddlywiki';
 
 export const widget: Record<string, IParseTreeNode[] | IParseTreeNode> = {
   'list widget': [
@@ -78,6 +78,148 @@ export const widget: Record<string, IParseTreeNode[] | IParseTreeNode> = {
       ],
       start: 48,
       end: 51,
+    },
+  ],
+  rpn: [
+    {
+      type: 'element',
+      tag: 'p',
+      children: [
+        {
+          type: 'macrocall',
+          start: 0,
+          attributes: {
+            $name: {
+              start: 11,
+              name: '$name',
+              type: 'string',
+              value: 'rpn',
+              end: 23,
+            },
+            a: {
+              start: 23,
+              name: 'a',
+              type: 'macro',
+              value: {
+                type: 'macrocall',
+                start: 26,
+                params: [
+                  {
+                    type: 'macro-parameter',
+                    start: 31,
+                    value: '2',
+                    end: 33,
+                  },
+                  {
+                    type: 'macro-parameter',
+                    start: 33,
+                    value: '2',
+                    end: 35,
+                  },
+                  {
+                    type: 'macro-parameter',
+                    start: 35,
+                    value: '*',
+                    end: 37,
+                  },
+                ],
+                name: 'rpn',
+                end: 39,
+              },
+              end: 39,
+            },
+            b: {
+              start: 39,
+              name: 'b',
+              type: 'string',
+              value: 'pi',
+              end: 44,
+            },
+            operation: {
+              start: 44,
+              name: 'operation',
+              type: 'string',
+              value: '*',
+              end: 58,
+            },
+            decimals: {
+              start: 58,
+              name: 'decimals',
+              type: 'string',
+              value: '4',
+              end: 71,
+            },
+          },
+          orderedAttributes: [
+            {
+              start: 11,
+              name: '$name',
+              type: 'string',
+              value: 'rpn',
+              end: 23,
+            },
+            {
+              start: 23,
+              name: 'a',
+              type: 'macro',
+              value: {
+                type: 'macrocall',
+                start: 26,
+                params: [
+                  {
+                    type: 'macro-parameter',
+                    start: 31,
+                    value: '2',
+                    end: 33,
+                  },
+                  {
+                    type: 'macro-parameter',
+                    start: 33,
+                    value: '2',
+                    end: 35,
+                  },
+                  {
+                    type: 'macro-parameter',
+                    start: 35,
+                    value: '*',
+                    end: 37,
+                  },
+                ],
+                name: 'rpn',
+                end: 39,
+              },
+              end: 39,
+            },
+            {
+              start: 39,
+              name: 'b',
+              type: 'string',
+              value: 'pi',
+              end: 44,
+            },
+            {
+              start: 44,
+              name: 'operation',
+              type: 'string',
+              value: '*',
+              end: 58,
+            },
+            {
+              start: 58,
+              name: 'decimals',
+              type: 'string',
+              value: '4',
+              end: 71,
+            },
+          ],
+          tag: '$macrocall',
+          isSelfClosing: true,
+          end: 73,
+          isBlock: false,
+        },
+      ],
+      start: 0,
+      end: 73,
     },
   ],
 };
