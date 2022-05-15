@@ -69,4 +69,5 @@ describe('Transform tree', () => {
   test('heading', () => {
     expect(wikiAstToSlateAst(wikiAstDict['heading'])).toMatchObject(slateDict['heading']);
   });
+  /** new tests here generated using `npx zx scripts/test/add-new-test.mjs` */
 });

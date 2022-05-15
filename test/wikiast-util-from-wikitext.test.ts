@@ -78,4 +78,5 @@ describe('fromWikiText', () => {
   test('heading', () => {
     expect(wikiAstFromWikiText(wikiTextDict.heading)).toEqual(wikiAstDict.heading);
   });
+  /** new tests here generated using `npx zx scripts/test/add-new-test.mjs` */
 });

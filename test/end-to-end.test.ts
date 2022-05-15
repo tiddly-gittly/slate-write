@@ -62,4 +62,5 @@ describe('Identical', () => {
   test('heading', () => {
     expect(wikiAstDict.heading).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos.heading)));
   });
+  /** new tests here generated using `npx zx scripts/test/add-new-test.mjs` */
 });

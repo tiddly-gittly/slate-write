@@ -75,4 +75,5 @@ describe('Transform tree', () => {
   test('heading', () => {
     expect(wikiAstToWikiText(wikiAstDict['heading'])).toEqual(wikiTextDict['heading']);
   });
+  /** new tests here generated using `npx zx scripts/test/add-new-test.mjs` */
 });
