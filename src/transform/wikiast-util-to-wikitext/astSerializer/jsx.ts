@@ -16,9 +16,18 @@ export function jsx(context: IContext, node: ICustomParseTreeNode | IDomParseTre
   /** list of attributes, prevent `orderedAttributes` or `attributes` to be undefined */
   const attributeList =
     orderedAttributes !== undefined ? orderedAttributes : attributes !== undefined ? Object.keys(attributes).map((key) => attributes[key]) : [];
+  const kvPairs = attributeList
+    .map((attributeNode) => {
+      const builder = context.builders[attributeNode.type];
+      const value = builder(context, attributeNode).join('');
+      // macro don't need a quote, otherwise it means escape
+      const valueWithQuote = attributeNode.type === 'macro' ? value : `"${value}"`;
+      return `${attributeNode.name}=${valueWithQuote}`;
+    })
+    .join(' ');
   const jsxResult = isSelfClosing
-    ? [`<${prefix}${tag} ${attributeList.map(({ name, value }) => `${name}="${value}"`).join(' ')}/>`]
-    : [`<${prefix}${tag} ${attributeList.map(({ name, value }) => `${name}="${value}"`).join(' ')}>`, ...convertNodes(context, children), `</${prefix}${tag}>`];
+    ? [`<${prefix}${tag} ${kvPairs}/>`]
+    : [`<${prefix}${tag} ${kvPairs}>`, ...convertNodes(context, children), `</${prefix}${tag}>`];
   // block level texts are separated with \n
   return jsxResult;
 }

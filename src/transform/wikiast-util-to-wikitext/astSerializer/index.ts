@@ -6,6 +6,9 @@ import { jsx } from './jsx';
 import { image } from './image';
 import { tiddler } from './transclude';
 import { widget } from './widget';
+import { macro } from './macro';
+import { macrocall } from './macrocall';
+import { string } from './string';
 
 export const builders = {
   element,
@@ -16,5 +19,12 @@ export const builders = {
   link,
   jsx,
   widget,
+  macro,
+  macrocall,
+  string,
+  'macro-parameter': string,
+  number: string,
+  bigint: string,
+  boolean: string,
 };
 export type IBuilders = typeof builders;

@@ -1,5 +1,5 @@
 import { wikiAstToSlateAst } from '../src/transform/wikiast-util-to-slate-plate-ast';
-import { slateDict, wikiAstDict } from './constants';
+import { slateDict, wikiAstDict, wikiAstDictWithoutPos } from './constants';
 
 describe('Transform node', () => {
   test('wikiAstToSlateAst callable', () => {
@@ -69,7 +69,7 @@ describe('Transform tree', () => {
     expect(wikiAstToSlateAst(wikiAstDict.heading)).toMatchObject(slateDict.heading);
   });
   test('rpn', () => {
-    expect(wikiAstToSlateAst(wikiAstDict.rpn)).toMatchObject(slateDict.rpn);
+    expect(wikiAstToSlateAst(wikiAstDictWithoutPos.rpn)).toMatchObject(slateDict.rpn);
   });
   /** new tests here generated using `npx zx scripts/test/add-new-test.mjs` */
 });

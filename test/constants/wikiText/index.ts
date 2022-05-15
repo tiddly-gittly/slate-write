@@ -111,5 +111,5 @@ AAA`,
 ## [[BBB]]
 ### CCC
 `,
-  rpn: `<$macrocall $name="rpn" a=<<rpn 2 2 *>> b=pi operation="*" decimals="4"/>`,
+  rpn: `<$macrocall $name="rpn" a=<<rpn 2 2 *>> b="pi" operation="*" decimals="4"/>`,
 };
