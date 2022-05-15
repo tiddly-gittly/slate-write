@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import type { ICustomParseTreeNode, IMacroCallParseTreeNode } from 'tiddlywiki';
 import { IContext } from '..';
 
@@ -9,6 +10,12 @@ export function macrocall(context: IContext, node: IMacroCallParseTreeNode): str
     return context.builders.widget(context, node as ICustomParseTreeNode);
   }
   if (name === undefined) return [];
-  const parameterString = params?.flatMap((parameter) => context.builders[parameter.type]?.(context, parameter) ?? []).join(' ');
+  const parameterString = params
+    ?.flatMap((parameter) => {
+      const parameterKeyString = parameter.name ? `${parameter.name}:` : '';
+      const parameterValues = context.builders[parameter.type]?.(context, parameter) ?? [];
+      return parameterValues.map((text) => (text.includes(' ') ? `"${text}"` : text)).map((value) => `${parameterKeyString}${value}`);
+    })
+    .join(' ');
   return [`<<`, name, parameterString === undefined ? '' : ` ${parameterString}`, `>>`];
 }

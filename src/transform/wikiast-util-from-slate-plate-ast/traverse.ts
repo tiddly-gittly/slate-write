@@ -24,10 +24,10 @@ export function convertWikiAstNode(builders: IAnyBuilder, node: TNode): IParseTr
   if (isElement(node)) {
     const builder = builders[node.type as keyof IBuilders];
     if (typeof builder === 'function') {
-      const builtSlateNodeOrNodes = builder(builders, node);
+      const builtSlateNodeOrNodes = builder(builders, node as never);
       return Array.isArray(builtSlateNodeOrNodes)
-        ? builtSlateNodeOrNodes.map((child) => ({ ...getSlatePlateASTAdditionalProperties(node), ...child }))
-        : ([{ ...getSlatePlateASTAdditionalProperties(node), ...builtSlateNodeOrNodes }] as IParseTreeNode[]);
+        ? builtSlateNodeOrNodes.map((child) => ({ ...getSlatePlateASTAdditionalProperties(node as never), ...child }))
+        : ([{ ...getSlatePlateASTAdditionalProperties(node as never), ...builtSlateNodeOrNodes }] as IParseTreeNode[]);
     }
   }
   // it might be a root or pure parent node, reduce it

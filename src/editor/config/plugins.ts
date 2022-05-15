@@ -23,7 +23,6 @@ import {
   createSubscriptPlugin,
   createSuperscriptPlugin,
   createUnderlinePlugin,
-  createNodeIdPlugin,
   createComboboxPlugin,
   createMentionPlugin,
 } from '@udecode/plate';
@@ -31,6 +30,7 @@ import { CONFIG } from './config';
 import { createHeadingPlugin } from '../plugins/heading';
 import { createWidgetPlugin } from '../plugins/widget';
 import { createDndPlugin } from '../plugins/dnd';
+import { createMacroPlugin } from '../plugins/macro';
 
 export const basicElements = createPlugins([
   createBlockquotePlugin(),
@@ -69,4 +69,4 @@ export const utils = createPlugins([
    */
   createTrailingBlockPlugin(),
 ]);
-export const twAdvancedElements = createPlugins([createWidgetPlugin()]);
+export const twAdvancedElements = createPlugins([createWidgetPlugin(), createMacroPlugin()]);

@@ -81,5 +81,8 @@ describe('fromWikiText', () => {
   test('rpn', () => {
     expect(wikiAstFromWikiText(wikiTextDict.rpn)).toEqual(wikiAstDict.rpn);
   });
+  test('macro alert', () => {
+    expect(wikiAstFromWikiText(wikiTextDict['macro alert'])).toEqual(wikiAstDict['macro alert']);
+  });
   /** new tests here generated using `npx zx scripts/test/add-new-test.mjs` */
 });

@@ -71,5 +71,8 @@ describe('Transform tree', () => {
   test('rpn', () => {
     expect(wikiAstToSlateAst(wikiAstDictWithoutPos.rpn)).toMatchObject(slateDict.rpn);
   });
+  test('macro alert', () => {
+    expect(wikiAstToSlateAst(wikiAstDict['macro alert'])).toMatchObject(slateDict['macro alert']);
+  });
   /** new tests here generated using `npx zx scripts/test/add-new-test.mjs` */
 });

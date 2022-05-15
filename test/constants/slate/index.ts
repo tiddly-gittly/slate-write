@@ -6,6 +6,7 @@ import { transclude } from './transclude';
 import { widget } from './widget';
 import { link } from './link';
 import { heading } from './heading';
+import { macro } from './macro';
 
 /**
  * Get value by adding `console.log(`newValue`, newValue);` in `onSave` of `src/components/editor.tsx`.
@@ -19,6 +20,7 @@ export const slateDict: Record<string, TEditor<Value> | TElement | TText | Array
   ...link,
   ...heading,
   ...ol,
+  ...macro,
   text: [{ text: 'AAA' }],
   'p > text': { type: 'p', children: [{ text: 'AAA' }] },
 };

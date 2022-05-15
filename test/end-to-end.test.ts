@@ -65,5 +65,8 @@ describe('Identical', () => {
   test('rpn', () => {
     expect(wikiAstDict.rpn).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos.rpn)));
   });
+  test('macro alert', () => {
+    expect(wikiAstDict['macro alert']).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos['macro alert'])));
+  });
   /** new tests here generated using `npx zx scripts/test/add-new-test.mjs` */
 });

@@ -3,6 +3,7 @@ import { element } from './element';
 import { text } from './text';
 import { link } from './link';
 import { widget } from './widget';
+import { macro } from './macro';
 
 export const builders = {
   element,
@@ -14,5 +15,6 @@ export const builders = {
   widget,
   image: widget,
   tiddler: widget,
+  macrocall: macro,
 };
 export type IBuilders = typeof builders;

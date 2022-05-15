@@ -25,6 +25,7 @@ export const builders = {
   [ELEMENT_LIC]: lic,
   text,
   widget,
+  macro: widget,
 };
 
 export type IBuilders = typeof builders;

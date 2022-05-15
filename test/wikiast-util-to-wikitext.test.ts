@@ -77,5 +77,8 @@ describe('Transform tree', () => {
   test('rpn', () => {
     expect(wikiAstToWikiText(wikiAstDict.rpn)).toEqual(wikiTextDict.rpn);
   });
+  test('macro alert', () => {
+    expect(wikiAstToWikiText(wikiAstDict['macro alert'])).toEqual(wikiTextDict['macro alert']);
+  });
   /** new tests here generated using `npx zx scripts/test/add-new-test.mjs` */
 });
