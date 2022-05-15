@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/dot-notation */
 import { wikiAstToWikiText } from '../src/transform/wikiast-util-to-wikitext';
 import { wikiAstDict, wikiTextDict } from './constants';
 
@@ -10,7 +9,7 @@ describe('wikiAstToWikiText', () => {
 });
 describe('Transform node', () => {
   test('text', () => {
-    expect(wikiAstToWikiText(wikiAstDict['text'])).toEqual(wikiTextDict['text']);
+    expect(wikiAstToWikiText(wikiAstDict.text)).toEqual(wikiTextDict.text);
   });
 });
 
@@ -43,13 +42,13 @@ describe('Transform tree', () => {
     expect(wikiAstToWikiText(wikiAstDict['ol + ol > ol > p'])).toEqual(wikiTextDict['ol + ol > ol > p']);
   });
   test('image', () => {
-    expect(wikiAstToWikiText(wikiAstDict['image'])).toEqual(wikiTextDict['image']);
+    expect(wikiAstToWikiText(wikiAstDict.image)).toEqual(wikiTextDict.image);
   });
   test('image with tooltip and width', () => {
     expect(wikiAstToWikiText(wikiAstDict['image with tooltip and width'])).toEqual(wikiTextDict['image with tooltip and width']);
   });
   test('transclude', () => {
-    expect(wikiAstToWikiText(wikiAstDict['transclude'])).toEqual(wikiTextDict['transclude']);
+    expect(wikiAstToWikiText(wikiAstDict.transclude)).toEqual(wikiTextDict.transclude);
   });
   test('list widget', () => {
     expect(wikiAstToWikiText(wikiAstDict['list widget'])).toEqual(wikiTextDict['list widget']);
@@ -58,7 +57,7 @@ describe('Transform tree', () => {
     expect(wikiAstToWikiText(wikiAstDict['list widget block'])).toEqual(wikiTextDict['list widget block']);
   });
   test('link', () => {
-    expect(wikiAstToWikiText(wikiAstDict['link'])).toEqual(wikiTextDict['link']);
+    expect(wikiAstToWikiText(wikiAstDict.link)).toEqual(wikiTextDict.link);
   });
   test('empty link', () => {
     expect(wikiAstToWikiText(wikiAstDict['empty link'])).toEqual(wikiTextDict['empty link']);
@@ -73,7 +72,10 @@ describe('Transform tree', () => {
     expect(wikiAstToWikiText(wikiAstDict['link in a list'])).toEqual(wikiTextDict['link in a list']);
   });
   test('heading', () => {
-    expect(wikiAstToWikiText(wikiAstDict['heading'])).toEqual(wikiTextDict['heading']);
+    expect(wikiAstToWikiText(wikiAstDict.heading)).toEqual(wikiTextDict.heading);
+  });
+  test('rpn', () => {
+    expect(wikiAstToWikiText(wikiAstDict.rpn)).toEqual(wikiTextDict.rpn);
   });
   /** new tests here generated using `npx zx scripts/test/add-new-test.mjs` */
 });

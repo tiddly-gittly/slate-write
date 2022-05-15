@@ -78,5 +78,8 @@ describe('fromWikiText', () => {
   test('heading', () => {
     expect(wikiAstFromWikiText(wikiTextDict.heading)).toEqual(wikiAstDict.heading);
   });
+  test('rpn', () => {
+    expect(wikiAstFromWikiText(wikiTextDict.rpn)).toEqual(wikiAstDict.rpn);
+  });
   /** new tests here generated using `npx zx scripts/test/add-new-test.mjs` */
 });

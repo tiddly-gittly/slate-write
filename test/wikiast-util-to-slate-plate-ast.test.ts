@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/dot-notation */
 import { wikiAstToSlateAst } from '../src/transform/wikiast-util-to-slate-plate-ast';
 import { slateDict, wikiAstDict } from './constants';
 
@@ -7,7 +6,7 @@ describe('Transform node', () => {
     expect(typeof wikiAstToSlateAst).toBe('function');
   });
   test('text', () => {
-    expect(wikiAstToSlateAst(wikiAstDict['text'])).toEqual(slateDict['text']);
+    expect(wikiAstToSlateAst(wikiAstDict.text)).toEqual(slateDict.text);
   });
 });
 
@@ -40,10 +39,10 @@ describe('Transform tree', () => {
     expect(wikiAstToSlateAst(wikiAstDict['ol + ol > ol > p'])).toMatchObject(slateDict['ol + ol > ol > p']);
   });
   test('image', () => {
-    expect(wikiAstToSlateAst(wikiAstDict['image'])).toMatchObject([slateDict['image']]);
+    expect(wikiAstToSlateAst(wikiAstDict.image)).toMatchObject([slateDict.image]);
   });
   test('transclude', () => {
-    expect(wikiAstToSlateAst(wikiAstDict['transclude'])).toMatchObject([slateDict['transclude']]);
+    expect(wikiAstToSlateAst(wikiAstDict.transclude)).toMatchObject([slateDict.transclude]);
   });
   test('list widget', () => {
     expect(wikiAstToSlateAst(wikiAstDict['list widget'])).toMatchObject([slateDict['list widget']]);
@@ -52,7 +51,7 @@ describe('Transform tree', () => {
     expect(wikiAstToSlateAst(wikiAstDict['list widget block'])).toMatchObject(slateDict['list widget block']);
   });
   test('link', () => {
-    expect(wikiAstToSlateAst(wikiAstDict['link'])).toMatchObject(slateDict['link']);
+    expect(wikiAstToSlateAst(wikiAstDict.link)).toMatchObject(slateDict.link);
   });
   test('empty link', () => {
     expect(wikiAstToSlateAst(wikiAstDict['empty link'])).toMatchObject(slateDict['empty link']);
@@ -67,7 +66,10 @@ describe('Transform tree', () => {
     expect(wikiAstToSlateAst(wikiAstDict['link in a list'])).toMatchObject(slateDict['link in a list']);
   });
   test('heading', () => {
-    expect(wikiAstToSlateAst(wikiAstDict['heading'])).toMatchObject(slateDict['heading']);
+    expect(wikiAstToSlateAst(wikiAstDict.heading)).toMatchObject(slateDict.heading);
+  });
+  test('rpn', () => {
+    expect(wikiAstToSlateAst(wikiAstDict.rpn)).toMatchObject(slateDict.rpn);
   });
   /** new tests here generated using `npx zx scripts/test/add-new-test.mjs` */
 });

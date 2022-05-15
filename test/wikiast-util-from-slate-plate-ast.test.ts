@@ -71,5 +71,8 @@ describe('fromSlateAst', () => {
   test('heading', () => {
     expect(wikiAstFromSlateAst(slateDict.heading)).toEqual(wikiAstDictWithoutPos.heading);
   });
+  test('rpn', () => {
+    expect(wikiAstFromSlateAst(slateDict.rpn)).toEqual(wikiAstDictWithoutPos.rpn);
+  });
   /** new tests here generated using `npx zx scripts/test/add-new-test.mjs` */
 });
