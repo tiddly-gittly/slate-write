@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
-import { IDomParseTreeNode, IParseTreeNode } from 'tiddlywiki';
-import cloneDeep from 'lodash/cloneDeep';
+import { IParseTreeNode } from 'tiddlywiki';
 
 /**
  * Need to use `type: 'text' as const,`.

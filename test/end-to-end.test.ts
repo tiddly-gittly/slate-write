@@ -1,6 +1,6 @@
 import { wikiAstToSlateAst } from '../src/transform/wikiast-util-to-slate-plate-ast';
 import { wikiAstFromSlateAst } from '../src/transform/wikiast-util-from-slate-plate-ast';
-import { slateDict, wikiAstDict, wikiAstDictWithoutPos } from './constants';
+import { wikiAstDict, wikiAstDictWithoutPos } from './constants';
 
 describe('Identical', () => {
   test('p > text', () => {

@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import fs from 'fs-extra';
 import { TiddlyWiki } from 'tiddlywiki';
 
 beforeEach(async () => {

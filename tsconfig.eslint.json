@@ -13,6 +13,8 @@
     "demo/**/*.js",
     "features/**/*.ts",
     "scripts/**/*.ts",
+    "scripts/**/*.mjs",
+    "scripts/**/*.js",
     "src/**/*.d.ts",
     "demo/**/*.d.ts",
     "test/**/*.mjs",

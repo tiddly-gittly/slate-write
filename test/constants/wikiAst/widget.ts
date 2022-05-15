@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
-import { IMacroCallParseTreeNode, IParseTreeNode } from 'tiddlywiki';
+import { IParseTreeNode } from 'tiddlywiki';
 
 export const widget: Record<string, IParseTreeNode[] | IParseTreeNode> = {
   'list widget': [
