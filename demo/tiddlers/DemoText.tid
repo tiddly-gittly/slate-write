@@ -6,41 +6,71 @@ title: DemoText
 type: text/vnd.tiddlywiki
 wysiwyg: yes
 
-# AAA
-## BBB
-### CCC
+! Title and marks A''AAA''A
 
-! A''AAA''A
+!! h2 B//BBB//B
 
-AAAA
+!!! h3 C__CCC__C
 
-!! B//BBB//B
+!!!! h4 D~~DDD~~D
 
-!!! C__CCC__C
+!!!!! h5 D~~DDD~~D
 
-!!!! D~~DDD~~D
-
-!!!!! D~~DDD~~D
-
-!!!!!! D~~DDD~~D
+!!!!!! h6 D~~DDD~~D
 
 E`EEE`E
 
+! List
+
+# AAA
+## BBB
+### CCC
+## DDD
+
+* DDD
+** EEE
+*** FFF
+*** GGG
+
+! Image and link
+
 [img[TiddlyWikiIconBlack.png]]
 
-{{favicon.ico}}
-
-<$list filter="[tag[ExampleTag]sort[title]]"/>
-
 [[ExampleTag]]
+
+{{favicon.ico}}
 
 [ext[TW5|https://tiddlywiki.com]]
 
 [ext[Mail me|mailto:me@where.net]]
 
+! Widget and macro
+
+```tid
+<$list filter="[tag[ExampleTag]sort[title]]"/>
+```
+
+<$list filter="[tag[ExampleTag]sort[title]]"/>
+
+```tid
+<<locator-view baseTitle:"TableOfContents">>
+```
+
 <<locator-view baseTitle:"TableOfContents">>
 
-<$macrocall $name="rpn" a=<<rpn 2 2 *>> b=pi operation="*" decimals="4"/>
+```tid
+<<alert primary "primary alert" width:60%>>
+```
+
+<<alert primary "primary alert" width:60%>>
+
+```tid
+<$macrocall $name="rpn" a=<<rpn 2 2 *>> b="pi" operation="*" decimals="4"/>
+```
+
+<$macrocall $name="rpn" a=<<rpn 2 2 *>> b="pi" operation="*" decimals="4"/>
+
+! Quotes
 
 > ABCD
 
