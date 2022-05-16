@@ -1,11 +1,12 @@
-import { ELEMENT_CODE_BLOCK, ELEMENT_LIC } from '@udecode/plate';
+import { ELEMENT_LIC } from '@udecode/plate';
 import htmlTags from 'html-tags';
 
-import { codeBlock } from './codeBlock';
+import { codeblock } from './codeblock';
 import { element } from './element';
 import { lic } from './lic';
 import { text } from './text';
 import { widget } from './widget';
+import { ELEMENT_CODE_BLOCK } from '../../../editor/plugins/codeblock';
 
 /**
  * Key is `node.type`, value is node converter function.
@@ -21,7 +22,7 @@ export const builders = {
     // eslint-disable-next-line @typescript-eslint/prefer-reduce-type-parameter, @typescript-eslint/consistent-type-assertions
     {} as IElementBuilders,
   ),
-  [ELEMENT_CODE_BLOCK]: codeBlock,
+  [ELEMENT_CODE_BLOCK]: codeblock,
   [ELEMENT_LIC]: lic,
   text,
   widget,

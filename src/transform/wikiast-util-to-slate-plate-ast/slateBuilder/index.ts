@@ -4,11 +4,13 @@ import { text } from './text';
 import { link } from './link';
 import { widget } from './widget';
 import { macro } from './macro';
+import { codeblock } from './codeblock';
 
 export const builders = {
   element,
   text,
   link,
+  codeblock,
   /**
    * We render most tw widgets using tw-react
    */

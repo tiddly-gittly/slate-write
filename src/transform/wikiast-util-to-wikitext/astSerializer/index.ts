@@ -9,6 +9,7 @@ import { widget } from './widget';
 import { macro } from './macro';
 import { macrocall } from './macrocall';
 import { string } from './string';
+import { codeblock } from './codeblock';
 
 export const builders = {
   element,
@@ -22,6 +23,7 @@ export const builders = {
   macro,
   macrocall,
   string,
+  codeblock,
   'macro-parameter': string,
   number: string,
   bigint: string,
