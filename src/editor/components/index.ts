@@ -2,6 +2,7 @@ import { createPlateUI, ELEMENT_LINK, LinkElement, ELEMENT_OL, ELEMENT_UL, withP
 import { css } from 'styled-components';
 import { withStyledDraggables } from '../config/withStyledDraggables';
 import { withStyledPlaceHolders } from '../config/withStyledPlaceHolders';
+import { CodeBlockElement, ELEMENT_CODE_BLOCK } from '../plugins/codeblock';
 import { ELEMENT_MACRO } from '../plugins/macro';
 import { ELEMENT_WIDGET, WidgetBlock } from '../plugins/widget';
 
@@ -10,6 +11,7 @@ const rawComponents = createPlateUI({
   [ELEMENT_WIDGET]: WidgetBlock,
   [ELEMENT_MACRO]: WidgetBlock,
   [ELEMENT_LINK]: LinkElement,
+  [ELEMENT_CODE_BLOCK]: CodeBlockElement,
   [ELEMENT_OL]: withProps(StyledElement, {
     as: 'ol',
   }),

@@ -1,0 +1,18 @@
+import { HotkeyPlugin, InsertNodesOptions, TElement, Value } from '@udecode/plate-core';
+
+export interface CodeBlockPlugin extends HotkeyPlugin {
+  deserializers?: string[];
+  syntax?: boolean;
+  syntaxPopularFirst?: boolean;
+}
+
+export interface TCodeBlockElement extends TElement {
+  code: string;
+  language?: string;
+}
+
+export interface CodeBlockInsertOptions<V extends Value> {
+  defaultType?: string;
+  insertNodesOptions?: Omit<InsertNodesOptions<V>, 'match'>;
+  level?: number;
+}

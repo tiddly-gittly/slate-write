@@ -2,7 +2,6 @@ import {
   createAutoformatPlugin,
   createBlockquotePlugin,
   createBoldPlugin,
-  createCodeBlockPlugin,
   createCodePlugin,
   createTrailingBlockPlugin,
   createTablePlugin,
@@ -28,6 +27,7 @@ import {
 } from '@udecode/plate';
 import { CONFIG } from './config';
 import { createHeadingPlugin } from '../plugins/heading';
+import { createCodeBlockPlugin } from '../plugins/codeblock';
 import { createWidgetPlugin } from '../plugins/widget';
 import { createDndPlugin } from '../plugins/dnd';
 import { createMacroPlugin } from '../plugins/macro';
