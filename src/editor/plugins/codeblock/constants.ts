@@ -55,6 +55,7 @@ export const ELEMENT_CODE_BLOCK = 'codeblock';
 // `;
 
 export const CODE_BLOCK_LANGUAGES_POPULAR: Record<string, string> = {
+  tid: 'TiddlyWiki',
   bash: 'Bash',
   css: 'CSS',
   git: 'Git',

@@ -4,9 +4,17 @@
 import React from 'react';
 import { getPluginOptions, useEditorRef } from '@udecode/plate-core';
 import { useReadOnly } from 'slate-react';
-import { CSSProp } from 'styled-components';
+import styled, { CSSProp } from 'styled-components';
 import { CODE_BLOCK_LANGUAGES, CODE_BLOCK_LANGUAGES_POPULAR, ELEMENT_CODE_BLOCK } from '../constants';
 import { CodeBlockPlugin } from '../types';
+
+const CodeSyntaxSelect = styled.select`
+  opacity: 20%;
+  &:hover {
+    opacity: 100%;
+  }
+  transition: opacity 0.2s;
+`;
 
 export function CodeBlockSelectElement({
   language,
@@ -26,7 +34,7 @@ export function CodeBlockSelectElement({
   const { syntaxPopularFirst } = getPluginOptions<CodeBlockPlugin>(editor, ELEMENT_CODE_BLOCK);
 
   return (
-    <select
+    <CodeSyntaxSelect
       value={value}
       style={{ float: 'right' }}
       onClick={(event) => {
@@ -50,6 +58,6 @@ export function CodeBlockSelectElement({
           {value_}
         </option>
       ))}
-    </select>
+    </CodeSyntaxSelect>
   );
 }
