@@ -77,5 +77,8 @@ describe('fromSlateAst', () => {
   test('macro alert', () => {
     expect(wikiAstFromSlateAst(slateDict['macro alert'])).toEqual(wikiAstDictWithoutPos['macro alert']);
   });
+  test('codeblock', () => {
+    expect(wikiAstFromSlateAst(slateDict.codeblock)).toEqual(wikiAstDictWithoutPos.codeblock);
+  });
   /** new tests here generated using `npx zx scripts/test/add-new-test.mjs` */
 });

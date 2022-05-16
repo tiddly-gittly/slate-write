@@ -113,4 +113,7 @@ AAA`,
 `,
   rpn: `<$macrocall $name="rpn" a=<<rpn 2 2 *>> b="pi" operation="*" decimals="4"/>`,
   'macro alert': `<<alert primary "primary alert" width:60%>>`,
+  codeblock: `\`\`\`tid
+<$list filter="[tag[ExampleTag]sort[title]]"/>
+\`\`\``,
 };

@@ -8,6 +8,7 @@ import { p } from './p';
 import { ol } from './ol';
 import { link } from './link';
 import { image } from './image';
+import { codeblock } from './codeblock';
 import { transclude } from './transclude';
 import { widget } from './widget';
 import { heading } from './heading';
@@ -17,6 +18,7 @@ export const wikiAstDict: Record<string, IParseTreeNode[] | IParseTreeNode> = {
   ...p,
   ...ol,
   ...image,
+  ...codeblock,
   ...transclude,
   ...widget,
   ...link,

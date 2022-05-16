@@ -1,0 +1,18 @@
+import { TEditor, Value, TElement, TText } from '@udecode/plate';
+
+export const codeblock: Record<string, TEditor<Value> | TElement | TText | Array<TEditor<Value> | TElement | TText>> = {
+  codeblock: [
+    {
+      type: 'codeblock',
+      isElement: true,
+      isVoid: false,
+      children: [
+        {
+          text: '',
+        },
+      ],
+      code: '<$list filter="[tag[ExampleTag]sort[title]]"/>',
+      language: 'tid',
+    },
+  ],
+};

@@ -80,5 +80,8 @@ describe('Transform tree', () => {
   test('macro alert', () => {
     expect(wikiAstToWikiText(wikiAstDict['macro alert'])).toEqual(wikiTextDict['macro alert']);
   });
+  test('codeblock', () => {
+    expect(wikiAstToWikiText(wikiAstDict.codeblock)).toEqual(wikiTextDict.codeblock);
+  });
   /** new tests here generated using `npx zx scripts/test/add-new-test.mjs` */
 });

@@ -84,5 +84,8 @@ describe('fromWikiText', () => {
   test('macro alert', () => {
     expect(wikiAstFromWikiText(wikiTextDict['macro alert'])).toEqual(wikiAstDict['macro alert']);
   });
+  test('codeblock', () => {
+    expect(wikiAstFromWikiText(wikiTextDict.codeblock)).toEqual(wikiAstDict.codeblock);
+  });
   /** new tests here generated using `npx zx scripts/test/add-new-test.mjs` */
 });
