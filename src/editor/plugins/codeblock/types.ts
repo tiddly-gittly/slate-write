@@ -2,7 +2,7 @@ import { HotkeyPlugin, InsertNodesOptions, TElement, Value } from '@udecode/plat
 
 export interface CodeBlockPlugin extends HotkeyPlugin {
   deserializers?: string[];
-  syntax?: boolean;
+  showSyntaxSwitcher?: boolean;
   syntaxPopularFirst?: boolean;
 }
 

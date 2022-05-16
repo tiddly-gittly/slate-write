@@ -16,8 +16,6 @@ const CodeTextArea = styled.textarea`
 function useCodeMirror(textAreaReference: RefObject<HTMLTextAreaElement>, options: EditorConfiguration): MutableRefObject<EditorFromTextArea | null> {
   const codeMirrorReference: MutableRefObject<EditorFromTextArea | null> = useRef(null);
   useEffect(() => {
-    // DEBUG: console
-    console.log(`'CodeMirror' in window && textAreaReference.current`, 'CodeMirror' in window, textAreaReference.current);
     if ('CodeMirror' in window && textAreaReference.current !== null) {
       const codeMirror = window.CodeMirror.fromTextArea(textAreaReference.current, {
         mode: 'text/plain',
@@ -43,7 +41,7 @@ export function CodeBlockElement<V extends Value>(props: StyledElementProps<V, T
 
   const { language, code } = element;
 
-  const { syntax } = getPluginOptions<CodeBlockPlugin, V>(editor, ELEMENT_CODE_BLOCK);
+  const { showSyntaxSwitcher } = getPluginOptions<CodeBlockPlugin, V>(editor, ELEMENT_CODE_BLOCK);
   const codeClassName = language !== undefined ? `${language} language-${language}` : '';
 
   const cmOptions = useMemo(() => ({ mode: language, value: code }), [language, code]);
@@ -69,7 +67,7 @@ export function CodeBlockElement<V extends Value>(props: StyledElementProps<V, T
   return (
     <>
       <div data-role="tw-codeblock-container" {...attributes} {...rootProps} {...nodeProps}>
-        {syntax === true && <CodeBlockSelectElement data-testid="CodeBlockSelectElement" language={language} onChange={onLanguageChange} />}
+        {showSyntaxSwitcher === true && <CodeBlockSelectElement data-testid="CodeBlockSelectElement" language={language} onChange={onLanguageChange} />}
         <div style={{ userSelect: 'none' }} contentEditable={false}>
           <CodeTextArea ref={textAreaReference} onChange={onCodeChange} defaultValue={code} className={codeClassName} />
         </div>

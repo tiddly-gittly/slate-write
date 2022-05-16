@@ -14,6 +14,6 @@ export const createCodeBlockPlugin = createPluginFactory<CodeBlockPlugin>({
   options: {
     // hotkey: ['mod+opt+8', 'mod+shift+8'],
     syntaxPopularFirst: true,
-    syntax: true,
+    showSyntaxSwitcher: true,
   },
 });
