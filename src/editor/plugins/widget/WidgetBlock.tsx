@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { TElement, Value } from '@udecode/plate';
-import React, { createRef } from 'react';
+import React, { useRef } from 'react';
 import { IParseTreeNode } from 'tiddlywiki';
 import { useWidget } from 'tw-react';
 import { StyledElementProps, getRootProps } from '@udecode/plate-styled-components';
@@ -11,8 +11,8 @@ export interface IWidgetBlockProps {
 export type WidgetBlockElementProps = StyledElementProps<Value, TElement & { node: IParseTreeNode }, IWidgetBlockProps>;
 
 export function WidgetBlock(props: WidgetBlockElementProps): JSX.Element {
-  const { attributes, children, nodeProps, element, editor } = props;
-  const widgetContainerReference = createRef<HTMLDivElement>();
+  const { attributes, nodeProps, element, editor } = props;
+  const widgetContainerReference = useRef<HTMLDivElement>(null);
   useWidget(element.node, widgetContainerReference);
   const rootProps = getRootProps(props);
   return (
