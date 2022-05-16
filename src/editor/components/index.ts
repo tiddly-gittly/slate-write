@@ -2,11 +2,13 @@ import { createPlateUI, ELEMENT_LINK, LinkElement, ELEMENT_OL, ELEMENT_UL, withP
 import { css } from 'styled-components';
 import { withStyledDraggables } from '../config/withStyledDraggables';
 import { withStyledPlaceHolders } from '../config/withStyledPlaceHolders';
+import { ELEMENT_MACRO } from '../plugins/macro';
 import { ELEMENT_WIDGET, WidgetBlock } from '../plugins/widget';
 
 // only component defined here will be wrapped by withStyledDraggables and withStyledPlaceHolders
 const rawComponents = createPlateUI({
   [ELEMENT_WIDGET]: WidgetBlock,
+  [ELEMENT_MACRO]: WidgetBlock,
   [ELEMENT_LINK]: LinkElement,
   [ELEMENT_OL]: withProps(StyledElement, {
     as: 'ol',
