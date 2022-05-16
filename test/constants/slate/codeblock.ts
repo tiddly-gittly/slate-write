@@ -5,7 +5,7 @@ export const codeblock: Record<string, TEditor<Value> | TElement | TText | Array
     {
       type: 'codeblock',
       isElement: true,
-      isVoid: false,
+      isVoid: true,
       children: [
         {
           text: '',

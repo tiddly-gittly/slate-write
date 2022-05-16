@@ -6,7 +6,7 @@ import { element } from './element';
 import { lic } from './lic';
 import { text } from './text';
 import { widget } from './widget';
-import { ELEMENT_CODE_BLOCK } from '../../../editor/plugins/codeblock';
+import { ELEMENT_CODE_BLOCK } from '../../../editor/plugins/codeblock/constants';
 
 /**
  * Key is `node.type`, value is node converter function.

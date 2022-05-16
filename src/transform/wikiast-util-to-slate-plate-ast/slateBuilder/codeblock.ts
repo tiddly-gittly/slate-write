@@ -1,7 +1,7 @@
 import { TElement } from '@udecode/plate';
 import type { ICodeBlockParseTreeNode } from 'tiddlywiki';
 
-import { ELEMENT_CODE_BLOCK } from '../../../editor/plugins/codeblock';
+import { ELEMENT_CODE_BLOCK } from '../../../editor/plugins/codeblock/constants';
 import { IContext } from '..';
 
 /**
@@ -13,7 +13,7 @@ export function codeblock(context: IContext, node: ICodeBlockParseTreeNode): TEl
   return {
     type: ELEMENT_CODE_BLOCK,
     isElement: true,
-    isVoid: false,
+    isVoid: true,
     language,
     code,
     children: [{ text: '' }],

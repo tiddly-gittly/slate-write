@@ -24,6 +24,7 @@ import {
   createUnderlinePlugin,
   createComboboxPlugin,
   createMentionPlugin,
+  createInlineVoidPlugin,
 } from '@udecode/plate';
 import { CONFIG } from './config';
 import { createHeadingPlugin } from '../plugins/heading';
@@ -64,6 +65,7 @@ export const utils = createPlugins([
   createIndentListPlugin(),
   createIndentPlugin(),
   createKbdPlugin(),
+  createInlineVoidPlugin(),
   /**
    * Add a trailing block when the last node type is not `type` and when the editor has .
    */
