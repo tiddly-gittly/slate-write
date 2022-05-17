@@ -29,6 +29,7 @@ type: text/vnd.tiddlywiki
 # TODO: optimization: use section splitter in section-editor to ensure only a small potion of text will `onChange` and rerender. And we can get start-end of section from section splitter, so replace the section of text onChange.
 # TODO: allow drag images in and import the image
 # TODO: context menu when click on the drag handle
+# TODO: context menu when select special block
 # TODO: i18n for readme and placeholder
 # TODO: allow 3rd party plugin to control the editor, for example, the command palette and the fishing plugin.
 # TODO: add more selection operation, or maybe in command palette, like "refactor to new tiddler"

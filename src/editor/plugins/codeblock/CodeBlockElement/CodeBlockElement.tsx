@@ -16,8 +16,9 @@ const CodeTextArea = styled.textarea`
 
 function useCodeMirror(textAreaReference: RefObject<HTMLTextAreaElement>, options: EditorConfiguration): MutableRefObject<EditorFromTextArea | null> {
   const codeMirrorReference: MutableRefObject<EditorFromTextArea | null> = useRef(null);
+  const codeMirrorInitialized = useRef(false);
   useEffect(() => {
-    if ('CodeMirror' in window && textAreaReference.current !== null) {
+    if ('CodeMirror' in window && textAreaReference.current !== null && !codeMirrorInitialized.current) {
       const codeMirror = window.CodeMirror.fromTextArea(textAreaReference.current, {
         mode: 'text/plain',
         lineNumbers: true,
@@ -29,6 +30,7 @@ function useCodeMirror(textAreaReference: RefObject<HTMLTextAreaElement>, option
       });
 
       codeMirrorReference.current = codeMirror;
+      codeMirrorInitialized.current = true;
     }
   }, [textAreaReference, options]);
   return codeMirrorReference;
@@ -43,9 +45,8 @@ export function CodeBlockElement<V extends Value>(props: StyledElementProps<V, T
   const { language, code } = element;
 
   const { showSyntaxSwitcher } = getPluginOptions<CodeBlockPlugin, V>(editor, ELEMENT_CODE_BLOCK);
-  const codeClassName = language !== undefined ? `${language} language-${language}` : '';
 
-  const cmOptions = useMemo(() => ({ mode: language, value: code }), [language, code]);
+  const cmOptions = useMemo<EditorConfiguration>(() => ({ mode: language, value: code }), [language, code]);
   const codeMirror = useCodeMirror(textAreaReference, cmOptions);
   const path = useMemo(() => findNodePath(editor, element), [editor, element]);
   const onLanguageChange = useCallback(
@@ -56,21 +57,31 @@ export function CodeBlockElement<V extends Value>(props: StyledElementProps<V, T
     },
     [editor, path],
   );
-  const onCodeChange: ChangeEventHandler<HTMLTextAreaElement> = useDebouncedCallback(
-    (event: ChangeEvent<HTMLTextAreaElement>) => {
+  const onCodeChange = useDebouncedCallback(
+    (eventOrString: ChangeEvent<HTMLTextAreaElement> | string) => {
       if (path !== undefined) {
-        setNodes<TCodeBlockElement>(editor, { code: event.target.value }, { at: path });
+        setNodes<TCodeBlockElement>(editor, { code: typeof eventOrString === 'string' ? eventOrString : eventOrString.target.value }, { at: path });
       }
     },
     [editor, path],
   );
+  const hasCodeMirrorEventListenerSettled = useRef<boolean>(false);
+  useEffect(() => {
+    if (codeMirror?.current !== null && !hasCodeMirrorEventListenerSettled.current) {
+      codeMirror.current.on('change', (instance) => {
+        const latestText = instance.getDoc().getValue();
+        onCodeChange(latestText);
+      });
+      hasCodeMirrorEventListenerSettled.current = true;
+    }
+  }, [onCodeChange, codeMirror]);
 
   return (
     <>
       <div data-role="tw-codeblock-container" {...attributes} {...rootProps} {...nodeProps}>
         {showSyntaxSwitcher === true && <CodeBlockSelectElement data-testid="CodeBlockSelectElement" language={language} onChange={onLanguageChange} />}
         <div style={{ userSelect: 'none' }} contentEditable={false}>
-          <CodeTextArea ref={textAreaReference} onChange={onCodeChange} defaultValue={code} className={codeClassName} />
+          <CodeTextArea ref={textAreaReference} onChange={onCodeChange} defaultValue={code} />
         </div>
         {children}
       </div>

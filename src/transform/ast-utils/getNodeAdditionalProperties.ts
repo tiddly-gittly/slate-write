@@ -2,10 +2,11 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { TElement } from '@udecode/plate';
 import pick from 'lodash/pick';
-import { IParseTreeAttribute, IParseTreeNode } from 'tiddlywiki';
+import { IParseTreeAttribute, IParseTreeNode, IWikiASTNode } from 'tiddlywiki';
 import { removeTypeFromAttributes } from './mapAttributes';
 
-export function getWikiASTAdditionalProperties(node: IParseTreeNode) {
+/** store attribute to tw-attribute, so it can be seamlessly restore later. */
+export function getWikiASTAdditionalProperties(node: IWikiASTNode) {
   const result = {
     ...pick(node, ['orderedAttributes', 'isBlock']),
   } as Partial<TElement>;
@@ -16,6 +17,8 @@ export function getWikiASTAdditionalProperties(node: IParseTreeNode) {
   }
   return result;
 }
+
+/** Assign previously stored attributes back to wikiast, should be overwrite by node itself, because some node may assign attribute in its builder */
 export function getSlatePlateASTAdditionalProperties(
   node: TElement & { isBlock: boolean; orderedAttributes: IParseTreeAttribute[]; 'tw-attributes': Record<string, IParseTreeAttribute> },
 ) {
