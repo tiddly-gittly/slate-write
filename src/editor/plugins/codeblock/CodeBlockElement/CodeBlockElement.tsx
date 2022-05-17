@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React, { RefObject, MutableRefObject, useRef, useCallback, ChangeEventHandler, ChangeEvent, useMemo, useEffect } from 'react';
 import { findNodePath, getPluginOptions, setNodes, Value } from '@udecode/plate-core';
 import type { EditorFromTextArea, EditorConfiguration } from 'codemirror';
@@ -34,7 +35,7 @@ function useCodeMirror(textAreaReference: RefObject<HTMLTextAreaElement>, option
 }
 
 export function CodeBlockElement<V extends Value>(props: StyledElementProps<V, TCodeBlockElement>): JSX.Element {
-  const { attributes, nodeProps, element, editor } = props;
+  const { attributes, nodeProps, element, children, editor } = props;
 
   const rootProps = getRootProps(props);
   const textAreaReference = useRef<HTMLTextAreaElement>(null);
