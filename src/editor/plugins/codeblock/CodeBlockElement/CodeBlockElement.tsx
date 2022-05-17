@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import React, { RefObject, MutableRefObject, useRef, useCallback, ChangeEventHandler, ChangeEvent, useMemo, useEffect } from 'react';
+import React, { RefObject, MutableRefObject, useRef, useCallback, ChangeEvent, useMemo, useEffect } from 'react';
 import { findNodePath, getPluginOptions, setNodes, Value } from '@udecode/plate-core';
 import type { EditorFromTextArea, EditorConfiguration } from 'codemirror';
 import { useDebouncedCallback } from 'beautiful-react-hooks';
@@ -21,11 +21,16 @@ function useCodeMirror(textAreaReference: RefObject<HTMLTextAreaElement>, option
     if ('CodeMirror' in window && textAreaReference.current !== null && !codeMirrorInitialized.current) {
       const codeMirror = window.CodeMirror.fromTextArea(textAreaReference.current, {
         mode: 'text/plain',
-        lineNumbers: true,
-        lineWrapping: true,
-        theme: 'material',
+        lineNumbers: $tw.wiki.getTiddlerText('$:/config/codemirror/lineNumbers') === 'true',
+        keyMap: $tw.wiki.getTiddlerText('$:/config/codemirror/keyMap'),
+        lineWrapping: $tw.wiki.getTiddlerText('$:/config/codemirror/lineWrapping') === 'true',
+        theme: $tw.wiki.getTiddlerText('$:/config/codemirror/theme'),
         autofocus: false,
         readOnly: false,
+        cursorBlinkRate: Number($tw.wiki.getTiddlerText('$:/config/codemirror/cursorBlinkRate') ?? '500'),
+        indentUnit: Number($tw.wiki.getTiddlerText('$:/config/codemirror/indentUnit') ?? '2'),
+        indentWithTabs: $tw.wiki.getTiddlerText('$:/config/codemirror/indentWithTabs') === 'true',
+        showCursorWhenSelecting: $tw.wiki.getTiddlerText('$:/config/codemirror/showCursorWhenSelecting') === 'true',
         ...options,
       });
 
@@ -50,12 +55,13 @@ export function CodeBlockElement<V extends Value>(props: StyledElementProps<V, T
   const codeMirror = useCodeMirror(textAreaReference, cmOptions);
   const path = useMemo(() => findNodePath(editor, element), [editor, element]);
   const onLanguageChange = useCallback(
-    (value: string) => {
+    (language: string) => {
       if (path !== undefined) {
-        setNodes<TCodeBlockElement>(editor, { language: value }, { at: path });
+        setNodes<TCodeBlockElement>(editor, { language }, { at: path });
+        codeMirror.current?.setOption('mode', language);
       }
     },
-    [editor, path],
+    [editor, path, codeMirror],
   );
   const onCodeChange = useDebouncedCallback(
     (eventOrString: ChangeEvent<HTMLTextAreaElement> | string) => {
@@ -81,7 +87,7 @@ export function CodeBlockElement<V extends Value>(props: StyledElementProps<V, T
       <div data-role="tw-codeblock-container" {...attributes} {...rootProps} {...nodeProps}>
         {showSyntaxSwitcher === true && <CodeBlockSelectElement data-testid="CodeBlockSelectElement" language={language} onChange={onLanguageChange} />}
         <div style={{ userSelect: 'none' }} contentEditable={false}>
-          <CodeTextArea ref={textAreaReference} onChange={onCodeChange} defaultValue={code} />
+          <CodeTextArea ref={textAreaReference} onChange={onCodeChange} defaultValue={code} className="CodeMirror" />
         </div>
         {children}
       </div>
