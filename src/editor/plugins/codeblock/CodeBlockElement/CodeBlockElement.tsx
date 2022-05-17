@@ -71,6 +71,7 @@ export function CodeBlockElement<V extends Value>(props: StyledElementProps<V, T
         <div style={{ userSelect: 'none' }} contentEditable={false}>
           <CodeTextArea ref={textAreaReference} onChange={onCodeChange} defaultValue={code} className={codeClassName} />
         </div>
+        {children}
       </div>
     </>
   );

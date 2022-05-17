@@ -8,6 +8,7 @@ import { CodeBlockPlugin } from './types';
 export const createCodeBlockPlugin = createPluginFactory<CodeBlockPlugin>({
   key: ELEMENT_CODE_BLOCK,
   isElement: true,
+  isVoid: true,
   handlers: {
     // onKeyDown: onKeyDownCodeBlock,
   },

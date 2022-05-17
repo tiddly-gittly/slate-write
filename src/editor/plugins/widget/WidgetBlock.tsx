@@ -11,7 +11,7 @@ export interface IWidgetBlockProps {
 export type WidgetBlockElementProps = StyledElementProps<Value, TElement & { node: IParseTreeNode }, IWidgetBlockProps>;
 
 export function WidgetBlock(props: WidgetBlockElementProps): JSX.Element {
-  const { attributes, nodeProps, element, editor } = props;
+  const { attributes, nodeProps, element, children, editor } = props;
   const widgetContainerReference = useRef<HTMLDivElement>(null);
   useWidget(element.node, widgetContainerReference);
   const rootProps = getRootProps(props);
@@ -20,6 +20,7 @@ export function WidgetBlock(props: WidgetBlockElementProps): JSX.Element {
       <div style={{ userSelect: 'none' }} contentEditable={false} {...nodeProps}>
         <div ref={widgetContainerReference} />
       </div>
+      {children}
     </div>
   );
 }
