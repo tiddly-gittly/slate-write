@@ -5,7 +5,7 @@ import React from 'react';
 import { getPluginOptions, useEditorRef } from '@udecode/plate-core';
 import { useReadOnly } from 'slate-react';
 import styled, { CSSProp } from 'styled-components';
-import { CODE_BLOCK_LANGUAGES, CODE_BLOCK_LANGUAGES_POPULAR, ELEMENT_CODE_BLOCK } from '../constants';
+import { CODE_BLOCK_LANGUAGES, CODE_BLOCK_LANGUAGES_POPULAR, ELEMENT_CODE_BLOCK, normalizeLanguage } from '../constants';
 import { CodeBlockPlugin } from '../types';
 
 const CodeSyntaxSelect = styled.select`
@@ -35,7 +35,7 @@ export function CodeBlockSelectElement({
 
   return (
     <CodeSyntaxSelect
-      value={value}
+      value={value && normalizeLanguage(value)}
       style={{ float: 'right' }}
       onClick={(event) => {
         event.stopPropagation();
@@ -46,18 +46,25 @@ export function CodeBlockSelectElement({
       }}
       contentEditable={false}
       {...props}>
-      <option value="">Plain text</option>
+      <option value="">txt</option>
       {syntaxPopularFirst &&
-        Object.entries(CODE_BLOCK_LANGUAGES_POPULAR).map(([key, value_]) => (
-          <option key={key} value={key}>
-            {value_}
+        CODE_BLOCK_LANGUAGES_POPULAR.map((displayName) => {
+          const values = CODE_BLOCK_LANGUAGES[displayName];
+          const value = Array.isArray(values) ? values[0] : values;
+          return (
+            <option key={displayName} value={value}>
+              {displayName}
+            </option>
+          );
+        })}
+      {Object.entries(CODE_BLOCK_LANGUAGES).map(([displayName, values]) => {
+        const value = Array.isArray(values) ? values[0] : values;
+        return (
+          <option key={displayName} value={value}>
+            {displayName}
           </option>
-        ))}
-      {Object.entries(CODE_BLOCK_LANGUAGES).map(([key, value_]) => (
-        <option key={key} value={key}>
-          {value_}
-        </option>
-      ))}
+        );
+      })}
     </CodeSyntaxSelect>
   );
 }

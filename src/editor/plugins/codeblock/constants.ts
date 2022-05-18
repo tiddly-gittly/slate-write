@@ -1,128 +1,85 @@
 export const ELEMENT_CODE_BLOCK = 'codeblock';
 
-// `
-// javascript:
-// abap: ABAP
-// arduino: Arduino
-// bash: Bash
-// basic: BASIC
-// c: C
-// clojure: Clojure
-// coffeescript: CoffeeScript
-// cpp: C++
-// csharp: C#
-// css: CSS
-// dart: Dart
-// diff: Diff
-// docker: Docker
-// elixir: Elixir
-// elm: Elm
-// erlang: Erlang
-// flow: Flow
-// fortran: Fortran
-// fsharp: F#
-// gherkin: Gherkin
-// glsl: GLSL
-// go: Go
-// graphql: GraphQL
-// groovy: Groovy
-// haskell
-// less
-// livescript
-// lua
-// makefile
-// match
-// matlab
-// nix
-// objectivec
-// ocaml
-// pascal
-// perl
-// prolog
-// purebasic
-// r
-// reason
-// scss
-// scala
-// scheme
-// sql
-// swift
-// vbnet
-// verilog
-// vhdl
-// visual-basic
-// wasm
-// `;
-
-export const CODE_BLOCK_LANGUAGES_POPULAR: Record<string, string> = {
-  tid: 'TiddlyWiki',
-  bash: 'Bash',
-  css: 'CSS',
-  git: 'Git',
-  graphql: 'GraphQL',
-  html: 'HTML',
-  javascript: 'JavaScript',
-  json: 'JSON',
-  jsx: 'JSX',
-  markdown: 'Markdown',
-  sql: 'SQL',
-  svg: 'SVG',
-  tsx: 'TSX',
-  typescript: 'TypeScript',
-  wasm: 'WebAssembly',
+export const CODE_BLOCK_LANGUAGES_POPULAR: string[] = [
+  'TiddlyWiki',
+  'Shell',
+  'CSS',
+  'Git',
+  'GraphQL',
+  'HTML',
+  'JavaScript',
+  'JSON',
+  'JSX',
+  'Markdown',
+  'SQL',
+  'SVG',
+  'TSX',
+  'TypeScript',
+  'WebAssembly',
+];
+export const CODE_BLOCK_LANGUAGES: Record<string, string | string[]> = {
+  ANTLR4: 'antlr4',
+  C: 'c',
+  'C#': 'csharp',
+  CSS: 'css',
+  CoffeeScript: 'coffeescript',
+  CMake: 'cmake',
+  Dart: 'dart',
+  Django: 'django',
+  Docker: 'docker',
+  EJS: 'ejs',
+  Erlang: 'erlang',
+  Git: 'git',
+  Go: 'go',
+  GraphQL: 'graphql',
+  Groovy: 'groovy',
+  HTML: 'html',
+  Java: 'java',
+  JavaScript: 'javascript',
+  JSON: 'json',
+  JSX: 'jsx',
+  Kotlin: 'kotlin',
+  LaTeX: 'latex',
+  Less: 'less',
+  Lua: 'lua',
+  Makefile: 'makefile',
+  Markdown: ['markdown', 'md'],
+  MATLAB: 'matlab',
+  Markup: 'markup',
+  'Objective-C': 'objectivec',
+  Perl: 'perl',
+  PHP: 'php',
+  PowerShell: 'powershell',
+  '.properties': 'properties',
+  'Protocol Buffers': 'protobuf',
+  Python: 'python',
+  R: 'r',
+  Ruby: 'ruby',
+  'Sass (Sass)': 'sass',
+  'Sass (Scss)': 'scss',
+  Scala: 'scala',
+  Scheme: 'scheme',
+  SQL: 'sql',
+  Shell: ['bash', 'sh', 'zsh', 'shell'],
+  Swift: 'swift',
+  SVG: 'svg',
+  TSX: 'tsx',
+  TiddlyWiki: ['tiddlywiki', 'tid'],
+  TypeScript: 'typescript',
+  WebAssembly: 'wasm',
+  YAML: 'yaml',
+  XML: 'xml',
 };
 
-export const CODE_BLOCK_LANGUAGES: Record<string, string> = {
-  antlr4: 'ANTLR4',
-  bash: 'Bash',
-  c: 'C',
-  csharp: 'C#',
-  css: 'CSS',
-  coffeescript: 'CoffeeScript',
-  cmake: 'CMake',
-  dart: 'Dart',
-  django: 'Django',
-  docker: 'Docker',
-  ejs: 'EJS',
-  erlang: 'Erlang',
-  git: 'Git',
-  go: 'Go',
-  graphql: 'GraphQL',
-  groovy: 'Groovy',
-  html: 'HTML',
-  java: 'Java',
-  javascript: 'JavaScript',
-  json: 'JSON',
-  jsx: 'JSX',
-  kotlin: 'Kotlin',
-  latex: 'LaTeX',
-  less: 'Less',
-  lua: 'Lua',
-  makefile: 'Makefile',
-  markdown: 'Markdown',
-  matlab: 'MATLAB',
-  markup: 'Markup',
-  objectivec: 'Objective-C',
-  perl: 'Perl',
-  php: 'PHP',
-  powershell: 'PowerShell',
-  properties: '.properties',
-  protobuf: 'Protocol Buffers',
-  python: 'Python',
-  r: 'R',
-  ruby: 'Ruby',
-  sass: 'Sass (Sass)',
-  scss: 'Sass (Scss)',
-  // FIXME: Error with current scala grammar
-  // scala: 'Scala',
-  scheme: 'Scheme',
-  sql: 'SQL',
-  shell: 'Shell',
-  swift: 'Swift',
-  svg: 'SVG',
-  tsx: 'TSX',
-  typescript: 'TypeScript',
-  wasm: 'WebAssembly',
-  yaml: 'YAML',
-  xml: 'XML',
-};
+export function normalizeLanguage(language: string): string {
+  for (const values of Object.values(CODE_BLOCK_LANGUAGES)) {
+    if (Array.isArray(values)) {
+      if (values.includes(language)) {
+        return values[0];
+      }
+    } else if (values === language) {
+      return values;
+    }
+  }
+  return language;
+}

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React, { RefObject, MutableRefObject, useRef, useCallback, ChangeEvent, useMemo, useEffect } from 'react';
 import { findNodePath, getPluginOptions, setNodes, Value } from '@udecode/plate-core';
@@ -7,7 +8,7 @@ import styled from 'styled-components';
 import { getRootProps, StyledElementProps } from '@udecode/plate-styled-components';
 import { CodeBlockSelectElement } from './CodeBlockSelectElement';
 import { TCodeBlockElement, CodeBlockPlugin } from '../types';
-import { ELEMENT_CODE_BLOCK } from '../constants';
+import { ELEMENT_CODE_BLOCK, normalizeLanguage } from '../constants';
 
 const CodeTextArea = styled.textarea`
   width: 100%;
@@ -19,8 +20,7 @@ function useCodeMirror(textAreaReference: RefObject<HTMLTextAreaElement>, option
   const codeMirrorInitialized = useRef(false);
   useEffect(() => {
     if ('CodeMirror' in window && textAreaReference.current !== null && !codeMirrorInitialized.current) {
-      const codeMirror = window.CodeMirror.fromTextArea(textAreaReference.current, {
-        mode: 'text/plain',
+      const codeMirrorDefaultOptions = {
         lineNumbers: $tw.wiki.getTiddlerText('$:/config/codemirror/lineNumbers') === 'true',
         keyMap: $tw.wiki.getTiddlerText('$:/config/codemirror/keyMap'),
         lineWrapping: $tw.wiki.getTiddlerText('$:/config/codemirror/lineWrapping') === 'true',
@@ -31,8 +31,8 @@ function useCodeMirror(textAreaReference: RefObject<HTMLTextAreaElement>, option
         indentUnit: Number($tw.wiki.getTiddlerText('$:/config/codemirror/indentUnit') ?? '2'),
         indentWithTabs: $tw.wiki.getTiddlerText('$:/config/codemirror/indentWithTabs') === 'true',
         showCursorWhenSelecting: $tw.wiki.getTiddlerText('$:/config/codemirror/showCursorWhenSelecting') === 'true',
-        ...options,
-      });
+      };
+      const codeMirror = window.CodeMirror.fromTextArea(textAreaReference.current, { ...codeMirrorDefaultOptions, ...options });
 
       codeMirrorReference.current = codeMirror;
       codeMirrorInitialized.current = true;
@@ -51,7 +51,7 @@ export function CodeBlockElement<V extends Value>(props: StyledElementProps<V, T
 
   const { showSyntaxSwitcher } = getPluginOptions<CodeBlockPlugin, V>(editor, ELEMENT_CODE_BLOCK);
 
-  const cmOptions = useMemo<EditorConfiguration>(() => ({ mode: language, value: code }), [language, code]);
+  const cmOptions = useMemo<EditorConfiguration>(() => ({ mode: language && normalizeLanguage(language), value: code }), [language, code]);
   const codeMirror = useCodeMirror(textAreaReference, cmOptions);
   const path = useMemo(() => findNodePath(editor, element), [editor, element]);
   const onLanguageChange = useCallback(
