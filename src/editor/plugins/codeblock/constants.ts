@@ -64,7 +64,7 @@ export const CODE_BLOCK_LANGUAGES: Record<string, string | string[]> = {
   Swift: 'swift',
   SVG: 'svg',
   TSX: 'tsx',
-  TiddlyWiki: ['tiddlywiki', 'tid'],
+  TiddlyWiki: ['tiddlywiki5', 'tiddlywiki', 'tid'],
   TypeScript: 'typescript',
   WebAssembly: 'wasm',
   YAML: 'yaml',
