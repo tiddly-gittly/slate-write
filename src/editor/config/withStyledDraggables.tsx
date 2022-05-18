@@ -3,7 +3,6 @@
 import {
   createPlateUI,
   ELEMENT_BLOCKQUOTE,
-  ELEMENT_CODE_BLOCK,
   ELEMENT_H1,
   ELEMENT_H2,
   ELEMENT_H3,
@@ -16,6 +15,8 @@ import {
 import { css } from 'styled-components';
 import { ELEMENT_WIDGET } from '../plugins/widget';
 import { withDraggables } from '../plugins/dnd';
+import { ELEMENT_CODE_BLOCK } from '../plugins/codeblock/constants';
+import { ELEMENT_MACRO } from '../plugins/macro';
 
 export const withStyledDraggables = (components: any): ReturnType<typeof createPlateUI> => {
   return withDraggables(components, [
@@ -95,12 +96,12 @@ export const withStyledDraggables = (components: any): ReturnType<typeof createP
       key: ELEMENT_CODE_BLOCK,
       styles: {
         gutterLeft: css`
-          padding-top: 1.2rem;
+          padding-top: 0.2em;
         `,
       },
     },
     {
-      key: ELEMENT_WIDGET,
+      keys: [ELEMENT_WIDGET, ELEMENT_MACRO],
       level: 0,
     },
   ]);
