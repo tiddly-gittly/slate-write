@@ -7,6 +7,7 @@ type: text/vnd.tiddlywiki
 ## Some basic mark and elements like ''bold'' and ordered list are supported by slate plugins imported from `src/config/plugins.ts`
 ## render advanced tiddlywiki widgets using [[tw-react|https://github.com/tiddly-gittly/tw-react]]'s `useWidget` hook, in our own plugin `src/config/plugins/widget/WidgetBlock.tsx`
 ### Things like widget, macro and codeblock are [[Void Node|https://docs.slatejs.org/api/nodes/element#void-vs-not-void]], slate won't render its AST children, we have full control
+### replace codeblock with codemirror or monaco, so plate's default prism code syntax highlighter won't need to be bundled with our plugin, it is too big
 # Transform AST to Slate JSON using transformers in src/transform, see `src/transform/README.md` for details. This also transform Slate JSON back to the wikiast and then serialize to wikitext.
 ## we add some type of wikiast to [[tw5-typed|https://github.com/tiddly-gittly/TW5-Typed]], based on the real json output of `$tw.wiki.parseText('text/vnd.tiddlywiki', input).tree`
 ## This is imported in editor by `import { deserialize, serialize } from '../../src/transform/serialize';`, and those serialize and deserialize functions uses things in the `src/transform`
@@ -38,9 +39,9 @@ type: text/vnd.tiddlywiki
 # TODO: autocomplete `<<`'s available macros
 # TODO: insert latex math using `$$` or `￥￥` shortcut
 # TODO: open context aware autocomplete using `ctrl+space`, show corresponding dropdown menu using prefix of the selection
-# TODO: replace codeblock with codemirror or monaco, so its prism highlight won't need to bundle with plugin, which is big
 # TODO: add excalidraw widget support
 # TODO: treeshaking serialize-md related things, they are bundled with plate package https://github.com/udecode/plate/discussions/363
+# TODO: minify code before package JSON to reduce size
 
 !! Development
 
