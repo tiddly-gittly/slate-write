@@ -1,3 +1,4 @@
+/* eslint-disable typescript-sort-keys/interface */
 /* eslint-disable @typescript-eslint/ban-types */
 import {
   AutoformatPlugin,
@@ -18,17 +19,18 @@ import {
   isSelectionAtBlockStart,
   KEYS_HEADING,
   LinkPlugin,
-  MentionPlugin,
   NormalizeTypesPlugin,
   PlatePlugin,
   ResetNodePlugin,
   SelectOnBackspacePlugin,
   SoftBreakPlugin,
+  TComboboxItemBase,
   TrailingBlockPlugin,
 } from '@udecode/plate';
 import { EditableProps } from 'slate-react/dist/components/editable';
 import { autoformatRules } from './autoformat';
 import { ELEMENT_WIDGET } from '../plugins/widget';
+import { AutoCompletePlugin } from '../plugins/autoComplete';
 
 export const SAVE_DEBOUNCE_INTERVAL = 1000;
 
@@ -46,9 +48,10 @@ interface Config {
   indent: Partial<PlatePlugin<IndentPlugin>>;
   lineHeight: Partial<PlatePlugin>;
   link: Partial<PlatePlugin<LinkPlugin>>;
-  mention: Partial<PlatePlugin<MentionPlugin<undefined>>>;
   resetBlockType: Partial<PlatePlugin<ResetNodePlugin>>;
   selectOnBackspace: Partial<PlatePlugin<SelectOnBackspacePlugin>>;
+  snippetComboBox: Partial<PlatePlugin<AutoCompletePlugin<undefined>>>;
+  wikiLinkComboBox: Partial<PlatePlugin<AutoCompletePlugin<undefined>>>;
   softBreak: Partial<PlatePlugin<SoftBreakPlugin>>;
   trailingBlock: Partial<PlatePlugin<TrailingBlockPlugin>>;
 }
@@ -60,18 +63,15 @@ export const CONFIG: Config = {
       hotkey: 'ctrl+l',
     },
   },
-  mention: {
+  snippetComboBox: {
     key: '/',
+  },
+  wikiLinkComboBox: {
+    key: '[[',
     options: {
-      trigger: '/',
-      insertSpaceAfterMention: false,
-      createMentionNode: (item) => {
-        return {
-          // override type and children in plate's packages/nodes/mention/src/getMentionOnSelectItem.ts
-          // its default type is '/' (the same as the key above), but we want it to be normal text
-          type: ELEMENT_PARAGRAPH,
-          children: [{ text: item.text as string }],
-        };
+      needSpaceBeforeTrigger: false,
+      createAutoCompleteNode: (item: TComboboxItemBase) => {
+        return { text: item.text as string };
       },
     },
   },
