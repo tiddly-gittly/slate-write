@@ -29,7 +29,7 @@ export const getAutoCompleteOnSelectItem =
 
     const {
       type,
-      options: { createAutoCompleteNode },
+      options: { createAutoCompleteNode, textToInsertAfter },
     } = getPlugin<AutoCompletePlugin>(editor as PlateEditor<Value>, key);
 
     const pathAbove = getBlockAbove(editor)?.[1];
@@ -41,15 +41,12 @@ export const getAutoCompleteOnSelectItem =
         insertText(editor, ' ');
       }
 
-      select(editor, targetRange);
+      // disabled because it is selecting a char before the ELEMENT_AUTO_COMPLETE_INPUT block, causing removeNodes can't find the node
+      // select(editor, targetRange);
 
       withoutMergingHistory(editor, () =>
         removeNodes(editor, {
-          match: (node) => {
-            // DEBUG: console
-            console.log(`node.type`, node.type === ELEMENT_AUTO_COMPLETE_INPUT, node.type);
-            return node.type === ELEMENT_AUTO_COMPLETE_INPUT;
-          },
+          match: (node) => node.type === ELEMENT_AUTO_COMPLETE_INPUT,
         }),
       );
 
@@ -66,9 +63,13 @@ export const getAutoCompleteOnSelectItem =
           ...props,
         } as TAutoCompleteElement);
       }
+      if (textToInsertAfter) {
+        insertText(editor, textToInsertAfter);
+      }
 
       // move the selection after the element
-      moveSelection(editor);
+      // disabled because we don't need to move to next line
+      // moveSelection(editor);
 
       // delete the inserted space
       if (isBlockEnd) {

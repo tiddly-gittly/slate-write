@@ -14,8 +14,8 @@ export interface AutoCompletePlugin<TData extends Data = NoData> {
   createAutoCompleteNode?: CreateAutoCompleteNode<TData>;
   id?: string;
   inputCreation?: { key: string; value: string };
-  insertSpaceAfterMention?: boolean;
   keepTrigger?: boolean;
   needSpaceBeforeTrigger?: boolean;
+  textToInsertAfter?: string;
   trigger?: string;
 }

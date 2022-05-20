@@ -70,6 +70,8 @@ export const CONFIG: Config = {
     key: '[[',
     options: {
       needSpaceBeforeTrigger: false,
+      keepTrigger: true,
+      textToInsertAfter: ']]',
       createAutoCompleteNode: (item: TComboboxItemBase) => {
         return { text: item.text as string };
       },

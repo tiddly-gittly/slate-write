@@ -9,8 +9,8 @@ import { ELEMENT_PARAGRAPH } from '@udecode/plate-paragraph';
 import { AutoCompletePlugin } from './types';
 import { withAutoComplete } from './withAutoComplete';
 
-export const ELEMENT_AUTO_COMPLETE = 'mention';
-export const ELEMENT_AUTO_COMPLETE_INPUT = 'mention_input';
+export const ELEMENT_AUTO_COMPLETE = 'auto_complete';
+export const ELEMENT_AUTO_COMPLETE_INPUT = 'auto_complete_input';
 
 /**
  * Enables support for autocompleting `/` and `[[`
