@@ -24,7 +24,7 @@ import { Location, Range } from 'slate';
 import { AutoCompletePlugin, TAutoCompleteInputElement } from './types';
 import { ELEMENT_AUTO_COMPLETE_INPUT } from './createAutoCompletePlugin';
 import { findAutoCompleteInput, isSelectionInAutoCompleteInput, isNodeAutoCompleteInput } from './queries';
-import { removeAutoCompleteInput } from './transforms';
+import { removeAutoCompleteInputAtPath } from './transforms';
 import { useAutoCompletePluginStore } from '../comboBox/store';
 
 export const withAutoComplete = <V extends Value = Value, E extends PlateEditor<V> = PlateEditor<V>>(
@@ -38,7 +38,7 @@ export const withAutoComplete = <V extends Value = Value, E extends PlateEditor<
   editor.deleteBackward = (unit) => {
     const currentAutoCompleteInput = findAutoCompleteInput(editor);
     if (currentAutoCompleteInput && getNodeString(currentAutoCompleteInput[0]) === '') {
-      return removeAutoCompleteInput(editor, currentAutoCompleteInput[1]);
+      return removeAutoCompleteInputAtPath(editor, currentAutoCompleteInput[1]);
     }
 
     deleteBackward(unit);
@@ -125,7 +125,7 @@ export const withAutoComplete = <V extends Value = Value, E extends PlateEditor<
         : undefined;
 
       if (previousAutoCompleteInputPath && !currentAutoCompleteInputPath) {
-        removeAutoCompleteInput(editor, previousAutoCompleteInputPath);
+        removeAutoCompleteInputAtPath(editor, previousAutoCompleteInputPath);
       }
 
       if (currentAutoCompleteInputPath) {
