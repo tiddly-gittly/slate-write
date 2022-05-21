@@ -8,16 +8,14 @@ import {
   insertNodes,
   insertText,
   isEndPoint,
-  moveSelection,
   PlatePluginKey,
   removeNodes,
-  select,
   TNodeProps,
   withoutMergingHistory,
   withoutNormalizing,
 } from '@udecode/plate-core';
-import { ELEMENT_AUTO_COMPLETE, ELEMENT_AUTO_COMPLETE_INPUT } from './createAutoCompletePlugin';
-import { AutoCompletePlugin, TAutoCompleteElement } from './types';
+import { ELEMENT_AUTO_COMPLETE, ELEMENT_AUTO_COMPLETE_INPUT } from '../autoComplete/createAutoCompletePlugin';
+import { AutoCompletePlugin, TAutoCompleteElement } from '../autoComplete/types';
 
 export type CreateAutoCompleteNode<TData extends Data> = (item: TComboboxItem<TData>) => TNodeProps<TAutoCompleteElement> | TText;
 

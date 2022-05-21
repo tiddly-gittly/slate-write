@@ -4,7 +4,7 @@ import { ComboboxItemProps, TComboboxItemBase } from '@udecode/plate';
 import styled from 'styled-components';
 import memorize from 'lodash/memoize';
 import { LazyTippy } from './PreviewTooltip';
-import { AutoCompleteCombobox } from 'src/editor/plugins/autoComplete/AutoCompleteCombobox';
+import { AutoCompleteCombobox } from 'src/editor/plugins/comboBox/AutoCompleteCombobox';
 
 const ListItemContentContainer = styled.div`
   width: 100%;
@@ -36,10 +36,10 @@ function TiddlerListItem(props: ComboboxItemProps<undefined>): JSX.Element {
 }
 
 export function WikiLinkCombobox(props: { id: string; pluginKey: string }): JSX.Element {
-  const { pluginKey } = props;
+  const { id, pluginKey } = props;
   const tiddlers: TComboboxItemBase[] = useMemo(() => $tw.wiki.getTiddlers().map((title) => ({ key: title, text: title })), []);
   // DEBUG: console
   console.log(`tiddlers`, tiddlers);
   // don't pass id to it, otherwise list will be empty, don't know why
-  return <AutoCompleteCombobox items={tiddlers} pluginKey={pluginKey} filter={filter} onRenderItem={TiddlerListItem} />;
+  return <AutoCompleteCombobox id={pluginKey} items={tiddlers} pluginKey={pluginKey} filter={filter} onRenderItem={TiddlerListItem} />;
 }

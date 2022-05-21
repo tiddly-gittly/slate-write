@@ -1,10 +1,10 @@
+/* eslint-disable unicorn/no-null */
 /**
  * Copied from plate's `packages/nodes/autocomplete/src/withAutoComplete.ts` to support `[[` two char trigger
  * Tests are not copied...Until we support tsx tests
  */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { comboboxActions } from '@udecode/plate-combobox';
 import {
   getEditorString,
   getNodeString,
@@ -25,6 +25,7 @@ import { AutoCompletePlugin, TAutoCompleteInputElement } from './types';
 import { ELEMENT_AUTO_COMPLETE_INPUT } from './createAutoCompletePlugin';
 import { findAutoCompleteInput, isSelectionInAutoCompleteInput, isNodeAutoCompleteInput } from './queries';
 import { removeAutoCompleteInput } from './transforms';
+import { useAutoCompletePluginStore } from '../comboBox/store';
 
 export const withAutoComplete = <V extends Value = Value, E extends PlateEditor<V> = PlateEditor<V>>(
   editor: E,
@@ -112,7 +113,9 @@ export const withAutoComplete = <V extends Value = Value, E extends PlateEditor<
     if (operation.type === 'insert_text' || operation.type === 'remove_text') {
       const currentAutoCompleteInput = findAutoCompleteInput(editor);
       if (currentAutoCompleteInput) {
-        comboboxActions.text(getNodeString(currentAutoCompleteInput[0]));
+        // DEBUG: console
+        console.log(`getNodeString(currentAutoCompleteInput[0])`, getNodeString(currentAutoCompleteInput[0]));
+        useAutoCompletePluginStore.setState({ text: getNodeString(currentAutoCompleteInput[0]) });
       }
     } else if (operation.type === 'set_selection') {
       const previousAutoCompleteInputPath = Range.isRange(operation.properties) ? findAutoCompleteInput(editor, { at: operation.properties })?.[1] : undefined;
@@ -126,7 +129,7 @@ export const withAutoComplete = <V extends Value = Value, E extends PlateEditor<
       }
 
       if (currentAutoCompleteInputPath) {
-        comboboxActions.targetRange(selection);
+        useAutoCompletePluginStore.setState({ targetRange: selection as Range });
       }
     } else if (operation.type === 'insert_node' && isNodeAutoCompleteInput(editor, operation.node as TNode)) {
       if ((operation.node as TAutoCompleteInputElement).trigger !== trigger) {
@@ -144,7 +147,7 @@ export const withAutoComplete = <V extends Value = Value, E extends PlateEditor<
           focus: { path: [...operation.path, 0], offset: text.length },
         });
 
-        comboboxActions.open({
+        useAutoCompletePluginStore.setState({
           activeId: id!,
           text,
           targetRange: selection,
@@ -155,7 +158,7 @@ export const withAutoComplete = <V extends Value = Value, E extends PlateEditor<
         return;
       }
 
-      comboboxActions.reset();
+      useAutoCompletePluginStore.getState().reset();
     }
   };
 

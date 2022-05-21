@@ -18,6 +18,7 @@
     "run-action": "zx scripts/run-action.mjs",
     "prepublishOnly": "npm run make && tsc --emitDeclarationOnly",
     "build:types": "tsc --emitDeclarationOnly",
+    "generate-barrels": "barrelsby --delete",
     "installType": "typesync"
   },
   "repository": {
@@ -44,6 +45,7 @@
     "@styled-icons/material": "10.34.0",
     "@tippyjs/react": "4.2.6",
     "@udecode/plate": "11.0.6",
+    "downshift": "^6.1.7",
     "html-tags": "3.2.0",
     "lodash": "4.17.21",
     "remark-slate-transformer": "0.6.7",
@@ -54,7 +56,8 @@
     "typescript-styled-is": "^2.1.0",
     "unified": "10.1.2",
     "unist-util-find": "^1.0.2",
-    "unist-util-parents": "^2.0.0"
+    "unist-util-parents": "^2.0.0",
+    "zustand": "^3.7.2"
   },
   "devDependencies": {
     "@types/archiver": "5.3.1",
@@ -71,6 +74,7 @@
     "@typescript-eslint/eslint-plugin": "5.24.0",
     "@typescript-eslint/parser": "5.24.0",
     "archiver": "5.3.1",
+    "barrelsby": "^2.3.4",
     "beautiful-react-hooks": "1.2.0",
     "browserslist": "4.20.3",
     "chokidar": "^3.5.3",

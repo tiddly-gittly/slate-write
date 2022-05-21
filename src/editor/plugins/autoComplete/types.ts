@@ -1,6 +1,6 @@
 import { Data, NoData } from '@udecode/plate-combobox';
 import { TElement } from '@udecode/plate-core';
-import { CreateAutoCompleteNode } from './getAutoCompleteOnSelectItem';
+import { CreateAutoCompleteNode } from '../comboBox/getAutoCompleteOnSelectItem';
 
 export interface TAutoCompleteElement extends TElement {
   value: string;

@@ -5,7 +5,7 @@ import { ISnippetComboboxItem, snippets } from '../../config/snippets';
 import styled from 'styled-components';
 import memorize from 'lodash/memoize';
 import { LazyTippy } from './PreviewTooltip';
-import { AutoCompleteCombobox } from 'src/editor/plugins/autoComplete/AutoCompleteCombobox';
+import { AutoCompleteCombobox } from 'src/editor/plugins/comboBox/AutoCompleteCombobox';
 
 const ListItemContentContainer = styled.div`
   width: 100%;
@@ -40,5 +40,5 @@ function SnippetListItem(props: ComboboxItemProps<ISnippetComboboxItem>): JSX.El
 export function SnippetCombobox(props: { id: string; pluginKey: string }): JSX.Element {
   const { id, pluginKey } = props;
   // don't pass id to it, otherwise list will be empty, don't know why
-  return <AutoCompleteCombobox items={snippets} pluginKey={pluginKey} filter={filter} onRenderItem={SnippetListItem} />;
+  return <AutoCompleteCombobox id={pluginKey} items={snippets} pluginKey={pluginKey} filter={filter} onRenderItem={SnippetListItem} />;
 }

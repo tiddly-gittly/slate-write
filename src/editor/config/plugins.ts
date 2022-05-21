@@ -22,7 +22,6 @@ import {
   createSubscriptPlugin,
   createSuperscriptPlugin,
   createUnderlinePlugin,
-  createComboboxPlugin,
   createInlineVoidPlugin,
 } from '@udecode/plate';
 import { CONFIG } from './config';
@@ -32,6 +31,7 @@ import { createWidgetPlugin } from '../plugins/widget';
 import { createDndPlugin } from '../plugins/dnd';
 import { createMacroPlugin } from '../plugins/macro';
 import { createAutoCompletePlugin } from '../plugins/autoComplete';
+import { createComboBoxPlugin } from '../plugins/comboBox';
 
 export const basicElements = createPlugins([
   createBlockquotePlugin(),
@@ -55,7 +55,7 @@ export const basicMarks = createPlugins([
   createUnderlinePlugin(),
 ]);
 export const utils = createPlugins([
-  createComboboxPlugin(),
+  createComboBoxPlugin(),
   createAutoCompletePlugin(CONFIG.snippetComboBox),
   createAutoCompletePlugin(CONFIG.wikiLinkComboBox),
   createSelectOnBackspacePlugin(CONFIG.selectOnBackspace),
