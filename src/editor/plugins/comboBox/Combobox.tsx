@@ -78,8 +78,6 @@ export function Combobox<TData extends Data = NoData>({
     }),
     shallow,
   );
-  // DEBUG: console
-  console.log(`text, highlightedIndex`, text, highlightedIndex);
   const editor = useEditorState();
   const focusedEditorId = useEventEditorSelectors.focus?.();
 

@@ -77,14 +77,14 @@ export const withAutoComplete = <V extends Value = Value, E extends PlateEditor<
     }
 
     // Make sure a autocomplete input is created at the beginning of line or after a whitespace
-    const previousChar = getEditorString(editor, getRange(editor, selection, getPointBefore(editor, selection, { distance: trigger.length - 1 })));
-    const previousCharPlus1 = getEditorString(editor, getRange(editor, selection, getPointBefore(editor, selection, { distance: trigger.length })));
+    const previousChar = getEditorString(editor, getRange(editor, selection, getPointBefore(editor, selection, { distance: trigger.length + 1 })));
+    const previousCharPlus1 = getEditorString(editor, getRange(editor, selection, getPointBefore(editor, selection, { distance: trigger.length + 2 })));
 
     const nextChar = getEditorString(editor, getRange(editor, selection, getPointAfter(editor, selection)));
 
     const beginningOfLine = previousChar === '' || previousChar.length === previousCharPlus1.length;
     const endOfLine = nextChar === '';
-    const precededByWhitespace = !needSpaceBeforeTrigger || previousCharPlus1.startsWith(' ');
+    const precededByWhitespace = !needSpaceBeforeTrigger || (needSpaceBeforeTrigger && previousChar.startsWith(' '));
     const followedByWhitespace = nextChar === ' ';
 
     if ((beginningOfLine || precededByWhitespace) && (endOfLine || followedByWhitespace)) {
@@ -113,8 +113,6 @@ export const withAutoComplete = <V extends Value = Value, E extends PlateEditor<
     if (operation.type === 'insert_text' || operation.type === 'remove_text') {
       const currentAutoCompleteInput = findAutoCompleteInput(editor);
       if (currentAutoCompleteInput) {
-        // DEBUG: console
-        console.log(`getNodeString(currentAutoCompleteInput[0])`, getNodeString(currentAutoCompleteInput[0]));
         useAutoCompletePluginStore.setState({ text: getNodeString(currentAutoCompleteInput[0]) });
       }
     } else if (operation.type === 'set_selection') {
