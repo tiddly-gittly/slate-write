@@ -22,6 +22,12 @@ type: text/vnd.tiddlywiki
 ## allow drag to reorder blocks, onDrop listeners are in `src/editor/plugins/dnd/hooks` that copied from plate's source
 ### code are copy from udecode/plate's repo to `src/editor/plugins/dnd` folder, and have modification in `src/editor/plugins/dnd/hooks/useDragBlock.ts` to set `$tw.dragInProgress = true`
 ## support drag to reorder list items and widget, components registered in `src/editor/components/index.ts` will be draggable
+# autocomplete `[[`'s and `{{`'s linkable tiddlers result
+## the code handles special `auto_complete_input` node that contains text to search after typing `/` or `[[` is copied from plate to `src/editor/plugins/autoComplete`
+## `src/editor/plugins/autoComplete/withAutoComplete.ts` will put text in the `auto_complete_input` node to the redux (zustand npm package) store `useAutoCompletePluginStore`
+## code in `src/editor/plugins/comboBox` will get text and list from the store `useAutoCompletePluginStore`, and handles dropdown (combobox) interaction using `downshift` npm package
+## And the final comboBox React component and the data source of tiddlers/macros/snippets are in the `src/editor/components/combobox` folder
+## autocomplete `<<`'s available macros as discussed in [[TiddlyWiki5/discussions/6706|https://github.com/Jermolene/TiddlyWiki5/discussions/6706]]
 
 !! TODO
 
@@ -34,9 +40,7 @@ type: text/vnd.tiddlywiki
 # TODO: i18n for readme and placeholder
 # TODO: allow 3rd party plugin to control the editor, for example, the command palette and the fishing plugin.
 # TODO: add more selection operation, or maybe in command palette, like "refactor to new tiddler"
-# TODO: autocomplete `[[`'s and `{{`'s linkable tiddlers result
 # TODO: autocomplete `<$`'s available widget and fields
-# TODO: autocomplete `<<`'s available macros
 # TODO: insert latex math using `$$` or `￥￥` shortcut
 # TODO: open context aware autocomplete using `ctrl+space`, show corresponding dropdown menu using prefix of the selection
 # TODO: add excalidraw widget support

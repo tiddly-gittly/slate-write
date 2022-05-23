@@ -1,0 +1,1 @@
+export const macroNames = Object.keys($tw.wiki.macros)

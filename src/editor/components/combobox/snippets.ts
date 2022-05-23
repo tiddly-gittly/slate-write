@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { TComboboxItem } from '@udecode/plate';
 import { Tiddler } from 'tiddlywiki';
 
@@ -25,7 +26,7 @@ $tw.utils.each($tw.wiki.filterTiddlers('[all[tiddlers+shadows]tag[$:/tags/TextEd
     key: snippetTiddlerTitle,
     data: {
       name: getSnippetName(snippet),
-      preview: `!! ${snippet.fields.caption}${snippet.fields['snippet-description'] ? '\n\n' + snippet.fields['snippet-description'] : ''}`,
+      preview: `!! ${snippet.fields.caption as string}${snippet.fields['snippet-description'] ? `\n\n${snippet.fields['snippet-description'] as string}` : ''}`,
     },
     text: snippet.fields.text,
   });

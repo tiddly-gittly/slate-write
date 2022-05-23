@@ -9,7 +9,7 @@ import * as PLUGINS from 'src/editor/config/plugins';
 import { BallonToolbar } from 'src/editor/components/Toolbars';
 import { GlobalStyle } from 'src/editor/config/globalStyle';
 import { IDefaultWidgetProps, ParentWidgetContext } from 'tw-react';
-import { SnippetCombobox, WikiLinkCombobox } from './components/combobox';
+import { MacrosCombobox, SnippetCombobox, WikiLinkCombobox } from './components/combobox';
 import { components } from './components';
 import { CONFIG } from './config/config';
 import { getIdFactory } from './plugins/id/getId';
@@ -117,6 +117,7 @@ export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Elemen
       <SnippetCombobox id={editorID} pluginKey="/" />
       <WikiLinkCombobox id={editorID} pluginKey="[[" />
       <WikiLinkCombobox id={editorID} pluginKey="{{" />
+      <MacrosCombobox id={editorID} pluginKey="<<" />
     </Plate>
   );
 }
