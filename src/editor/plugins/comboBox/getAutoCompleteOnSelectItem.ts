@@ -14,6 +14,7 @@ import {
   withoutMergingHistory,
   withoutNormalizing,
 } from '@udecode/plate-core';
+import { replaceCurrentBlockWithParseResult } from '../advancedBlock/replaceCurrentBlockWithParseResult';
 import { ELEMENT_AUTO_COMPLETE, ELEMENT_AUTO_COMPLETE_INPUT } from '../autoComplete/createAutoCompletePlugin';
 import { removeAutoCompleteInputFromCurrentSelection } from '../autoComplete/transforms';
 import { AutoCompletePlugin, TAutoCompleteElement } from '../autoComplete/types';
@@ -71,6 +72,8 @@ export const getAutoCompleteOnSelectItem =
       if (isBlockEnd) {
         deleteText(editor);
       }
+
+      replaceCurrentBlockWithParseResult(editor);
     });
     return reset();
   };
