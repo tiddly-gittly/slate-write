@@ -116,6 +116,7 @@ export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Elemen
       <BallonToolbar />
       <SnippetCombobox id={editorID} pluginKey="/" />
       <WikiLinkCombobox id={editorID} pluginKey="[[" />
+      <WikiLinkCombobox id={editorID} pluginKey="{{" />
     </Plate>
   );
 }

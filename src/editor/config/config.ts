@@ -52,6 +52,7 @@ interface Config {
   selectOnBackspace: Partial<PlatePlugin<SelectOnBackspacePlugin>>;
   snippetComboBox: Partial<PlatePlugin<AutoCompletePlugin<undefined>>>;
   wikiLinkComboBox: Partial<PlatePlugin<AutoCompletePlugin<undefined>>>;
+  wikiTransclusionComboBox: Partial<PlatePlugin<AutoCompletePlugin<undefined>>>;
   softBreak: Partial<PlatePlugin<SoftBreakPlugin>>;
   trailingBlock: Partial<PlatePlugin<TrailingBlockPlugin>>;
 }
@@ -72,6 +73,17 @@ export const CONFIG: Config = {
       needSpaceBeforeTrigger: false,
       keepTrigger: true,
       textToInsertAfter: ']]',
+      createAutoCompleteNode: (item: TComboboxItemBase) => {
+        return { text: item.text as string };
+      },
+    },
+  },
+  wikiTransclusionComboBox: {
+    key: '{{',
+    options: {
+      needSpaceBeforeTrigger: false,
+      keepTrigger: true,
+      textToInsertAfter: '}}',
       createAutoCompleteNode: (item: TComboboxItemBase) => {
         return { text: item.text as string };
       },
