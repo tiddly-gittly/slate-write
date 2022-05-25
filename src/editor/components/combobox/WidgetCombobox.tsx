@@ -21,7 +21,7 @@ export function WidgetCombobox(props: { id: string; pluginKey: string }): JSX.El
       pluginKey={pluginKey}
       filter={filterKey}
       onRenderItem={ComboBoxDorpDownListItem}
-      getRenderTextTemplate={(item) => memorizedRenderText(item.key)}
+      getRenderTextTemplate={(item) => memorizedRenderText(`!! ${item.key}\n\n${item.text as string}`)}
       getNameTemplate={(item) => (item as IWidgetItem).data.widgetClass.name}
     />
   );

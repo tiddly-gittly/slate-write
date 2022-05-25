@@ -26,7 +26,9 @@ $tw.utils.each($tw.wiki.filterTiddlers('[all[tiddlers+shadows]tag[$:/tags/TextEd
     key: snippetTiddlerTitle,
     data: {
       name: getSnippetName(snippet),
-      preview: `!! ${snippet.fields.caption as string}${snippet.fields['snippet-description'] ? `\n\n${snippet.fields['snippet-description'] as string}` : ''}`,
+      preview: `!! ${snippet.fields.caption as string}${
+        snippet.fields['snippet-description'] ? `\n\n${snippet.fields['snippet-description'] as string}` : ''
+      }\n\n${snippet.fields.text}`,
     },
     text: snippet.fields.text,
   });

@@ -17,7 +17,7 @@ export function MacrosCombobox(props: { id: string; pluginKey: string }): JSX.El
       pluginKey={pluginKey}
       filter={filterKey}
       onRenderItem={ComboBoxDorpDownListItem}
-      getRenderTextTemplate={(item) => memorizedRenderText(item.text as string)}
+      getRenderTextTemplate={(item) => memorizedRenderText(`!! ${item.key}\n\n${item.text as string}`)}
     />
   );
 }
