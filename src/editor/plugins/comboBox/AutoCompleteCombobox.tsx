@@ -5,7 +5,7 @@ import { ELEMENT_AUTO_COMPLETE } from '../autoComplete/createAutoCompletePlugin'
 import { AutoCompletePlugin } from '../autoComplete/types';
 import { getAutoCompleteOnSelectItem } from './getAutoCompleteOnSelectItem';
 import { Combobox } from './Combobox';
-import { ComboboxProps } from './Combobox.types';
+import { ComboboxProps, WidgetsListItemTextGetters } from './Combobox.types';
 
 export interface AutoCompleteComboboxProps<TData extends Data = NoData> extends Partial<ComboboxProps<TData>> {
   pluginKey?: string;
@@ -15,7 +15,7 @@ export function AutoCompleteCombobox<TData extends Data = NoData>({
   pluginKey = ELEMENT_AUTO_COMPLETE,
   id = pluginKey,
   ...props
-}: AutoCompleteComboboxProps<TData>): JSX.Element {
+}: AutoCompleteComboboxProps<TData> & WidgetsListItemTextGetters): JSX.Element {
   const editor = usePlateEditorRef()!;
 
   const { trigger } = getPluginOptions<AutoCompletePlugin>(editor, pluginKey);

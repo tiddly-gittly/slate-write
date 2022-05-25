@@ -1,23 +1,12 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { PlateEditor, TText, Value } from '@udecode/plate';
-import type { ComboboxOnSelectItem, Data, NoData, TComboboxItem } from '@udecode/plate-combobox';
-import {
-  deleteText,
-  getBlockAbove,
-  getPlugin,
-  insertNodes,
-  insertText,
-  isEndPoint,
-  PlatePluginKey,
-  removeNodes,
-  TNodeProps,
-  withoutMergingHistory,
-  withoutNormalizing,
-} from '@udecode/plate-core';
+import type { Data, NoData, TComboboxItem } from '@udecode/plate-combobox';
+import { deleteText, getBlockAbove, getPlugin, insertNodes, insertText, isEndPoint, PlatePluginKey, TNodeProps, withoutNormalizing } from '@udecode/plate-core';
 import { replaceCurrentBlockWithParseResult } from '../advancedBlock/replaceCurrentBlockWithParseResult';
-import { ELEMENT_AUTO_COMPLETE, ELEMENT_AUTO_COMPLETE_INPUT } from '../autoComplete/createAutoCompletePlugin';
+import { ELEMENT_AUTO_COMPLETE } from '../autoComplete/createAutoCompletePlugin';
 import { removeAutoCompleteInputFromCurrentSelection } from '../autoComplete/transforms';
 import { AutoCompletePlugin, TAutoCompleteElement } from '../autoComplete/types';
+import { ComboboxOnSelectItem } from './Combobox.types';
 import { useAutoCompletePluginStore } from './store';
 
 export type CreateAutoCompleteNode<TData extends Data> = (item: TComboboxItem<TData>) => TNodeProps<TAutoCompleteElement> | TText;

@@ -54,6 +54,7 @@ interface Config {
   wikiLinkComboBox: Partial<PlatePlugin<AutoCompletePlugin<undefined>>>;
   wikiTransclusionComboBox: Partial<PlatePlugin<AutoCompletePlugin<undefined>>>;
   macrosComboBox: Partial<PlatePlugin<AutoCompletePlugin<undefined>>>;
+  widgetComboBox: Partial<PlatePlugin<AutoCompletePlugin<undefined>>>;
   softBreak: Partial<PlatePlugin<SoftBreakPlugin>>;
   trailingBlock: Partial<PlatePlugin<TrailingBlockPlugin>>;
 }
@@ -96,6 +97,17 @@ export const CONFIG: Config = {
       needSpaceBeforeTrigger: false,
       keepTrigger: true,
       textToInsertAfter: '>>',
+      createAutoCompleteNode: (item: TComboboxItemBase) => {
+        return { text: item.text as string };
+      },
+    },
+  },
+  widgetComboBox: {
+    key: '<$',
+    options: {
+      needSpaceBeforeTrigger: false,
+      keepTrigger: true,
+      textToInsertAfter: '/>',
       createAutoCompleteNode: (item: TComboboxItemBase) => {
         return { text: item.text as string };
       },

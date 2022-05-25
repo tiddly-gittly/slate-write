@@ -9,7 +9,7 @@ import type { Data, NoData, TComboboxItem, TComboboxItemBase } from '@udecode/pl
 import { isDefined, useEditorState, useEventEditorSelectors } from '@udecode/plate-core';
 import { PortalBody } from '@udecode/plate-styled-components';
 import { getRangeBoundingClientRect, usePopperPosition, virtualReference } from '@udecode/plate-ui-popper';
-import { ComboboxProps } from './Combobox.types';
+import { ComboboxProps, WidgetsListItemTextGetters } from './Combobox.types';
 import styled from 'styled-components';
 import is from 'typescript-styled-is';
 import { useAutoCompletePluginStore } from './store';
@@ -54,7 +54,6 @@ const Item = styled.div`
     }
   `}
 `;
-
 /**
  * Register the combobox id, trigger, onSelectItem
  * Renders the combobox if active.
@@ -66,7 +65,9 @@ export function Combobox<TData extends Data = NoData>({
   items,
   maxSuggestions = items?.length ?? 0,
   filter,
-}: ComboboxProps<TData>): JSX.Element | null {
+  getRenderTextTemplate,
+  getNameTemplate,
+}: ComboboxProps<TData> & WidgetsListItemTextGetters): JSX.Element | null {
   const { activeId, highlightedIndex, popperContainer, targetRange, text, filteredItems } = useAutoCompletePluginStore(
     ({ activeId, highlightedIndex, popperContainer, targetRange, text, filteredItems }) => ({
       activeId,
@@ -122,7 +123,7 @@ export function Combobox<TData extends Data = NoData>({
     <PortalBody>
       <Container {...menuProps} ref={popperReference} style={popperStyles.popper} {...attributes.popper}>
         {filteredItems.map((item, index) => {
-          const renderedItem = onRenderItem != null ? onRenderItem({ item: item as TComboboxItem<TData> }) : item.text;
+          const renderedItem = onRenderItem != null ? onRenderItem({ item: item as TComboboxItem<TData>, getRenderTextTemplate, getNameTemplate }) : item.text;
 
           const highlighted = index === highlightedIndex;
 

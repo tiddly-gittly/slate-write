@@ -1,15 +1,18 @@
 /* eslint-disable unicorn/no-null */
+import { TComboboxItemWithData } from '@udecode/plate';
 import type { TComboboxItemBase } from '@udecode/plate-combobox';
 import { BaseSelection } from 'slate';
 import create from 'zustand';
 
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-constraint
+export type AnyComboBoxItem<T extends any = any> = TComboboxItemWithData<T> | TComboboxItemBase;
 export interface IAutoCompletePluginContext {
   /**
    * Active id (combobox id which is opened).
    */
   activeId?: string;
 
-  filteredItems: Record<string, TComboboxItemBase[]>;
+  filteredItems: Record<string, AnyComboBoxItem[]>;
 
   /**
    * Highlighted index.
@@ -34,14 +37,14 @@ export interface IAutoCompletePluginContext {
 }
 export interface IAutoCompletePluginStoreActions {
   reset: () => void;
-  setFilteredItems: (newState: Record<string, TComboboxItemBase[]>) => void;
+  setFilteredItems: (newState: Record<string, AnyComboBoxItem[]>) => void;
 }
 
 export const useAutoCompletePluginStore = create<IAutoCompletePluginContext & IAutoCompletePluginStoreActions>((set) => ({
   highlightedIndex: -1,
   targetRange: null,
   filteredItems: {},
-  setFilteredItems: (newState: Record<string, TComboboxItemBase[]>) => set((state) => ({ ...state, filteredItems: { ...state.filteredItems, ...newState } })),
+  setFilteredItems: (newState: Record<string, AnyComboBoxItem[]>) => set((state) => ({ ...state, filteredItems: { ...state.filteredItems, ...newState } })),
   reset: () =>
     set({
       activeId: undefined,

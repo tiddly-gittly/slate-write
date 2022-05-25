@@ -60,6 +60,7 @@ export const utils = createPlugins([
   createAutoCompletePlugin(CONFIG.wikiLinkComboBox),
   createAutoCompletePlugin(CONFIG.wikiTransclusionComboBox),
   createAutoCompletePlugin(CONFIG.macrosComboBox),
+  createAutoCompletePlugin(CONFIG.widgetComboBox),
   createSelectOnBackspacePlugin(CONFIG.selectOnBackspace),
   createSoftBreakPlugin(CONFIG.softBreak),
   createExitBreakPlugin(CONFIG.exitBreak),

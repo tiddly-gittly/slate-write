@@ -60,7 +60,7 @@ export const withAutoComplete = <V extends Value = Value, E extends PlateEditor<
         editor,
         getRange(editor, currentSelection, getPointBefore(editor, currentSelection, { distance: currentTrigger.length - 1 })),
       );
-      if (`${text}${previousChars}` === currentTrigger) {
+      if (`${previousChars}${text}` === currentTrigger) {
         return true;
       }
     }
