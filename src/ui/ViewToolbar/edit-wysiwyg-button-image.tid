@@ -1,7 +1,7 @@
 title: $:/plugins/linonetwo/slate-write/ui/ViewToolbar/images/edit-wysiwyg-button
 tags: $:/tags/Image
 
-<svg width="22pt" height="22pt" class="tc-image-edit-button tc-image-button" viewBox="0 0 128 128">
+<svg width="22pt" height="22pt" class="tc-image-edit-button tc-image-wysiwyg-edit-button tc-image-button" viewBox="0 0 128 128">
   <g fill-rule="evenodd">
     <g id="svg_1" fill-rule="evenodd">
       <path id="svg_2"
@@ -9,4 +9,5 @@ tags: $:/tags/Image
     </g>
     <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="108" id="svg_11" y="89" x="2"
       stroke-width="0">T</text>
+  </g>
 </svg>

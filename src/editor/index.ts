@@ -41,10 +41,6 @@ class SlateWriteWidget extends Widget<IEditorAppProps> {
   private isFileDropEnabled: boolean | undefined;
   private editShowToolbar: boolean | undefined;
 
-  /** a lock to prevent update from tiddler to slate, when update of tiddler is trigger by slate. */
-  private isUpdatingByUserInput = false;
-  private updatingLockTimeoutHandle: NodeJS.Timeout | undefined;
-
   constructor(parseTreeNode: any, options: any) {
     super(parseTreeNode, options);
     $tw.modules.applyMethods('texteditoroperation', this.editorOperations);
@@ -62,24 +58,46 @@ class SlateWriteWidget extends Widget<IEditorAppProps> {
         return;
       }
       $tw.wiki.setText(this.editTitle, undefined, undefined, newText);
-      this.updatingLockTimeoutHandle = setTimeout(() => {
-        this.isUpdatingByUserInput = false;
-      });
+      this.unlock();
     };
     return {
       currentTiddler: this.editTitle ?? this.getVariable('currentTiddler'),
       tiddlerText: (this.editTitle && $tw.wiki.getTiddlerText(this.editTitle)) ?? '',
       saver: {
-        lock: () => {
-          this.isUpdatingByUserInput = true;
-          if (this.updatingLockTimeoutHandle !== undefined) {
-            clearTimeout(this.updatingLockTimeoutHandle);
-          }
-        },
+        lock: this.lock,
         onSave,
         interval: SAVE_DEBOUNCE_INTERVAL,
       },
     };
+  };
+
+  /** a lock to prevent update from tiddler to slate, when update of tiddler is trigger by slate. */
+  private isUpdatingByUserInput = false;
+  private updatingLockTimeoutHandle: NodeJS.Timeout | undefined;
+  get editIconElement() {
+    const element = (this.parentDomNode as HTMLDivElement).closest('.tc-tiddler-exists')?.querySelector('.tc-image-wysiwyg-edit-button');
+    return element;
+  }
+
+  lock = () => {
+    this.isUpdatingByUserInput = true;
+    const iconText = this.editIconElement?.querySelector('text');
+    if (iconText) {
+      iconText.innerHTML = '.....';
+    }
+    if (this.updatingLockTimeoutHandle !== undefined) {
+      clearTimeout(this.updatingLockTimeoutHandle);
+    }
+  };
+
+  unlock = () => {
+    this.updatingLockTimeoutHandle = setTimeout(() => {
+      this.isUpdatingByUserInput = false;
+      const iconText = this.editIconElement?.querySelector('text');
+      if (iconText) {
+        iconText.innerHTML = 'T';
+      }
+    });
   };
 
   execute() {
