@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
-import { createPlugins, Plate, TNode, getPlateActions, usePlateEditorRef, createNodeIdPlugin, TElement } from '@udecode/plate';
+import { createPlugins, Plate, TNode, getPlateActions, usePlateEditorRef, createNodeIdPlugin, TElement, PlateProvider } from '@udecode/plate';
 import { useDebouncedCallback } from 'beautiful-react-hooks';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -67,19 +67,7 @@ export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Elemen
       updateEditorValue(newValue);
     }
   }, [props.tiddlerText, currentTextReference, updateEditorValue, resetEditor, idCreator]);
-  useEffect(() => {
-    // reset selection, so if you delete wikitext, selection won't goto some empty space and cause error
-    resetEditor();
-    // this only work as didMount
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  const onBlur = useCallback(() => {
-    // reset selection, so if you delete wikitext, selection won't goto some empty space and cause error
-    resetEditor();
-    // resetEditor is different every time, and allow it causing rerender will make dnd not draggable
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  const debouncedSaver = useDebouncedCallback(
+  const saver = useCallback(
     (newValue: TNode[]) => {
       // DEBUG: console
       console.log(`newValue`, newValue);
@@ -88,10 +76,12 @@ export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Elemen
       currentTextReference.current = newText;
     },
     [props.saver.onSave],
-    props.saver.interval,
   );
+  const debouncedSaver = useDebouncedCallback(saver, [saver], props.saver.interval);
   const onChange = useCallback(
     (newValue: TElement[]) => {
+      if (currentAstReference.current === newValue) return;
+      currentAstReference.current = newValue;
       // check isComposing and if user is just set_selection
       if (editorReference === null || ReactEditor.isComposing(editorReference as ReactEditor)) {
         return;
@@ -100,11 +90,27 @@ export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Elemen
         return;
       }
       props.saver.lock();
-      currentAstReference.current = newValue;
       debouncedSaver(newValue);
     },
     [debouncedSaver, editorReference, props.saver],
   );
+  useEffect(() => {
+    // reset selection, so if you delete wikitext, selection won't goto some empty space and cause error
+    // resetEditor();
+    // this only work as didMount
+    return () => {
+      // emergency save on close or switch to edit or readonly
+      saver(currentAstReference.current);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const onBlur = useCallback(() => {
+    // reset selection, so if you delete wikitext, selection won't goto some empty space and cause error
+    resetEditor();
+    // resetEditor is different every time, and allow it causing rerender will make dnd not draggable
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   if (typeof document === 'undefined') {
     return <div>Loading...</div>;
   }
@@ -125,11 +131,13 @@ export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Elemen
 
 export function App(props: IEditorAppProps & IDefaultWidgetProps): JSX.Element {
   return (
-    <ParentWidgetContext.Provider value={props.parentWidget}>
-      <GlobalStyle />
-      <DndProvider backend={HTML5Backend}>
-        <Editor {...props} />
-      </DndProvider>
-    </ParentWidgetContext.Provider>
+    <PlateProvider id={props.currentTiddler}>
+      <ParentWidgetContext.Provider value={props.parentWidget}>
+        <GlobalStyle />
+        <DndProvider backend={HTML5Backend}>
+          <Editor {...props} />
+        </DndProvider>
+      </ParentWidgetContext.Provider>
+    </PlateProvider>
   );
 }
