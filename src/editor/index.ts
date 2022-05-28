@@ -163,18 +163,10 @@ class SlateWriteWidget extends Widget<IEditorAppProps> {
       (this.editRefreshTitle !== undefined && changedTiddlers[this.editRefreshTitle]) ||
       (this.editTitle && changedTiddlers[this.editTitle]?.modified)
     ) {
-      this.noUnmount = true;
       this.refreshSelf();
       return this.refreshChildren(changedTiddlers);
     }
     return false;
-  }
-
-  /** sometimes we just want refresh selectly, no full unmount, like in case of update tiddler text from outside of editor */
-  private noUnmount = false;
-  removeChildDomNodes() {
-    super.removeChildDomNodes(this.noUnmount);
-    this.noUnmount = false;
   }
 }
 
