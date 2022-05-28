@@ -62,7 +62,7 @@ class SlateWriteWidget extends Widget<IEditorAppProps> {
     };
     return {
       currentTiddler: this.editTitle ?? this.getVariable('currentTiddler'),
-      tiddlerText: (this.editTitle && $tw.wiki.getTiddlerText(this.editTitle)) ?? '',
+      initialTiddlerText: (this.editTitle && $tw.wiki.getTiddlerText(this.editTitle)) ?? '',
       saver: {
         lock: this.lock,
         onSave,
