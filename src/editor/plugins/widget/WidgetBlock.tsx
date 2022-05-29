@@ -7,6 +7,7 @@ import { StyledElementProps, getRootProps } from '@udecode/plate-styled-componen
 import styled from 'styled-components';
 import { WidgetCodeEditor } from './WidgetCodeEditor';
 import { useSelected } from 'slate-react';
+import is from 'typescript-styled-is';
 
 export interface IWidgetBlockProps {
   element: TElement & { node: IParseTreeNode };
@@ -17,6 +18,13 @@ const TwWidgetContainerOuter = styled.div``;
 const TwWidgetContainerInner = styled.div`
   user-select: normal;
   white-space: normal;
+`;
+const TwWidgetCodeContainer = styled.div`
+  opacity: 0;
+  ${is('selected')`
+    opacity: 1;
+  `}
+  transition: opacity 0.1s;
 `;
 
 export function WidgetBlock(props: WidgetBlockElementProps): JSX.Element {
@@ -31,7 +39,7 @@ export function WidgetBlock(props: WidgetBlockElementProps): JSX.Element {
         <div ref={widgetContainerReference} />
       </TwWidgetContainerInner>
       {children}
-      {selected && <WidgetCodeEditor {...props} />}
+      <TwWidgetCodeContainer selected={selected}>{selected && <WidgetCodeEditor {...props} />}</TwWidgetCodeContainer>
     </TwWidgetContainerOuter>
   );
 }
