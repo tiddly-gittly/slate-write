@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import React, { useRef, ChangeEvent, useMemo, useState } from 'react';
-import { findNodePath, setNodes } from '@udecode/plate-core';
+import React, { useRef, ChangeEvent, useMemo, useCallback } from 'react';
+import { findNodePath, insertNodes, removeNodes } from '@udecode/plate-core';
+import { withoutNormalizing } from '@udecode/plate';
 import type { EditorConfiguration } from 'codemirror';
+import Tippy from '@tippyjs/react';
 import { useDebouncedCallback } from 'beautiful-react-hooks';
 // import { useDrag } from 'react-dnd';
 import styled from 'styled-components';
@@ -18,10 +20,17 @@ const CodeBlockWrapper = styled.div<{ left?: number; opacity?: number; top?: num
   left: ${({ left }) => left}px;
   opacity: ${({ opacity }) => opacity}; */
 `;
+const CodeBlockContainer = styled.div`
+  user-select: none;
+  display: flex;
+  flex-direction: row;
+`;
 const CodeTextArea = styled.textarea`
   width: 100%;
   height: max-content;
 `;
+const SaveButton = styled.button``;
+const SaveButtonText = $tw.wiki.getTiddlerText('$:/language/Buttons/SaveWiki/Hint');
 
 export function WidgetCodeEditor(props: WidgetBlockElementProps): JSX.Element {
   const { element, children, editor } = props;
@@ -32,25 +41,24 @@ export function WidgetCodeEditor(props: WidgetBlockElementProps): JSX.Element {
   const cmOptions = useMemo<EditorConfiguration>(() => ({ mode: CODE_BLOCK_LANGUAGES.TiddlyWiki[0], value: code }), [code]);
   const codeMirror = useCodeMirror(textAreaReference, cmOptions);
   const path = useMemo(() => findNodePath(editor, element), [editor, element]);
-  const onCodeChange = useDebouncedCallback(
-    (eventOrString: ChangeEvent<HTMLTextAreaElement> | string) => {
-      // DEBUG: console
-      console.log(`WidgetCodeEditoreventOrString`, eventOrString);
-      if (path !== undefined) {
-        const latestCode = typeof eventOrString === 'string' ? eventOrString : eventOrString.target.value;
-        // TODO: use idCreator here, and in every deserialize usages
-        // DEBUG: console
-        console.log(`element.node`, element.node);
-        const slateNode = deserialize(latestCode);
-        // DEBUG: console
-        console.log(`WidgetCodeEditorslateNode`, slateNode);
-        // DEBUG: console
-        console.log(`path`, path);
-        setNodes(editor, slateNode[0], { at: path });
-      }
-    },
-    [editor, path],
-  );
+  const latestCodeReference = useRef<string>(code);
+  const onCodeChange = useCallback((eventOrString: ChangeEvent<HTMLTextAreaElement> | string) => {
+    const latestCode = typeof eventOrString === 'string' ? eventOrString : eventOrString.target.value;
+    latestCodeReference.current = latestCode;
+  }, []);
+  const onSave = useDebouncedCallback(() => {
+    if (path !== undefined) {
+      // TODO: use idCreator here, and in every deserialize usages
+      const slateNode = deserialize(latestCodeReference.current);
+      const previousSelection = editor.selection;
+      withoutNormalizing(editor, () => {
+        removeNodes(editor, { at: path });
+        insertNodes(editor, slateNode, { at: path });
+        editor.selection = previousSelection;
+      });
+      codeMirror.current?.focus?.();
+    }
+  }, [editor, path, codeMirror]);
   useCodeMirrorEventListenerSettled(onCodeChange, codeMirror);
 
   // const [topLeft, topLeftSetter] = useState<{ left?: number; top?: number }>({ top: undefined, left: undefined });
@@ -79,9 +87,14 @@ export function WidgetCodeEditor(props: WidgetBlockElementProps): JSX.Element {
 
   return (
     <CodeBlockWrapper /* top={topLeft.top} left={topLeft.left} opacity={opacity} ref={dragReference} */>
-      <div style={{ userSelect: 'none' }} contentEditable={false} className="tw-widget-code-editor-container">
-        <CodeTextArea ref={textAreaReference} onChange={onCodeChange} defaultValue={code} className="CodeMirror" />
-      </div>
+      <CodeBlockContainer contentEditable={false}>
+        <div className="tw-widget-code-editor-container">
+          <CodeTextArea ref={textAreaReference} onChange={onCodeChange} defaultValue={code} className="CodeMirror" />
+        </div>
+        <Tippy content="(⌃/⌘ + ⏎)">
+          <SaveButton onClick={onSave}>{SaveButtonText}</SaveButton>
+        </Tippy>
+      </CodeBlockContainer>
       {children}
     </CodeBlockWrapper>
   );
