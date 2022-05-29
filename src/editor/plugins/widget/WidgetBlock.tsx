@@ -15,7 +15,7 @@ export type WidgetBlockElementProps = StyledElementProps<Value, TElement & { nod
 
 const TwWidgetContainerOuter = styled.div``;
 const TwWidgetContainerInner = styled.div`
-  user-select: none;
+  user-select: normal;
   white-space: normal;
 `;
 const CodeBlockWrapper = styled.div``;
