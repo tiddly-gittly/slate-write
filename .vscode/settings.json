@@ -11,6 +11,7 @@
     "slatejs",
     "tidast",
     "udecode",
-    "wikiast"
+    "wikiast",
+    "zustand"
   ]
 }

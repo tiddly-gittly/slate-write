@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import React, { useRef, ChangeEvent, useMemo, useCallback } from 'react';
-import { findNodePath, insertNodes, removeNodes } from '@udecode/plate-core';
+import React, { useRef, ChangeEvent, useMemo, useCallback, MutableRefObject, useEffect } from 'react';
+import { findNodePath, insertNodes, removeNodes, setNodes } from '@udecode/plate-core';
 import { withoutNormalizing } from '@udecode/plate';
-import type { EditorConfiguration } from 'codemirror';
+import type { EditorConfiguration, EditorFromTextArea } from 'codemirror';
 import Tippy from '@tippyjs/react';
 import { useDebouncedCallback } from 'beautiful-react-hooks';
 // import { useDrag } from 'react-dnd';
@@ -11,6 +11,7 @@ import { CODE_BLOCK_LANGUAGES, useCodeMirror, useCodeMirrorEventListenerSettled 
 import { WidgetBlockElementProps } from './WidgetBlock';
 import { wikiAstToWikiText } from 'src/transform/wikiast-util-to-wikitext';
 import { deserialize } from 'src/transform/serialize';
+import { useWidgetCodeBlockStore } from './store';
 
 const CodeBlockWrapper = styled.div<{ left?: number; opacity?: number; top?: number }>`
   position: absolute;
@@ -32,8 +33,20 @@ const CodeTextArea = styled.textarea`
 const SaveButton = styled.button``;
 const SaveButtonText = $tw.wiki.getTiddlerText('$:/language/Buttons/SaveWiki/Hint');
 
+export function useCodeMirrorOnCmdEnter(onSave: () => void, codeMirror: MutableRefObject<EditorFromTextArea | null>): void {
+  const hasCodeMirrorEventListenerSettled = useRef<boolean>(false);
+  useEffect(() => {
+    if (codeMirror?.current !== null && !hasCodeMirrorEventListenerSettled.current) {
+      const saveKeyMap = { 'Ctrl-Enter': onSave, 'Cmd-Enter': onSave };
+      codeMirror.current.addKeyMap(saveKeyMap);
+      hasCodeMirrorEventListenerSettled.current = true;
+    }
+  }, [codeMirror, onSave]);
+}
+
 export function WidgetCodeEditor(props: WidgetBlockElementProps): JSX.Element {
   const { element, children, editor } = props;
+  const store = useWidgetCodeBlockStore();
 
   const textAreaReference = useRef<HTMLTextAreaElement>(null);
 
@@ -50,16 +63,29 @@ export function WidgetCodeEditor(props: WidgetBlockElementProps): JSX.Element {
     if (path !== undefined) {
       // TODO: use idCreator here, and in every deserialize usages
       const slateNode = deserialize(latestCodeReference.current);
-      const previousSelection = editor.selection;
+      const previousSlateSelection = editor.selection;
+      useWidgetCodeBlockStore.setState({
+        previousActiveId: element.id as string,
+        previousCodeMirrorSelection: codeMirror.current?.getCursor?.('from') ?? undefined,
+      });
       withoutNormalizing(editor, () => {
         removeNodes(editor, { at: path });
         insertNodes(editor, slateNode, { at: path });
-        editor.selection = previousSelection;
+        // restore id
+        setNodes(editor, { id: element.id }, { at: path });
+        editor.selection = previousSlateSelection;
       });
-      codeMirror.current?.focus?.();
     }
   }, [editor, path, codeMirror]);
   useCodeMirrorEventListenerSettled(onCodeChange, codeMirror);
+  useCodeMirrorOnCmdEnter(onSave, codeMirror);
+  useEffect(() => {
+    codeMirror.current?.focus?.();
+    // restore selection in code mirror
+    if (store.previousActiveId === element.id && store.previousCodeMirrorSelection !== undefined) {
+      codeMirror.current?.setSelection?.(store.previousCodeMirrorSelection);
+    }
+  }, [codeMirror, element.id, store.previousActiveId, store.previousCodeMirrorSelection]);
 
   // const [topLeft, topLeftSetter] = useState<{ left?: number; top?: number }>({ top: undefined, left: undefined });
   // const [{ opacity }, dragReference] = useDrag(
