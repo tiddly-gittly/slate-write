@@ -107,12 +107,6 @@ export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Elemen
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const onBlur = useCallback(() => {
-    // reset selection, so if you delete wikitext, selection won't goto some empty space and cause error
-    resetEditor();
-    // resetEditor is different every time, and allow it causing rerender will make dnd not draggable
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   if (typeof document === 'undefined') {
     return <div>Loading...</div>;
@@ -121,7 +115,7 @@ export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Elemen
   console.log(`currentAstRef.current`, currentAstReference.current);
 
   return (
-    <Plate id={editorID} initialValue={currentAstReference.current} plugins={plugins} onChange={onChange} editableProps={{ ...CONFIG.editableProps, onBlur }}>
+    <Plate id={editorID} initialValue={currentAstReference.current} plugins={plugins} onChange={onChange} editableProps={{ ...CONFIG.editableProps }}>
       <BallonToolbar />
       <SnippetCombobox id={editorID} pluginKey="/" />
       <WikiLinkCombobox id={editorID} pluginKey="[[" />
