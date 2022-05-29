@@ -18,7 +18,6 @@ const TwWidgetContainerInner = styled.div`
   user-select: normal;
   white-space: normal;
 `;
-const CodeBlockWrapper = styled.div``;
 
 export function WidgetBlock(props: WidgetBlockElementProps): JSX.Element {
   const { attributes, element, children, editor } = props;
@@ -32,11 +31,7 @@ export function WidgetBlock(props: WidgetBlockElementProps): JSX.Element {
         <div ref={widgetContainerReference} />
       </TwWidgetContainerInner>
       {children}
-      {selected && (
-        <CodeBlockWrapper>
-          <WidgetCodeEditor {...props} />
-        </CodeBlockWrapper>
-      )}
+      {selected && <WidgetCodeEditor {...props} />}
     </TwWidgetContainerOuter>
   );
 }

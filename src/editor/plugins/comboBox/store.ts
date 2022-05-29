@@ -39,8 +39,9 @@ export interface IAutoCompletePluginStoreActions {
   reset: () => void;
   setFilteredItems: (newState: Record<string, AnyComboBoxItem[]>) => void;
 }
+export type IAutoCompletePluginStore = IAutoCompletePluginContext & IAutoCompletePluginStoreActions;
 
-export const useAutoCompletePluginStore = create<IAutoCompletePluginContext & IAutoCompletePluginStoreActions>((set) => ({
+export const useAutoCompletePluginStore = create<IAutoCompletePluginStore>((set) => ({
   highlightedIndex: -1,
   targetRange: null,
   filteredItems: {},

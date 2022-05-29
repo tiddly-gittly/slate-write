@@ -99,6 +99,8 @@ export function Combobox<TData extends Data = NoData>({
     if (activeId) {
       useAutoCompletePluginStore.getState().setFilteredItems({ [id]: result });
     }
+    // don't let 'activeId' and 'id' cause change
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter, items, maxSuggestions, text]);
 
   const popperReference = React.useRef<any>(null);

@@ -10,6 +10,10 @@ import { CodeBlockSelectElement } from './CodeBlockSelectElement';
 import { TCodeBlockElement, CodeBlockPlugin } from '../types';
 import { ELEMENT_CODE_BLOCK, normalizeLanguage } from '../constants';
 
+const CodeContainer = styled.div`
+  margin-top: 1em;
+  margin-bottom: 1em;
+`;
 const CodeTextArea = styled.textarea`
   width: 100%;
   height: max-content;
@@ -90,14 +94,12 @@ export function CodeBlockElement<V extends Value>(props: StyledElementProps<V, T
   useCodeMirrorEventListenerSettled(onCodeChange, codeMirror);
 
   return (
-    <>
-      <div data-role="tw-codeblock-container" {...attributes} {...rootProps} {...nodeProps}>
-        {showSyntaxSwitcher === true && <CodeBlockSelectElement data-testid="CodeBlockSelectElement" language={language} onChange={onLanguageChange} />}
-        <div style={{ userSelect: 'none' }} contentEditable={false}>
-          <CodeTextArea ref={textAreaReference} onChange={onCodeChange} defaultValue={code} className="CodeMirror" />
-        </div>
-        {children}
-      </div>
-    </>
+    <div {...attributes} {...rootProps} {...nodeProps}>
+      {showSyntaxSwitcher === true && <CodeBlockSelectElement data-testid="CodeBlockSelectElement" language={language} onChange={onLanguageChange} />}
+      <CodeContainer style={{ userSelect: 'none' }} contentEditable={false} className="tw-codeblock-container">
+        <CodeTextArea ref={textAreaReference} onChange={onCodeChange} defaultValue={code} className="CodeMirror" />
+      </CodeContainer>
+      {children}
+    </div>
   );
 }
