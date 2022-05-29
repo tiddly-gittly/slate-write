@@ -46,27 +46,20 @@ E`EEE`E
 
 ! Widget and macro
 
+We will have following advanced blocks below:
+
 ```tid
 <$list filter="[tag[ExampleTag]sort[title]]"/>
-```
-
-<$list filter="[tag[ExampleTag]sort[title]]"/>
-
-```tid
 <<locator-view baseTitle:"TableOfContents">>
-```
-
-<<locator-view baseTitle:"TableOfContents">>
-
-```tid
 <<alert primary "primary alert" width:60%>>
-```
-
-<<alert primary "primary alert" width:60%>>
-
-```tid
 <$macrocall $name="rpn" a=<<rpn 2 2 *>> b="pi" operation="*" decimals="4"/>
 ```
+
+<$list filter="[tag[ExampleTag]sort[title]]"/>
+
+<<locator-view baseTitle:"TableOfContents">>
+
+<<alert primary "primary alert" width:60%>>
 
 <$macrocall $name="rpn" a=<<rpn 2 2 *>> b="pi" operation="*" decimals="4"/>
 

@@ -15,7 +15,7 @@ const CodeTextArea = styled.textarea`
   height: max-content;
 `;
 
-function useCodeMirror(textAreaReference: RefObject<HTMLTextAreaElement>, options: EditorConfiguration): MutableRefObject<EditorFromTextArea | null> {
+export function useCodeMirror(textAreaReference: RefObject<HTMLTextAreaElement>, options: EditorConfiguration): MutableRefObject<EditorFromTextArea | null> {
   const codeMirrorReference: MutableRefObject<EditorFromTextArea | null> = useRef(null);
   const codeMirrorInitialized = useRef(false);
   useEffect(() => {
@@ -39,6 +39,22 @@ function useCodeMirror(textAreaReference: RefObject<HTMLTextAreaElement>, option
     }
   }, [textAreaReference, options]);
   return codeMirrorReference;
+}
+
+export function useCodeMirrorEventListenerSettled(
+  onCodeChange: (eventOrString: ChangeEvent<HTMLTextAreaElement> | string) => void,
+  codeMirror: MutableRefObject<EditorFromTextArea | null>,
+): void {
+  const hasCodeMirrorEventListenerSettled = useRef<boolean>(false);
+  useEffect(() => {
+    if (codeMirror?.current !== null && !hasCodeMirrorEventListenerSettled.current) {
+      codeMirror.current.on('change', (instance) => {
+        const latestText = instance.getDoc().getValue();
+        onCodeChange(latestText);
+      });
+      hasCodeMirrorEventListenerSettled.current = true;
+    }
+  }, [onCodeChange, codeMirror]);
 }
 
 export function CodeBlockElement<V extends Value>(props: StyledElementProps<V, TCodeBlockElement>): JSX.Element {
@@ -71,16 +87,7 @@ export function CodeBlockElement<V extends Value>(props: StyledElementProps<V, T
     },
     [editor, path],
   );
-  const hasCodeMirrorEventListenerSettled = useRef<boolean>(false);
-  useEffect(() => {
-    if (codeMirror?.current !== null && !hasCodeMirrorEventListenerSettled.current) {
-      codeMirror.current.on('change', (instance) => {
-        const latestText = instance.getDoc().getValue();
-        onCodeChange(latestText);
-      });
-      hasCodeMirrorEventListenerSettled.current = true;
-    }
-  }, [onCodeChange, codeMirror]);
+  useCodeMirrorEventListenerSettled(onCodeChange, codeMirror);
 
   return (
     <>
