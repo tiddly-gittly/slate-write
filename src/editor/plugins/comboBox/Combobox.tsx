@@ -8,7 +8,7 @@ import React, { useCallback, useEffect } from 'react';
 import type { Data, NoData, TComboboxItem, TComboboxItemBase } from '@udecode/plate-combobox';
 import { isDefined, useEditorState, useEventEditorSelectors } from '@udecode/plate-core';
 import { PortalBody } from '@udecode/plate-styled-components';
-import { getRangeBoundingClientRect, usePopperPosition, virtualReference } from '@udecode/plate-ui-popper';
+import { flip, getRangeBoundingClientRect, offset, shift, useVirtualFloating } from '@udecode/plate-floating';
 import { ComboboxProps, WidgetsListItemTextGetters } from './Combobox.types';
 import styled from 'styled-components';
 import is from 'typescript-styled-is';
@@ -100,7 +100,7 @@ export function Combobox<TData extends Data = NoData>({
       useAutoCompletePluginStore.getState().setFilteredItems({ [id]: result });
     }
     // don't let 'activeId' and 'id' cause change
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter, items, maxSuggestions, text]);
 
   const popperReference = React.useRef<any>(null);
@@ -117,6 +117,14 @@ export function Combobox<TData extends Data = NoData>({
     placement: 'bottom-start',
     getBoundingClientRect,
     offset: [0, 4],
+  });
+  // Update popper position
+  const { style: popperStyles, floating } = useVirtualFloating({
+    
+    placement: 'bottom-start',
+    getBoundingClientRect,
+    middleware: [offset(4), shift(), flip()],
+    ...floatingOptions,
   });
 
   const comboBox = useComboBox(filteredItems);
