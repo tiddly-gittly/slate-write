@@ -3,7 +3,7 @@
 import React, { RefObject, MutableRefObject, useRef, useCallback, ChangeEvent, useMemo, useEffect } from 'react';
 import { findNodePath, getPluginOptions, setNodes, Value } from '@udecode/plate-core';
 import type { EditorFromTextArea, EditorConfiguration } from 'codemirror';
-import { useDebouncedCallback } from 'beautiful-react-hooks';
+import useDebouncedCallback from 'beautiful-react-hooks/useDebouncedCallback';
 import styled from 'styled-components';
 import { getRootProps, StyledElementProps } from '@udecode/plate-styled-components';
 import { CodeBlockSelectElement } from './CodeBlockSelectElement';

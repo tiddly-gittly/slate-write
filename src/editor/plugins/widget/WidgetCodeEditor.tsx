@@ -4,7 +4,7 @@ import { findNodePath, insertNodes, removeNodes, setNodes } from '@udecode/plate
 import { withoutNormalizing } from '@udecode/plate';
 import type { EditorConfiguration, EditorFromTextArea } from 'codemirror';
 import Tippy from '@tippyjs/react';
-import { useDebouncedCallback } from 'beautiful-react-hooks';
+import useDebouncedCallback from 'beautiful-react-hooks/useDebouncedCallback';
 // import { useDrag } from 'react-dnd';
 import styled from 'styled-components';
 import { CODE_BLOCK_LANGUAGES, useCodeMirror, useCodeMirrorEventListenerSettled } from '../codeblock';
