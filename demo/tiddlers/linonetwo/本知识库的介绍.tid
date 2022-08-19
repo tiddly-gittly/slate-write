@@ -1,0 +1,43 @@
+created: 20211002070742148
+creator: 林一二
+modified: 20211226142700624
+modifier: 林一二
+tags: tiddlywiki
+title: 本知识库的介绍
+type: text/vnd.tiddlywiki
+
+!! 内容
+
+这个知识库主要用于存放[[林一二]]偶遇的文字模因，还有替代微博朋友圈发他的各种[[想法]]，也作为探索过程中堆放待整理的在线内容的目录。目前已有 <$count filter="[all[tiddlers]!is[system]!is[shadow]]"/> 条笔记（仅统计你有权限查看的）。
+
+主要关于[[模因学]]、存储各种[[小说点子]]、挖[[工具设计]]的坑、思考[[游戏设计]]。以及统合一切人生意义的[[意义之塔]]。
+
+以及一些[[加密了的内容|APrivateContent]]，包括我的[[个人 Todo 列表|任务]]、[[日记|日志]]等，还有从[[GoogleCalendar]]导入的[[每日评价]]。
+
+我的其他资源如下：
+
+<$macrocall $name=列表转句子宏 text={{我的其他资源库}} />
+
+!! 操作
+
+全局的[[多功能搜索框|Command Palette 使用方法]]按 CMD/CTRL+P 打开。
+
+右侧的网状目录系统使用方法见其[[使用帮助|$:/plugins/linonetwo/itonnote/Help/TW-Locator基于标签生成的文件夹目录结构使用方法]]。
+
+!! 可访问性
+
+本知识库备份在[[Github仓库|https://github.com/linonetwo/wiki/]]上，有想评论的内容可以在这个仓库里发[[issue|https://github.com/linonetwo/wiki/issues]] 。在线版本是 [[onetwo.ren/wiki|https://onetwo.ren/wiki/]]。对在线版本的编辑操作不影响 Github 仓库上的源内容，你可以随意把玩其中的任何功能。
+
+<<reuse-tiddler "如何加速访问这个 Wiki">>
+
+!! 笔记系统
+
+如果你也想[[用TiddlyWiki替代Notion和EverNote作为个人知识管理系统|https://zhuanlan.zhihu.com/p/140473235]]，可以试试这个[[TiddlyWiki知识仓库模板]]！
+
+更多 TiddlyWiki 内容详见 [[tiddlywiki]]。
+
+!! 友链
+
+其他在积极使用TiddlyWiki的朋友的wiki：
+
+<<reuse-tiddler "其他在积极使用TiddlyWiki的朋友的wiki">>

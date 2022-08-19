@@ -1,0 +1,42 @@
+created: 20200408120217503
+creator: 林一二
+modified: 20220424041550442
+modifier: 林一二
+tags: tiddlywiki 自改TW $:/tags/SideBar
+title: 快速创建新笔记按钮
+type: text/vnd.tiddlywiki
+
+<fieldset>
+	<legend>快速添加</legend>
+
+	<$button>
+		<$action-sendmessage $message="tm-new-tiddler" title=<<now "YYYY-MM-DD">> tags="想法" />
+	添加新想法
+	</$button>
+	
+	<$button>
+		<$action-sendmessage $message="tm-new-tiddler" title=<<now "YYYY-MM-DD">> tags="剪藏" type="text/x-markdown" />
+	添加新Markdown剪藏
+	</$button>
+
+	<$button>
+		<$action-sendmessage $message="tm-new-tiddler" title="xxx" text="""<$macrocall $name="locator-view" baseTitle=<<currentTiddler>> />""" tags="Index" />
+	添加新文件夹(Tag)
+	</$button>
+
+	<$button>
+		<$action-sendmessage $message="tm-new-tiddler" title="xxx" tags="列表整理" text="# " />
+	添加新列表
+	</$button>
+	
+	<$button>
+		<$action-sendmessage $message="tm-new-tiddler" title=<<now "YYYY-MM-DD">> text="" tags="APrivateContent Index" />
+	添加非公开内容
+	</$button>
+	
+	<$button>
+		<$action-sendmessage $message="tm-new-tiddler" title=<<now "YYYY-MM-DD">> text="" tags="APrivateContent 日志" />
+	添加日志
+	</$button>
+
+</fieldset>

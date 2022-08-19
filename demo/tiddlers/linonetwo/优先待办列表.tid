@@ -1,0 +1,9 @@
+created: 20200625084743202
+creator: 林一二
+modified: 20211227042817545
+modifier: 林一二
+tags: Index
+title: 优先待办列表
+type: text/vnd.tiddlywiki
+
+<$macrocall $name=table-dynamic caption="优先待办列表" filter="[tag[任务]]+[field:priority[very high]]-[tag[done]]" fields="title tags" class="w-100"/>
