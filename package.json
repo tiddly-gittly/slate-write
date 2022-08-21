@@ -80,6 +80,7 @@
     "browserslist": "4.21.3",
     "chokidar": "^3.5.3",
     "esbuild": "0.15.5",
+    "esbuild-dynamic-import-plugin": "^0.0.12",
     "esbuild-plugin-browserslist": "0.4.13",
     "eslint": "8.22.0",
     "eslint-config-prettier": "8.5.0",

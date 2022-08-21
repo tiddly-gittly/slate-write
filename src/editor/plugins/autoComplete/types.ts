@@ -1,4 +1,4 @@
-import { Data, NoData } from '@udecode/plate-combobox';
+import type { Data, NoData } from '@udecode/plate-combobox';
 import { TElement } from '@udecode/plate-core';
 import { CreateAutoCompleteNode } from '../comboBox/getAutoCompleteOnSelectItem';
 

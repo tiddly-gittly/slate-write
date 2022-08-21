@@ -7,6 +7,7 @@ const esbuild = require('esbuild');
 const { readJsonSync } = require('fs-extra');
 const browserslist = require('browserslist');
 const { esbuildPluginBrowserslist, resolveToEsbuildTarget } = require('esbuild-plugin-browserslist');
+const importPlugin = require('esbuild-dynamic-import-plugin');
 const fs = require('fs-extra');
 const path = require('path');
 
@@ -23,6 +24,8 @@ const result = await esbuild.build({
   minify: false,
   outdir: `./dist/plugins/${author}/${name}`,
   sourcemap: process.env.CI ? false : 'inline',
+  // we will have result.metafile later
+  metafile: true,
   format: 'cjs',
   treeShaking: true,
   platform: 'browser',
@@ -30,6 +33,15 @@ const result = await esbuild.build({
   plugins: [
     esbuildPluginBrowserslist(browserslist('last 2 versions'), {
       printUnknownTargets: false,
+    }),
+    importPlugin({
+      options: [
+        {
+          libraryName: 'lodash',
+          libraryDirectory: '',
+          camel2DashComponentName: false, // default: true
+        },
+      ],
     }),
   ],
 });
@@ -47,4 +59,9 @@ for (let out of result.outputFiles) {
       .replace(' = require("react-dom/server")', ''),
     'utf8',
   );
+}
+
+if (result.metafile) {
+  // use https://bundle-buddy.com/esbuild to analyses
+  await fs.writeFile('./dist/metafile.json', JSON.stringify(result.metafile));
 }
