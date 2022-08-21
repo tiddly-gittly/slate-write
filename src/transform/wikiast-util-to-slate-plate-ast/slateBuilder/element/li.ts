@@ -2,7 +2,8 @@
 /**
  * This is an example of custom element processing. The logic here is the same as `src/transform/wikiast-util-to-slate-plate-ast/slateBuilder/element/index.ts`, purely for example.
  */
-import { ELEMENT_LI, ELEMENT_LIC, TElement, TNode } from '@udecode/plate';
+import type { TElement, TNode } from '@udecode/plate-core';
+import { ELEMENT_LI, ELEMENT_LIC } from '@udecode/plate-list';
 import { mergeAdjacent } from '../../../../transform/ast-utils/mergeAdjacent';
 import type { IDomParseTreeNode, ITextParseTreeNode } from 'tiddlywiki';
 import { IContext } from '../..';

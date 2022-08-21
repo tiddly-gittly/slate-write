@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { withoutMergingHistory, removeNodes } from '@udecode/plate';
+import { withoutMergingHistory, removeNodes } from '@udecode/plate-core';
 import { getNode, insertText, PlateEditor, unwrapNodes, Value, withoutNormalizing } from '@udecode/plate-core';
 import { Path } from 'slate';
 import { ELEMENT_AUTO_COMPLETE_INPUT } from '../createAutoCompletePlugin';

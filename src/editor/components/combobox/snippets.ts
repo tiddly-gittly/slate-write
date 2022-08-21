@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import { TComboboxItem } from '@udecode/plate';
-import { Tiddler } from 'tiddlywiki';
+import type { TComboboxItem } from '@udecode/plate-core';
+import type { Tiddler } from 'tiddlywiki';
 
 export interface ISnippetComboboxItem {
   name: string;

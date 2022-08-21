@@ -1,4 +1,4 @@
-import { TNode, isText, isElement } from '@udecode/plate';
+import { TNode, isText, isElement } from '@udecode/plate-core';
 import { IParseTreeNode } from 'tiddlywiki';
 
 import { IBuilders } from './wikiAstBuilder';

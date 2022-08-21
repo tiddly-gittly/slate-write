@@ -1,4 +1,4 @@
-import { TText, isText, TNode } from '@udecode/plate';
+import { TText, isText, TNode } from '@udecode/plate-core';
 import omit from 'lodash/omit';
 import type { ITextParseTreeNode } from 'tiddlywiki';
 import { IContext } from '..';

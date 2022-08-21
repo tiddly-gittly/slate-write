@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import { TNode } from '@udecode/plate';
+import { TNode } from '@udecode/plate-core';
 import { IWikiASTNode } from 'tiddlywiki';
 
 /**

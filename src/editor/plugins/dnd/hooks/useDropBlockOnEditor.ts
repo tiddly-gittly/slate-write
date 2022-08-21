@@ -1,34 +1,34 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /** copied from plate's packages/ui/dnd/src/hooks/useDropBlockOnEditor.ts, without modification */
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { DropTargetMonitor, useDrop } from 'react-dnd';
-import { findNode, isExpanded } from '@udecode/plate-core';
+import { findNode, isExpanded, EElement, TReactEditor, Value, withoutNormalizing } from '@udecode/plate-core';
 import { Path, Transforms } from 'slate';
 import { ReactEditor } from 'slate-react';
-import { DragItemBlock } from '../types';
-import { EElement, getHoverDirection, getNewDirection, TReactEditor, Value, withoutNormalizing } from '@udecode/plate';
 import { postDropNormalize } from './postDropNormalize';
+import { getHoverDirection, getNewDirection, DragItemNode } from '@udecode/plate-ui-dnd';
 
 export const useDropBlockOnEditor = <V extends Value>(
   editor: TReactEditor<V>,
   {
-    blockRef,
+    nodeRef,
     element,
     dropLine,
     setDropLine,
   }: {
-    blockRef: any;
     dropLine: string;
     element: EElement<V>;
+    nodeRef: any;
     setDropLine: Function;
   },
 ) => {
   const id = element.id as string;
   return useDrop({
     accept: 'block',
-    drop: (dragItem: DragItemBlock, monitor: DropTargetMonitor) => {
-      const direction = getHoverDirection(dragItem, monitor, blockRef, id);
+    drop: (dragItem: DragItemNode, monitor: DropTargetMonitor) => {
+      const direction = getHoverDirection({ dragItem, monitor, nodeRef, id });
       if (!direction) return;
 
       const dragEntry = findNode(editor, {
@@ -76,8 +76,8 @@ export const useDropBlockOnEditor = <V extends Value>(
         isOver: monitor.isOver(),
       };
     },
-    hover(item: DragItemBlock, monitor: DropTargetMonitor) {
-      const direction = getHoverDirection(item, monitor, blockRef, id);
+    hover(dragItem: DragItemNode, monitor: DropTargetMonitor) {
+      const direction = getHoverDirection({ dragItem, monitor, nodeRef, id });
       const dropLineDirection = getNewDirection(dropLine, direction);
       if (dropLineDirection) setDropLine(dropLineDirection);
 

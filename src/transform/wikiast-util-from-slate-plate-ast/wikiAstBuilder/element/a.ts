@@ -1,4 +1,4 @@
-import { TElement } from '@udecode/plate';
+import { TElement } from '@udecode/plate-core';
 import type { IDomParseTreeNode, ILinkParseTreeNode } from 'tiddlywiki';
 import { IBuilders } from '..';
 import { convertNodes } from '../../traverse';

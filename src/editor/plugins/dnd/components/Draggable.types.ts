@@ -3,7 +3,7 @@ import { TEditor } from '@udecode/plate-core';
 import { StyledElementProps } from '@udecode/plate-styled-components';
 import { Path } from 'slate';
 import { CSSProp } from 'styled-components';
-import { Value, EElement, DragHandleProps } from '@udecode/plate';
+import { Value, EElement, DragHandleProps } from '@udecode/plate-core';
 
 export interface DraggableStyleProps<V extends Value> extends DraggableProps<V> {
   direction: '' | 'top' | 'bottom';

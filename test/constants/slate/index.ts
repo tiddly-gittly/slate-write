@@ -1,4 +1,4 @@
-import { TEditor, Value, TElement, TText } from '@udecode/plate';
+import { TEditor, Value, TElement, TText } from '@udecode/plate-core';
 
 import { image } from './image';
 import { ol } from './ol';

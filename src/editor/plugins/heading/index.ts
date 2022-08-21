@@ -1,6 +1,6 @@
 /** copied from plate's packages/nodes/heading/src/createHeadingPlugin.ts , modify the hotkey and limit of level */
 /* eslint-disable unicorn/no-thenable */
-import { HeadingsPlugin, HeadingPlugin, KEYS_HEADING } from '@udecode/plate';
+import { HeadingsPlugin, HeadingPlugin, KEYS_HEADING } from '@udecode/plate-heading';
 import { createPluginFactory, onKeyDownToggleElement, PlatePlugin } from '@udecode/plate-core';
 
 /**
@@ -12,10 +12,10 @@ export const createHeadingPlugin = createPluginFactory<HeadingsPlugin>({
   options: {
     levels: 6,
   },
-  then: (editor, { options: { levels } = {} }) => {
+  then: (editor, { options: { levels = 0 } = {} }) => {
     const plugins: Array<PlatePlugin<HeadingPlugin>> = [];
 
-    for (let level = 1; level <= levels!; level++) {
+    for (let level = 1; level <= levels; level++) {
       const key = KEYS_HEADING[level - 1];
 
       const plugin: PlatePlugin<HeadingPlugin> = {

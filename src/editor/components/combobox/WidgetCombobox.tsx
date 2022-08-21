@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import React, { useMemo } from 'react';
-import type { TComboboxItem } from '@udecode/plate';
+import type { TComboboxItem } from '@udecode/plate-core';
 import { AutoCompleteCombobox } from 'src/editor/plugins/comboBox/AutoCompleteCombobox';
-import { Widget } from 'tiddlywiki';
+import type { Widget } from 'tiddlywiki';
 import { ComboBoxDorpDownListItem, filterKey, memorizedRenderText } from './ListItem';
 
 export type IWidgetItem = TComboboxItem<{ widgetClass: Widget }>;

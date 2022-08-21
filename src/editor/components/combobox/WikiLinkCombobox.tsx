@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useMemo } from 'react';
-import { TComboboxItemBase } from '@udecode/plate';
+import type { TComboboxItemBase } from '@udecode/plate-core';
 import { AutoCompleteCombobox } from 'src/editor/plugins/comboBox/AutoCompleteCombobox';
 import { ComboBoxDorpDownListItem, filterKey, memorizedRenderTiddler } from './ListItem';
 

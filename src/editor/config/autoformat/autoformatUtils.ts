@@ -5,18 +5,10 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  AutoformatBlockRule,
-  ELEMENT_CODE_BLOCK,
-  ELEMENT_CODE_LINE,
-  getParentNode,
-  isElement,
-  isType,
-  PlateEditor,
-  toggleList,
-  unwrapList,
-  Value,
-} from '@udecode/plate';
+import { getParentNode, isElement, isType, PlateEditor, Value } from '@udecode/plate-core';
+import { toggleList, unwrapList } from '@udecode/plate-list';
+import { AutoformatBlockRule } from '@udecode/plate-autoformat';
+import { ELEMENT_CODE_BLOCK, ELEMENT_CODE_LINE } from '@udecode/plate-code-block';
 
 export const clearBlockFormat: AutoformatBlockRule['preFormat'] = (editor) => unwrapList(editor);
 

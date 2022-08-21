@@ -2,7 +2,7 @@
 /**
  * Files copied from plate's `packages/nodes/mention` to support `[[` two char trigger
  */
-import { TComboboxItemBase } from '@udecode/plate-combobox';
+import type { TComboboxItemBase } from '@udecode/plate-combobox';
 import { createPluginFactory } from '@udecode/plate-core';
 import { isSelectionInMentionInput, mentionOnKeyDownHandler } from '@udecode/plate-mention';
 import { ELEMENT_PARAGRAPH } from '@udecode/plate-paragraph';

@@ -1,4 +1,4 @@
-import { TElement } from '@udecode/plate';
+import { TElement } from '@udecode/plate-core';
 import type { ILinkParseTreeNode, ITextParseTreeNode } from 'tiddlywiki';
 
 import { ISlateAstExtraTwMarkers } from '../../ast-common-types';

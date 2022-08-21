@@ -9,7 +9,7 @@ import { DragIndicator } from '@styled-icons/material/DragIndicator';
 import { useDndBlock } from '../hooks/useDndBlock';
 import { DraggableProps } from './Draggable.types';
 import { grabberTooltipProps } from './grabberTooltipProps';
-import { Value } from '@udecode/plate';
+import { Value } from '@udecode/plate-core';
 
 interface IStyleMod {
   mod?: string | CSSProp<any>;
@@ -79,7 +79,7 @@ export const Draggable = <V extends Value>(props: DraggableProps<V>): JSX.Elemen
   const { dropLine, dragRef, isDragging } = useDndBlock({
     element,
     path,
-    blockRef: rootReference,
+    nodeRef: rootReference,
   });
 
   const multiDragReference = useMergedRef(dragRef, dragWrapperReference);

@@ -1,4 +1,4 @@
-import { TElement } from '@udecode/plate';
+import { TElement } from '@udecode/plate-core';
 import type { ICodeBlockParseTreeNode } from 'tiddlywiki';
 import type { IBuilders } from '.';
 

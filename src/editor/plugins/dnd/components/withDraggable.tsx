@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React, { forwardRef, useMemo } from 'react';
-import { createNodesWithHOC, PlateRenderElementProps, TEditor } from '@udecode/plate-core';
+import { createNodesWithHOC, PlateRenderElementProps, TEditor, Value } from '@udecode/plate-core';
 import { Path } from 'slate';
 import { ReactEditor, useReadOnly } from 'slate-react';
 import { Draggable } from './Draggable';
 import { DraggableProps } from './Draggable.types';
-import { Value } from '@udecode/plate';
 
 export interface WithDraggableOptions<V extends Value> extends Pick<DraggableProps<V>, 'onRenderDragHandle' | 'styles'> {
   /**

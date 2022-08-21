@@ -1,15 +1,11 @@
-import {
-  createPlateUI,
-  ELEMENT_LINK,
-  LinkElement,
-  ELEMENT_OL,
-  ELEMENT_UL,
-  withProps,
-  StyledElement,
-  ELEMENT_PARAGRAPH,
-  MentionElement,
-  MentionInputElement,
-} from '@udecode/plate';
+import { createPlateUI } from '@udecode/plate-ui';
+import { ELEMENT_LINK } from '@udecode/plate-link';
+import { LinkElement } from '@udecode/plate-ui-link';
+import { ELEMENT_OL, ELEMENT_UL } from '@udecode/plate-list';
+import { withProps } from '@udecode/plate-core';
+import { StyledElement } from '@udecode/plate-styled-components';
+import { ELEMENT_PARAGRAPH } from '@udecode/plate-paragraph';
+import { MentionElement, MentionInputElement } from '@udecode/plate-ui-mention';
 import { css } from 'styled-components';
 import { withStyledDraggables } from '../config/withStyledDraggables';
 import { withStyledPlaceHolders } from '../config/withStyledPlaceHolders';

@@ -1,7 +1,7 @@
 /* eslint-disable unicorn/no-null */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import { ELEMENT_LINK, LinkPlugin } from '@udecode/plate';
+import { ELEMENT_LINK, LinkPlugin } from '@udecode/plate-link';
 import { getAboveNode, getPluginType, isCollapsed, PlateEditor, unwrapNodes, Value } from '@udecode/plate-core';
 import { Editor } from 'slate';
 import { upsertLinkAtSelection } from './upsertLinkAtSelection';

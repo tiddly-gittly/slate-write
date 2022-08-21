@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
-import { TNode } from '@udecode/plate';
+import { TNode } from '@udecode/plate-core';
 import { ICustomParseTreeNode, IParseTreeNode } from 'tiddlywiki';
 import type { IContext } from '.';
 

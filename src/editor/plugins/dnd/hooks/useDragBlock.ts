@@ -1,8 +1,7 @@
 /** copied from plate's packages/ui/dnd/src/hooks/useDragBlock.ts, add $tw things */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { useDrag } from 'react-dnd';
-import { TEditor, Value } from '@udecode/plate-core';
-import { DragItemBlock, EElement } from '@udecode/plate';
+import { TEditor, Value, DragItemBlock, EElement } from '@udecode/plate-core';
 import { Editor, Path } from 'slate';
 
 export interface DragItemWithParent extends DragItemBlock {

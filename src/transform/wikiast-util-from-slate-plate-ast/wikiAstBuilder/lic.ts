@@ -1,4 +1,4 @@
-import { TElement, ELEMENT_LIC, TText } from '@udecode/plate';
+import { TElement, ELEMENT_LIC, TText } from '@udecode/plate-core';
 import type { IParseTreeNode } from 'tiddlywiki';
 import type { IBuilders } from '.';
 import { convertNodes } from '../traverse';

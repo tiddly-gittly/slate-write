@@ -1,8 +1,7 @@
-import { Value, PlateEditor } from '@udecode/plate';
+import type { Value, PlateEditor, RenderFunction } from '@udecode/plate-core';
 import type { ComboboxState, NoData, TComboboxItem } from '@udecode/plate-combobox';
-import { RenderFunction } from '@udecode/plate-core';
-import { StyledProps } from '@udecode/plate-styled-components';
-import { CSSProp } from 'styled-components';
+import type { StyledProps } from '@udecode/plate-styled-components';
+import type { CSSProp } from 'styled-components';
 import type { AnyComboBoxItem } from './store';
 
 export interface ComboboxStyleProps<TData> extends ComboboxProps<TData> {

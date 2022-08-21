@@ -1,29 +1,28 @@
+import { createAutoformatPlugin } from '@udecode/plate-autoformat';
+import { createBlockquotePlugin } from '@udecode/plate-block-quote';
 import {
-  createAutoformatPlugin,
-  createBlockquotePlugin,
   createBoldPlugin,
   createCodePlugin,
-  createTrailingBlockPlugin,
-  createTablePlugin,
-  createExitBreakPlugin,
-  createHorizontalRulePlugin,
-  createImagePlugin,
-  createItalicPlugin,
-  createIndentListPlugin,
-  createIndentPlugin,
-  createKbdPlugin,
-  createLinkPlugin,
-  createListPlugin,
-  createParagraphPlugin,
-  createPlugins,
-  createSelectOnBackspacePlugin,
-  createSoftBreakPlugin,
   createStrikethroughPlugin,
   createSubscriptPlugin,
   createSuperscriptPlugin,
   createUnderlinePlugin,
-  createInlineVoidPlugin,
-} from '@udecode/plate';
+  createItalicPlugin,
+} from '@udecode/plate-basic-marks';
+import { createTrailingBlockPlugin } from '@udecode/plate-trailing-block';
+import { createTablePlugin } from '@udecode/plate-table';
+import { createSoftBreakPlugin, createExitBreakPlugin } from '@udecode/plate-break';
+import { createHorizontalRulePlugin } from '@udecode/plate-horizontal-rule';
+import { createImagePlugin } from '@udecode/plate-media';
+import { createIndentListPlugin } from '@udecode/plate-indent-list';
+import { createIndentPlugin } from '@udecode/plate-indent';
+import { createKbdPlugin } from '@udecode/plate-kbd';
+import { createLinkPlugin } from '@udecode/plate-link';
+import { createListPlugin } from '@udecode/plate-list';
+import { createParagraphPlugin } from '@udecode/plate-paragraph';
+import { createPlugins, createInlineVoidPlugin } from '@udecode/plate-core';
+import { createSelectOnBackspacePlugin } from '@udecode/plate-select';
+
 import { CONFIG } from './config';
 import { createHeadingPlugin } from '../plugins/heading';
 import { createCodeBlockPlugin } from '../plugins/codeblock';

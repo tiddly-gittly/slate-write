@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import { PlateEditor, TText, Value } from '@udecode/plate';
+import { PlateEditor, TText, Value } from '@udecode/plate-core';
 import type { Data, NoData, TComboboxItem } from '@udecode/plate-combobox';
 import { deleteText, getBlockAbove, getPlugin, insertNodes, insertText, isEndPoint, PlatePluginKey, TNodeProps, withoutNormalizing } from '@udecode/plate-core';
 import { replaceCurrentBlockWithParseResult } from '../advancedBlock/replaceCurrentBlockWithParseResult';

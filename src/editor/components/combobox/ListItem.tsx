@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import type { ComboboxItemProps, TComboboxItemBase } from '@udecode/plate';
+import type { ComboboxItemProps, TComboboxItemBase } from '@udecode/plate-core';
 import styled from 'styled-components';
 import memorize from 'lodash/memoize';
 import { LazyTippy } from './PreviewTooltip';

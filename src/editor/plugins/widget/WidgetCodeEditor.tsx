@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React, { useRef, ChangeEvent, useMemo, useCallback, MutableRefObject, useEffect } from 'react';
-import { findNodePath, insertNodes, removeNodes, setNodes } from '@udecode/plate-core';
-import { withoutNormalizing } from '@udecode/plate';
+import { findNodePath, insertNodes, removeNodes, setNodes, withoutNormalizing } from '@udecode/plate-core';
 import type { EditorConfiguration, EditorFromTextArea } from 'codemirror';
 import Tippy from '@tippyjs/react';
 import useDebouncedCallback from 'beautiful-react-hooks/useDebouncedCallback';

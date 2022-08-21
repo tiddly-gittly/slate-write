@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { ComboboxItemProps, TComboboxItemBase, TComboboxItemWithData } from '@udecode/plate';
+import type { ComboboxItemProps, TComboboxItemBase, TComboboxItemWithData } from '@udecode/plate-core';
 import { ISnippetComboboxItem, snippets } from './snippets';
 import { AutoCompleteCombobox } from 'src/editor/plugins/comboBox/AutoCompleteCombobox';
 import { ComboBoxDorpDownListItem, memorizedRenderText } from './ListItem';

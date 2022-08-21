@@ -1,4 +1,4 @@
-import { TNode, TEditor, Value, TElement, TText } from '@udecode/plate';
+import { TNode, TEditor, Value, TElement, TText } from '@udecode/plate-core';
 import type { IParseTreeNode } from 'tiddlywiki';
 import { convertNodes } from './traverse';
 import { builders } from './wikiAstBuilder';

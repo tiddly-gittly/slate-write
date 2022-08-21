@@ -1,7 +1,7 @@
 /**
  * This is an example of custom element processing. The logic here is the same as `src/transform/wikiast-util-to-slate-plate-ast/slateBuilder/element/index.ts`, purely for example.
  */
-import { TElement } from '@udecode/plate';
+import { TElement } from '@udecode/plate-core';
 import type { IDomParseTreeNode } from 'tiddlywiki';
 import { IContext } from '../..';
 import { convertNodes } from '../../traverse';

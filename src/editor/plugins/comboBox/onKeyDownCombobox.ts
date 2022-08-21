@@ -1,7 +1,6 @@
-import { getPlugin, insertText } from '@udecode/plate';
+import { getPlugin, insertText, KeyboardHandlerReturnType, PlateEditor, Value } from '@udecode/plate-core';
 import type { TComboboxItemBase } from '@udecode/plate-combobox';
 import { getNextWrappingIndex } from '@udecode/plate-combobox';
-import { KeyboardHandlerReturnType, PlateEditor, Value } from '@udecode/plate-core';
 import { AutoCompletePlugin } from '../autoComplete';
 import { removeAutoCompleteInputFromCurrentSelection } from '../autoComplete/transforms';
 import { getAutoCompleteOnSelectItem } from './getAutoCompleteOnSelectItem';

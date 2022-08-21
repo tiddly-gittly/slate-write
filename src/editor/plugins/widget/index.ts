@@ -1,4 +1,4 @@
-import { createPluginFactory } from '@udecode/plate';
+import { createPluginFactory } from '@udecode/plate-core';
 export { WidgetBlock } from './WidgetBlock';
 
 export const ELEMENT_WIDGET = 'widget';

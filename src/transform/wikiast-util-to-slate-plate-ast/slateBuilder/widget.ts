@@ -1,4 +1,4 @@
-import { TElement } from '@udecode/plate';
+import { TElement } from '@udecode/plate-core';
 import type { ICustomParseTreeNode } from 'tiddlywiki';
 
 import { ELEMENT_WIDGET } from '../../../editor/plugins/widget';

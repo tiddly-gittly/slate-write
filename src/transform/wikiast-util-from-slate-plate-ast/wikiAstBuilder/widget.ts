@@ -1,5 +1,5 @@
 import type { IParseTreeNode } from 'tiddlywiki';
-import { TElement } from '@udecode/plate';
+import { TElement } from '@udecode/plate-core';
 
 import { IBuilders } from '.';
 

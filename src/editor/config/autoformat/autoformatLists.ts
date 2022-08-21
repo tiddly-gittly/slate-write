@@ -1,4 +1,5 @@
-import { AutoformatRule, ELEMENT_LI, ELEMENT_OL, ELEMENT_UL } from '@udecode/plate';
+import { ELEMENT_LI, ELEMENT_OL, ELEMENT_UL } from '@udecode/plate-list';
+import { AutoformatRule } from '@udecode/plate-autoformat';
 import { clearBlockFormat, formatList } from './autoformatUtils';
 
 export const autoformatLists: AutoformatRule[] = [

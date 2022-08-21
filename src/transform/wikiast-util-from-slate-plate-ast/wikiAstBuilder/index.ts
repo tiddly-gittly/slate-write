@@ -1,4 +1,4 @@
-import { ELEMENT_LIC } from '@udecode/plate';
+import { ELEMENT_LIC } from '@udecode/plate-list';
 import htmlTags from 'html-tags';
 
 import { codeblock } from './codeblock';

@@ -5,7 +5,7 @@ import React, { useCallback, useContext, useMemo } from 'react';
 import { getRootProps, StyledElementProps } from '@udecode/plate-styled-components';
 import { ISlateAstExtraTwMarkers } from 'src/transform/ast-common-types';
 import { ParentWidgetContext } from 'tw-react';
-import { Value, TLinkElement } from '@udecode/plate';
+import { Value, TLinkElement } from '@udecode/plate-core';
 
 export const LinkElement = <V extends Value>(props: StyledElementProps<V, TLinkElement & ISlateAstExtraTwMarkers>): JSX.Element => {
   const { attributes, children, nodeProps, element } = props;
