@@ -103,35 +103,23 @@ export function Combobox<TData extends Data = NoData>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter, items, maxSuggestions, text]);
 
-  const popperReference = React.useRef<any>(null);
-
   // Get target range rect
-  const getBoundingClientRect = useCallback(() => getRangeBoundingClientRect(editor, targetRange) ?? virtualReference, [editor, targetRange]);
+  const getBoundingClientRect = useCallback(() => getRangeBoundingClientRect(editor, targetRange), [editor, targetRange]);
 
   const isHidden = editor.selection == null || focusedEditorId !== editor.id || activeId !== id;
   // Update popper position
-  const { styles: popperStyles, attributes } = usePopperPosition({
-    popperElement: popperReference.current,
-    popperContainer,
-    isHidden,
-    placement: 'bottom-start',
-    getBoundingClientRect,
-    offset: [0, 4],
-  });
-  // Update popper position
-  const { style: popperStyles, floating } = useVirtualFloating({
-    
+  const { style: containerStyles, floating: floatingReference } = useVirtualFloating({
     placement: 'bottom-start',
     getBoundingClientRect,
     middleware: [offset(4), shift(), flip()],
-    ...floatingOptions,
+    open: !isHidden,
   });
 
   const comboBox = useComboBox(filteredItems);
-  const menuProps = comboBox.getMenuProps({}, { suppressRefError: true });
+  const menuProps = comboBox ? comboBox.getMenuProps({}, { suppressRefError: true }) : { ref: null };
   return (
     <PortalBody>
-      <Container {...menuProps} ref={popperReference} style={popperStyles.popper} {...attributes.popper}>
+      <Container {...menuProps} ref={floatingReference} style={containerStyles}>
         {filteredItems.map((item, index) => {
           const renderedItem = onRenderItem != null ? onRenderItem({ item: item as TComboboxItem<TData>, getRenderTextTemplate, getNameTemplate }) : item.text;
 
