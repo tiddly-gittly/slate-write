@@ -20,8 +20,7 @@ const result = await esbuild.build({
   write: false,
   entryPoints: packageJSON.tsFiles.map((tsFileName) => `./src/${tsFileName}.ts`),
   bundle: true,
-  // let tiddly-gittly/tw5-plugin-packer minify it, and let our fix of `module exports` works
-  minify: false,
+  minify: true,
   outdir: `./dist/plugins/${author}/${name}`,
   sourcemap: process.env.CI ? false : 'inline',
   // we will have result.metafile later
@@ -53,10 +52,8 @@ for (let out of result.outputFiles) {
     out.path,
     new TextDecoder()
       .decode(out.contents)
-      .replace('module.exports = ', '')
       // fix Cannot find module named 'react-dom/server
-      .replace(' = __require("react-dom/server")', '')
-      .replace(' = require("react-dom/server")', ''),
+      .replace('=require("react-dom/server")', ''),
     'utf8',
   );
 }
