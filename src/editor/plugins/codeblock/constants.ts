@@ -1,4 +1,6 @@
 export const ELEMENT_CODE_BLOCK = 'codeblock';
+export const ELEMENT_CODE_LINE = 'code_line';
+export const ELEMENT_CODE_SYNTAX = 'code_syntax';
 
 export const CODE_BLOCK_LANGUAGES_POPULAR: string[] = [
   'TiddlyWiki',

@@ -8,7 +8,7 @@
 import { getParentNode, isElement, isType, PlateEditor, Value } from '@udecode/plate-core';
 import { toggleList, unwrapList } from '@udecode/plate-list';
 import { AutoformatBlockRule } from '@udecode/plate-autoformat';
-import { ELEMENT_CODE_BLOCK, ELEMENT_CODE_LINE } from '@udecode/plate-code-block';
+import { ELEMENT_CODE_BLOCK, ELEMENT_CODE_LINE } from 'src/editor/plugins/codeblock/constants';
 
 export const clearBlockFormat: AutoformatBlockRule['preFormat'] = (editor) => unwrapList(editor);
 

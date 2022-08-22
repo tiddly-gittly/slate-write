@@ -26,13 +26,13 @@ import { ELEMENT_H1, ELEMENT_H2, ELEMENT_H3, ELEMENT_H4, ELEMENT_H5, ELEMENT_H6 
 import { BalloonToolbar, BlockToolbarButton, MarkToolbarButton } from '@udecode/plate-ui-toolbar';
 import { ELEMENT_OL, ELEMENT_UL } from '@udecode/plate-list';
 import { ELEMENT_BLOCKQUOTE } from '@udecode/plate-block-quote';
-import { ELEMENT_CODE_BLOCK } from '@udecode/plate-code-block';
 import { ListToolbarButton } from '@udecode/plate-ui-list';
 import { MARK_BOLD, MARK_ITALIC, MARK_UNDERLINE, MARK_STRIKETHROUGH, MARK_CODE, MARK_SUPERSCRIPT, MARK_SUBSCRIPT } from '@udecode/plate-basic-marks';
 
 import type { Placement } from 'tippy.js';
 import { LinkToolbarButton } from '../plugins/link/LinkToolbarButton';
 import { Editor } from 'slate';
+import { ELEMENT_CODE_BLOCK } from '../plugins/codeblock/constants';
 
 const tooltipStyle = {
   arrow: true,

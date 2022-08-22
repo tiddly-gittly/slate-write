@@ -15,7 +15,7 @@ import type { TComboboxItemBase } from '@udecode/plate-combobox';
 import { TrailingBlockPlugin } from '@udecode/plate-trailing-block';
 import { KEYS_HEADING, ELEMENT_H1, ELEMENT_H2, ELEMENT_H3, ELEMENT_H4, ELEMENT_H5, ELEMENT_H6 } from '@udecode/plate-heading';
 import { ELEMENT_BLOCKQUOTE } from '@udecode/plate-block-quote';
-import { ELEMENT_CODE_BLOCK } from '@udecode/plate-code-block';
+import { ELEMENT_CODE_BLOCK } from '../plugins/codeblock/constants';
 import type { EditableProps } from 'slate-react/dist/components/editable';
 import { autoformatRules } from './autoformat';
 import { ELEMENT_WIDGET } from '../plugins/widget';

@@ -3,8 +3,9 @@ import { ELEMENT_H1, ELEMENT_H2, ELEMENT_H3, ELEMENT_H4, ELEMENT_H5, ELEMENT_H6 
 import { AutoformatRule } from '@udecode/plate-autoformat';
 import { ELEMENT_HR } from '@udecode/plate-horizontal-rule';
 import { ELEMENT_BLOCKQUOTE } from '@udecode/plate-block-quote';
-import { ELEMENT_CODE_BLOCK, insertEmptyCodeBlock } from '@udecode/plate-code-block';
 import { clearBlockFormat } from './autoformatUtils';
+import { ELEMENT_CODE_BLOCK } from 'src/editor/plugins/codeblock/constants';
+import { insertEmptyCodeBlock } from 'src/editor/plugins/codeblock/transforms/insertEmptyCodeBlock';
 
 export const autoformatBlocks: AutoformatRule[] = [
   {
