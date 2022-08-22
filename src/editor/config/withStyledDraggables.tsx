@@ -3,17 +3,18 @@
 import { ELEMENT_BLOCKQUOTE } from '@udecode/plate-block-quote';
 import { ELEMENT_PARAGRAPH } from '@udecode/plate-paragraph';
 import { ELEMENT_LI } from '@udecode/plate-list';
-import { createPlateUI } from '@udecode/plate-ui';
 
 import { ELEMENT_H1, ELEMENT_H2, ELEMENT_H3, ELEMENT_H4, ELEMENT_H5, ELEMENT_H6 } from '@udecode/plate-heading';
 
+import type { DefaultPlatePluginKey } from '@udecode/plate-ui';
+import type { PlatePluginComponent } from '@udecode/plate-core';
 import { css } from 'styled-components';
 import { ELEMENT_WIDGET } from '../plugins/widget';
 import { withDraggables } from '../plugins/dnd';
 import { ELEMENT_CODE_BLOCK } from '../plugins/codeblock/constants';
 import { ELEMENT_MACRO } from '../plugins/macro';
 
-export const withStyledDraggables = (components: any): ReturnType<typeof createPlateUI> => {
+export const withStyledDraggables = (components: any): Record<DefaultPlatePluginKey, PlatePluginComponent<any>> => {
   return withDraggables(components, [
     // only element that registered keys here will have dnd grabber
     {

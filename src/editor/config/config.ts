@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { AutoformatPlugin } from '@udecode/plate-autoformat';
 import { ELEMENT_PARAGRAPH } from '@udecode/plate-paragraph';
-import { ELEMENT_TD } from '@udecode/plate-table';
 import { ELEMENT_TODO_LI } from '@udecode/plate-list';
 import { ExitBreakPlugin, SoftBreakPlugin } from '@udecode/plate-break';
 import { IndentPlugin } from '@udecode/plate-indent';
@@ -151,7 +150,7 @@ export const CONFIG: Config = {
         {
           hotkey: 'enter',
           query: {
-            allow: [ELEMENT_CODE_BLOCK, ELEMENT_BLOCKQUOTE, ELEMENT_TD],
+            allow: [ELEMENT_CODE_BLOCK, ELEMENT_BLOCKQUOTE],
           },
         },
       ],

@@ -10,10 +10,8 @@ import {
   createItalicPlugin,
 } from '@udecode/plate-basic-marks';
 import { createTrailingBlockPlugin } from '@udecode/plate-trailing-block';
-import { createTablePlugin } from '@udecode/plate-table';
 import { createSoftBreakPlugin, createExitBreakPlugin } from '@udecode/plate-break';
 import { createHorizontalRulePlugin } from '@udecode/plate-horizontal-rule';
-import { createImagePlugin } from '@udecode/plate-media';
 import { createIndentListPlugin } from '@udecode/plate-indent-list';
 import { createIndentPlugin } from '@udecode/plate-indent';
 import { createKbdPlugin } from '@udecode/plate-kbd';
@@ -39,9 +37,7 @@ export const basicElements = createPlugins([
   createParagraphPlugin(),
   createHorizontalRulePlugin(),
   createListPlugin(),
-  createImagePlugin(),
   createLinkPlugin(),
-  createTablePlugin(),
 ]);
 
 export const basicMarks = createPlugins([
