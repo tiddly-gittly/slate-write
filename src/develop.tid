@@ -29,6 +29,9 @@ type: text/vnd.tiddlywiki
 ## And the final comboBox React component and the data source of tiddlers/macros/snippets are in the `src/editor/components/combobox` folder
 ## autocomplete `<<`'s available macros as discussed in [[TiddlyWiki5/discussions/6706|https://github.com/Jermolene/TiddlyWiki5/discussions/6706]]
 ## autocomplete `<$`'s available widget and fields, see `src/editor/components/combobox/WidgetCombobox.tsx`, in `widgetItems`, text field is the text that will be inserted, this logic is at `src/editor/plugins/comboBox/getAutoCompleteOnSelectItem.ts`
+# Only import needed components from their deepest package to achieve "tree shaking" to reduce bundle size
+## e.g., `import { LinkElement } from '@udecode/plate-ui-link';` instead of `import { LinkElement } from '@udecode/plate';`
+## Some element from plate are not needed, like ImageElement can be replaced by tw's own image widget, so don't import it. And for code-block, we use our own codemirror based element located in `src/editor/plugins/codeblock/CodeBlockElement/CodeBlockElement.tsx`
 
 !! TODO
 
@@ -44,8 +47,6 @@ type: text/vnd.tiddlywiki
 # TODO: insert latex math using `$$` or `￥￥` shortcut
 # TODO: open context aware autocomplete using `ctrl+space`, show corresponding dropdown menu using prefix of the selection
 # TODO: add excalidraw widget support
-# TODO: treeshaking serialize-md related things, they are bundled with plate package https://github.com/udecode/plate/discussions/363
-# TODO: minify code before package JSON to reduce size
 
 !! Development
 
