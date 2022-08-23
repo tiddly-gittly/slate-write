@@ -1,10 +1,13 @@
-import { echo, startSpinner } from 'zx/experimental';
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { echo } from 'zx';
 
 const placeholder = '/** new tests here generated using `npx zx scripts/test/add-new-test.mjs` */';
 
 const newTestCaseName = await question('What is the name of new test case?');
 
-const stop = startSpinner();
 echo('reading files...');
 
 const files = {};
@@ -59,7 +62,6 @@ await fs.writeFile('test/wikiast-util-from-wikitext.test.ts', files['test/wikias
 await fs.writeFile('test/wikiast-util-to-slate-plate-ast.test.ts', files['test/wikiast-util-to-slate-plate-ast.test.ts'], 'utf8');
 await fs.writeFile('test/wikiast-util-to-wikitext.test.ts', files['test/wikiast-util-to-wikitext.test.ts'], 'utf8');
 
-stop();
 echo('done, linting files...');
 
 await $`npx eslint test --fix`;
