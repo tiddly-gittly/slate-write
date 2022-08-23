@@ -2,7 +2,6 @@ import { TNode } from '@udecode/plate-core';
 import type { IDomParseTreeNode } from 'tiddlywiki';
 import { convertNodes } from '../../traverse';
 import { IContext } from '../..';
-import pick from 'lodash/pick';
 
 import { ul } from './ul';
 import { li } from './li';

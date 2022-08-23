@@ -13,6 +13,7 @@ import { transclude } from './transclude';
 import { widget } from './widget';
 import { heading } from './heading';
 import { macro } from './macro';
+import { table } from './table';
 
 export const wikiAstDict: Record<string, IParseTreeNode[] | IParseTreeNode> = {
   ...p,
@@ -24,6 +25,7 @@ export const wikiAstDict: Record<string, IParseTreeNode[] | IParseTreeNode> = {
   ...link,
   ...heading,
   ...macro,
+  ...table,
 };
 
 export const wikiAstDictWithoutPos = mapValues(cloneDeep(wikiAstDict), (ast: IParseTreeNode | IParseTreeNode[]) =>

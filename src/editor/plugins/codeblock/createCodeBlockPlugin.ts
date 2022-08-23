@@ -1,4 +1,4 @@
-import { createPluginFactory, PlateEditor, Value } from '@udecode/plate-core';
+import { createPluginFactory } from '@udecode/plate-core';
 import { ELEMENT_CODE_BLOCK } from './constants';
 import { CodeBlockPlugin } from './types';
 

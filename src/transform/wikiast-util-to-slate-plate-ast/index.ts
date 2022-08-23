@@ -1,5 +1,5 @@
-import { TNode } from '@udecode/plate-core';
-import { IParseTreeNode } from 'tiddlywiki';
+import type { TNode } from '@udecode/plate-core';
+import type { IParseTreeNode } from 'tiddlywiki';
 
 import { builders, type IBuilders } from './slateBuilder';
 import { convertNodes, type slateNode } from './traverse';
