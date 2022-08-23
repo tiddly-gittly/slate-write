@@ -1,12 +1,15 @@
 /* eslint-disable unicorn/no-null */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import { ELEMENT_LINK, LinkPlugin } from '@udecode/plate-link';
+import { ELEMENT_LINK } from '@udecode/plate-link';
 import { getAboveNode, getPluginType, isCollapsed, PlateEditor, unwrapNodes, Value } from '@udecode/plate-core';
 import { Editor } from 'slate';
 import { upsertLinkAtSelection } from './upsertLinkAtSelection';
 
-export const getAndUpsertLink = async <V extends Value>(editor: PlateEditor<V>, getLinkUrl?: LinkPlugin['getLinkUrl']) => {
+export const getAndUpsertLink = async <V extends Value>(
+  editor: PlateEditor<V>,
+  getLinkUrl?: (previousUrl: string | null) => Promise<string | null> | string | null,
+) => {
   const type = getPluginType(editor, ELEMENT_LINK);
   let previousUrl = '';
   const selectedText = editor.selection === null ? '' : Editor.string(editor as Editor, editor.selection);

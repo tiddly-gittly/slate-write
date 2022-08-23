@@ -83,5 +83,8 @@ describe('fromSlateAst', () => {
   test('tableGettingStarted', () => {
     expect(wikiAstFromSlateAst(slateDict.tableGettingStarted)).toEqual(wikiAstDictWithoutPos.tableGettingStarted);
   });
+  test('table', () => {
+    expect(wikiAstFromSlateAst(slateDict.table)).toEqual(wikiAstDictWithoutPos.table);
+  });
   /** new tests here generated using `npx zx scripts/test/add-new-test.mjs` */
 });

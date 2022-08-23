@@ -9,7 +9,7 @@ export interface LinkToolbarButtonProps extends ToolbarButtonProps {
   /**
    * Default onMouseDown is getting the link url by calling this promise before inserting the image.
    */
-  getLinkUrl?: (previousUrl: string | null) => Promise<string | null>;
+  getLinkUrl?: (previousUrl: string | null) => Promise<string | null> | string | null;
 }
 
 export const LinkToolbarButton = withPlateEventProvider(({ id, getLinkUrl, ...props }: LinkToolbarButtonProps) => {

@@ -12,6 +12,7 @@ import {
 import { createTrailingBlockPlugin } from '@udecode/plate-trailing-block';
 import { createSoftBreakPlugin, createExitBreakPlugin } from '@udecode/plate-break';
 import { createHorizontalRulePlugin } from '@udecode/plate-horizontal-rule';
+import { createTablePlugin } from '@udecode/plate-table';
 import { createIndentListPlugin } from '@udecode/plate-indent-list';
 import { createIndentPlugin } from '@udecode/plate-indent';
 import { createKbdPlugin } from '@udecode/plate-kbd';
@@ -38,6 +39,7 @@ export const basicElements = createPlugins([
   createHorizontalRulePlugin(),
   createListPlugin(),
   createLinkPlugin(),
+  createTablePlugin(),
 ]);
 
 export const basicMarks = createPlugins([

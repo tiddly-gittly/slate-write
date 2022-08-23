@@ -21,6 +21,8 @@ import { CodeBlockElement, ELEMENT_CODE_BLOCK } from '../plugins/codeblock';
 import { ELEMENT_MACRO } from '../plugins/macro';
 import { ELEMENT_WIDGET } from '../plugins/widget';
 import { WidgetBlock } from '../plugins/widget/WidgetBlock';
+import { TableElement, TableCellElement, TableRowElement } from '@udecode/plate-ui-table';
+import { ELEMENT_TABLE, ELEMENT_TD, ELEMENT_TH, ELEMENT_TR } from '@udecode/plate-table';
 
 export const createPlateUI = <
   T extends string = string,
@@ -165,27 +167,28 @@ const rawComponents = createPlateUI({
       `,
     },
   }),
-  // [ELEMENT_TABLE]: TableElement,
-  // [ELEMENT_TD]: TableCellElement,
-  // [ELEMENT_TH]: withProps(StyledElement, {
-  //   as: 'th',
-  //   styles: {
-  //     root: [
-  //       tw`p-2 text-left`,
-  //       css`
-  //         background-color: rgb(244, 245, 247);
-  //         border: 1px solid rgb(193, 199, 208);
-  //         min-width: 48px;
+  [ELEMENT_TABLE]: TableElement,
+  [ELEMENT_TD]: TableCellElement,
+  [ELEMENT_TH]: withProps(StyledElement, {
+    as: 'th',
+    styles: {
+      root: [
+        css`
+          padding: 2px;
+          text-align: left;
+          background-color: rgb(244, 245, 247);
+          border: 1px solid rgb(193, 199, 208);
+          min-width: 48px;
 
-  //         > * {
-  //           margin: 0;
-  //         }
-  //       `,
-  //     ],
-  //   },
-  // }),
+          > * {
+            margin: 0;
+          }
+        `,
+      ],
+    },
+  }),
+  [ELEMENT_TR]: TableRowElement,
   // [ELEMENT_TODO_LI]: TodoListElement,
-  // [ELEMENT_TR]: TableRowElement,
   [MARK_BOLD]: withProps(StyledLeaf, { as: 'strong' }),
   [MARK_CODE]: withProps(StyledLeaf, {
     as: 'code',

@@ -20,5 +20,5 @@ export function element(context: IContext, node: IDomParseTreeNode): TNode | TNo
   return {
     type: tag,
     children: convertNodes(context, children),
-  };
+  } as TNode;
 }

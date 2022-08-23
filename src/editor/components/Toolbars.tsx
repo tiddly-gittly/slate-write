@@ -28,11 +28,19 @@ import { ELEMENT_OL, ELEMENT_UL } from '@udecode/plate-list';
 import { ELEMENT_BLOCKQUOTE } from '@udecode/plate-block-quote';
 import { ListToolbarButton } from '@udecode/plate-ui-list';
 import { MARK_BOLD, MARK_ITALIC, MARK_UNDERLINE, MARK_STRIKETHROUGH, MARK_CODE, MARK_SUPERSCRIPT, MARK_SUBSCRIPT } from '@udecode/plate-basic-marks';
+import { TableToolbarButton } from '@udecode/plate-ui-table';
+import { insertTable, deleteTable, insertTableRow, deleteRow, insertTableColumn, deleteColumn } from '@udecode/plate-table';
 
 import type { Placement } from 'tippy.js';
 import { LinkToolbarButton } from '../plugins/link/LinkToolbarButton';
-import { Editor } from 'slate';
+import { BaseEditor, Editor } from 'slate';
 import { ELEMENT_CODE_BLOCK } from '../plugins/codeblock/constants';
+import { BorderAll } from '@styled-icons/material/BorderAll';
+import { BorderClear } from '@styled-icons/material/BorderClear';
+import { BorderBottom } from '@styled-icons/material/BorderBottom';
+import { BorderTop } from '@styled-icons/material/BorderTop';
+import { BorderLeft } from '@styled-icons/material/BorderLeft';
+import { BorderRight } from '@styled-icons/material/BorderRight';
 
 const tooltipStyle = {
   arrow: true,
@@ -63,12 +71,24 @@ export const BasicElementToolbarButtons = (): JSX.Element => {
       <LinkToolbarButton icon={<Link />} tooltip={{ content: 'Link to (Ctrl+L) ([[)', ...tooltipStyle }} />
       <LinkToolbarButton
         icon={<Bracket />}
-        getLinkUrl={(previousUrl: string | null) => (editor.selection === null ? previousUrl ?? '' : Editor.string(editor, editor.selection))}
+        getLinkUrl={(previousUrl: string | null) => (editor.selection === null ? previousUrl ?? '' : Editor.string(editor as BaseEditor, editor.selection))}
         tooltip={{ content: 'WikiLink ([[)', ...tooltipStyle }}
       />
+      <TableToolbarButtons />
     </>
   );
 };
+
+export const TableToolbarButtons = (): JSX.Element => (
+  <>
+    <TableToolbarButton icon={<BorderAll />} transform={insertTable} />
+    <TableToolbarButton icon={<BorderClear />} transform={deleteTable} />
+    <TableToolbarButton icon={<BorderBottom />} transform={insertTableRow} />
+    <TableToolbarButton icon={<BorderTop />} transform={deleteRow} />
+    <TableToolbarButton icon={<BorderLeft />} transform={insertTableColumn} />
+    <TableToolbarButton icon={<BorderRight />} transform={deleteColumn} />
+  </>
+);
 
 export const ListToolbarButtons = (): JSX.Element => {
   const editor = usePlateEditorRef()!;
@@ -128,7 +148,7 @@ export const BallonToolbar = (): JSX.Element => {
 
   return (
     <BalloonToolbar
-      popperOptions={{
+      floatingOptions={{
         placement: 'top',
       }}
       theme={theme}>

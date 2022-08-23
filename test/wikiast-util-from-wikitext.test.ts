@@ -90,5 +90,8 @@ describe('fromWikiText', () => {
   test('tableGettingStarted', () => {
     expect(wikiAstFromWikiText(wikiTextDict.tableGettingStarted)).toEqual(wikiAstDict.tableGettingStarted);
   });
+  test('table', () => {
+    expect(wikiAstFromWikiText(wikiTextDict.table)).toEqual(wikiAstDict.table);
+  });
   /** new tests here generated using `npx zx scripts/test/add-new-test.mjs` */
 });

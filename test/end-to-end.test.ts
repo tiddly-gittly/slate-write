@@ -74,5 +74,8 @@ describe('Identical', () => {
   test('tableGettingStarted', () => {
     expect(wikiAstDict.tableGettingStarted).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos.tableGettingStarted)));
   });
+  test('table', () => {
+    expect(wikiAstDict.table).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos.table)));
+  });
   /** new tests here generated using `npx zx scripts/test/add-new-test.mjs` */
 });

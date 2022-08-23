@@ -116,6 +116,8 @@ AAA`,
   codeblock: `\`\`\`tid
 <$list filter="[tag[ExampleTag]sort[title]]"/>
 \`\`\``,
+  table: `|cell one|cell two|
+|cell three|cell four|`,
   tableGettingStarted: `\\define lingo-base() $:/language/ControlPanel/Basics/
 欢迎使用 ~TiddlyWiki 及参与 ~TiddlyWiki 社群
 

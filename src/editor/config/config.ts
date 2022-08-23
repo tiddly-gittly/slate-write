@@ -51,7 +51,7 @@ interface Config {
 export const CONFIG: Config = {
   link: {
     options: {
-      hotkey: 'ctrl+l',
+      triggerFloatingLinkHotkeys: 'ctrl+l',
     },
   },
   snippetComboBox: {

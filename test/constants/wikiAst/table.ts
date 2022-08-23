@@ -2,6 +2,38 @@
 import { IParseTreeNode } from 'tiddlywiki';
 
 export const table: Record<string, IParseTreeNode[] | IParseTreeNode> = {
+  table: [
+    {
+      type: 'element',
+      tag: 'table',
+      children: [
+        {
+          type: 'element',
+          tag: 'tbody',
+          children: [
+            {
+              type: 'element',
+              tag: 'tr',
+              children: [
+                { type: 'element', tag: 'td', children: [{ type: 'text', text: 'cell one', start: 1, end: 9 }] },
+                { type: 'element', tag: 'td', children: [{ type: 'text', text: 'cell two', start: 10, end: 18 }] },
+              ],
+              attributes: { class: { name: 'class', type: 'string', value: 'evenRow' } },
+            },
+            {
+              type: 'element',
+              tag: 'tr',
+              children: [
+                { type: 'element', tag: 'td', children: [{ type: 'text', text: 'cell three', start: 21, end: 31 }] },
+                { type: 'element', tag: 'td', children: [{ type: 'text', text: 'cell four', start: 32, end: 41 }] },
+              ],
+              attributes: { class: { name: 'class', type: 'string', value: 'oddRow' } },
+            },
+          ],
+        },
+      ],
+    },
+  ],
   tableGettingStarted: [
     {
       type: 'set',
