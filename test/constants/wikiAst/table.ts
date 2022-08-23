@@ -2,7 +2,7 @@
 import { IParseTreeNode } from 'tiddlywiki';
 
 export const table: Record<string, IParseTreeNode[] | IParseTreeNode> = {
-  GettingStarted: [
+  tableGettingStarted: [
     {
       type: 'set',
       attributes: { name: { type: 'string', value: 'lingo-base' }, value: { type: 'string', value: '$:/language/ControlPanel/Basics/' } },

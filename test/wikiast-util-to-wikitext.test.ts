@@ -83,5 +83,8 @@ describe('Transform tree', () => {
   test('codeblock', () => {
     expect(wikiAstToWikiText(wikiAstDict.codeblock)).toEqual(wikiTextDict.codeblock);
   });
+  test('tableGettingStarted', () => {
+    expect(wikiAstToWikiText(wikiAstDict.tableGettingStarted)).toEqual(wikiTextDict.tableGettingStarted);
+  });
   /** new tests here generated using `npx zx scripts/test/add-new-test.mjs` */
 });

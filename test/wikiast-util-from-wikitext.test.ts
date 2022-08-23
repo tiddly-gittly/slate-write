@@ -87,5 +87,8 @@ describe('fromWikiText', () => {
   test('codeblock', () => {
     expect(wikiAstFromWikiText(wikiTextDict.codeblock)).toEqual(wikiAstDict.codeblock);
   });
+  test('tableGettingStarted', () => {
+    expect(wikiAstFromWikiText(wikiTextDict.tableGettingStarted)).toEqual(wikiAstDict.tableGettingStarted);
+  });
   /** new tests here generated using `npx zx scripts/test/add-new-test.mjs` */
 });

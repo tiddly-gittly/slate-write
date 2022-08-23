@@ -77,5 +77,8 @@ describe('Transform tree', () => {
   test('codeblock', () => {
     expect(wikiAstToSlateAst(wikiAstDict.codeblock)).toMatchObject(slateDict.codeblock);
   });
+  test('tableGettingStarted', () => {
+    expect(wikiAstToSlateAst(wikiAstDict.tableGettingStarted)).toMatchObject(slateDict.tableGettingStarted);
+  });
   /** new tests here generated using `npx zx scripts/test/add-new-test.mjs` */
 });
