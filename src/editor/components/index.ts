@@ -19,7 +19,8 @@ import { withStyledPlaceHolders } from '../config/withStyledPlaceHolders';
 import { ELEMENT_AUTO_COMPLETE, ELEMENT_AUTO_COMPLETE_INPUT } from '../plugins/autoComplete';
 import { CodeBlockElement, ELEMENT_CODE_BLOCK } from '../plugins/codeblock';
 import { ELEMENT_MACRO } from '../plugins/macro';
-import { ELEMENT_WIDGET, WidgetBlock } from '../plugins/widget';
+import { ELEMENT_WIDGET } from '../plugins/widget';
+import { WidgetBlock } from '../plugins/widget/WidgetBlock';
 
 export const createPlateUI = <
   T extends string = string,
