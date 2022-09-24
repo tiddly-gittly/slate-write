@@ -5,6 +5,7 @@ import { link } from './link';
 import { widget } from './widget';
 import { macro } from './macro';
 import { codeblock } from './codeblock';
+import { set } from './set';
 
 export const builders = {
   element,
@@ -18,5 +19,6 @@ export const builders = {
   image: widget,
   tiddler: widget,
   macrocall: macro,
+  set,
 };
 export type IBuilders = typeof builders;

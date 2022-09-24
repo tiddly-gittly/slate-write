@@ -133,4 +133,7 @@ AAA`,
 </div>
 
 请参阅[[控制台|$:/ControlPanel]]查看更多选项。`,
+  setDefine: `\\define lingo-base() $:/language/ControlPanel/Basics/
+
+<<lingo Title/Prompt>>`,
 };

@@ -83,5 +83,8 @@ describe('Transform tree', () => {
   test('table', () => {
     expect(wikiAstToSlateAst(wikiAstDict.table)).toMatchObject(slateDict.table);
   });
+  test('setDefine', () => {
+    expect(wikiAstToSlateAst(wikiAstDict.setDefine)).toMatchObject(slateDict.setDefine);
+  });
   /** new tests here generated using `npx zx scripts/test/add-new-test.mjs` */
 });

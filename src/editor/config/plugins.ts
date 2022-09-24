@@ -28,6 +28,7 @@ import { createCodeBlockPlugin } from '../plugins/codeblock';
 import { createWidgetPlugin } from '../plugins/widget';
 import { createDndPlugin } from '../plugins/dnd';
 import { createMacroPlugin } from '../plugins/macro';
+import { createVariablePlugin } from '../plugins/variable';
 import { createAutoCompletePlugin } from '../plugins/autoComplete';
 import { createComboBoxPlugin } from '../plugins/comboBox';
 
@@ -72,4 +73,4 @@ export const utils = createPlugins([
    */
   createTrailingBlockPlugin(),
 ]);
-export const twAdvancedElements = createPlugins([createWidgetPlugin(), createMacroPlugin()]);
+export const twAdvancedElements = createPlugins([createWidgetPlugin(), createMacroPlugin(), createVariablePlugin()]);

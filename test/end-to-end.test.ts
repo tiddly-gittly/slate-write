@@ -77,5 +77,8 @@ describe('Identical', () => {
   test('table', () => {
     expect(wikiAstDict.table).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos.table)));
   });
+  test('setDefine', () => {
+    expect(wikiAstDict.setDefine).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos.setDefine)));
+  });
   /** new tests here generated using `npx zx scripts/test/add-new-test.mjs` */
 });
