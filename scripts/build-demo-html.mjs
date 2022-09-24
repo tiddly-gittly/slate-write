@@ -13,17 +13,17 @@ const [_, __, author, name] = pluginInfo.title.split('/');
 const pluginTitle = `${author}/${name}`;
 
 const repoDirectory = path.resolve(__dirname, '..');
-const distDirectory = path.join(repoDirectory, 'dist');
+const distributionDirectory = path.join(repoDirectory, 'dist');
 const jsonPluginFileName = `$__plugins_${pluginTitle.replace('/', '_')}.json`;
 // copy demo
-await fs.copy(path.join(repoDirectory, 'demo'), distDirectory);
+await fs.copy(path.join(repoDirectory, 'demo'), distributionDirectory);
 // copy json plugin
-await fs.copy(path.join(distDirectory, 'out', jsonPluginFileName), path.join(distDirectory, 'tiddlers', jsonPluginFileName));
+await fs.copy(path.join(distributionDirectory, 'out', jsonPluginFileName), path.join(distributionDirectory, 'tiddlers', jsonPluginFileName));
 
 /**
  * Make demo html file
  */
-const htmlPath = `${distDirectory}/output/index.html`;
+const htmlPath = `${distributionDirectory}/output/index.html`;
 
 /**
  * Same as `cross-env TIDDLYWIKI_PLUGIN_PATH='node_modules/tiddlywiki/plugins/published' TIDDLYWIKI_THEME_PATH='${wikiFolderName}/themes'`
@@ -32,9 +32,9 @@ const htmlPath = `${distDirectory}/output/index.html`;
  */
 // process.env.TIDDLYWIKI_PLUGIN_PATH = `${distDir}/plugins`;
 
-cd(distDirectory);
-await $`tiddlywiki ${distDirectory} --build externalimages`;
-await $`tiddlywiki ${distDirectory} --build externaljs`;
+cd(distributionDirectory);
+await $`tiddlywiki ${distributionDirectory} --build externalimages`;
+await $`tiddlywiki ${distributionDirectory} --build externaljs`;
 // build dll.js and config tw to load it
 // original filename contains invalid char, will cause static server unable to load it
 const htmlContent = fs.readFileSync(htmlPath, 'utf8');

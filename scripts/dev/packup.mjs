@@ -1,3 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable unicorn/prevent-abbreviations */
 import path from 'path';
 import fs from 'fs-extra';
 import esbuild from 'esbuild';
@@ -11,7 +18,7 @@ const SOURCE_DIRECTORY = 'src';
 const DISTNATION_DIRECTORY = 'dist';
 const WIKI_DIRECTORY = 'demo';
 const WIKI_TIDDLERS_DIRECTORY = `${WIKI_DIRECTORY}/tiddlers`;
-const ENTRANCE_EXT_LIST = ['.ts', '.tsx', '.jsx', '.mjs'];
+const ENTRANCE_EXT_LIST = new Set(['.ts', '.tsx', '.jsx', '.mjs']);
 const pluginInfo = fs.readJsonSync('src/plugin.info');
 const [_, __, author, name] = pluginInfo.title.split('/');
 const pluginTitle = `${author}/${name}`;
@@ -29,27 +36,27 @@ export const cleanDist = async () => {
 };
 
 export const findAllEntries = async (previousEntryList) => {
-  previousEntryList = previousEntryList ? previousEntryList : [];
+  previousEntryList = previousEntryList || [];
   let entryChanged = false;
   const entryList = [];
   const outputMetaMap = {};
   await walkFilesAsync(SOURCE_DIRECTORY, (dir) => {
     const metaDir = `${dir.replace(path.extname(dir), '.js')}.meta`;
     const dirInfo = path.parse(dir);
-    if (ENTRANCE_EXT_LIST.indexOf(path.extname(dir).toLowerCase()) !== -1) {
+    if (ENTRANCE_EXT_LIST.has(path.extname(dir).toLowerCase())) {
       if (fs.existsSync(metaDir)) {
         entryList.push(dir);
-        if (!entryChanged && previousEntryList.indexOf(dir) === -1) entryChanged = true;
-        outputMetaMap[`${path.join(dirInfo.dir, dirInfo.name)}.js`] = fs.readFileSync(metaDir).toString('utf-8');
+        if (!entryChanged && !previousEntryList.includes(dir)) entryChanged = true;
+        outputMetaMap[`${path.join(dirInfo.dir, dirInfo.name)}.js`] = fs.readFileSync(metaDir).toString('utf8');
       }
     } else if (dir.endsWith('.css.meta')) {
-      outputMetaMap[path.join(dirInfo.dir, dirInfo.name)] = fs.readFileSync(metaDir.replace('.js', '')).toString('utf-8');
+      outputMetaMap[path.join(dirInfo.dir, dirInfo.name)] = fs.readFileSync(metaDir.replace('.js', '')).toString('utf8');
     }
   });
   if (!entryChanged) {
     const len = previousEntryList.length;
     for (let i = 0; i < len; i++) {
-      if (entryList.indexOf(previousEntryList[i]) !== -1) continue;
+      if (entryList.includes(previousEntryList[i])) continue;
       entryChanged = true;
       break;
     }
@@ -101,7 +108,7 @@ export const initTiddlyWiki = async (_$tw, args) => {
   // copy demo
   await fs.copy(path.join(process.cwd(), 'demo'), DISTNATION_DIRECTORY);
   const $tw = tw.TiddlyWiki(_$tw);
-  $tw.boot.argv = args ? args : [DISTNATION_DIRECTORY];
+  $tw.boot.argv = args || [DISTNATION_DIRECTORY];
   $tw.boot.boot();
   return $tw;
 };

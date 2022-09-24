@@ -1,3 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable unicorn/prevent-abbreviations */
 import chokidar from 'chokidar';
 import tw from 'tiddlywiki';
 import fs from 'fs-extra';
@@ -10,7 +17,7 @@ const packageJSON = fs.readJsonSync('package.json');
 
 // WebSocket with TiddlyWiki on broswer
 const devWebListnerScriptPath = path.resolve(path.join(process.cwd(), 'scripts', 'dev', 'devweb-listener.js'));
-const devWebListnerScript = fs.readFileSync(devWebListnerScriptPath).toString('utf-8');
+const devWebListnerScript = fs.readFileSync(devWebListnerScriptPath).toString('utf8');
 const wssPort = await getPort({ port: 8081 });
 const refreshHeartBeat = (ws) => {
   ws.isAlive = true;
@@ -23,7 +30,7 @@ const refreshHeartBeat = (ws) => {
     }
     ws.isAlive = false;
     ws.ping();
-  }, 15000);
+  }, 15_000);
 };
 const wss = new WebSocketServer({ port: wssPort });
 wss.on('connection', (ws) => {
@@ -44,8 +51,8 @@ wss.on('close', () => {
 });
 
 const $tw1 = await initTiddlyWiki();
-let $tw2 = undefined;
-let twServer = undefined;
+let $tw2;
+let twServer;
 // Watch source files change
 const watcher = chokidar.watch('src', {
   ignoreInitial: true,
@@ -60,9 +67,9 @@ const refresh = async () => {
   try {
     const [entryList, metaMap, _] = await findAllEntries();
     await buildEntries(entryList, metaMap);
-    await exportPlugins($tw1, false, true, false);
-  } catch (e) {
-    console.error(e);
+    exportPlugins($tw1, false, true, false);
+  } catch (error) {
+    console.error(error);
     return;
   }
   if (twServer) twServer.close();
@@ -83,6 +90,12 @@ const refresh = async () => {
   });
   $tw2.boot.boot();
 };
-watcher.on('ready', refresh);
-watcher.on('add', refresh);
-watcher.on('change', refresh);
+watcher.on('ready', () => {
+  void refresh();
+});
+watcher.on('add', () => {
+  void refresh();
+});
+watcher.on('change', () => {
+  void refresh();
+});
