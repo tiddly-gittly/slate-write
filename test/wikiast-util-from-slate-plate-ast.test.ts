@@ -80,7 +80,7 @@ describe('fromSlateAst', () => {
   test('codeblock', () => {
     expect(wikiAstFromSlateAst(slateDict.codeblock)).toEqual(wikiAstDictWithoutPos.codeblock);
   });
-  test('tableGettingStarted', () => {
+  test.skip('tableGettingStarted', () => {
     expect(wikiAstFromSlateAst(slateDict.tableGettingStarted)).toEqual(wikiAstDictWithoutPos.tableGettingStarted);
   });
   test('table', () => {

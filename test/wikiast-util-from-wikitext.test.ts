@@ -87,7 +87,7 @@ describe('fromWikiText', () => {
   test('codeblock', () => {
     expect(wikiAstFromWikiText(wikiTextDict.codeblock)).toEqual(wikiAstDict.codeblock);
   });
-  test('tableGettingStarted', () => {
+  test.skip('tableGettingStarted', () => {
     expect(wikiAstFromWikiText(wikiTextDict.tableGettingStarted)).toEqual(wikiAstDict.tableGettingStarted);
   });
   test('table', () => {
