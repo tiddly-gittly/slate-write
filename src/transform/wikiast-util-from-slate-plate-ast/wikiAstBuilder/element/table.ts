@@ -8,7 +8,7 @@ export function table(builders: IBuilders, node: TElement): IDomParseTreeNode {
   const children = convertNodes(builders, node.children);
   return {
     type: 'element',
-    tag: 'tbody',
+    tag: 'table',
     children: [
       {
         type: 'element',

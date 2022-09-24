@@ -1,4 +1,4 @@
-import { IParseTreeNode } from 'tiddlywiki';
+import { IWikiASTNode } from 'tiddlywiki';
 import { select } from 'unist-util-select';
 import { wikiAstFromSlateAst } from '../src/transform/wikiast-util-from-slate-plate-ast';
 import { slateDict, wikiAstDictWithoutPos } from './constants';
@@ -34,7 +34,7 @@ describe('fromSlateAst', () => {
     // in this case we are mainly testing wiki to slate's bad case, so in this slate to wiki, we need to adjust bad data in wikiast
     const emptyLicNode = select('element[tag=ol] > element[tag=li] > element[tag=ol] > element[tag=li]:nth-child(2)', result[0]);
     if (emptyLicNode !== null) {
-      (emptyLicNode as IParseTreeNode).children = [];
+      (emptyLicNode as IWikiASTNode).children = [];
     }
     expect(result).toEqual(wikiAstDictWithoutPos['ol > ol > p + empty p']);
   });

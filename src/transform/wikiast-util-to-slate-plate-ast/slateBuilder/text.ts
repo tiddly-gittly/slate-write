@@ -40,7 +40,7 @@ export function mergeSiblingTexts<T extends TNode>(node: T): T {
  */
 export function wrapTextWithP(nodes: TNode[]): TNode[] {
   return nodes.map((node) => {
-    if (node.type === 'text') {
+    if (typeof node.text === 'string' && node.type === undefined) {
       return {
         type: 'p',
         children: [node],
