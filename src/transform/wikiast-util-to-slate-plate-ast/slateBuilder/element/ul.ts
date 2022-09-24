@@ -13,6 +13,6 @@ export function ul(context: IContext, node: IDomParseTreeNode): TElement {
   const { tag, children } = node as IListDomParseTreeNode;
   return {
     type: tag,
-    children: convertNodes(context, children),
+    children: convertNodes(context, children) as TElement[],
   };
 }

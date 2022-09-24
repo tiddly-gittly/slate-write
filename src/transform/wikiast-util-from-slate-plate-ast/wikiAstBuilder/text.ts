@@ -1,4 +1,4 @@
-import { TText } from '@udecode/plate-core';
+import { TText, TNode } from '@udecode/plate-core';
 import type { ITextParseTreeNode, IDomParseTreeNode } from 'tiddlywiki';
 import { IBuilders } from '.';
 
@@ -17,6 +17,18 @@ function textWithoutMark(builders: IBuilders, node: TTextWithMark): ITextParseTr
     type: 'text',
     text: node.text,
   };
+}
+
+/**
+ * In table, wikiast has bare text node in td, but slateast requires we have a p wrapper. Now we remove the wrapper and restore the bare text.
+ */
+export function unwrapSlateTextWithP(nodes: TNode[]): TNode[] {
+  return nodes.flatMap((node) => {
+    if (node.type === 'p' && Array.isArray(node.children) && node.children.every((node) => 'text' in node)) {
+      return node.children as TNode[];
+    }
+    return node;
+  });
 }
 
 const markTypeMap = {

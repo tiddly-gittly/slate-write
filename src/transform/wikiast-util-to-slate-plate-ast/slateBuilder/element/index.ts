@@ -7,8 +7,9 @@ import { ul } from './ul';
 import { li } from './li';
 import { blockquote } from './blockquote';
 import { marks } from './marks';
+import { tbody, td } from './table';
 
-export const elementBuilders = { ul, ol: ul, li, blockquote, ...marks };
+export const elementBuilders = { ul, ol: ul, li, blockquote, ...marks, tbody, td };
 export type IElementBuilders = typeof elementBuilders;
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type

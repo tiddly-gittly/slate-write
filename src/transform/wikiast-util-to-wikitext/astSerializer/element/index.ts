@@ -8,8 +8,9 @@ import { li } from './li';
 import { headings } from './h1';
 import { blockquote } from './blockquote';
 import { marks } from './marks';
+import { tableTags } from './table';
 import type { IContext, IWithParent } from '../..';
-export const elementBuilders = { a, p, div, ul, ol: ul, li, blockquote, ...marks, ...headings };
+export const elementBuilders = { a, p, div, ul, ol: ul, li, blockquote, ...marks, ...headings, ...tableTags };
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function element(context: IContext, node: IDomParseTreeNode & IWithParent): string[] {

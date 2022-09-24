@@ -34,3 +34,18 @@ export function mergeSiblingTexts<T extends TNode>(node: T): T {
     }, []),
   };
 }
+
+/**
+ * In table, wikiast has bare text node in td, but slateast requires we have a p wrapper
+ */
+export function wrapTextWithP(nodes: TNode[]): TNode[] {
+  return nodes.map((node) => {
+    if (node.type === 'text') {
+      return {
+        type: 'p',
+        children: [node],
+      } as TNode;
+    }
+    return node;
+  });
+}

@@ -6,10 +6,13 @@ import { IBuilders } from '..';
 
 import { blockquote } from './blockquote';
 import { a } from './a';
+import { table, td } from './table';
 
 const elementBuilders: Partial<Record<keyof HTMLElementTagNameMap, (builders: IBuilders, node: TElement) => IWikiASTNode>> = {
   blockquote,
   a,
+  table,
+  td,
 };
 
 export function element(builders: IBuilders, node: TElement & { type: keyof HTMLElementTagNameMap }): IWikiASTNode {
