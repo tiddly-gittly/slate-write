@@ -14,6 +14,7 @@ import { widget } from './widget';
 import { heading } from './heading';
 import { macro } from './macro';
 import { table } from './table';
+import { set } from './set';
 
 export const wikiAstDict: Record<string, IParseTreeNode[] | IParseTreeNode> = {
   ...p,
@@ -26,6 +27,7 @@ export const wikiAstDict: Record<string, IParseTreeNode[] | IParseTreeNode> = {
   ...heading,
   ...macro,
   ...table,
+  ...set,
 };
 
 export const wikiAstDictWithoutPos = mapValues(cloneDeep(wikiAstDict), (ast: IParseTreeNode | IParseTreeNode[]) =>

@@ -1,7 +1,7 @@
 import { TElement } from '@udecode/plate-core';
 import type { ICustomParseTreeNode } from 'tiddlywiki';
 
-import { ELEMENT_VARIABLE } from '../../../editor/plugins/variable';
+import { ELEMENT_SET } from '../../../editor/plugins/set';
 import { convertNodes } from '../traverse';
 import { IContext } from '..';
 
@@ -25,7 +25,7 @@ export function set(context: IContext, node: ICustomParseTreeNode): TElement & {
   // pass all information to the react renderer, and do things there.
   return {
     node: nodeWithoutChildren,
-    type: ELEMENT_VARIABLE,
+    type: ELEMENT_SET,
     isElement: true,
     isVoid: true,
     children: convertNodes(context, children) as TElement[],

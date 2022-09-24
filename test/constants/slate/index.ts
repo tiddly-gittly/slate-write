@@ -9,6 +9,7 @@ import { link } from './link';
 import { heading } from './heading';
 import { macro } from './macro';
 import { table } from './table';
+import { set } from './set';
 
 /**
  * Get value by adding `console.log(`newValue`, newValue);` in `onSave` of `src/components/editor.tsx`.
@@ -25,6 +26,7 @@ export const slateDict: Record<string, TEditor<Value> | TElement | TText | Array
   ...ol,
   ...macro,
   ...table,
+  ...set,
   text: [{ text: 'AAA' }],
   'p > text': { type: 'p', children: [{ text: 'AAA' }] },
 };

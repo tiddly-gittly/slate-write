@@ -8,6 +8,7 @@ import { tiddler } from './transclude';
 import { widget } from './widget';
 import { macro } from './macro';
 import { macrocall } from './macrocall';
+import { set } from './set';
 import { string } from './string';
 import { codeblock } from './codeblock';
 
@@ -22,6 +23,7 @@ export const builders = {
   widget,
   macro,
   macrocall,
+  set,
   string,
   codeblock,
   'macro-parameter': string,
