@@ -6,6 +6,7 @@ import { element } from './element';
 import { lic } from './lic';
 import { text } from './text';
 import { widget } from './widget';
+import { set } from './set';
 import { ELEMENT_CODE_BLOCK } from '../../../editor/plugins/codeblock/constants';
 
 /**
@@ -27,6 +28,7 @@ export const builders = {
   text,
   widget,
   macro: widget,
+  set,
 };
 
 export type IBuilders = typeof builders;

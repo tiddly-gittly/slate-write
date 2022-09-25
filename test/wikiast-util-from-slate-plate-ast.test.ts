@@ -2,6 +2,7 @@ import { IWikiASTNode } from 'tiddlywiki';
 import { select } from 'unist-util-select';
 import { wikiAstFromSlateAst } from '../src/transform/wikiast-util-from-slate-plate-ast';
 import { slateDict, wikiAstDictWithoutPos } from './constants';
+import { mapToNoPosNode } from '../src/transform/ast-utils/mapToNoPosNode';
 
 describe('fromSlateAst', () => {
   test('it run without error', () => {
@@ -87,7 +88,7 @@ describe('fromSlateAst', () => {
     expect(wikiAstFromSlateAst(slateDict.table)).toEqual(wikiAstDictWithoutPos.table);
   });
   test('setDefine', () => {
-    expect(wikiAstFromSlateAst(slateDict.setDefine)).toEqual(wikiAstDictWithoutPos.setDefine);
+    expect(wikiAstFromSlateAst(slateDict.setDefine).map((ast) => mapToNoPosNode(ast))).toEqual(wikiAstDictWithoutPos.setDefine);
   });
   /** new tests here generated using `npx zx scripts/test/add-new-test.mjs` */
 });
