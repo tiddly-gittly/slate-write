@@ -1,0 +1,5 @@
+title: ExampleBoard
+type: application/tldr
+tags: Index
+
+{"document":{"id":"doc","name":"ExampleBoard","version":15.5,"pages":{"page":{"id":"page","name":"Page 1","childIndex":1,"shapes":{"06731f21-2dd6-41bd-1d74-78cd79c97d5c":{"id":"06731f21-2dd6-41bd-1d74-78cd79c97d5c","type":"text","name":"Text","parentId":"page","childIndex":1,"point":[588.93,488.21],"rotation":0,"text":"TW-WhiteBoard Plugin","style":{"color":"black","size":"small","isFilled":false,"dash":"draw","scale":1,"font":"script","textAlign":"middle"}}},"bindings":{}}},"pageStates":{"page":{"id":"page","selectedIds":["06731f21-2dd6-41bd-1d74-78cd79c97d5c"],"camera":{"point":[-199,-230],"zoom":1}}},"assets":{}}}
