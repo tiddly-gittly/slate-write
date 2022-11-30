@@ -4,13 +4,15 @@ caption: {{$:/plugins/linonetwo/slate-write/ui/ViewToolbar/images/edit-wysiwyg-b
 description: {{$:/language/Buttons/Edit/Hint}}
 
 \whitespace trim
-<$button message="tm-edit-wysiwyg-tiddler" param=<<currentTiddler>> tooltip={{$:/language/Buttons/Edit/Hint}} aria-label={{$:/language/Buttons/Edit/Caption}} class=<<tv-config-toolbar-class>>>
-<$list filter="[<tv-config-toolbar-icons>match[yes]]">
-{{$:/plugins/linonetwo/slate-write/ui/ViewToolbar/images/edit-wysiwyg-button}}
+<$list filter="[<currentTiddler>field:type[text/vnd.tiddlywiki]]:or[<currentTiddler>field:type[]]">
+  <$button message="tm-edit-wysiwyg-tiddler" param=<<currentTiddler>> tooltip={{$:/language/Buttons/Edit/Hint}} aria-label={{$:/language/Buttons/Edit/Caption}} class=<<tv-config-toolbar-class>>>
+    <$list filter="[<tv-config-toolbar-icons>match[yes]]">
+      {{$:/plugins/linonetwo/slate-write/ui/ViewToolbar/images/edit-wysiwyg-button}}
+    </$list>
+    <$list filter="[<tv-config-toolbar-text>match[yes]]">
+      <span class="tc-btn-text">
+        <$text text={{$:/language/Buttons/Edit/Caption}}/>
+      </span>
+    </$list>
+  </$button>
 </$list>
-<$list filter="[<tv-config-toolbar-text>match[yes]]">
-<span class="tc-btn-text">
-<$text text={{$:/language/Buttons/Edit/Caption}}/>
-</span>
-</$list>
-</$button>
