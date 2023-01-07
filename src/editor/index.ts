@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import { IChangedTiddlers } from 'tiddlywiki';
+import { IChangedTiddlers, Widget as TWWidget } from 'tiddlywiki';
 import type { ReactWidget } from 'tw-react';
 
 import { App, IEditorAppProps } from './editor';
@@ -58,6 +58,7 @@ class SlateWriteWidget extends Widget<IEditorAppProps> {
         return;
       }
       $tw.wiki.setText(this.editTitle, undefined, undefined, newText);
+      notifyNavigatorSaveTiddler(this.editTitle, this.parentWidget);
       this.unlock();
     };
     return {
@@ -168,6 +169,16 @@ class SlateWriteWidget extends Widget<IEditorAppProps> {
     }
     return false;
   }
+}
+
+function notifyNavigatorSaveTiddler(title: string, parentWidget?: TWWidget) {
+  parentWidget?.dispatchEvent({
+    type: 'tm-save-tiddler',
+    // param: param,
+    paramObject: { suppressNavigation: 'yes' },
+    tiddlerTitle: title,
+  });
+  parentWidget?.dispatchEvent({ type: 'tm-auto-save-wiki' });
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
