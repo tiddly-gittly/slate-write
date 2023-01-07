@@ -4,7 +4,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable unicorn/prevent-abbreviations */
 import chokidar from 'chokidar';
 import tw from 'tiddlywiki';
 import fs from 'fs-extra';
@@ -13,11 +12,9 @@ import getPort from 'get-port';
 import { WebSocketServer, WebSocket } from 'ws';
 import { findAllEntries, buildEntries, exportPlugins, initTiddlyWiki } from './packup.mjs';
 
-const packageJSON = fs.readJsonSync('package.json');
-
 // WebSocket with TiddlyWiki on broswer
-const devWebListnerScriptPath = path.resolve(path.join(process.cwd(), 'scripts', 'dev', 'devweb-listener.js'));
-const devWebListnerScript = fs.readFileSync(devWebListnerScriptPath).toString('utf8');
+const developmentWebListenerScriptPath = path.resolve(path.join(process.cwd(), 'scripts', 'dev', 'devweb-listener.js'));
+const developmentWebListenerScript = fs.readFileSync(developmentWebListenerScriptPath).toString('utf8');
 const wssPort = await getPort({ port: 8081 });
 const refreshHeartBeat = (ws) => {
   ws.isAlive = true;
@@ -67,7 +64,7 @@ const refresh = async () => {
   try {
     const [entryList, metaMap, _] = await findAllEntries();
     await buildEntries(entryList, metaMap);
-    exportPlugins($tw1, false, true, false);
+    exportPlugins($tw1, false, false, true);
   } catch (error) {
     console.error(error);
     return;
@@ -78,7 +75,7 @@ const refresh = async () => {
   $tw2.preloadTiddler({ title: '$:/Modern.TiddlyDev/devWebsocket/port', text: `${wssPort}` });
   $tw2.preloadTiddler({
     title: '$:/Modern.TiddlyDev/devWebsocket/listener',
-    text: devWebListnerScript,
+    text: developmentWebListenerScript,
     type: 'application/javascript',
     'module-type': 'startup',
   });
@@ -90,12 +87,7 @@ const refresh = async () => {
   });
   $tw2.boot.boot();
 };
-watcher.on('ready', () => {
-  void refresh();
-});
-watcher.on('add', () => {
-  void refresh();
-});
-watcher.on('change', () => {
-  void refresh();
-});
+/* eslint-disable @typescript-eslint/no-misused-promises */
+watcher.on('ready', refresh);
+watcher.on('add', refresh);
+watcher.on('change', refresh);

@@ -17,7 +17,7 @@ const target = RunTarget.mainJs(path.resolve('node_modules/tw5-plugin-packer/act
 const options = RunOptions.create()
   .setInputs({
     minify: process.env.CI !== undefined,
-    source: [`dist/plugins/${pluginTitle}`],
+    source: [`dist/${pluginInfo["plugin-type"]}s/${pluginTitle}`],
     output: 'dist/out',
     'uglifyjs-options': '{ "warnings": false, "ie8": false, "safari10": false }',
     'cleancss-options': '{ "compatibility": "*", "level": 2 }',

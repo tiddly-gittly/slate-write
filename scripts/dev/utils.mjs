@@ -1,10 +1,10 @@
+/* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable unicorn/prevent-abbreviations */
 import path from 'path';
 import fs from 'fs-extra';
 import { execSync } from 'child_process';
