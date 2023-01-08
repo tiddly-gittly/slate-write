@@ -57,6 +57,7 @@
     "lodash": "4.17.21",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
+    "requestidlecallback-polyfill": "^1.0.2",
     "slate": "0.82.0",
     "slate-history": "0.66.0",
     "slate-hyperscript": "0.77.0",

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
+import 'requestidlecallback-polyfill';
 import { IChangedTiddlers, Widget as TWWidget } from 'tiddlywiki';
 import type { ReactWidget } from 'tw-react';
 
@@ -172,13 +173,18 @@ class SlateWriteWidget extends Widget<IEditorAppProps> {
 }
 
 function notifyNavigatorSaveTiddler(title: string, parentWidget?: TWWidget) {
-  parentWidget?.dispatchEvent({
-    type: 'tm-save-tiddler',
-    // param: param,
-    paramObject: { suppressNavigation: 'yes' },
-    tiddlerTitle: title,
-  });
-  parentWidget?.dispatchEvent({ type: 'tm-auto-save-wiki' });
+  window.requestIdleCallback(
+    () => {
+      parentWidget?.dispatchEvent({
+        type: 'tm-save-tiddler',
+        // param: param,
+        paramObject: { suppressNavigation: 'yes' },
+        tiddlerTitle: title,
+      });
+      parentWidget?.dispatchEvent({ type: 'tm-auto-save-wiki' });
+    },
+    { timeout: 2000 },
+  );
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
