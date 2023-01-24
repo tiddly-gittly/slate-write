@@ -28,5 +28,8 @@ export function getSlatePlateASTAdditionalProperties(
   if (node['tw-attributes']) {
     result.attributes = node['tw-attributes'];
   }
+  if (node.orderedAttributes) {
+    result.orderedAttributes = node.orderedAttributes;
+  }
   return result;
 }

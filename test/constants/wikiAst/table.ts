@@ -19,6 +19,13 @@ export const table: Record<string, IParseTreeNode[] | IParseTreeNode> = {
                 { type: 'element', tag: 'td', children: [{ type: 'text', text: 'cell two', start: 10, end: 18 }] },
               ],
               attributes: { class: { name: 'class', type: 'string', value: 'evenRow' } },
+              orderedAttributes: [
+                {
+                  name: 'class',
+                  type: 'string',
+                  value: 'evenRow',
+                },
+              ],
             },
             {
               type: 'element',
@@ -28,6 +35,13 @@ export const table: Record<string, IParseTreeNode[] | IParseTreeNode> = {
                 { type: 'element', tag: 'td', children: [{ type: 'text', text: 'cell four', start: 32, end: 41 }] },
               ],
               attributes: { class: { name: 'class', type: 'string', value: 'oddRow' } },
+              orderedAttributes: [
+                {
+                  name: 'class',
+                  type: 'string',
+                  value: 'oddRow',
+                },
+              ],
             },
           ],
         },
