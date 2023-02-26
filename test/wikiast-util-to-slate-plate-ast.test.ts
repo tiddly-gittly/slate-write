@@ -77,7 +77,7 @@ describe('Transform tree', () => {
   test('codeblock', () => {
     expect(wikiAstToSlateAst(wikiAstDict.codeblock)).toMatchObject(slateDict.codeblock);
   });
-  test.skip('tableGettingStarted', () => {
+  test.only('tableGettingStarted', () => {
     expect(wikiAstToSlateAst(wikiAstDict.tableGettingStarted)).toMatchObject(slateDict.tableGettingStarted);
   });
   test('table', () => {

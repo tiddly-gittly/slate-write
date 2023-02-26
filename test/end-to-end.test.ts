@@ -71,7 +71,7 @@ describe('Identical', () => {
   test('codeblock', () => {
     expect(wikiAstDict.codeblock).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos.codeblock)));
   });
-  test.skip('tableGettingStarted', () => {
+  test.only('tableGettingStarted', () => {
     expect(wikiAstDict.tableGettingStarted).toMatchObject(wikiAstFromSlateAst(wikiAstToSlateAst(wikiAstDictWithoutPos.tableGettingStarted)));
   });
   test('table', () => {

@@ -10,3 +10,8 @@
 	border-radius: 3px;
 	font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
 }
+
+.tw-slate-write-container button:not(.tc-btn-invisible) {
+	margin: unset;
+	padding: unset;
+}

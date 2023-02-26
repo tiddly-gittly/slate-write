@@ -74,3 +74,19 @@ EFGHI?
 
 EFGHI!
 <<<
+
+! Tables
+
+!! Simple table
+
+|cell one|cell two|
+|cell three|cell four|
+
+!! Cell Formatting
+
+|!First column|!Second column|!Third column|
+|left | centre | right|
+
+|color:red; North West|opacity:0.5;North|North East|
+|color(green):West|Here|East|
+|South West|South|South East|

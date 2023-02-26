@@ -83,7 +83,7 @@ describe('Transform tree', () => {
   test('codeblock', () => {
     expect(wikiAstToWikiText(wikiAstDict.codeblock)).toEqual(wikiTextDict.codeblock);
   });
-  test.skip('tableGettingStarted', () => {
+  test.only('tableGettingStarted', () => {
     expect(wikiAstToWikiText(wikiAstDict.tableGettingStarted)).toEqual(wikiTextDict.tableGettingStarted);
   });
   test('table', () => {

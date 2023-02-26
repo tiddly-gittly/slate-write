@@ -133,7 +133,9 @@ export function App(props: IEditorAppProps & IDefaultWidgetProps): JSX.Element {
       <ParentWidgetContext.Provider value={props.parentWidget}>
         <GlobalStyle />
         <DndProvider backend={HTML5Backend}>
-          <Editor {...props} />
+          <div className="tw-slate-write-container">
+            <Editor {...props} />
+          </div>
         </DndProvider>
       </ParentWidgetContext.Provider>
     </PlateProvider>
