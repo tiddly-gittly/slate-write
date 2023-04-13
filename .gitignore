@@ -65,3 +65,4 @@ public-dist/
 # testing and dev temp folders
 settings-dev/
 .dccache
+demo/tiddlers/$__plugins_linonetwo_HugeWikiExample.json
