@@ -1,5 +1,11 @@
 name: Release Plugins
 
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 on:
   push:
     tags:
