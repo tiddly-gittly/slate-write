@@ -5,7 +5,7 @@
   "author": "LinOnetwo",
   "core-version": ">=5.1.22",
   "plugin-type": "plugin",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "dependents": ["$:/plugins/linonetwo/tw-react"],
   "list": "readme develop"
 }
