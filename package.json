@@ -49,12 +49,15 @@
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2",
     "postcss": "^8.4.24",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
     "rimraf": "^5.0.1",
     "ts-node": "^10.9.1",
     "tw5-typed": "^0.3.5",
     "typescript": "^5.1.3"
+  },
+  "peerDependencies": {
+    "tw-react": "^0.4.6",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
   },
   "dependencies": {
     "@react-hook/merged-ref": "^1.3.2",
@@ -107,7 +110,6 @@
     "tiddlywiki": "^5.2.7",
     "tiddlywiki-plugin-dev": "^0.0.39",
     "tippy.js": "^6.3.7",
-    "tw-react": "^0.4.6",
     "typescript-styled-is": "^2.1.0",
     "unified": "10.1.2",
     "unist-util-find": "^1.0.2",

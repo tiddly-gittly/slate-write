@@ -118,12 +118,18 @@ dependencies:
   npm-check-updates:
     specifier: ^16.10.13
     version: 16.10.13
+  react:
+    specifier: 18.2.0
+    version: 18.2.0
   react-dnd:
     specifier: ^16.0.1
     version: 16.0.1(@types/node@20.3.1)(react@18.2.0)
   react-dnd-html5-backend:
     specifier: ^16.0.1
     version: 16.0.1
+  react-dom:
+    specifier: 18.2.0
+    version: 18.2.0(react@18.2.0)
   requestidlecallback-polyfill:
     specifier: ^1.0.2
     version: 1.0.2
@@ -216,12 +222,6 @@ devDependencies:
   postcss:
     specifier: ^8.4.24
     version: 8.4.24
-  react:
-    specifier: 18.2.0
-    version: 18.2.0
-  react-dom:
-    specifier: 18.2.0
-    version: 18.2.0(react@18.2.0)
   rimraf:
     specifier: ^5.0.1
     version: 5.0.1
