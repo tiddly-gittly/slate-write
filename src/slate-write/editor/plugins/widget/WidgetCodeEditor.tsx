@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import { CODE_BLOCK_LANGUAGES, useCodeMirror, useCodeMirrorEventListenerSettled } from '../codeblock';
 import { WidgetBlockElementProps } from './WidgetBlock';
 import { wikiAstToWikiText } from 'wikiast-util-to-wikitext';
-import { deserialize } from 'src/transform/serialize';
+import { deserialize } from 'src/slate-write/transform/serialize';
 import { useWidgetCodeBlockStore } from './store';
 
 const CodeBlockWrapper = styled.div<{ left?: number; opacity?: number; top?: number }>`
