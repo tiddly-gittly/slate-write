@@ -1,36 +1,36 @@
 import { createAutoformatPlugin } from '@udecode/plate-autoformat';
-import { createBlockquotePlugin } from '@udecode/plate-block-quote';
 import {
   createBoldPlugin,
   createCodePlugin,
+  createItalicPlugin,
   createStrikethroughPlugin,
   createSubscriptPlugin,
   createSuperscriptPlugin,
   createUnderlinePlugin,
-  createItalicPlugin,
 } from '@udecode/plate-basic-marks';
-import { createTrailingBlockPlugin } from '@udecode/plate-trailing-block';
-import { createSoftBreakPlugin, createExitBreakPlugin } from '@udecode/plate-break';
+import { createBlockquotePlugin } from '@udecode/plate-block-quote';
+import { createExitBreakPlugin, createSoftBreakPlugin } from '@udecode/plate-break';
+import { createInlineVoidPlugin, createPlugins } from '@udecode/plate-core';
 import { createHorizontalRulePlugin } from '@udecode/plate-horizontal-rule';
-import { createTablePlugin } from '@udecode/plate-table';
-import { createIndentListPlugin } from '@udecode/plate-indent-list';
 import { createIndentPlugin } from '@udecode/plate-indent';
+import { createIndentListPlugin } from '@udecode/plate-indent-list';
 import { createKbdPlugin } from '@udecode/plate-kbd';
 import { createLinkPlugin } from '@udecode/plate-link';
 import { createListPlugin } from '@udecode/plate-list';
 import { createParagraphPlugin } from '@udecode/plate-paragraph';
-import { createPlugins, createInlineVoidPlugin } from '@udecode/plate-core';
 import { createSelectOnBackspacePlugin } from '@udecode/plate-select';
+// import { createTablePlugin } from '@udecode/plate-table';
+import { createTrailingBlockPlugin } from '@udecode/plate-trailing-block';
 
-import { CONFIG } from './config';
-import { createHeadingPlugin } from '../plugins/heading';
+import { createAutoCompletePlugin } from '../plugins/autoComplete';
 import { createCodeBlockPlugin } from '../plugins/codeblock';
-import { createWidgetPlugin } from '../plugins/widget';
+import { createComboBoxPlugin } from '../plugins/comboBox';
 import { createDndPlugin } from '../plugins/dnd';
+import { createHeadingPlugin } from '../plugins/heading';
 import { createMacroPlugin } from '../plugins/macro';
 import { createSetVariablePlugin } from '../plugins/set';
-import { createAutoCompletePlugin } from '../plugins/autoComplete';
-import { createComboBoxPlugin } from '../plugins/comboBox';
+import { createWidgetPlugin } from '../plugins/widget';
+import { CONFIG } from './config';
 
 export const basicElements = createPlugins([
   createBlockquotePlugin(),
@@ -40,7 +40,7 @@ export const basicElements = createPlugins([
   createHorizontalRulePlugin(),
   createListPlugin(),
   createLinkPlugin(),
-  createTablePlugin(),
+  // createTablePlugin(),
 ]);
 
 export const basicMarks = createPlugins([
