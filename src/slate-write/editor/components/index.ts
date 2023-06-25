@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/consistent-type-assertions */
 import { MARK_BOLD, MARK_CODE, MARK_ITALIC, MARK_STRIKETHROUGH, MARK_SUBSCRIPT, MARK_SUPERSCRIPT, MARK_UNDERLINE } from '@udecode/plate-basic-marks';
 import { ELEMENT_BLOCKQUOTE } from '@udecode/plate-block-quote';
 import { PlatePluginComponent, withProps } from '@udecode/plate-core';
@@ -8,7 +9,7 @@ import { ELEMENT_LINK } from '@udecode/plate-link';
 import { ELEMENT_LI, ELEMENT_OL, ELEMENT_UL } from '@udecode/plate-list';
 import { ELEMENT_PARAGRAPH } from '@udecode/plate-paragraph';
 import { StyledElement, StyledLeaf } from '@udecode/plate-styled-components';
-import { DefaultPlatePluginKey } from '@udecode/plate-ui';
+import type { DefaultPlatePluginKey } from '@udecode/plate-ui';
 import { BlockquoteElement } from '@udecode/plate-ui-block-quote';
 import { LinkElement } from '@udecode/plate-ui-link';
 import { MentionElement, MentionInputElement } from '@udecode/plate-ui-mention';
@@ -16,6 +17,7 @@ import { css } from 'styled-components';
 
 import { ELEMENT_TABLE, ELEMENT_TD, ELEMENT_TH, ELEMENT_TR } from '@udecode/plate-table';
 import { TableCellElement, TableElement, TableRowElement } from '@udecode/plate-ui-table';
+import type { FunctionComponent } from 'react';
 import { withStyledDraggables } from '../config/withStyledDraggables';
 import { withStyledPlaceHolders } from '../config/withStyledPlaceHolders';
 import { ELEMENT_AUTO_COMPLETE, ELEMENT_AUTO_COMPLETE_INPUT } from '../plugins/autoComplete';
@@ -26,7 +28,7 @@ import { WidgetBlock } from '../plugins/widget/WidgetBlock';
 
 export const createPlateUI = <
   T extends string = string,
-  R extends Record<DefaultPlatePluginKey | T, PlatePluginComponent> = Record<DefaultPlatePluginKey | T, PlatePluginComponent>,
+  R extends Record<DefaultPlatePluginKey | T, PlatePluginComponent | FunctionComponent<any>> = Record<DefaultPlatePluginKey | T, PlatePluginComponent | FunctionComponent<any>>,
 >(
   overrideByKey?: Partial<R>,
 ): R => {
@@ -51,12 +53,6 @@ const rawComponents = createPlateUI({
   [ELEMENT_MACRO]: WidgetBlock,
   [ELEMENT_LINK]: LinkElement,
   [ELEMENT_CODE_BLOCK]: CodeBlockElement,
-  [ELEMENT_OL]: withProps(StyledElement, {
-    as: 'ol',
-  }),
-  [ELEMENT_UL]: withProps(StyledElement, {
-    as: 'ul',
-  }),
   [ELEMENT_PARAGRAPH]: withProps(StyledElement, {
     as: 'p',
     styles: {
@@ -67,7 +63,6 @@ const rawComponents = createPlateUI({
   }),
 
   [ELEMENT_BLOCKQUOTE]: BlockquoteElement,
-  [ELEMENT_CODE_BLOCK]: CodeBlockElement,
   // [ELEMENT_CODE_LINE]: CodeLineElement,
   // [ELEMENT_CODE_SYNTAX]: CodeSyntaxLeaf,
   // TODO: use basic hr element, plate's is wiredly huge
@@ -145,7 +140,6 @@ const rawComponents = createPlateUI({
   // TODO: use tw image widget
   // [ELEMENT_IMAGE]: ImageElement,
   [ELEMENT_LI]: withProps(StyledElement, { as: 'li' }),
-  [ELEMENT_LINK]: LinkElement,
   // [ELEMENT_MEDIA_EMBED]: MediaEmbedElement,
   // [ELEMENT_MENTION]: MentionElement,
   // [ELEMENT_MENTION_INPUT]: MentionInputElement,
