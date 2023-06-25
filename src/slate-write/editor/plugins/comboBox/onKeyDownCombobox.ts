@@ -1,6 +1,8 @@
 import type { TComboboxItemBase } from '@udecode/plate-combobox';
 import { getNextWrappingIndex } from '@udecode/plate-combobox';
-import { getPlugin, insertText, KeyboardHandlerReturnType, PlateEditor, Value } from '@udecode/plate-core';
+import { getPlugin, KeyboardHandlerReturnType, PlateEditor } from '@udecode/plate-core';
+import { Value } from '@udecode/slate';
+import { insertText } from 'slate';
 import { AutoCompletePlugin } from '../autoComplete';
 import { removeAutoCompleteInputFromCurrentSelection } from '../autoComplete/transforms';
 import { getAutoCompleteOnSelectItem } from './getAutoCompleteOnSelectItem';
@@ -15,7 +17,7 @@ import { useAutoCompletePluginStore } from './store';
  */
 export const onKeyDownCombobox = <V extends Value = Value, E extends PlateEditor<V> = PlateEditor<V>>(editor: E): KeyboardHandlerReturnType => (event) => {
   const { highlightedIndex, filteredItems, activeId, reset } = useAutoCompletePluginStore.getState();
-  const currentFilteredItems: TComboboxItemBase[] = filteredItems[activeId ?? ''] ?? [];
+  const currentFilteredItems: TComboboxItemBase[] = (filteredItems[activeId ?? ''] ?? []) as TComboboxItemBase[];
   const isOpen = activeId !== undefined;
 
   if (!isOpen) return;

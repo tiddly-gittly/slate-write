@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { TLinkElement, Value } from '@udecode/plate-core';
+import { TLinkElement, Value } from '@udecode/slate';
 import { getRootProps, StyledElementProps } from '@udecode/plate-styled-components';
 import React, { useCallback, useContext, useMemo } from 'react';
 import { ParentWidgetContext } from 'tw-react';

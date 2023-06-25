@@ -1,6 +1,6 @@
 /** copied from plate's packages/ui/dnd/src/components/Draggable.types.ts , delete unused DragHandleProps */
-import { TEditor } from '@udecode/plate-core';
-import { DragHandleProps, EElement, Value } from '@udecode/plate-core';
+import { TEditor } from '@udecode/slate';
+import { DragHandleProps, EElement, Value } from '@udecode/slate';
 import { StyledElementProps } from '@udecode/plate-styled-components';
 import { Path } from 'slate';
 import { CSSProp } from 'styled-components';

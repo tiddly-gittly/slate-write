@@ -1,4 +1,4 @@
-import { DragItemBlock, TReactEditor, Value } from '@udecode/plate-core';
+import { DragItemBlock, TReactEditor, Value } from '@udecode/slate';
 import { Path, Transforms } from 'slate';
 import { ReactEditor } from 'slate-react';
 import type { DragItemWithParent } from './useDragBlock';

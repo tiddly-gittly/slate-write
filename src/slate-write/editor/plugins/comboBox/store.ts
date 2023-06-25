@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/no-null */
 import type { TComboboxItemBase } from '@udecode/plate-combobox';
-import type { TComboboxItemWithData } from '@udecode/plate-core';
+import type { TComboboxItemWithData } from '@udecode/slate';
 import { BaseSelection } from 'slate';
 import create from 'zustand';
 

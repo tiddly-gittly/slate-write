@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import { getPluginType, someNode, useEventPlateId, usePlateEditorState, withPlateEventProvider } from '@udecode/plate-core';
+import { getPluginType, useEventPlateId, usePlateEditorState, withPlateProvider } from '@udecode/plate-core';
 import { ELEMENT_LINK } from '@udecode/plate-link';
 import { ToolbarButton, ToolbarButtonProps } from '@udecode/plate-ui-toolbar';
+import { someNode } from '@udecode/slate';
 import React from 'react';
 import { getAndUpsertLink } from './transforms/getAndUpsertLink';
 
@@ -12,7 +13,7 @@ export interface LinkToolbarButtonProps extends ToolbarButtonProps {
   getLinkUrl?: (previousUrl: string | null) => Promise<string | null> | string | null;
 }
 
-export const LinkToolbarButton = withPlateEventProvider(({ id, getLinkUrl, ...props }: LinkToolbarButtonProps) => {
+export const LinkToolbarButton = withPlateProvider(({ id, getLinkUrl, ...props }: LinkToolbarButtonProps) => {
   id = useEventPlateId(id);
   const editor = usePlateEditorState(id)!;
 

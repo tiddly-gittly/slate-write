@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { findNode, FindNodeOptions, getPluginType, PlateEditor, Value } from '@udecode/plate-core';
+import { getPluginType, PlateEditor } from '@udecode/plate-core';
+import { findNode, FindNodeOptions, Value } from '@udecode/slate';
 import { ELEMENT_AUTO_COMPLETE_INPUT } from '../createAutoCompletePlugin';
 import { TAutoCompleteInputElement } from '../types';
 

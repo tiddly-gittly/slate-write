@@ -1,6 +1,7 @@
-import { getPluginType, PlateEditor, Value, wrapNodes } from '@udecode/plate-core';
+import { getPluginType, PlateEditor } from '@udecode/plate-core';
 import { ELEMENT_LINK } from '@udecode/plate-link';
-import { Location } from 'slate';
+import { Value } from '@udecode/slate';
+import { Location, wrapNodes } from 'slate';
 
 /**
  * Wrap selected nodes with a link and collapse at the end.

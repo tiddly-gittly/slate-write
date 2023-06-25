@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { createNodesWithHOC, PlateRenderElementProps, TEditor, Value } from '@udecode/plate-core';
+import { type PlateRenderElementProps } from '@udecode/plate-core';
+import { createNodesWithHOC } from '@udecode/plate-utils';
+import { TEditor, Value } from '@udecode/slate';
 import React, { forwardRef, useMemo } from 'react';
 import { Path } from 'slate';
 import { ReactEditor, useReadOnly } from 'slate-react';

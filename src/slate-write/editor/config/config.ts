@@ -4,7 +4,6 @@ import { AutoformatPlugin } from '@udecode/plate-autoformat';
 import { ELEMENT_BLOCKQUOTE } from '@udecode/plate-block-quote';
 import { ExitBreakPlugin, SoftBreakPlugin } from '@udecode/plate-break';
 import type { TComboboxItemBase } from '@udecode/plate-combobox';
-import { isBlockAboveEmpty, isSelectionAtBlockStart, PlatePlugin } from '@udecode/plate-core';
 import { ELEMENT_H1, ELEMENT_H2, ELEMENT_H3, ELEMENT_H4, ELEMENT_H5, ELEMENT_H6, KEYS_HEADING } from '@udecode/plate-heading';
 import { IndentPlugin } from '@udecode/plate-indent';
 import { LinkPlugin } from '@udecode/plate-link';

@@ -1,7 +1,8 @@
 /** copied from plate's packages/nodes/link/src/transforms/upsertLinkAtSelection.ts , add tw-type */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import { collapseSelection, getLeafNode, getPluginType, insertNodes, isCollapsed, PlateEditor, select, unwrapNodes, Value } from '@udecode/plate-core';
+import { getPluginType, PlateEditor } from '@udecode/plate-core';
 import { ELEMENT_LINK, TLinkElement } from '@udecode/plate-link';
+import { collapseSelection, getLeafNode, insertNodes, isCollapsed, select, unwrapNodes, Value } from '@udecode/slate';
 import { wrapLink } from './wrapLink';
 
 /**

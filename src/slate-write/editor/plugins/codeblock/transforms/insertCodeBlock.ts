@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { getPluginType, InsertNodesOptions, isExpanded, isSelectionAtBlockStart, PlateEditor, setElements, someNode, TElement, Value, wrapNodes } from '@udecode/plate-core';
+import { getPluginType, PlateEditor } from '@udecode/plate-core';
+import { InsertNodesOptions, isExpanded, setElements, someNode, TElement, Value, wrapNodes } from '@udecode/slate';
+import { isSelectionAtBlockStart } from '@udecode/slate-utils';
 import { ELEMENT_CODE_BLOCK } from '../constants';
 import { getCodeLineType } from '../options';
 

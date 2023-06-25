@@ -3,7 +3,7 @@
 import useMergedRef from '@react-hook/merged-ref';
 import { DragIndicator } from '@styled-icons/material/DragIndicator';
 import Tippy from '@tippyjs/react';
-import { Value } from '@udecode/plate-core';
+import { Value } from '@udecode/slate';
 import React, { MouseEvent, useRef } from 'react';
 import styled, { CSSProp } from 'styled-components';
 import is from 'typescript-styled-is';

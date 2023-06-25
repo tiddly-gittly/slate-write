@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import type { TComboboxItem } from '@udecode/plate-core';
+import type { TComboboxItem } from '@udecode/slate';
 import React, { useMemo } from 'react';
 import type { Widget } from 'tiddlywiki';
 import { AutoCompleteCombobox } from '../../plugins/comboBox/AutoCompleteCombobox';

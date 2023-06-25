@@ -1,4 +1,4 @@
-import type { TElement, TNode } from '@udecode/plate-core';
+import type { TElement, TNode } from '@udecode/slate';
 import { wikiAstFromSlateAst } from 'wikiast-util-from-slate-plate-ast';
 import { wikiAstFromWikiText } from 'wikiast-util-from-wikitext';
 import { wikiAstToSlateAst } from 'wikiast-util-to-slate-plate-ast';

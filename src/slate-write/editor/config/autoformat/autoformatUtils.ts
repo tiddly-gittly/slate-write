@@ -6,8 +6,10 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { AutoformatBlockRule } from '@udecode/plate-autoformat';
-import { getParentNode, isElement, isType, PlateEditor, Value } from '@udecode/plate-core';
+import { type PlateEditor } from '@udecode/plate-core';
 import { toggleList, unwrapList } from '@udecode/plate-list';
+import { isType } from '@udecode/plate-utils';
+import { getParentNode, isElement, Value } from '@udecode/slate';
 import { ELEMENT_CODE_BLOCK, ELEMENT_CODE_LINE } from '../../plugins/codeblock/constants';
 
 export const clearBlockFormat: AutoformatBlockRule['preFormat'] = (editor) => {

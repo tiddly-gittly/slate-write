@@ -1,6 +1,6 @@
 /** copied from plate's packages/ui/dnd/src/hooks/useDragBlock.ts, add $tw things */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { DragItemBlock, EElement, TEditor, Value } from '@udecode/plate-core';
+import { DragItemBlock, EElement, TEditor, Value } from '@udecode/slate';
 import { useDrag } from 'react-dnd';
 import { Editor, Path } from 'slate';
 

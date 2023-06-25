@@ -4,9 +4,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable unicorn/no-null */
 import type { Data, NoData, TComboboxItem, TComboboxItemBase } from '@udecode/plate-combobox';
-import { isDefined, useEditorState, useEventEditorSelectors } from '@udecode/plate-core';
+import { useEditorState, useEventEditorSelectors } from '@udecode/plate-core';
 import { flip, getRangeBoundingClientRect, offset, shift, useVirtualFloating } from '@udecode/plate-floating';
 import { PortalBody } from '@udecode/plate-styled-components';
+import { isDefined } from '@udecode/utils';
 import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import is from 'typescript-styled-is';

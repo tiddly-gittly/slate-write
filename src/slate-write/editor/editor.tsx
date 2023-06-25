@@ -1,10 +1,11 @@
-import { createPlugins, getPlateActions, Plate, PlateProvider, TElement, TNode, usePlateEditorRef } from '@udecode/plate-core';
 import { createNodeIdPlugin } from '@udecode/plate-node-id';
 import useDebouncedCallback from 'beautiful-react-hooks/useDebouncedCallback';
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
+import { createPlugins, Plate, PlateProvider, usePlateActions, usePlateEditorRef, useResetPlateEditor } from '@udecode/plate-core';
+import { TElement, TNode } from '@udecode/slate';
 import { ReactEditor } from 'slate-react';
 import { IDefaultWidgetProps, ParentWidgetContext } from 'tw-react';
 import { deserialize, serialize } from '../transform/serialize';
@@ -35,7 +36,8 @@ const defaultPlugins = createPlugins([...PLUGINS.basicElements, ...PLUGINS.basic
 
 export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Element {
   const editorID = props.currentTiddler;
-  const { resetEditor, value: updateEditorValue } = getPlateActions(editorID);
+  const { value: updateEditorValue } = usePlateActions(editorID);
+  const resetEditor = useResetPlateEditor(editorID);
   const idCreator = useMemo(() => {
     return getIdFactory(props.currentTiddler);
   }, [props.currentTiddler]);

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { findNodePath, getPluginOptions, setNodes, Value } from '@udecode/plate-core';
+import { setNodes, Value } from '@udecode/slate';
 import { getRootProps, StyledElementProps } from '@udecode/plate-styled-components';
 import useDebouncedCallback from 'beautiful-react-hooks/useDebouncedCallback';
 import type { EditorConfiguration, EditorFromTextArea } from 'codemirror';

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import Tippy from '@tippyjs/react';
-import { findNodePath, insertNodes, removeNodes, setNodes, withoutNormalizing } from '@udecode/plate-core';
+import { insertNodes, removeNodes, setNodes, withoutNormalizing } from '@udecode/slate';
 import useDebouncedCallback from 'beautiful-react-hooks/useDebouncedCallback';
 import type { EditorConfiguration, EditorFromTextArea } from 'codemirror';
 import React, { ChangeEvent, MutableRefObject, useCallback, useEffect, useMemo, useRef } from 'react';
@@ -11,6 +11,7 @@ import { wikiAstToWikiText } from 'wikiast-util-to-wikitext';
 import { CODE_BLOCK_LANGUAGES, useCodeMirror, useCodeMirrorEventListenerSettled } from '../codeblock';
 import { useWidgetCodeBlockStore } from './store';
 import { WidgetBlockElementProps } from './WidgetBlock';
+import { findNodePath } from '@udecode/slate-react';
 
 const CodeBlockWrapper = styled.div<{ left?: number; opacity?: number; top?: number }>`
   position: absolute;

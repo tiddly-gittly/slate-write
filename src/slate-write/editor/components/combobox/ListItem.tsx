@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import type { ComboboxItemProps, TComboboxItemBase } from '@udecode/plate-core';
+import type { ComboboxItemProps, TComboboxItemBase } from '@udecode/slate';
 import memorize from 'lodash/memoize';
 import React from 'react';
 import styled from 'styled-components';

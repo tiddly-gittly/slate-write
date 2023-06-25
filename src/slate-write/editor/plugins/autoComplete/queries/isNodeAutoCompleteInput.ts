@@ -1,4 +1,5 @@
-import { getPluginType, PlateEditor, TNode, Value } from '@udecode/plate-core';
+import { getPluginType, PlateEditor } from '@udecode/plate-core';
+import { TNode, Value } from '@udecode/slate';
 import { ELEMENT_AUTO_COMPLETE_INPUT } from '../createAutoCompletePlugin';
 import { TAutoCompleteInputElement } from '../types';
 

@@ -1,8 +1,9 @@
 /* eslint-disable unicorn/no-null */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import { getAboveNode, getPluginType, isCollapsed, PlateEditor, unwrapNodes, Value } from '@udecode/plate-core';
+import { getPluginType, PlateEditor } from '@udecode/plate-core';
 import { ELEMENT_LINK } from '@udecode/plate-link';
+import { getAboveNode, isCollapsed, unwrapNodes, Value } from '@udecode/slate';
 import { Editor } from 'slate';
 import { upsertLinkAtSelection } from './upsertLinkAtSelection';
 

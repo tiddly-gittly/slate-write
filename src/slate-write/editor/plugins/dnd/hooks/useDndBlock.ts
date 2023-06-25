@@ -2,7 +2,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { EElement, useEditorRef, Value } from '@udecode/plate-core';
+import { useEditorRef } from '@udecode/plate-core';
+import { EElement, Value } from '@udecode/slate';
 import { useState } from 'react';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 import { Path } from 'slate';

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import type { TComboboxItem } from '@udecode/plate-core';
+import type { TComboboxItem } from '@udecode/slate';
 import type { Tiddler } from 'tiddlywiki';
 
 export interface ISnippetComboboxItem {

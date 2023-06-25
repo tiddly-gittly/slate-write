@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { TElement, Value } from '@udecode/plate-core';
 import { getRootProps, StyledElementProps } from '@udecode/plate-styled-components';
+import { TElement, Value } from '@udecode/slate';
 import React, { useRef } from 'react';
 import { useSelected } from 'slate-react';
 import styled from 'styled-components';
@@ -14,12 +14,12 @@ export interface IWidgetBlockProps {
 }
 export type WidgetBlockElementProps = StyledElementProps<Value, TElement & { node: IParseTreeNode }, IWidgetBlockProps>;
 
-const TwWidgetContainerOuter = styled.div``;
-const TwWidgetContainerInner = styled.div`
+export const TwWidgetContainerOuter = styled.div``;
+export const TwWidgetContainerInner = styled.div`
   user-select: normal;
   white-space: normal;
 `;
-const TwWidgetCodeContainer = styled.div`
+export const TwWidgetCodeContainer = styled.div`
   opacity: 0;
   ${is('selected')`
     opacity: 1;
@@ -34,7 +34,7 @@ export function WidgetBlock(props: WidgetBlockElementProps): JSX.Element {
   const rootProps = getRootProps(props);
   const selected = useSelected();
   return (
-    <TwWidgetContainerOuter data-role='tw-widget-container' {...attributes} {...rootProps} as={rootProps.as}>
+    <TwWidgetContainerOuter data-role='tw-widget-container' {...attributes} {...rootProps} as={rootProps.as as undefined}>
       <TwWidgetContainerInner contentEditable={false}>
         <div ref={widgetContainerReference} />
       </TwWidgetContainerInner>

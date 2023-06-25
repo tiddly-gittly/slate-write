@@ -5,21 +5,8 @@
  */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import {
-  getEditorString,
-  getNodeString,
-  getPlugin,
-  getPointAfter,
-  getPointBefore,
-  getRange,
-  insertNodes,
-  PlateEditor,
-  setSelection,
-  TNode,
-  TText,
-  Value,
-  WithPlatePlugin,
-} from '@udecode/plate-core';
+import { getPlugin, PlateEditor, WithPlatePlugin } from '@udecode/plate-core';
+import { getEditorString, getNodeString, getPointAfter, getPointBefore, getRange, insertNodes, setSelection, TNode, TText, Value } from '@udecode/slate';
 import { Location, Range } from 'slate';
 import { useAutoCompletePluginStore } from '../comboBox/store';
 import { ELEMENT_AUTO_COMPLETE_INPUT } from './createAutoCompletePlugin';

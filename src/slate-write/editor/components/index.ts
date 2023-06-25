@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
 import { MARK_BOLD, MARK_CODE, MARK_ITALIC, MARK_STRIKETHROUGH, MARK_SUBSCRIPT, MARK_SUPERSCRIPT, MARK_UNDERLINE } from '@udecode/plate-basic-marks';
 import { ELEMENT_BLOCKQUOTE } from '@udecode/plate-block-quote';
-import { PlatePluginComponent, withProps } from '@udecode/plate-core';
 import { ELEMENT_H1, ELEMENT_H2, ELEMENT_H3, ELEMENT_H4, ELEMENT_H5, ELEMENT_H6 } from '@udecode/plate-heading';
 import { MARK_HIGHLIGHT } from '@udecode/plate-highlight';
 import { MARK_KBD } from '@udecode/plate-kbd';
@@ -15,8 +14,10 @@ import { LinkElement } from '@udecode/plate-ui-link';
 import { MentionElement, MentionInputElement } from '@udecode/plate-ui-mention';
 import { css } from 'styled-components';
 
+import { PlatePluginComponent } from '@udecode/plate-core';
 import { ELEMENT_TABLE, ELEMENT_TD, ELEMENT_TH, ELEMENT_TR } from '@udecode/plate-table';
-import { TableCellElement, TableElement, TableRowElement } from '@udecode/plate-ui-table';
+import { PlateTableCellElement, PlateTableElement, PlateTableRowElement } from '@udecode/plate-ui-table';
+import { withProps } from '@udecode/plate-utils';
 import type { FunctionComponent } from 'react';
 import { withStyledDraggables } from '../config/withStyledDraggables';
 import { withStyledPlaceHolders } from '../config/withStyledPlaceHolders';
@@ -161,8 +162,8 @@ const rawComponents = createPlateUI({
       `,
     },
   }),
-  [ELEMENT_TABLE]: TableElement,
-  [ELEMENT_TD]: TableCellElement,
+  [ELEMENT_TABLE]: PlateTableElement,
+  [ELEMENT_TD]: PlateTableCellElement,
   [ELEMENT_TH]: withProps(StyledElement, {
     as: 'th',
     styles: {
@@ -181,7 +182,7 @@ const rawComponents = createPlateUI({
       ],
     },
   }),
-  [ELEMENT_TR]: TableRowElement,
+  [ELEMENT_TR]: PlateTableRowElement,
   // [ELEMENT_TODO_LI]: TodoListElement,
   [MARK_BOLD]: withProps(StyledLeaf, { as: 'strong' }),
   [MARK_CODE]: withProps(StyledLeaf, {

@@ -10,7 +10,6 @@ import {
 } from '@udecode/plate-basic-marks';
 import { createBlockquotePlugin } from '@udecode/plate-block-quote';
 import { createExitBreakPlugin, createSoftBreakPlugin } from '@udecode/plate-break';
-import { createInlineVoidPlugin, createPlugins } from '@udecode/plate-core';
 import { createHorizontalRulePlugin } from '@udecode/plate-horizontal-rule';
 import { createIndentPlugin } from '@udecode/plate-indent';
 import { createIndentListPlugin } from '@udecode/plate-indent-list';
@@ -22,6 +21,7 @@ import { createSelectOnBackspacePlugin } from '@udecode/plate-select';
 // import { createTablePlugin } from '@udecode/plate-table';
 import { createTrailingBlockPlugin } from '@udecode/plate-trailing-block';
 
+import { createInlineVoidPlugin, createPlugins } from '@udecode/plate-core';
 import { createAutoCompletePlugin } from '../plugins/autoComplete';
 import { createCodeBlockPlugin } from '../plugins/codeblock';
 import { createComboBoxPlugin } from '../plugins/comboBox';

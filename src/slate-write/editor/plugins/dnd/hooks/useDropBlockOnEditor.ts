@@ -3,8 +3,9 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import { EElement, findNode, isExpanded, TReactEditor, Value, withoutNormalizing } from '@udecode/plate-core';
-import { DragItemNode, getHoverDirection, getNewDirection } from '@udecode/plate-ui-dnd';
+import { DragItemNode, getHoverDirection, getNewDirection } from '@udecode/plate-dnd';
+import { EElement, findNode, isExpanded, Value, withoutNormalizing } from '@udecode/slate';
+import { TReactEditor } from '@udecode/slate-react';
 import { DropTargetMonitor, useDrop } from 'react-dnd';
 import { Path, Transforms } from 'slate';
 import { ReactEditor } from 'slate-react';
@@ -53,7 +54,7 @@ export const useDropBlockOnEditor = <V extends Value>(
           const nodePath = findNode(editor, { at: [], match: { id } })?.[1];
           if (nodePath === undefined) return;
           const parentPath = nodePath.slice(0, -1);
-          dropPath = [...parentPath, nodePath.at(-1) - 1];
+          dropPath = [...parentPath, (nodePath.at(-1) ?? 0) - 1];
 
           if (Path.equals(dragPath, dropPath)) return;
         }
