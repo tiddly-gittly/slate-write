@@ -10,7 +10,9 @@ import { getParentNode, isElement, isType, PlateEditor, Value } from '@udecode/p
 import { toggleList, unwrapList } from '@udecode/plate-list';
 import { ELEMENT_CODE_BLOCK, ELEMENT_CODE_LINE } from '../../plugins/codeblock/constants';
 
-export const clearBlockFormat: AutoformatBlockRule['preFormat'] = (editor) => unwrapList(editor);
+export const clearBlockFormat: AutoformatBlockRule['preFormat'] = (editor) => {
+  unwrapList(editor);
+};
 
 export const format = <V extends Value>(editor: PlateEditor<V>, customFormatting: any) => {
   if (editor.selection) {
@@ -32,5 +34,7 @@ export const formatList = <V extends Value>(editor: PlateEditor<V>, elementType:
 };
 
 export const formatText = <V extends Value>(editor: PlateEditor<V>, text: string) => {
-  format(editor, () => editor.insertText(text));
+  format(editor, () => {
+    editor.insertText(text);
+  });
 };

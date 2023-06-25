@@ -1,7 +1,7 @@
 /** copied from plate's packages/nodes/heading/src/createHeadingPlugin.ts , modify the hotkey and limit of level */
 /* eslint-disable unicorn/no-thenable */
-import { HeadingsPlugin, HeadingPlugin, KEYS_HEADING } from '@udecode/plate-heading';
 import { createPluginFactory, onKeyDownToggleElement, PlatePlugin } from '@udecode/plate-core';
+import { HeadingPlugin, HeadingsPlugin, KEYS_HEADING } from '@udecode/plate-heading';
 
 /**
  * Enables support for headings with configurable levels

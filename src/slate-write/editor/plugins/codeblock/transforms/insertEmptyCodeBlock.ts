@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+import type { CodeBlockInsertOptions } from '@udecode/plate-code-block';
 import { ELEMENT_DEFAULT, getPath, getPluginType, insertElements, isBlockAboveEmpty, isExpanded, PlateEditor, Value } from '@udecode/plate-core';
 import { Path } from 'slate';
-import type { CodeBlockInsertOptions } from '@udecode/plate-code-block';
 import { insertCodeBlock } from './insertCodeBlock';
 
 /**

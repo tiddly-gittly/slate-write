@@ -21,11 +21,11 @@ import {
   WithPlatePlugin,
 } from '@udecode/plate-core';
 import { Location, Range } from 'slate';
-import { AutoCompletePlugin, TAutoCompleteInputElement } from './types';
-import { ELEMENT_AUTO_COMPLETE_INPUT } from './createAutoCompletePlugin';
-import { findAutoCompleteInput, isSelectionInAutoCompleteInput, isNodeAutoCompleteInput } from './queries';
-import { removeAutoCompleteInputAtPath } from './transforms';
 import { useAutoCompletePluginStore } from '../comboBox/store';
+import { ELEMENT_AUTO_COMPLETE_INPUT } from './createAutoCompletePlugin';
+import { findAutoCompleteInput, isNodeAutoCompleteInput, isSelectionInAutoCompleteInput } from './queries';
+import { removeAutoCompleteInputAtPath } from './transforms';
+import { AutoCompletePlugin, TAutoCompleteInputElement } from './types';
 
 export const withAutoComplete = <V extends Value = Value, E extends PlateEditor<V> = PlateEditor<V>>(
   editor: E,
@@ -70,10 +70,12 @@ export const withAutoComplete = <V extends Value = Value, E extends PlateEditor<
   editor.insertText = (text) => {
     const { selection } = editor;
     if (!selection || isSelectionInAutoCompleteInput(editor)) {
-      return insertText(text);
+      insertText(text);
+      return;
     }
     if (!textMatchTrigger(text, trigger, selection)) {
-      return insertText(text);
+      insertText(text);
+      return;
     }
 
     // Make sure a autocomplete input is created at the beginning of line or after a whitespace
@@ -101,10 +103,11 @@ export const withAutoComplete = <V extends Value = Value, E extends PlateEditor<
       } else if (trigger.length > 1) {
         deleteBackward('character');
       }
-      return insertNodes<TAutoCompleteInputElement>(editor, data);
+      insertNodes<TAutoCompleteInputElement>(editor, data);
+      return;
     }
 
-    return insertText(text);
+    insertText(text);
   };
 
   editor.apply = (operation) => {

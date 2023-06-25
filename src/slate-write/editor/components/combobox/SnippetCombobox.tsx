@@ -1,12 +1,11 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
 import type { ComboboxItemProps, TComboboxItemBase, TComboboxItemWithData } from '@udecode/plate-core';
-import { ISnippetComboboxItem, snippets } from './snippets';
-import { ComboBoxDorpDownListItem, memorizedRenderText } from './ListItem';
+import React from 'react';
 import { AutoCompleteCombobox } from '../../plugins/comboBox/AutoCompleteCombobox';
+import { ComboBoxDorpDownListItem, memorizedRenderText } from './ListItem';
+import { ISnippetComboboxItem, snippets } from './snippets';
 
-const filter = (text: string) => (value: TComboboxItemBase) =>
-  (value as ComboboxItemProps<ISnippetComboboxItem>['item']).data.name.toLowerCase().startsWith(text.toLowerCase());
+const filter = (text: string) => (value: TComboboxItemBase) => (value as ComboboxItemProps<ISnippetComboboxItem>['item']).data.name.toLowerCase().startsWith(text.toLowerCase());
 
 export function SnippetCombobox(props: { id: string; pluginKey: string }): JSX.Element {
   const { id, pluginKey } = props;

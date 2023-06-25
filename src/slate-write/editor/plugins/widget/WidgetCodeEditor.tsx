@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import React, { useRef, ChangeEvent, useMemo, useCallback, MutableRefObject, useEffect } from 'react';
-import { findNodePath, insertNodes, removeNodes, setNodes, withoutNormalizing } from '@udecode/plate-core';
-import type { EditorConfiguration, EditorFromTextArea } from 'codemirror';
 import Tippy from '@tippyjs/react';
+import { findNodePath, insertNodes, removeNodes, setNodes, withoutNormalizing } from '@udecode/plate-core';
 import useDebouncedCallback from 'beautiful-react-hooks/useDebouncedCallback';
+import type { EditorConfiguration, EditorFromTextArea } from 'codemirror';
+import React, { ChangeEvent, MutableRefObject, useCallback, useEffect, useMemo, useRef } from 'react';
 // import { useDrag } from 'react-dnd';
-import styled from 'styled-components';
-import { CODE_BLOCK_LANGUAGES, useCodeMirror, useCodeMirrorEventListenerSettled } from '../codeblock';
-import { WidgetBlockElementProps } from './WidgetBlock';
-import { wikiAstToWikiText } from 'wikiast-util-to-wikitext';
 import { deserialize } from 'src/slate-write/transform/serialize';
+import styled from 'styled-components';
+import { wikiAstToWikiText } from 'wikiast-util-to-wikitext';
+import { CODE_BLOCK_LANGUAGES, useCodeMirror, useCodeMirrorEventListenerSettled } from '../codeblock';
 import { useWidgetCodeBlockStore } from './store';
+import { WidgetBlockElementProps } from './WidgetBlock';
 
 const CodeBlockWrapper = styled.div<{ left?: number; opacity?: number; top?: number }>`
   position: absolute;
@@ -113,10 +113,10 @@ export function WidgetCodeEditor(props: WidgetBlockElementProps): JSX.Element {
   return (
     <CodeBlockWrapper /* top={topLeft.top} left={topLeft.left} opacity={opacity} ref={dragReference} */>
       <CodeBlockContainer contentEditable={false}>
-        <div className="tw-widget-code-editor-container">
-          <CodeTextArea ref={textAreaReference} onChange={onCodeChange} defaultValue={code} className="CodeMirror" />
+        <div className='tw-widget-code-editor-container'>
+          <CodeTextArea ref={textAreaReference} onChange={onCodeChange} defaultValue={code} className='CodeMirror' />
         </div>
-        <Tippy content="(⌃/⌘ + ⏎)">
+        <Tippy content='(⌃/⌘ + ⏎)'>
           <SaveButton onClick={onSave}>{SaveButtonText}</SaveButton>
         </Tippy>
       </CodeBlockContainer>

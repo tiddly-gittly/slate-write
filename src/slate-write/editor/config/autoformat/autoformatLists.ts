@@ -1,5 +1,5 @@
-import { ELEMENT_LI, ELEMENT_OL, ELEMENT_UL } from '@udecode/plate-list';
 import { AutoformatRule } from '@udecode/plate-autoformat';
+import { ELEMENT_LI, ELEMENT_OL, ELEMENT_UL } from '@udecode/plate-list';
 import { clearBlockFormat, formatList } from './autoformatUtils';
 
 export const autoformatLists: AutoformatRule[] = [
@@ -8,13 +8,17 @@ export const autoformatLists: AutoformatRule[] = [
     type: ELEMENT_LI,
     match: ['* ', '- '],
     preFormat: clearBlockFormat,
-    format: (editor) => formatList(editor, ELEMENT_UL),
+    format: (editor) => {
+      formatList(editor, ELEMENT_UL);
+    },
   },
   {
     mode: 'block',
     type: ELEMENT_LI,
     match: ['1. ', '1) ', '# '],
     preFormat: clearBlockFormat,
-    format: (editor) => formatList(editor, ELEMENT_OL),
+    format: (editor) => {
+      formatList(editor, ELEMENT_OL);
+    },
   },
 ];

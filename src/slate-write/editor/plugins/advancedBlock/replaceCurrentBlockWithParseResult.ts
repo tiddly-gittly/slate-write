@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import { EElementOrText, getNode, insertNodes, getRangeFromBlockStart, PlateEditor, TNode, Value } from '@udecode/plate-core';
-import { serialize, deserialize } from 'src/slate-write/transform/serialize';
+import { EElementOrText, getNode, getRangeFromBlockStart, insertNodes, PlateEditor, TNode, Value } from '@udecode/plate-core';
+import { deserialize, serialize } from 'src/slate-write/transform/serialize';
 
 export function replaceCurrentBlockWithParseResult<V extends Value>(editor: PlateEditor<V>): void {
   const blockRange = getRangeFromBlockStart(editor);

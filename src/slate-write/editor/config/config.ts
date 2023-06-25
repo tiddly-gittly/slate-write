@@ -1,24 +1,24 @@
 /* eslint-disable typescript-sort-keys/interface */
 /* eslint-disable @typescript-eslint/ban-types */
 import { AutoformatPlugin } from '@udecode/plate-autoformat';
-import { ELEMENT_PARAGRAPH } from '@udecode/plate-paragraph';
-import { ELEMENT_TODO_LI } from '@udecode/plate-list';
+import { ELEMENT_BLOCKQUOTE } from '@udecode/plate-block-quote';
 import { ExitBreakPlugin, SoftBreakPlugin } from '@udecode/plate-break';
-import { IndentPlugin } from '@udecode/plate-indent';
+import type { TComboboxItemBase } from '@udecode/plate-combobox';
 import { isBlockAboveEmpty, isSelectionAtBlockStart, PlatePlugin } from '@udecode/plate-core';
+import { ELEMENT_H1, ELEMENT_H2, ELEMENT_H3, ELEMENT_H4, ELEMENT_H5, ELEMENT_H6, KEYS_HEADING } from '@udecode/plate-heading';
+import { IndentPlugin } from '@udecode/plate-indent';
 import { LinkPlugin } from '@udecode/plate-link';
+import { ELEMENT_TODO_LI } from '@udecode/plate-list';
 import { NormalizeTypesPlugin } from '@udecode/plate-normalizers';
+import { ELEMENT_PARAGRAPH } from '@udecode/plate-paragraph';
 import { ResetNodePlugin } from '@udecode/plate-reset-node';
 import { SelectOnBackspacePlugin } from '@udecode/plate-select';
-import type { TComboboxItemBase } from '@udecode/plate-combobox';
 import { TrailingBlockPlugin } from '@udecode/plate-trailing-block';
-import { KEYS_HEADING, ELEMENT_H1, ELEMENT_H2, ELEMENT_H3, ELEMENT_H4, ELEMENT_H5, ELEMENT_H6 } from '@udecode/plate-heading';
-import { ELEMENT_BLOCKQUOTE } from '@udecode/plate-block-quote';
-import { ELEMENT_CODE_BLOCK } from '../plugins/codeblock/constants';
 import type { EditableProps } from 'slate-react/dist/components/editable';
-import { autoformatRules } from './autoformat';
-import { ELEMENT_WIDGET } from '../plugins/widget';
 import { AutoCompletePlugin } from '../plugins/autoComplete';
+import { ELEMENT_CODE_BLOCK } from '../plugins/codeblock/constants';
+import { ELEMENT_WIDGET } from '../plugins/widget';
+import { autoformatRules } from './autoformat';
 
 export const SAVE_DEBOUNCE_INTERVAL = 1000;
 

@@ -6,7 +6,7 @@ import { wikiAstToWikiText } from 'wikiast-util-to-wikitext';
 
 export function serialize(value: TNode[]): string {
   const wikiAst = wikiAstFromSlateAst(value);
-  const shouldAddTailingN = wikiAst.length > 1 && wikiAst[wikiAst.length - 1].isBlock === true;
+  const shouldAddTailingN = wikiAst.length > 1 && wikiAst.at(-1).isBlock === true;
   return wikiAstToWikiText(wikiAst, { extraTailingNCount: shouldAddTailingN ? 1 : 0 });
 }
 

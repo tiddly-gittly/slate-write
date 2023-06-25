@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable unicorn/no-null */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import React from 'react';
 import { getPluginOptions, useEditorRef } from '@udecode/plate-core';
+import React from 'react';
 import { useReadOnly } from 'slate-react';
 import styled, { CSSProp } from 'styled-components';
 import { CODE_BLOCK_LANGUAGES, CODE_BLOCK_LANGUAGES_POPULAR, ELEMENT_CODE_BLOCK, normalizeLanguage } from '../constants';
@@ -45,8 +45,9 @@ export function CodeBlockSelectElement({
         setValue(event.target.value);
       }}
       contentEditable={false}
-      {...props}>
-      <option value="">txt</option>
+      {...props}
+    >
+      <option value=''>txt</option>
       {syntaxPopularFirst &&
         CODE_BLOCK_LANGUAGES_POPULAR.map((displayName) => {
           const values = CODE_BLOCK_LANGUAGES[displayName];

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import 'tippy.js/animations/scale.css';
 import 'tippy.js/dist/tippy.css';
-import React from 'react';
+import { Bracket } from '@styled-icons/boxicons-regular/Bracket';
 import { CodeAlt } from '@styled-icons/boxicons-regular/CodeAlt';
 import { CodeBlock } from '@styled-icons/boxicons-regular/CodeBlock';
 import { Subscript } from '@styled-icons/foundation/Subscript';
@@ -13,34 +13,34 @@ import { FormatListNumbered } from '@styled-icons/material/FormatListNumbered';
 import { FormatQuote } from '@styled-icons/material/FormatQuote';
 import { FormatStrikethrough } from '@styled-icons/material/FormatStrikethrough';
 import { FormatUnderlined } from '@styled-icons/material/FormatUnderlined';
+import { Link } from '@styled-icons/material/Link';
 import { Looks3 } from '@styled-icons/material/Looks3';
 import { Looks4 } from '@styled-icons/material/Looks4';
 import { Looks5 } from '@styled-icons/material/Looks5';
 import { Looks6 } from '@styled-icons/material/Looks6';
 import { LooksOne } from '@styled-icons/material/LooksOne';
 import { LooksTwo } from '@styled-icons/material/LooksTwo';
-import { Link } from '@styled-icons/material/Link';
-import { Bracket } from '@styled-icons/boxicons-regular/Bracket';
+import { MARK_BOLD, MARK_CODE, MARK_ITALIC, MARK_STRIKETHROUGH, MARK_SUBSCRIPT, MARK_SUPERSCRIPT, MARK_UNDERLINE } from '@udecode/plate-basic-marks';
+import { ELEMENT_BLOCKQUOTE } from '@udecode/plate-block-quote';
 import { getPluginType, usePlateEditorRef } from '@udecode/plate-core';
 import { ELEMENT_H1, ELEMENT_H2, ELEMENT_H3, ELEMENT_H4, ELEMENT_H5, ELEMENT_H6 } from '@udecode/plate-heading';
-import { BalloonToolbar, BlockToolbarButton, MarkToolbarButton } from '@udecode/plate-ui-toolbar';
 import { ELEMENT_OL, ELEMENT_UL } from '@udecode/plate-list';
-import { ELEMENT_BLOCKQUOTE } from '@udecode/plate-block-quote';
+import { deleteColumn, deleteRow, deleteTable, insertTable, insertTableColumn, insertTableRow } from '@udecode/plate-table';
 import { ListToolbarButton } from '@udecode/plate-ui-list';
-import { MARK_BOLD, MARK_ITALIC, MARK_UNDERLINE, MARK_STRIKETHROUGH, MARK_CODE, MARK_SUPERSCRIPT, MARK_SUBSCRIPT } from '@udecode/plate-basic-marks';
 import { TableToolbarButton } from '@udecode/plate-ui-table';
-import { insertTable, deleteTable, insertTableRow, deleteRow, insertTableColumn, deleteColumn } from '@udecode/plate-table';
+import { BalloonToolbar, BlockToolbarButton, MarkToolbarButton } from '@udecode/plate-ui-toolbar';
+import React from 'react';
 
-import type { Placement } from 'tippy.js';
-import { LinkToolbarButton } from '../plugins/link/LinkToolbarButton';
-import { BaseEditor, Editor } from 'slate';
-import { ELEMENT_CODE_BLOCK } from '../plugins/codeblock/constants';
 import { BorderAll } from '@styled-icons/material/BorderAll';
-import { BorderClear } from '@styled-icons/material/BorderClear';
 import { BorderBottom } from '@styled-icons/material/BorderBottom';
-import { BorderTop } from '@styled-icons/material/BorderTop';
+import { BorderClear } from '@styled-icons/material/BorderClear';
 import { BorderLeft } from '@styled-icons/material/BorderLeft';
 import { BorderRight } from '@styled-icons/material/BorderRight';
+import { BorderTop } from '@styled-icons/material/BorderTop';
+import { BaseEditor, Editor } from 'slate';
+import type { Placement } from 'tippy.js';
+import { ELEMENT_CODE_BLOCK } from '../plugins/codeblock/constants';
+import { LinkToolbarButton } from '../plugins/link/LinkToolbarButton';
 
 const tooltipStyle = {
   arrow: true,
@@ -151,7 +151,8 @@ export const BallonToolbar = (): JSX.Element => {
       floatingOptions={{
         placement: 'top',
       }}
-      theme={theme}>
+      theme={theme}
+    >
       <BasicMarkToolbarButtons />
       <BasicElementToolbarButtons />
       <ListToolbarButtons />

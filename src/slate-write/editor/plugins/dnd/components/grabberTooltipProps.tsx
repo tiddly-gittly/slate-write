@@ -1,5 +1,5 @@
-import React from 'react';
 import { TippyProps } from '@tippyjs/react';
+import React from 'react';
 
 const GrabberTooltipContent = (): JSX.Element => (
   <div style={{ fontSize: 12 }}>

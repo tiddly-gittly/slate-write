@@ -1,18 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { ELEMENT_BLOCKQUOTE } from '@udecode/plate-block-quote';
-import { ELEMENT_PARAGRAPH } from '@udecode/plate-paragraph';
 import { ELEMENT_LI } from '@udecode/plate-list';
+import { ELEMENT_PARAGRAPH } from '@udecode/plate-paragraph';
 
 import { ELEMENT_H1, ELEMENT_H2, ELEMENT_H3, ELEMENT_H4, ELEMENT_H5, ELEMENT_H6 } from '@udecode/plate-heading';
 
-import type { DefaultPlatePluginKey } from '@udecode/plate-ui';
 import type { PlatePluginComponent } from '@udecode/plate-core';
+import type { DefaultPlatePluginKey } from '@udecode/plate-ui';
 import { css } from 'styled-components';
-import { ELEMENT_WIDGET } from '../plugins/widget';
-import { withDraggables } from '../plugins/dnd';
 import { ELEMENT_CODE_BLOCK } from '../plugins/codeblock/constants';
+import { withDraggables } from '../plugins/dnd';
 import { ELEMENT_MACRO } from '../plugins/macro';
+import { ELEMENT_WIDGET } from '../plugins/widget';
 
 export const withStyledDraggables = (components: any): Record<DefaultPlatePluginKey, PlatePluginComponent<any>> => {
   return withDraggables(components, [

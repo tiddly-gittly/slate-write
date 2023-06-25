@@ -1,11 +1,11 @@
-import React, { useMemo } from 'react';
 import type { Data, NoData } from '@udecode/plate-combobox';
 import { getPluginOptions, usePlateEditorRef } from '@udecode/plate-core';
+import React, { useMemo } from 'react';
 import { ELEMENT_AUTO_COMPLETE } from '../autoComplete/createAutoCompletePlugin';
 import { AutoCompletePlugin } from '../autoComplete/types';
-import { getAutoCompleteOnSelectItem } from './getAutoCompleteOnSelectItem';
 import { Combobox } from './Combobox';
 import { ComboboxProps, WidgetsListItemTextGetters } from './Combobox.types';
+import { getAutoCompleteOnSelectItem } from './getAutoCompleteOnSelectItem';
 
 export interface AutoCompleteComboboxProps<TData extends Data = NoData> extends Partial<ComboboxProps<TData>> {
   pluginKey?: string;

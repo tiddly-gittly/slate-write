@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import React, { useCallback, useContext, useMemo } from 'react';
+import { TLinkElement, Value } from '@udecode/plate-core';
 import { getRootProps, StyledElementProps } from '@udecode/plate-styled-components';
-import { ISlateAstExtraTwMarkers } from 'wikiast-utils';
+import React, { useCallback, useContext, useMemo } from 'react';
 import { ParentWidgetContext } from 'tw-react';
-import { Value, TLinkElement } from '@udecode/plate-core';
+import { ISlateAstExtraTwMarkers } from 'wikiast-utils';
 
 export const LinkElement = <V extends Value>(props: StyledElementProps<V, TLinkElement & ISlateAstExtraTwMarkers>): JSX.Element => {
   const { attributes, children, nodeProps, element } = props;
@@ -104,7 +104,8 @@ export const LinkElement = <V extends Value>(props: StyledElementProps<V, TLinkE
       {...nodeProps}
       {...attributesFromTw}
       className={`${rootProps.className ?? ''} ${classesFromTw}`}
-      style={{ cursor: 'pointer' }}>
+      style={{ cursor: 'pointer' }}
+    >
       {children}
     </a>
   );

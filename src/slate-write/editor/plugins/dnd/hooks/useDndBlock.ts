@@ -2,12 +2,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { EElement, useEditorRef, Value } from '@udecode/plate-core';
 import { useState } from 'react';
 import { getEmptyImage } from 'react-dnd-html5-backend';
-import { useEditorRef, EElement, Value } from '@udecode/plate-core';
+import { Path } from 'slate';
 import { useDragBlock } from './useDragBlock';
 import { useDropBlockOnEditor } from './useDropBlockOnEditor';
-import { Path } from 'slate';
 
 export const useDndBlock = <V extends Value>({
   element,

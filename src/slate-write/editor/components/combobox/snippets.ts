@@ -12,7 +12,7 @@ function getSnippetName(tiddler: Tiddler): string {
   const name = tiddler.fields['snippet-name'];
   if (typeof name !== 'string' || name) {
     const splits = tiddler.fields.title.split('/');
-    return splits[splits.length - 1];
+    return splits.at(-1);
   }
   return name;
 }

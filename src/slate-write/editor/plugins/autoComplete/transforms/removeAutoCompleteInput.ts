@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { withoutMergingHistory, removeNodes } from '@udecode/plate-core';
+import { removeNodes, withoutMergingHistory } from '@udecode/plate-core';
 import { getNode, insertText, PlateEditor, unwrapNodes, Value, withoutNormalizing } from '@udecode/plate-core';
 import { Path } from 'slate';
 import { ELEMENT_AUTO_COMPLETE_INPUT } from '../createAutoCompletePlugin';
@@ -20,9 +20,10 @@ export const removeAutoCompleteInputAtPath = <V extends Value>(editor: PlateEdit
       at: path,
     });
   });
-export const removeAutoCompleteInputFromCurrentSelection = <V extends Value>(editor: PlateEditor<V>) =>
+export const removeAutoCompleteInputFromCurrentSelection = <V extends Value>(editor: PlateEditor<V>) => {
   withoutMergingHistory(editor, () => {
     removeNodes(editor, {
       match: (node) => node.type === ELEMENT_AUTO_COMPLETE_INPUT,
     });
   });
+};

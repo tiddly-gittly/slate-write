@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
-import React, { useMemo } from 'react';
 import type { TComboboxItemBase } from '@udecode/plate-core';
-import { ComboBoxDorpDownListItem, filterKey, memorizedRenderTiddler } from './ListItem';
+import React, { useMemo } from 'react';
 import { AutoCompleteCombobox } from '../../plugins/comboBox/AutoCompleteCombobox';
+import { ComboBoxDorpDownListItem, filterKey, memorizedRenderTiddler } from './ListItem';
 
 export function WikiLinkCombobox(props: { id: string; pluginKey: string }): JSX.Element {
   const { id, pluginKey } = props;

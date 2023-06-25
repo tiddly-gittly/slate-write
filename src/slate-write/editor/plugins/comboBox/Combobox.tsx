@@ -3,15 +3,15 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable unicorn/no-null */
-import shallow from 'zustand/shallow';
-import React, { useCallback, useEffect } from 'react';
 import type { Data, NoData, TComboboxItem, TComboboxItemBase } from '@udecode/plate-combobox';
 import { isDefined, useEditorState, useEventEditorSelectors } from '@udecode/plate-core';
-import { PortalBody } from '@udecode/plate-styled-components';
 import { flip, getRangeBoundingClientRect, offset, shift, useVirtualFloating } from '@udecode/plate-floating';
-import { ComboboxProps, WidgetsListItemTextGetters } from './Combobox.types';
+import { PortalBody } from '@udecode/plate-styled-components';
+import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import is from 'typescript-styled-is';
+import shallow from 'zustand/shallow';
+import { ComboboxProps, WidgetsListItemTextGetters } from './Combobox.types';
 import { useAutoCompletePluginStore } from './store';
 import { useComboBox } from './useComboBox';
 
@@ -92,7 +92,7 @@ export function Combobox<TData extends Data = NoData>({
       result = items
         .filter((element) =>
           // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-          (filter !== undefined ? filter(text) : (value: TComboboxItemBase) => (value.text as string).toLowerCase().startsWith(text.toLowerCase()))(element),
+          (filter === undefined ? (value: TComboboxItemBase) => (value.text as string).toLowerCase().startsWith(text.toLowerCase()) : filter(text))(element)
         )
         .slice(0, maxSuggestions);
     }
@@ -121,7 +121,7 @@ export function Combobox<TData extends Data = NoData>({
     <PortalBody>
       <Container {...menuProps} ref={floatingReference} style={containerStyles}>
         {filteredItems.map((item, index) => {
-          const renderedItem = onRenderItem != null ? onRenderItem({ item: item as TComboboxItem<TData>, getRenderTextTemplate, getNameTemplate }) : item.text;
+          const renderedItem = onRenderItem == null ? item.text : onRenderItem({ item: item as TComboboxItem<TData>, getRenderTextTemplate, getNameTemplate });
 
           const highlighted = index === highlightedIndex;
 
@@ -136,7 +136,8 @@ export function Combobox<TData extends Data = NoData>({
               onMouseDown={(event: MouseEvent) => {
                 event.preventDefault();
                 onSelectItem?.(editor, item);
-              }}>
+              }}
+            >
               {renderedItem}
             </Item>
           );

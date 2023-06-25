@@ -1,5 +1,5 @@
-import type { Value, PlateEditor, RenderFunction } from '@udecode/plate-core';
 import type { ComboboxState, NoData, TComboboxItem } from '@udecode/plate-combobox';
+import type { PlateEditor, RenderFunction, Value } from '@udecode/plate-core';
 import type { StyledProps } from '@udecode/plate-styled-components';
 import type { CSSProp } from 'styled-components';
 import type { AnyComboBoxItem } from './store';

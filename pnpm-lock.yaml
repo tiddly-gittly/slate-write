@@ -150,7 +150,7 @@ dependencies:
     version: 5.3.6(@babel/core@7.22.5)(react-dom@18.2.0)(react-is@17.0.2)(react@18.2.0)
   tiddlywiki:
     specifier: ^5.2.7
-    version: 5.2.7
+    version: registry.npmmirror.com/tiddlywiki@5.2.7
   tiddlywiki-plugin-dev:
     specifier: ^0.0.39
     version: 0.0.39(postcss@8.4.24)(ts-node@10.9.1)
@@ -5831,13 +5831,6 @@ packages:
       - ts-node
       - utf-8-validate
     dev: false
-
-  /tiddlywiki@5.2.7:
-    resolution: {integrity: sha512-7Hi8IF/6iIdTWpX6tJ955isy6n0JShCh1fu27SX9jSa0JuP3JUg40Hgb9g/iNV5oK5dxstFZImjAeVaXOPSdiw==}
-    engines: {node: '>=0.8.2'}
-    hasBin: true
-    dev: false
-    bundledDependencies: []
 
   /tiny-invariant@1.0.6:
     resolution: {integrity: sha512-FOyLWWVjG+aC0UqG76V53yAWdXfH8bO6FNmyZOuUrzDzK8DI3/JRY25UD7+g49JWM1LXwymsKERB+DzI0dTEQA==}

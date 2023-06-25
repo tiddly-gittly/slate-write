@@ -1,7 +1,7 @@
 /** copied from plate's packages/nodes/link/src/transforms/upsertLinkAtSelection.ts , add tw-type */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
+import { collapseSelection, getLeafNode, getPluginType, insertNodes, isCollapsed, PlateEditor, select, unwrapNodes, Value } from '@udecode/plate-core';
 import { ELEMENT_LINK, TLinkElement } from '@udecode/plate-link';
-import { collapseSelection, getLeafNode, select, Value, getPluginType, insertNodes, isCollapsed, PlateEditor, unwrapNodes } from '@udecode/plate-core';
 import { wrapLink } from './wrapLink';
 
 /**
@@ -27,13 +27,14 @@ export const upsertLinkAtSelection = <V extends Value>(
   const type = getPluginType(editor, ELEMENT_LINK);
 
   if (!wrap && isCollapsed(editor.selection)) {
-    return insertNodes<TLinkElement>(editor, {
+    insertNodes<TLinkElement>(editor, {
       type,
       url,
       children: [{ text: url }],
       // we need to change this, so fork the code
       'tw-type': 'link',
     });
+    return;
   }
 
   // if our cursor is inside an existing link, but don't have the text selected, select it now

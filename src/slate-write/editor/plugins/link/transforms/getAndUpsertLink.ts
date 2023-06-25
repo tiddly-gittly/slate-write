@@ -1,8 +1,8 @@
 /* eslint-disable unicorn/no-null */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import { ELEMENT_LINK } from '@udecode/plate-link';
 import { getAboveNode, getPluginType, isCollapsed, PlateEditor, unwrapNodes, Value } from '@udecode/plate-core';
+import { ELEMENT_LINK } from '@udecode/plate-link';
 import { Editor } from 'slate';
 import { upsertLinkAtSelection } from './upsertLinkAtSelection';
 
@@ -22,20 +22,21 @@ export const getAndUpsertLink = async <V extends Value>(
   }
 
   let url: string | null = null;
-  if (getLinkUrl !== undefined) {
-    url = await getLinkUrl(previousUrl);
-  } else {
+  if (getLinkUrl === undefined) {
     url = window.prompt(`Enter the URL of the link:`, previousUrl || selectedText);
+  } else {
+    url = await getLinkUrl(previousUrl);
   }
   // if canceled
   if (url === null) return;
 
   // remove the url
   if (url === '' && editor.selection !== undefined && editor.selection !== null) {
-    return unwrapNodes(editor, {
+    unwrapNodes(editor, {
       at: editor.selection,
       match: { type: getPluginType(editor, ELEMENT_LINK) },
     });
+    return;
   }
 
   // If our cursor is in middle of a link, then we don't want to insert it inline

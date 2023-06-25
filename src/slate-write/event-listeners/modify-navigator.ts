@@ -2,7 +2,7 @@ import { IWidgetEvent, Widget, Wiki } from 'tiddlywiki';
 
 const NavigatorWidget = require('$:/core/modules/widgets/navigator.js').navigator;
 
-NavigatorWidget.prototype.handleEditWYSIWYGTiddlerEvent = function (event: IWidgetEvent) {
+NavigatorWidget.prototype.handleEditWYSIWYGTiddlerEvent = function(event: IWidgetEvent) {
   const editTiddler = $tw.hooks.invokeHook('th-editing-wysiwyg-tiddler', event);
   if (editTiddler === undefined) {
     return false;
@@ -27,7 +27,7 @@ NavigatorWidget.prototype.handleEditWYSIWYGTiddlerEvent = function (event: IWidg
 };
 
 const coreRender = NavigatorWidget.prototype.render as Widget['render'];
-NavigatorWidget.prototype.render = function (parent: Node, nextSibling: Node) {
+NavigatorWidget.prototype.render = function(parent: Node, nextSibling: Node) {
   this.addEventListeners([{ type: 'tm-edit-wysiwyg-tiddler', handler: 'handleEditWYSIWYGTiddlerEvent' }]);
   Reflect.apply(coreRender, this, [parent, nextSibling]);
 };

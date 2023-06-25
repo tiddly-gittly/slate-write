@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import React, { forwardRef, useMemo } from 'react';
 import { createNodesWithHOC, PlateRenderElementProps, TEditor, Value } from '@udecode/plate-core';
+import React, { forwardRef, useMemo } from 'react';
 import { Path } from 'slate';
 import { ReactEditor, useReadOnly } from 'slate-react';
 import { Draggable } from './Draggable';

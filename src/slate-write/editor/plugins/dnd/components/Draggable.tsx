@@ -1,15 +1,15 @@
 /** copied from plate's packages/ui/dnd/src/components/Draggable.tsx , change to use styled-components */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import React, { useRef, MouseEvent } from 'react';
-import Tippy from '@tippyjs/react';
-import styled, { CSSProp } from 'styled-components';
-import is from 'typescript-styled-is';
 import useMergedRef from '@react-hook/merged-ref';
 import { DragIndicator } from '@styled-icons/material/DragIndicator';
+import Tippy from '@tippyjs/react';
+import { Value } from '@udecode/plate-core';
+import React, { MouseEvent, useRef } from 'react';
+import styled, { CSSProp } from 'styled-components';
+import is from 'typescript-styled-is';
 import { useDndBlock } from '../hooks/useDndBlock';
 import { DraggableProps } from './Draggable.types';
 import { grabberTooltipProps } from './grabberTooltipProps';
-import { Value } from '@udecode/plate-core';
 
 interface IStyleMod {
   mod?: string | CSSProp<any>;
@@ -64,7 +64,7 @@ const DropLine = styled.div<{ dropLine: '' | 'top' | 'bottom' }>`
   height: 0.125rem;
   background: #b4d5ff;
   width: 100%;
-  ${({ dropLine }) => (dropLine === 'top' ? 'top: -1px;' : dropLine === 'bottom' ? 'bottom: -1px;' : '')}
+  ${({ dropLine }) => (dropLine === 'top' ? 'top: -1px;' : (dropLine === 'bottom' ? 'bottom: -1px;' : ''))}
 `;
 
 export const Draggable = <V extends Value>(props: DraggableProps<V>): JSX.Element => {
@@ -91,11 +91,11 @@ export const Draggable = <V extends Value>(props: DraggableProps<V>): JSX.Elemen
         {!!dropLine && <DropLine contentEditable={false} dropLine={dropLine} />}
       </BlockAndGutter>
 
-      <GutterLeft className="slate-Draggable-gutterLeft" mod={styles?.gutterLeft} contentEditable={false}>
+      <GutterLeft className='slate-Draggable-gutterLeft' mod={styles?.gutterLeft} contentEditable={false}>
         <BlockToolbarWrapper mod={styles?.blockToolbarWrapper}>
           <BlockToolbar ref={multiDragReference}>
             <Tippy {...grabberTooltipProps}>
-              <DragHandle type="button" onMouseDown={(event: MouseEvent) => event.stopPropagation()}>
+              <DragHandle type='button' onMouseDown={(event: MouseEvent) => event.stopPropagation()}>
                 <DragIndicator
                   style={{
                     width: 18,

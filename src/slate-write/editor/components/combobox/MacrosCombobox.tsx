@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
-import React, { useContext, useMemo } from 'react';
 import type { TComboboxItem } from '@udecode/plate-core';
+import React, { useContext, useMemo } from 'react';
 import { ParentWidgetContext, useFilter } from 'tw-react';
-import { ComboBoxDorpDownListItem, memorizedRenderText, filterKey } from './ListItem';
 import { AutoCompleteCombobox } from '../../plugins/comboBox/AutoCompleteCombobox';
+import { ComboBoxDorpDownListItem, filterKey, memorizedRenderText } from './ListItem';
 
 export function MacrosCombobox(props: { id: string; pluginKey: string }): JSX.Element {
   const { id, pluginKey } = props;

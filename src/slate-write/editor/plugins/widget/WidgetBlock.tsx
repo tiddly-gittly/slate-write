@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { TElement, Value } from '@udecode/plate-core';
+import { getRootProps, StyledElementProps } from '@udecode/plate-styled-components';
 import React, { useRef } from 'react';
+import { useSelected } from 'slate-react';
+import styled from 'styled-components';
 import { IParseTreeNode } from 'tiddlywiki';
 import { useWidget } from 'tw-react';
-import { StyledElementProps, getRootProps } from '@udecode/plate-styled-components';
-import styled from 'styled-components';
-import { WidgetCodeEditor } from './WidgetCodeEditor';
-import { useSelected } from 'slate-react';
 import is from 'typescript-styled-is';
+import { WidgetCodeEditor } from './WidgetCodeEditor';
 
 export interface IWidgetBlockProps {
   element: TElement & { node: IParseTreeNode };
@@ -34,7 +34,7 @@ export function WidgetBlock(props: WidgetBlockElementProps): JSX.Element {
   const rootProps = getRootProps(props);
   const selected = useSelected();
   return (
-    <TwWidgetContainerOuter data-role="tw-widget-container" {...attributes} {...rootProps} as={rootProps.as}>
+    <TwWidgetContainerOuter data-role='tw-widget-container' {...attributes} {...rootProps} as={rootProps.as}>
       <TwWidgetContainerInner contentEditable={false}>
         <div ref={widgetContainerReference} />
       </TwWidgetContainerInner>

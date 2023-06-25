@@ -1,19 +1,21 @@
-import { css } from 'styled-components';
-import { ELEMENT_LINK } from '@udecode/plate-link';
-import { LinkElement } from '@udecode/plate-ui-link';
-import { ELEMENT_OL, ELEMENT_UL, ELEMENT_LI } from '@udecode/plate-list';
-import { withProps, PlatePluginComponent } from '@udecode/plate-core';
-import { ELEMENT_PARAGRAPH } from '@udecode/plate-paragraph';
-import { MentionElement, MentionInputElement } from '@udecode/plate-ui-mention';
-import { ELEMENT_H1, ELEMENT_H2, ELEMENT_H3, ELEMENT_H4, ELEMENT_H5, ELEMENT_H6 } from '@udecode/plate-heading';
 import { MARK_BOLD, MARK_CODE, MARK_ITALIC, MARK_STRIKETHROUGH, MARK_SUBSCRIPT, MARK_SUPERSCRIPT, MARK_UNDERLINE } from '@udecode/plate-basic-marks';
 import { ELEMENT_BLOCKQUOTE } from '@udecode/plate-block-quote';
-import { StyledElement, StyledLeaf } from '@udecode/plate-styled-components';
+import { PlatePluginComponent, withProps } from '@udecode/plate-core';
+import { ELEMENT_H1, ELEMENT_H2, ELEMENT_H3, ELEMENT_H4, ELEMENT_H5, ELEMENT_H6 } from '@udecode/plate-heading';
 import { MARK_HIGHLIGHT } from '@udecode/plate-highlight';
 import { MARK_KBD } from '@udecode/plate-kbd';
-import { BlockquoteElement } from '@udecode/plate-ui-block-quote';
+import { ELEMENT_LINK } from '@udecode/plate-link';
+import { ELEMENT_LI, ELEMENT_OL, ELEMENT_UL } from '@udecode/plate-list';
+import { ELEMENT_PARAGRAPH } from '@udecode/plate-paragraph';
+import { StyledElement, StyledLeaf } from '@udecode/plate-styled-components';
 import { DefaultPlatePluginKey } from '@udecode/plate-ui';
+import { BlockquoteElement } from '@udecode/plate-ui-block-quote';
+import { LinkElement } from '@udecode/plate-ui-link';
+import { MentionElement, MentionInputElement } from '@udecode/plate-ui-mention';
+import { css } from 'styled-components';
 
+import { ELEMENT_TABLE, ELEMENT_TD, ELEMENT_TH, ELEMENT_TR } from '@udecode/plate-table';
+import { TableCellElement, TableElement, TableRowElement } from '@udecode/plate-ui-table';
 import { withStyledDraggables } from '../config/withStyledDraggables';
 import { withStyledPlaceHolders } from '../config/withStyledPlaceHolders';
 import { ELEMENT_AUTO_COMPLETE, ELEMENT_AUTO_COMPLETE_INPUT } from '../plugins/autoComplete';
@@ -21,8 +23,6 @@ import { CodeBlockElement, ELEMENT_CODE_BLOCK } from '../plugins/codeblock';
 import { ELEMENT_MACRO } from '../plugins/macro';
 import { ELEMENT_WIDGET } from '../plugins/widget';
 import { WidgetBlock } from '../plugins/widget/WidgetBlock';
-import { TableElement, TableCellElement, TableRowElement } from '@udecode/plate-ui-table';
-import { ELEMENT_TABLE, ELEMENT_TD, ELEMENT_TH, ELEMENT_TR } from '@udecode/plate-table';
 
 export const createPlateUI = <
   T extends string = string,

@@ -1,4 +1,4 @@
-import { Value, getPluginType, PlateEditor, wrapNodes } from '@udecode/plate-core';
+import { getPluginType, PlateEditor, Value, wrapNodes } from '@udecode/plate-core';
 import { ELEMENT_LINK } from '@udecode/plate-link';
 import { Location } from 'slate';
 

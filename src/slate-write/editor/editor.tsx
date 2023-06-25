@@ -1,20 +1,20 @@
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import { createPlugins, getPlateActions, Plate, PlateProvider, TElement, TNode, usePlateEditorRef } from '@udecode/plate-core';
 import { createNodeIdPlugin } from '@udecode/plate-node-id';
-import { Plate, createPlugins, TNode, getPlateActions, usePlateEditorRef, TElement, PlateProvider } from '@udecode/plate-core';
 import useDebouncedCallback from 'beautiful-react-hooks/useDebouncedCallback';
+import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
-import { deserialize, serialize } from '../transform/serialize';
-import * as PLUGINS from './config/plugins';
-import { BallonToolbar } from './components/Toolbars';
-import { GlobalStyle } from './config/globalStyle';
-import { IDefaultWidgetProps, ParentWidgetContext } from 'tw-react';
-import { MacrosCombobox, SnippetCombobox, WikiLinkCombobox, WidgetCombobox } from './components/combobox';
-import { components } from './components';
-import { CONFIG } from './config/config';
-import { getIdFactory } from './plugins/id/getId';
 import { ReactEditor } from 'slate-react';
+import { IDefaultWidgetProps, ParentWidgetContext } from 'tw-react';
+import { deserialize, serialize } from '../transform/serialize';
+import { components } from './components';
+import { MacrosCombobox, SnippetCombobox, WidgetCombobox, WikiLinkCombobox } from './components/combobox';
+import { BallonToolbar } from './components/Toolbars';
+import { CONFIG } from './config/config';
+import { GlobalStyle } from './config/globalStyle';
+import * as PLUGINS from './config/plugins';
+import { getIdFactory } from './plugins/id/getId';
 
 export interface IEditorAppProps {
   currentTiddler: string;
@@ -118,11 +118,11 @@ export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Elemen
   return (
     <Plate id={editorID} initialValue={currentAstReference.current} plugins={plugins} onChange={onChange} editableProps={{ ...CONFIG.editableProps }}>
       <BallonToolbar />
-      <SnippetCombobox id={editorID} pluginKey="/" />
-      <WikiLinkCombobox id={editorID} pluginKey="[[" />
-      <WikiLinkCombobox id={editorID} pluginKey="{{" />
-      <MacrosCombobox id={editorID} pluginKey="<<" />
-      <WidgetCombobox id={editorID} pluginKey="<$" />
+      <SnippetCombobox id={editorID} pluginKey='/' />
+      <WikiLinkCombobox id={editorID} pluginKey='[[' />
+      <WikiLinkCombobox id={editorID} pluginKey='{{' />
+      <MacrosCombobox id={editorID} pluginKey='<<' />
+      <WidgetCombobox id={editorID} pluginKey='<$' />
     </Plate>
   );
 }
@@ -133,7 +133,7 @@ export function App(props: IEditorAppProps & IDefaultWidgetProps): JSX.Element {
       <ParentWidgetContext.Provider value={props.parentWidget}>
         <GlobalStyle />
         <DndProvider backend={HTML5Backend}>
-          <div className="tw-slate-write-container">
+          <div className='tw-slate-write-container'>
             <Editor {...props} />
           </div>
         </DndProvider>

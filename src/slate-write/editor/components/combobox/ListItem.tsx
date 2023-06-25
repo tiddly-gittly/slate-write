@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
 import type { ComboboxItemProps, TComboboxItemBase } from '@udecode/plate-core';
-import styled from 'styled-components';
 import memorize from 'lodash/memoize';
-import { LazyTippy } from './PreviewTooltip';
+import React from 'react';
+import styled from 'styled-components';
 import { WidgetsListItemTextGetters } from '../../plugins/comboBox/Combobox.types';
+import { LazyTippy } from './PreviewTooltip';
 
 const ListItemContentContainer = styled.div`
   width: 100%;
@@ -31,8 +31,9 @@ export function ComboBoxDorpDownListItem(props: ComboboxItemProps<any> & Widgets
     <LazyTippy
       content={<PreviewWithWikiText getRenderTextTemplate={props.getRenderTextTemplate} item={props.item} />}
       showOnCreate={false}
-      placement="right"
-      hideOnClick>
+      placement='right'
+      hideOnClick
+    >
       <ListItemContentContainer>
         <Name>{props.getNameTemplate?.(props.item) ?? props.item.text}</Name>
       </ListItemContentContainer>

@@ -8,7 +8,6 @@ export const ELEMENT_MACRO = 'macro';
  * > The syntax is actually a shorthand for a $macrocall widget
  *
  * So the MacroBlock is just a wrapper of WidgetBlock too
- *
  */
 export const createMacroPlugin = createPluginFactory({
   key: ELEMENT_MACRO,

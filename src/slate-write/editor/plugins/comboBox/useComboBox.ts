@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import shallow from 'zustand/shallow';
-import { useMemo } from 'react';
 import { useCombobox } from 'downshift';
+import { useMemo } from 'react';
+import shallow from 'zustand/shallow';
 import { useAutoCompletePluginStore } from './store';
 
 export function useComboBox(filteredItems: unknown[]) {

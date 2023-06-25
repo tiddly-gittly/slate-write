@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import React, { RefObject, MutableRefObject, useRef, useCallback, ChangeEvent, useMemo, useEffect } from 'react';
 import { findNodePath, getPluginOptions, setNodes, Value } from '@udecode/plate-core';
-import type { EditorFromTextArea, EditorConfiguration } from 'codemirror';
-import useDebouncedCallback from 'beautiful-react-hooks/useDebouncedCallback';
-import styled from 'styled-components';
 import { getRootProps, StyledElementProps } from '@udecode/plate-styled-components';
-import { CodeBlockSelectElement } from './CodeBlockSelectElement';
-import { TCodeBlockElement, CodeBlockPlugin } from '../types';
+import useDebouncedCallback from 'beautiful-react-hooks/useDebouncedCallback';
+import type { EditorConfiguration, EditorFromTextArea } from 'codemirror';
+import React, { ChangeEvent, MutableRefObject, RefObject, useCallback, useEffect, useMemo, useRef } from 'react';
+import styled from 'styled-components';
 import { ELEMENT_CODE_BLOCK, normalizeLanguage } from '../constants';
+import { CodeBlockPlugin, TCodeBlockElement } from '../types';
+import { CodeBlockSelectElement } from './CodeBlockSelectElement';
 
 const CodeContainer = styled.div`
   margin-top: 1em;
@@ -95,9 +95,9 @@ export function CodeBlockElement<V extends Value>(props: StyledElementProps<V, T
 
   return (
     <div {...attributes} {...rootProps} {...nodeProps}>
-      {showSyntaxSwitcher === true && <CodeBlockSelectElement data-testid="CodeBlockSelectElement" language={language} onChange={onLanguageChange} />}
-      <CodeContainer style={{ userSelect: 'none' }} contentEditable={false} className="tw-codeblock-container">
-        <CodeTextArea ref={textAreaReference} onChange={onCodeChange} defaultValue={code} className="CodeMirror" />
+      {showSyntaxSwitcher === true && <CodeBlockSelectElement data-testid='CodeBlockSelectElement' language={language} onChange={onLanguageChange} />}
+      <CodeContainer style={{ userSelect: 'none' }} contentEditable={false} className='tw-codeblock-container'>
+        <CodeTextArea ref={textAreaReference} onChange={onCodeChange} defaultValue={code} className='CodeMirror' />
       </CodeContainer>
       {children}
     </div>

@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/no-null */
-import type { TComboboxItemWithData } from '@udecode/plate-core';
 import type { TComboboxItemBase } from '@udecode/plate-combobox';
+import type { TComboboxItemWithData } from '@udecode/plate-core';
 import { BaseSelection } from 'slate';
 import create from 'zustand';
 
@@ -45,8 +45,10 @@ export const useAutoCompletePluginStore = create<IAutoCompletePluginStore>((set)
   highlightedIndex: -1,
   targetRange: null,
   filteredItems: {},
-  setFilteredItems: (newState: Record<string, AnyComboBoxItem[]>) => set((state) => ({ ...state, filteredItems: { ...state.filteredItems, ...newState } })),
-  reset: () =>
+  setFilteredItems: (newState: Record<string, AnyComboBoxItem[]>) => {
+    set((state) => ({ ...state, filteredItems: { ...state.filteredItems, ...newState } }));
+  },
+  reset: () => {
     set({
       activeId: undefined,
       filteredItems: {},
@@ -54,5 +56,6 @@ export const useAutoCompletePluginStore = create<IAutoCompletePluginStore>((set)
       popperContainer: undefined,
       targetRange: null,
       text: undefined,
-    }),
+    });
+  },
 }));
