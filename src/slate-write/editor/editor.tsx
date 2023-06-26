@@ -46,8 +46,8 @@ export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Elemen
 export function App(props: IEditorAppProps & IDefaultWidgetProps): JSX.Element {
   const editorID = props.currentTiddler;
   const idCreator = useMemo(() => {
-    return getIdFactory(props.currentTiddler);
-  }, [props.currentTiddler]);
+    return getIdFactory(editorID);
+  }, [editorID]);
   const [currentAstReference, onChange] = useInitialValueOnChange({
     editorID,
     initialTiddlerText: props.initialTiddlerText,
