@@ -63,7 +63,7 @@ export const utils = createPlugins([
   createSoftBreakPlugin(CONFIG.softBreak),
   createExitBreakPlugin(CONFIG.exitBreak),
   createAutoformatPlugin(CONFIG.autoformat),
-  createDndPlugin(),
+  createDndPlugin({ options: { enableScroller: true } }),
   createIndentListPlugin(),
   createIndentPlugin(),
   createKbdPlugin(),

@@ -8,78 +8,110 @@ import { ELEMENT_H1, ELEMENT_H2, ELEMENT_H3, ELEMENT_H4, ELEMENT_H5, ELEMENT_H6 
 
 import type { PlatePluginComponent } from '@udecode/plate-core';
 import type { DefaultPlatePluginKey } from '@udecode/plate-ui';
-import { css } from 'styled-components';
+import { withPlateDraggables } from '@udecode/plate-ui-dnd';
 import { ELEMENT_CODE_BLOCK } from '../plugins/codeblock/constants';
-import { withDraggables } from '../plugins/dnd';
 import { ELEMENT_MACRO } from '../plugins/macro';
 import { ELEMENT_WIDGET } from '../plugins/widget';
 
 export const withStyledDraggables = (components: any): Record<DefaultPlatePluginKey, PlatePluginComponent<any>> => {
-  return withDraggables(components, [
+  return withPlateDraggables(components, [
     // only element that registered keys here will have dnd grabber
     {
+      keys: [
+        ELEMENT_PARAGRAPH,
+        ELEMENT_BLOCKQUOTE,
+        ELEMENT_LI,
+        ELEMENT_H1,
+        ELEMENT_H2,
+        ELEMENT_H3,
+        ELEMENT_H4,
+        ELEMENT_H5,
+        ELEMENT_H6,
+        ELEMENT_CODE_BLOCK,
+      ],
+      draggableProps: {
+        onRenderDragHandle: () => {
+          return (
+            <button type='button' className='drag-button'>
+              Drag
+            </button>
+          );
+        },
+      },
+    },
+    {
       key: ELEMENT_LI,
-      styles: {
-        gutterLeft: css`
-          transform: translateX(-6em);
-        `,
+      draggableProps: {
+        styles: {
+          gutterLeft: { transform: 'translateX(-6em)' },
+        },
       },
     },
     {
       key: ELEMENT_H1,
-      styles: {
-        gutterLeft: css`
-          padding: 0 0 4px;
-          font-size: 1.875em;
-        `,
-        blockToolbarWrapper: css`
-          height: 1.3em;
-        `,
+      draggableProps: {
+        styles: {
+          gutterLeft: {
+            padding: '0 0 4px',
+            fontSize: '1.875em',
+          },
+          blockToolbarWrapper: {
+            height: '1.3em',
+          },
+        },
       },
     },
     {
       key: ELEMENT_H2,
-      styles: {
-        gutterLeft: css`
-          padding: 0 0 1px;
-          font-size: 1.5em;
-        `,
-        blockToolbarWrapper: css`
-          height: 1.3em;
-        `,
+      draggableProps: {
+        styles: {
+          gutterLeft: {
+            padding: '0 0 1px',
+            fontSize: '1.5em',
+          },
+          blockToolbarWrapper: {
+            height: '1.3em',
+          },
+        },
       },
     },
     {
       key: ELEMENT_H3,
-      styles: {
-        gutterLeft: css`
-          padding: 0 0 1px;
-          font-size: 1.25em;
-        `,
-        blockToolbarWrapper: css`
-          height: 1.3em;
-        `,
+      draggableProps: {
+        styles: {
+          gutterLeft: {
+            padding: '0 0 1px',
+            fontSize: '1.25em',
+          },
+          blockToolbarWrapper: {
+            height: '1.3em',
+          },
+        },
       },
     },
     {
       key: ELEMENT_H4,
-      styles: {
-        gutterLeft: css`
-          padding: 0 0 0;
-          font-size: 0.9em;
-        `,
-        blockToolbarWrapper: css`
-          height: 1.3em;
-        `,
+      draggableProps: {
+        styles: {
+          gutterLeft: {
+            padding: '0 0 0',
+            fontSize: '0.9em',
+          },
+          blockToolbarWrapper: {
+            height: '1.3em',
+          },
+        },
       },
     },
     {
       keys: [ELEMENT_H5, ELEMENT_H6],
-      styles: {
-        gutterLeft: css`
-          padding: 0;
-          margin-top: -0.4em;
-        `,
+      draggableProps: {
+        styles: {
+          gutterLeft: {
+            padding: '0',
+            marginTop: '-0.4em',
+          },
+        },
       },
     },
     {
@@ -90,10 +122,12 @@ export const withStyledDraggables = (components: any): Record<DefaultPlatePlugin
     },
     {
       key: ELEMENT_CODE_BLOCK,
-      styles: {
-        gutterLeft: css`
-          padding-top: 0.2em;
-        `,
+      draggableProps: {
+        styles: {
+          gutterLeft: {
+            paddingTop: '0.2em',
+          },
+        },
       },
     },
     {
