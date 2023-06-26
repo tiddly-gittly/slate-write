@@ -47,8 +47,6 @@ export function useInitialValueOnChange(context: IUseInitialValueOnChangeContext
 
   const onChange = useCallback(
     (newValue: TElement[]) => {
-      // DEBUG: console newValue
-      console.log(`newValue`, newValue);
       if (currentAstReference.current === newValue) return;
       currentAstReference.current = newValue;
       // check isComposing and if user is just set_selection
