@@ -1,8 +1,7 @@
 import type { TComboboxItemBase } from '@udecode/plate-combobox';
 import { getNextWrappingIndex } from '@udecode/plate-combobox';
 import { getPlugin, KeyboardHandlerReturnType, PlateEditor } from '@udecode/plate-core';
-import { Value } from '@udecode/slate';
-import { insertText } from 'slate';
+import { insertText, Value } from '@udecode/slate';
 import { AutoCompletePlugin } from '../autoComplete';
 import { removeAutoCompleteInputFromCurrentSelection } from '../autoComplete/transforms';
 import { getAutoCompleteOnSelectItem } from './getAutoCompleteOnSelectItem';
@@ -46,6 +45,7 @@ export const onKeyDownCombobox = <V extends Value = Value, E extends PlateEditor
   if (event.key === 'Escape') {
     event.preventDefault();
     removeAutoCompleteInputFromCurrentSelection(editor);
+    // modify source to add this
     if (keepTrigger !== true) {
       insertText(editor, trigger ?? '');
     }

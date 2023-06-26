@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
-import type { TComboboxItem } from '@udecode/slate';
+import { TComboboxItem } from '@udecode/plate-combobox';
 import React, { useMemo } from 'react';
 import type { Widget } from 'tiddlywiki';
 import { AutoCompleteCombobox } from '../../plugins/comboBox/AutoCompleteCombobox';
 import { ComboBoxDorpDownListItem, filterKey, memorizedRenderText } from './ListItem';
 
-export type IWidgetItem = TComboboxItem<{ widgetClass: Widget }>;
+export type IWidgetItem = TComboboxItem<{ widgetClass: typeof Widget }>;
 
 export function WidgetCombobox(props: { id: string; pluginKey: string }): JSX.Element {
   const { id, pluginKey } = props;
@@ -21,7 +21,7 @@ export function WidgetCombobox(props: { id: string; pluginKey: string }): JSX.El
       pluginKey={pluginKey}
       filter={filterKey}
       onRenderItem={ComboBoxDorpDownListItem}
-      getRenderTextTemplate={(item) => memorizedRenderText(`!! ${item.key}\n\n${item.text as string}`)}
+      getRenderTextTemplate={(item: TComboboxItem) => memorizedRenderText(`!! ${item.key}\n\n${item.text as string}`)}
       getNameTemplate={(item) => (item as IWidgetItem).data.widgetClass.name}
     />
   );

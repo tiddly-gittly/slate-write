@@ -1,4 +1,5 @@
-import { HotkeyPlugin, InsertNodesOptions, TElement, Value } from '@udecode/slate';
+import { HotkeyPlugin } from '@udecode/plate-core';
+import { InsertNodesOptions, TElement, Value } from '@udecode/slate';
 
 export interface CodeBlockPlugin extends HotkeyPlugin {
   deserializers?: string[];

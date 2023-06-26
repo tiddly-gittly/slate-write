@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import type { TComboboxItem } from '@udecode/slate';
+import { TComboboxItem } from '@udecode/plate-combobox';
 import React, { useContext, useMemo } from 'react';
 import { ParentWidgetContext, useFilter } from 'tw-react';
 import { AutoCompleteCombobox } from '../../plugins/comboBox/AutoCompleteCombobox';
@@ -17,7 +17,7 @@ export function MacrosCombobox(props: { id: string; pluginKey: string }): JSX.El
       pluginKey={pluginKey}
       filter={filterKey}
       onRenderItem={ComboBoxDorpDownListItem}
-      getRenderTextTemplate={(item) => memorizedRenderText(`!! ${item.key}\n\n${item.text as string}`)}
+      getRenderTextTemplate={(item: TComboboxItem) => memorizedRenderText(`!! ${item.key}\n\n${item.text as string}`)}
     />
   );
 }

@@ -22,10 +22,10 @@ import { createSelectOnBackspacePlugin } from '@udecode/plate-select';
 import { createTrailingBlockPlugin } from '@udecode/plate-trailing-block';
 
 import { createInlineVoidPlugin, createPlugins } from '@udecode/plate-core';
+import { createDndPlugin } from '@udecode/plate-dnd';
 import { createAutoCompletePlugin } from '../plugins/autoComplete';
 import { createCodeBlockPlugin } from '../plugins/codeblock';
 import { createComboBoxPlugin } from '../plugins/comboBox';
-import { createDndPlugin } from '../plugins/dnd';
 import { createHeadingPlugin } from '../plugins/heading';
 import { createMacroPlugin } from '../plugins/macro';
 import { createSetVariablePlugin } from '../plugins/set';

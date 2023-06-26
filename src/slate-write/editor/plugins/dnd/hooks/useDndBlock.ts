@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 import { Path } from 'slate';
 import { useDragBlock } from './useDragBlock';
-import { useDropBlockOnEditor } from './useDropBlockOnEditor';
+import { useDropBlock } from './useDropBlock';
 
 export const useDndBlock = <V extends Value>({
   element,
@@ -26,7 +26,7 @@ export const useDndBlock = <V extends Value>({
   const [dropLine, setDropLine] = useState<'' | 'top' | 'bottom'>('');
 
   const [{ isDragging }, dragReference, preview] = useDragBlock(editor, element, path);
-  const [{ isOver }, drop] = useDropBlockOnEditor(editor, {
+  const [{ isOver }, drop] = useDropBlock(editor, {
     element,
     nodeRef,
     dropLine,

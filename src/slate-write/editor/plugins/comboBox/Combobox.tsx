@@ -1,3 +1,6 @@
+/**
+ * Copy from packages/ui/combobox/src/Combobox.tsx to add `getRenderTextTemplate`
+ */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-call */

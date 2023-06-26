@@ -23,6 +23,9 @@ dependencies:
   '@types/codemirror':
     specifier: ^5.60.8
     version: registry.npmmirror.com/@types/codemirror@5.60.8
+  '@types/lodash':
+    specifier: ^4.14.195
+    version: registry.npmmirror.com/@types/lodash@4.14.195
   '@udecode/plate-autoformat':
     specifier: 21.3.2
     version: registry.npmmirror.com/@udecode/plate-autoformat@21.3.2(@babel/core@7.22.5)(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0)(scheduler@0.23.0)(slate-history@0.93.0)(slate-react@0.97.1)(slate@0.94.1)

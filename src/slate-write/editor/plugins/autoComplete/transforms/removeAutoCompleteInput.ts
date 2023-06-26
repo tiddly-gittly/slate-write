@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { removeNodes, withoutMergingHistory } from '@udecode/slate';
-import { getNode, insertText, PlateEditor, unwrapNodes, Value, withoutNormalizing } from '@udecode/slate';
+import type { PlateEditor } from '@udecode/plate-core';
+import { getNode, insertText, removeNodes, TEditor, THistoryEditor, unwrapNodes, Value, withoutMergingHistory, withoutNormalizing } from '@udecode/slate';
 import { Path } from 'slate';
 import { ELEMENT_AUTO_COMPLETE_INPUT } from '../createAutoCompletePlugin';
 import { TAutoCompleteInputElement } from '../types';
@@ -21,8 +21,8 @@ export const removeAutoCompleteInputAtPath = <V extends Value>(editor: PlateEdit
     });
   });
 export const removeAutoCompleteInputFromCurrentSelection = <V extends Value>(editor: PlateEditor<V>) => {
-  withoutMergingHistory(editor, () => {
-    removeNodes(editor, {
+  withoutMergingHistory(editor as THistoryEditor<V>, () => {
+    removeNodes(editor as TEditor<V>, {
       match: (node) => node.type === ELEMENT_AUTO_COMPLETE_INPUT,
     });
   });

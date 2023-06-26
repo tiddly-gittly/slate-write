@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import type { TComboboxItemBase } from '@udecode/slate';
+import { TComboboxItemBase } from '@udecode/plate-combobox';
 import React, { useMemo } from 'react';
 import { AutoCompleteCombobox } from '../../plugins/comboBox/AutoCompleteCombobox';
 import { ComboBoxDorpDownListItem, filterKey, memorizedRenderTiddler } from './ListItem';
@@ -15,7 +15,7 @@ export function WikiLinkCombobox(props: { id: string; pluginKey: string }): JSX.
       pluginKey={pluginKey}
       filter={filterKey}
       onRenderItem={ComboBoxDorpDownListItem}
-      getRenderTextTemplate={(item) => memorizedRenderTiddler(item.key)}
+      getRenderTextTemplate={(item: TComboboxItemBase) => memorizedRenderTiddler(item.key)}
     />
   );
 }

@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { setNodes, Value } from '@udecode/slate';
+import { getPluginOptions } from '@udecode/plate-core';
 import { getRootProps, StyledElementProps } from '@udecode/plate-styled-components';
+import { setNodes, Value } from '@udecode/slate';
+import { findNodePath } from '@udecode/slate-react';
 import useDebouncedCallback from 'beautiful-react-hooks/useDebouncedCallback';
 import type { EditorConfiguration, EditorFromTextArea } from 'codemirror';
 import React, { ChangeEvent, MutableRefObject, RefObject, useCallback, useEffect, useMemo, useRef } from 'react';

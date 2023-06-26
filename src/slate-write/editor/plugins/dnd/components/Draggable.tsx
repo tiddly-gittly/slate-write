@@ -95,7 +95,12 @@ export const Draggable = <V extends Value>(props: DraggableProps<V>): JSX.Elemen
         <BlockToolbarWrapper mod={styles?.blockToolbarWrapper}>
           <BlockToolbar ref={multiDragReference}>
             <Tippy {...grabberTooltipProps}>
-              <DragHandle type='button' onMouseDown={(event: MouseEvent) => event.stopPropagation()}>
+              <DragHandle
+                type='button'
+                onMouseDown={(event: MouseEvent) => {
+                  event.stopPropagation();
+                }}
+              >
                 <DragIndicator
                   style={{
                     width: 18,

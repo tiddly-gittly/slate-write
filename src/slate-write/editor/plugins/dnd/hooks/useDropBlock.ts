@@ -11,7 +11,7 @@ import { Path, Transforms } from 'slate';
 import { ReactEditor } from 'slate-react';
 import { postDropNormalize } from './postDropNormalize';
 
-export const useDropBlockOnEditor = <V extends Value>(
+export const useDropBlock = <V extends Value>(
   editor: TReactEditor<V>,
   {
     nodeRef,

@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { TLinkElement, Value } from '@udecode/slate';
+import type { TLinkElement } from '@udecode/plate-link';
 import { getRootProps, StyledElementProps } from '@udecode/plate-styled-components';
+import type { Value } from '@udecode/slate';
 import React, { useCallback, useContext, useMemo } from 'react';
 import { ParentWidgetContext } from 'tw-react';
-import { ISlateAstExtraTwMarkers } from 'wikiast-utils';
+import type { ISlateAstExtraTwMarkers } from 'wikiast-utils';
 
 export const LinkElement = <V extends Value>(props: StyledElementProps<V, TLinkElement & ISlateAstExtraTwMarkers>): JSX.Element => {
   const { attributes, children, nodeProps, element } = props;
@@ -16,6 +17,7 @@ export const LinkElement = <V extends Value>(props: StyledElementProps<V, TLinkE
   const onClick = useCallback(
     (event: React.MouseEvent) => {
       if (parentWidget === undefined) return;
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       const domNode = attributes.ref.current as HTMLLinkElement | undefined;
       if (domNode === undefined) return;
       event.stopPropagation();
@@ -59,10 +61,10 @@ export const LinkElement = <V extends Value>(props: StyledElementProps<V, TLinkE
   );
 
   const isMissing = useMemo(
-    () => !(parentWidget?.wiki?.tiddlerExists(element.attributes?.to?.value ?? '') ?? false),
+    () => !(parentWidget?.wiki?.tiddlerExists(element.attributes?.to?.value as string ?? '') ?? false),
     [element.attributes?.to?.value, parentWidget?.wiki],
   );
-  const isShadow = useMemo(() => parentWidget?.wiki?.isShadowTiddler(element.attributes?.to?.value ?? ''), [element.attributes?.to?.value, parentWidget?.wiki]);
+  const isShadow = useMemo(() => parentWidget?.wiki?.isShadowTiddler(element.attributes?.to?.value as string ?? ''), [element.attributes?.to?.value, parentWidget?.wiki]);
 
   const attributesFromTw = useMemo(() => {
     const results: Record<string, unknown> = {};
@@ -87,10 +89,10 @@ export const LinkElement = <V extends Value>(props: StyledElementProps<V, TLinkE
         }
       }
       if (element.attributes?.class?.value) {
-        results.push(element.attributes?.class?.value);
+        results.push(element.attributes?.class?.value as string);
       }
     } else {
-      results.push(element.attributes?.overrideClasses?.value);
+      results.push(element.attributes?.overrideClasses?.value as string);
     }
     return results.join(' ');
   }, [element.attributes, isShadow, isMissing]);

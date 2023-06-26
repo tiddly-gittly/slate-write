@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
-import type { ComboboxItemProps, TComboboxItemBase } from '@udecode/slate';
+import { TComboboxItemBase } from '@udecode/plate-combobox';
 import memorize from 'lodash/memoize';
 import React from 'react';
 import styled from 'styled-components';
-import { WidgetsListItemTextGetters } from '../../plugins/comboBox/Combobox.types';
+import { ComboboxItemProps, WidgetsListItemTextGetters } from '../../plugins/comboBox/Combobox.types';
 import { LazyTippy } from './PreviewTooltip';
 
 const ListItemContentContainer = styled.div`

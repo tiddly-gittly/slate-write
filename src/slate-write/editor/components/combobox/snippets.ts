@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
-import type { TComboboxItem } from '@udecode/slate';
+import type { TComboboxItem } from '@udecode/plate-combobox';
 import type { Tiddler } from 'tiddlywiki';
 
 export interface ISnippetComboboxItem {
@@ -12,7 +12,7 @@ function getSnippetName(tiddler: Tiddler): string {
   const name = tiddler.fields['snippet-name'];
   if (typeof name !== 'string' || name) {
     const splits = tiddler.fields.title.split('/');
-    return splits.at(-1);
+    return splits.at(-1) ?? '';
   }
   return name;
 }

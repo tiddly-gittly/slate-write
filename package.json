@@ -52,12 +52,12 @@
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2",
     "postcss": "^8.4.24",
-    "rimraf": "^5.0.1",
-    "ts-node": "^10.9.1",
-    "tw5-typed": "^0.3.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "rimraf": "^5.0.1",
+    "ts-node": "^10.9.1",
     "tw-react": "^0.4.6",
+    "tw5-typed": "^0.3.7",
     "typescript": "^5.1.3"
   },
   "pnpm": {
@@ -79,6 +79,7 @@
     "@styled-icons/material": "10.47.0",
     "@tippyjs/react": "4.2.6",
     "@types/codemirror": "^5.60.8",
+    "@types/lodash": "^4.14.195",
     "@udecode/plate-autoformat": "21.3.2",
     "@udecode/plate-basic-marks": "21.3.2",
     "@udecode/plate-block-quote": "21.3.2",
