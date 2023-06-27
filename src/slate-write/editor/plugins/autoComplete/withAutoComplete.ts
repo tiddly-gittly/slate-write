@@ -10,9 +10,11 @@ import { getEditorString, getNodeString, getPointAfter, getPointBefore, getRange
 import { Location, Range } from 'slate';
 import { useAutoCompletePluginStore } from '../comboBox/store';
 import { ELEMENT_AUTO_COMPLETE_INPUT } from './createAutoCompletePlugin';
-import { findAutoCompleteInput, isNodeAutoCompleteInput, isSelectionInAutoCompleteInput } from './queries';
-import { removeAutoCompleteInputAtPath } from './transforms';
-import { AutoCompletePlugin, TAutoCompleteInputElement } from './types';
+import { findAutoCompleteInput } from './queries/findAutoCompleteInput';
+import { isNodeAutoCompleteInput } from './queries/isNodeAutoCompleteInput';
+import { isSelectionInAutoCompleteInput } from './queries/isSelectionInAutoCompleteInput';
+import { removeAutoCompleteInputAtPath } from './transforms/removeAutoCompleteInput';
+import type { AutoCompletePlugin, TAutoCompleteInputElement } from './types';
 
 export const withAutoComplete = <V extends Value = Value, E extends PlateEditor<V> = PlateEditor<V>>(
   editor: E,

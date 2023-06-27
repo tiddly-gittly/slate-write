@@ -2,8 +2,9 @@ import type { TComboboxItemBase } from '@udecode/plate-combobox';
 import { getNextWrappingIndex } from '@udecode/plate-combobox';
 import { getPlugin, KeyboardHandlerReturnType, PlateEditor } from '@udecode/plate-core';
 import { insertText, Value } from '@udecode/slate';
-import { AutoCompletePlugin } from '../autoComplete';
-import { removeAutoCompleteInputFromCurrentSelection } from '../autoComplete/transforms';
+
+import { removeAutoCompleteInputFromCurrentSelection } from '../autoComplete/transforms/removeAutoCompleteInput';
+import { AutoCompletePlugin } from '../autoComplete/types';
 import { getAutoCompleteOnSelectItem } from './getAutoCompleteOnSelectItem';
 import { useAutoCompletePluginStore } from './store';
 

@@ -5,13 +5,14 @@ import useDebouncedCallback from 'beautiful-react-hooks/useDebouncedCallback';
 import type { EditorConfiguration, EditorFromTextArea } from 'codemirror';
 import React, { ChangeEvent, MutableRefObject, useCallback, useEffect, useMemo, useRef } from 'react';
 // import { useDrag } from 'react-dnd';
+import { findNodePath } from '@udecode/slate-react';
 import { deserialize } from 'src/slate-write/transform/serialize';
 import styled from 'styled-components';
 import { wikiAstToWikiText } from 'wikiast-util-to-wikitext';
-import { CODE_BLOCK_LANGUAGES, useCodeMirror, useCodeMirrorEventListenerSettled } from '../codeblock';
+import { useCodeMirror, useCodeMirrorEventListenerSettled } from '../codeblock/CodeBlockElement/CodeBlockElement';
+import { CODE_BLOCK_LANGUAGES } from '../codeblock/constants';
 import { useWidgetCodeBlockStore } from './store';
 import { WidgetBlockElementProps } from './WidgetBlock';
-import { findNodePath } from '@udecode/slate-react';
 
 const CodeBlockWrapper = styled.div<{ left?: number; opacity?: number; top?: number }>`
   position: absolute;

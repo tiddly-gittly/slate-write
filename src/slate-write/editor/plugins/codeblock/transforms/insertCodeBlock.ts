@@ -4,7 +4,7 @@ import { getPluginType, PlateEditor } from '@udecode/plate-core';
 import { InsertNodesOptions, isExpanded, setElements, someNode, TElement, Value, wrapNodes } from '@udecode/slate';
 import { isSelectionAtBlockStart } from '@udecode/slate-utils';
 import { ELEMENT_CODE_BLOCK } from '../constants';
-import { getCodeLineType } from '../options';
+import { getCodeLineType } from '../options/getCodeLineType';
 
 /**
  * Insert a code block: set the node to code line and wrap it with a code block.

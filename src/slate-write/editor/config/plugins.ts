@@ -19,12 +19,11 @@ import { createListPlugin } from '@udecode/plate-list';
 import { createParagraphPlugin } from '@udecode/plate-paragraph';
 import { createSelectOnBackspacePlugin } from '@udecode/plate-select';
 // import { createTablePlugin } from '@udecode/plate-table';
-import { createTrailingBlockPlugin } from '@udecode/plate-trailing-block';
-
 import { createInlineVoidPlugin, createPlugins } from '@udecode/plate-core';
 import { createDndPlugin } from '@udecode/plate-dnd';
-import { createAutoCompletePlugin } from '../plugins/autoComplete';
-import { createCodeBlockPlugin } from '../plugins/codeblock';
+import { createTrailingBlockPlugin } from '@udecode/plate-trailing-block';
+
+import { createAutoCompletePlugin, createCodeBlockPlugin } from '../plugins';
 import { createComboBoxPlugin } from '../plugins/comboBox';
 import { createHeadingPlugin } from '../plugins/heading';
 import { createMacroPlugin } from '../plugins/macro';
