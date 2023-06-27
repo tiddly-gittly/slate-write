@@ -19,7 +19,7 @@ import { ELEMENT_TABLE, ELEMENT_TD, ELEMENT_TH, ELEMENT_TR } from '@udecode/plat
 import { PlateTableCellElement, PlateTableElement, PlateTableRowElement } from '@udecode/plate-ui-table';
 import { withProps } from '@udecode/plate-utils';
 import type { FunctionComponent } from 'react';
-import { withStyledDraggables } from '../config/withStyledDraggables';
+import { withStyledDraggables } from './drag-and-drop/withStyledDraggables';
 import { withStyledPlaceHolders } from '../config/withStyledPlaceHolders';
 import { ELEMENT_AUTO_COMPLETE, ELEMENT_AUTO_COMPLETE_INPUT } from '../plugins/autoComplete';
 import { CodeBlockElement, ELEMENT_CODE_BLOCK } from '../plugins/codeblock';
