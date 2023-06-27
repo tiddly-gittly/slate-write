@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/no-null */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { ELEMENT_BLOCKQUOTE } from '@udecode/plate-block-quote';
@@ -17,12 +18,19 @@ import { DragHandle } from './DragHandle';
 const draggableComponents: Parameters<typeof withPlateDraggables>[1] = [
   // only element that registered keys here will have dnd grabber
   {
-    key: ELEMENT_LI,
+    // allow li drag, not ul/ol, because ol/ul will move entire list tree. While user might just want to move a single line of li.
+    keys: [ELEMENT_LI /* , ELEMENT_OL, ELEMENT_UL */],
     draggableProps: {
       styles: {
-        gutterLeft: { transform: '' },
+        // fix list item mark (dot on the left) covered by drag handle
+        gutterLeft: { transform: 'translateX(-200%)' },
+        block: {
+          // fix list item mark (dot on the left) not visible
+          overflow: 'visible',
+        },
       },
     },
+    level: null,
   },
   {
     key: ELEMENT_H1,
@@ -81,7 +89,7 @@ const draggableComponents: Parameters<typeof withPlateDraggables>[1] = [
     },
   },
   {
-    keys: [ELEMENT_H5, ELEMENT_H6],
+    keys: [ELEMENT_H5, ELEMENT_H6, ELEMENT_PARAGRAPH],
     draggableProps: {
       styles: {
         gutterLeft: {
@@ -90,9 +98,6 @@ const draggableComponents: Parameters<typeof withPlateDraggables>[1] = [
         },
       },
     },
-  },
-  {
-    key: ELEMENT_PARAGRAPH,
   },
   {
     key: ELEMENT_BLOCKQUOTE,
