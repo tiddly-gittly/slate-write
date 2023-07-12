@@ -4,7 +4,7 @@ caption: {{$:/plugins/linonetwo/slate-write/ui/ViewToolbar/images/edit-wysiwyg-b
 description: {{$:/language/Buttons/Edit/Hint}}
 
 \whitespace trim
-<$list filter="[<currentTiddler>field:type[text/vnd.tiddlywiki]!prefix[$]]"> 
+<$list filter="[<currentTiddler>field:type[text/vnd.tiddlywiki]!prefix[$:/]] :or[<currentTiddler>!prefix[$:/]field:type[]]"> 
   <$button message="tm-edit-wysiwyg-tiddler" param=<<currentTiddler>> tooltip={{$:/language/Buttons/Edit/Hint}} aria-label={{$:/language/Buttons/Edit/Caption}} class=<<tv-config-toolbar-class>>>
     <$list filter="[<tv-config-toolbar-icons>match[yes]]">
       {{$:/plugins/linonetwo/slate-write/ui/ViewToolbar/images/edit-wysiwyg-button}}
