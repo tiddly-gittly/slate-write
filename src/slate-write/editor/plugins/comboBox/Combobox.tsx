@@ -32,10 +32,10 @@ const Container = styled.ul`
 
   z-index: 500;
 `;
-const Item = styled.div`
+const Item = styled.div<{ $highlighted?: boolean }>`
   display: flex;
   align-items: center;
-  curser: pointer;
+  cursor: pointer;
 
   padding: 0 2px;
 
@@ -50,7 +50,7 @@ const Item = styled.div`
     background: rgb(243, 242, 241);
   }
 
-  ${is('highlighted')`
+  ${is('$highlighted')`
     background: rgb(237, 235, 233);
 
     &:hover {
@@ -132,7 +132,7 @@ export function Combobox<TData extends Data = NoData>({
           return (
             <Item
               key={item.key}
-              highlighted={highlighted}
+              $highlighted={highlighted}
               {...comboBox.getItemProps({
                 item,
                 index,
