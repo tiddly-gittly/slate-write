@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { TComboboxItemBase } from '@udecode/plate-combobox';
-import memorize from 'lodash/memoize';
+import memoize from 'memize';
 import React from 'react';
 import styled from 'styled-components';
 import { ComboboxItemProps, WidgetsListItemTextGetters } from '../../plugins/comboBox/Combobox.types';
@@ -17,8 +17,8 @@ const ListItemContentContainer = styled.div`
 const Preview = styled.div``;
 const Name = styled.div``;
 
-export const memorizedRenderText = memorize((text: string) => $tw.wiki.renderText('text/html', 'text/vnd.tiddlywiki', text));
-export const memorizedRenderTiddler = memorize((title: string) => $tw.wiki.renderTiddler('text/html', title));
+export const memorizedRenderText = memoize((text: string) => $tw.wiki.renderText('text/html', 'text/vnd.tiddlywiki', text));
+export const memorizedRenderTiddler = memoize((title: string) => $tw.wiki.renderTiddler('text/html', title));
 
 export const filterKey = (text: string) => (value: TComboboxItemBase) => value.key.toLowerCase().startsWith(text.toLowerCase());
 
