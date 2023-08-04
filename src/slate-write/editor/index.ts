@@ -185,5 +185,7 @@ function notifyNavigatorSaveTiddler(title: string, parentWidget?: TWWidget) {
   );
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+declare let exports: {
+  widget: typeof Widget;
+};
 exports.widget = SlateWriteWidget;
