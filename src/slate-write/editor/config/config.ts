@@ -6,7 +6,7 @@ import { ExitBreakPlugin, SoftBreakPlugin } from '@udecode/plate-break';
 import type { TComboboxItemBase } from '@udecode/plate-combobox';
 import { PlatePlugin } from '@udecode/plate-core';
 import { ELEMENT_H1, ELEMENT_H2, ELEMENT_H3, ELEMENT_H4, ELEMENT_H5, ELEMENT_H6, KEYS_HEADING } from '@udecode/plate-heading';
-import { IndentPlugin } from '@udecode/plate-indent';
+// import { IndentPlugin } from '@udecode/plate-indent';
 import { LinkPlugin } from '@udecode/plate-link';
 import { ELEMENT_TODO_LI } from '@udecode/plate-list';
 import { NormalizeTypesPlugin } from '@udecode/plate-normalizers';
@@ -16,7 +16,8 @@ import { SelectOnBackspacePlugin } from '@udecode/plate-select';
 import { TrailingBlockPlugin } from '@udecode/plate-trailing-block';
 import { isBlockAboveEmpty, isSelectionAtBlockStart } from '@udecode/slate-utils';
 import type { EditableProps } from 'slate-react/dist/components/editable';
-import { AutoCompletePlugin } from '../plugins/autoComplete';
+// import { AutoCompletePlugin } from '../plugins/autoComplete';
+import type { AutoCompletePlugin } from '../plugins/autoComplete/types';
 import { ELEMENT_CODE_BLOCK } from '../plugins/codeblock/constants';
 import { ELEMENT_WIDGET } from '../plugins/widget';
 import { autoformatRules } from './autoformat';
@@ -34,7 +35,7 @@ interface Config {
   editableProps: EditableProps;
   exitBreak: Partial<PlatePlugin<ExitBreakPlugin>>;
   forceLayout: Partial<PlatePlugin<NormalizeTypesPlugin>>;
-  indent: Partial<PlatePlugin<IndentPlugin>>;
+  // indent: Partial<PlatePlugin<IndentPlugin>>;
   lineHeight: Partial<PlatePlugin>;
   link: Partial<PlatePlugin<LinkPlugin>>;
   resetBlockType: Partial<PlatePlugin<ResetNodePlugin>>;
@@ -112,13 +113,14 @@ export const CONFIG: Config = {
       },
     },
   },
-  indent: {
-    inject: {
-      props: {
-        validTypes: [ELEMENT_PARAGRAPH, ELEMENT_H1, ELEMENT_H2, ELEMENT_H3, ELEMENT_H4, ELEMENT_H5, ELEMENT_H6, ELEMENT_BLOCKQUOTE, ELEMENT_CODE_BLOCK],
-      },
-    },
-  },
+  // TODO: find a way to support indent in wikitext, maybe change this in tw core to allow render leading spaces as indent?
+  // indent: {
+  //   inject: {
+  //     props: {
+  //       validTypes: [ELEMENT_PARAGRAPH, ELEMENT_H1, ELEMENT_H2, ELEMENT_H3, ELEMENT_H4, ELEMENT_H5, ELEMENT_H6, ELEMENT_BLOCKQUOTE, ELEMENT_CODE_BLOCK],
+  //     },
+  //   },
+  // },
   lineHeight: {
     inject: {
       props: {

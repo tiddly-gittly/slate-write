@@ -28,9 +28,7 @@ export interface ISaver {
 
 export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Element {
   const { currentTiddler: editorID } = props;
-
   // TODO: get dom node to add IME listener to prevent update when IME open https://github.com/udecode/plate/issues/239#issuecomment-1098052241
-
   return (
     <Plate id={editorID} editableProps={{ ...CONFIG.editableProps }}>
       <BallonToolbar />
@@ -60,15 +58,15 @@ export function App(props: IEditorAppProps & IDefaultWidgetProps): JSX.Element {
     return <div>Loading...</div>;
   }
   return (
-    <PlateProvider id={editorID} initialValue={currentAstReference.current} onChange={onChange} plugins={plugins}>
-      <ParentWidgetContext.Provider value={props.parentWidget}>
-        <GlobalStyle />
-        <DndProvider backend={HTML5Backend}>
-          <div className='tw-slate-write-container'>
+    <ParentWidgetContext.Provider value={props.parentWidget}>
+      <GlobalStyle />
+      <DndProvider backend={HTML5Backend}>
+        <div className='tw-slate-write-container'>
+          <PlateProvider id={editorID} initialValue={currentAstReference.current} onChange={onChange} plugins={plugins}>
             <Editor {...props} />
-          </div>
-        </DndProvider>
-      </ParentWidgetContext.Provider>
-    </PlateProvider>
+          </PlateProvider>
+        </div>
+      </DndProvider>
+    </ParentWidgetContext.Provider>
   );
 }

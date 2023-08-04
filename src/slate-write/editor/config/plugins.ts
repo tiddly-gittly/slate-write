@@ -11,11 +11,11 @@ import {
 import { createBlockquotePlugin } from '@udecode/plate-block-quote';
 import { createExitBreakPlugin, createSoftBreakPlugin } from '@udecode/plate-break';
 import { createHorizontalRulePlugin } from '@udecode/plate-horizontal-rule';
-import { createIndentPlugin } from '@udecode/plate-indent';
-import { createIndentListPlugin } from '@udecode/plate-indent-list';
+// import { createIndentPlugin } from '@udecode/plate-indent';
+import { createListPlugin } from '@udecode/plate-list';
+// import { createIndentListPlugin } from '@udecode/plate-indent-list';
 import { createKbdPlugin } from '@udecode/plate-kbd';
 import { createLinkPlugin } from '@udecode/plate-link';
-import { createListPlugin } from '@udecode/plate-list';
 import { createParagraphPlugin } from '@udecode/plate-paragraph';
 import { createSelectOnBackspacePlugin } from '@udecode/plate-select';
 // import { createTablePlugin } from '@udecode/plate-table';
@@ -38,6 +38,7 @@ export const basicElements = createPlugins([
   createParagraphPlugin(),
   createHorizontalRulePlugin(),
   createListPlugin(),
+  // createIndentListPlugin(),
   createLinkPlugin(),
   // createTablePlugin(),
 ]);
@@ -63,8 +64,7 @@ export const utils = createPlugins([
   createExitBreakPlugin(CONFIG.exitBreak),
   createAutoformatPlugin(CONFIG.autoformat),
   createDndPlugin({ options: { enableScroller: true } }),
-  createIndentListPlugin(),
-  createIndentPlugin(),
+  // createIndentPlugin(),
   createKbdPlugin(),
   createInlineVoidPlugin(),
   /**

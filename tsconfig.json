@@ -2,6 +2,7 @@
   "extends": "@modern-js/tsconfig/base.json",
   "compilerOptions": {
     "declaration": false,
+    "esModuleInterop": true,
     "jsx": "react-jsx",
     "baseUrl": "./",
     "types": ["node", "tw5-typed"],
