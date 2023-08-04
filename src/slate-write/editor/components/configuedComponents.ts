@@ -25,7 +25,7 @@ import { CodeBlockElement, ELEMENT_AUTO_COMPLETE, ELEMENT_AUTO_COMPLETE_INPUT } 
 import { ELEMENT_MACRO } from '../plugins/macro';
 import { ELEMENT_WIDGET } from '../plugins/widget';
 import { WidgetBlock } from '../plugins/widget/WidgetBlock';
-import { withStyledDraggables } from '../config/draggableComponents';
+import { withDraggables } from './plate-ui/with-draggables';
 
 export const createPlateUI = <
   T extends string = string,
@@ -46,7 +46,7 @@ export const createPlateUI = <
   return components;
 };
 
-// only component defined here will be wrapped by withStyledDraggables and withStyledPlaceHolders
+// only component defined here will be wrapped by withDraggables and withStyledPlaceHolders
 const rawComponents = createPlateUI({
   [ELEMENT_AUTO_COMPLETE]: MentionElement,
   [ELEMENT_AUTO_COMPLETE_INPUT]: MentionInputElement,
@@ -234,4 +234,4 @@ const rawComponents = createPlateUI({
   [MARK_SUPERSCRIPT]: withProps(StyledLeaf, { as: 'sup' }),
   [MARK_UNDERLINE]: withProps(StyledLeaf, { as: 'u' }),
 });
-export const components = withStyledDraggables(withStyledPlaceHolders(rawComponents));
+export const components = withDraggables(withStyledPlaceHolders(rawComponents));

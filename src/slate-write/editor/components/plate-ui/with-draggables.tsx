@@ -5,6 +5,8 @@ import { FC } from 'react';
 
 import { withDraggable as withDraggablePrimitive, WithDraggableOptions } from '@udecode/plate-dnd';
 
+import { PlatePluginComponent } from '@udecode/plate-core';
+import { DefaultPlatePluginKey } from '../../config/DefaultPlatePluginKey';
 import { draggableComponents } from '../../config/draggableComponents';
 import { Draggable, DraggableProps } from './draggable';
 
@@ -17,6 +19,6 @@ export const withDraggable = (
 
 export const withDraggablesPrimitive = createNodesWithHOC(withDraggable);
 
-export const withDraggables = (components: any) => {
+export const withDraggables = (components: any): Record<DefaultPlatePluginKey, PlatePluginComponent<any>> => {
   return withDraggablesPrimitive(components, draggableComponents);
 };

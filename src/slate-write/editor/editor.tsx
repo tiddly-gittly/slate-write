@@ -12,6 +12,7 @@ import { useInitialValueOnChange } from './hooks/useInitialValueOnChange';
 import { usePlugins } from './hooks/usePlugins';
 import { getIdFactory } from './plugins/id/getId';
 import './style.css';
+import { TooltipProvider } from './components/plate-ui/tooltip';
 
 export interface IEditorAppProps {
   currentTiddler: string;
@@ -62,11 +63,17 @@ export function App(props: IEditorAppProps & IDefaultWidgetProps): JSX.Element {
     <ParentWidgetContext.Provider value={props.parentWidget}>
       <GlobalStyle />
       <DndProvider backend={HTML5Backend}>
-        <div className='tw-slate-write-container'>
-          <PlateProvider id={editorID} initialValue={currentAstReference.current} onChange={onChange} plugins={plugins}>
-            <Editor {...props} />
-          </PlateProvider>
-        </div>
+        <TooltipProvider
+          disableHoverableContent
+          delayDuration={500}
+          skipDelayDuration={0}
+        >
+          <div className='tw-slate-write-container'>
+            <PlateProvider id={editorID} initialValue={currentAstReference.current} onChange={onChange} plugins={plugins}>
+              <Editor {...props} />
+            </PlateProvider>
+          </div>
+        </TooltipProvider>
       </DndProvider>
     </ParentWidgetContext.Provider>
   );

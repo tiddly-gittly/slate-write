@@ -4,6 +4,7 @@
 
 export * from './combobox/index';
 export * from './configuedComponents';
-export * from './drag-and-drop/DragHandle';
-export * from '../config/draggableComponents';
+export * from './plate-ui/draggable';
+export * from './plate-ui/tooltip';
+export * from './plate-ui/with-draggables';
 export * from './Toolbars';

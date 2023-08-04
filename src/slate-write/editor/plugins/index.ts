@@ -20,6 +20,8 @@ export * from './codeblock/transforms/insertCodeBlock';
 export * from './codeblock/transforms/insertEmptyCodeBlock';
 export * from './codeblock/types';
 export * from './comboBox/index';
+export * from './dnd/createDndPlugin';
+export * from './dnd/postDropNormalize';
 export * from './heading/index';
 export * from './link/LinkElement/index';
 export * from './link/LinkToolbarButton';
