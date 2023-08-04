@@ -5,5 +5,5 @@
 export * from './combobox/index';
 export * from './configuedComponents';
 export * from './drag-and-drop/DragHandle';
-export * from './drag-and-drop/withStyledDraggables';
+export * from '../config/draggableComponents';
 export * from './Toolbars';

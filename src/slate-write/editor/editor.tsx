@@ -11,6 +11,7 @@ import { GlobalStyle } from './config/globalStyle';
 import { useInitialValueOnChange } from './hooks/useInitialValueOnChange';
 import { usePlugins } from './hooks/usePlugins';
 import { getIdFactory } from './plugins/id/getId';
+import './style.css';
 
 export interface IEditorAppProps {
   currentTiddler: string;

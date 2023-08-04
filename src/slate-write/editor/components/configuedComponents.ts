@@ -25,7 +25,7 @@ import { CodeBlockElement, ELEMENT_AUTO_COMPLETE, ELEMENT_AUTO_COMPLETE_INPUT } 
 import { ELEMENT_MACRO } from '../plugins/macro';
 import { ELEMENT_WIDGET } from '../plugins/widget';
 import { WidgetBlock } from '../plugins/widget/WidgetBlock';
-import { withStyledDraggables } from './drag-and-drop/withStyledDraggables';
+import { withStyledDraggables } from '../config/draggableComponents';
 
 export const createPlateUI = <
   T extends string = string,

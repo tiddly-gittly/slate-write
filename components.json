@@ -1,0 +1,15 @@
+{
+  "$schema": "https://platejs.org/schema.json",
+  "style": "default",
+  "rsc": false,
+  "tailwind": {
+    "config": "tailwind.config.js",
+    "css": "src/slate-write/editor/style.css",
+    "baseColor": "slate",
+    "cssVariables": false
+  },
+  "aliases": {
+    "components": "src/slate-write/editor/components",
+    "utils": "src/slate-write/editor/lib/utils.ts"
+  }
+}
