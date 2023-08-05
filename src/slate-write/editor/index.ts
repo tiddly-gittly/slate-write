@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import 'requestidlecallback-polyfill';
-import { IChangedTiddlers, Widget as TWWidget } from 'tiddlywiki';
+import { IChangedTiddlers, IParseTreeNode, IWidgetInitialiseOptions, Widget as TWWidget } from 'tiddlywiki';
 
 import { SAVE_DEBOUNCE_INTERVAL } from './config/config';
 import { App, IEditorAppProps } from './editor';
@@ -40,7 +40,10 @@ class SlateWriteWidget extends Widget<IEditorAppProps> {
   private isFileDropEnabled: boolean | undefined;
   private editShowToolbar: boolean | undefined;
 
-  constructor(parseTreeNode: any, options: any) {
+  constructor(
+    parseTreeNode: IParseTreeNode,
+    options?: IWidgetInitialiseOptions,
+  ) {
     super(parseTreeNode, options);
     $tw.modules.applyMethods('texteditoroperation', this.editorOperations);
   }
@@ -185,5 +188,7 @@ function notifyNavigatorSaveTiddler(title: string, parentWidget?: TWWidget) {
   );
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+declare let exports: {
+  widget: typeof SlateWriteWidget;
+};
 exports.widget = SlateWriteWidget;

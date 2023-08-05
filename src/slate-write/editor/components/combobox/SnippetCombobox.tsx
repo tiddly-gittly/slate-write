@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import type { TComboboxItemBase, TComboboxItemWithData } from '@udecode/plate-combobox';
-import type { ComboboxItemProps } from '@udecode/plate-ui';
 import React from 'react';
 import { AutoCompleteCombobox } from '../../plugins/comboBox/AutoCompleteCombobox';
 import { ComboBoxDorpDownListItem, memorizedRenderText } from './ListItem';
 import { type ISnippetComboboxItem, snippets } from './snippets';
+import { ComboboxItemProps } from '../../plugins/comboBox/Combobox.types';
 
 const filter = (text: string) => (value: TComboboxItemBase) => (value as ComboboxItemProps<ISnippetComboboxItem>['item']).data.name.toLowerCase().startsWith(text.toLowerCase());
 

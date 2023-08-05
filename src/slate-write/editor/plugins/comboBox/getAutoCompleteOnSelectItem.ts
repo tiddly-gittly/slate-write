@@ -9,7 +9,7 @@ import { deleteText, insertNodes, insertText, isEndPoint, TNodeProps, TText, Val
 import { getBlockAbove } from '@udecode/slate-utils';
 import { replaceCurrentBlockWithParseResult } from '../advancedBlock/replaceCurrentBlockWithParseResult';
 import { ELEMENT_AUTO_COMPLETE } from '../autoComplete/createAutoCompletePlugin';
-import { removeAutoCompleteInputFromCurrentSelection } from '../autoComplete/transforms';
+import { removeAutoCompleteInputFromCurrentSelection } from '../autoComplete/transforms/removeAutoCompleteInput';
 import { AutoCompletePlugin, TAutoCompleteElement } from '../autoComplete/types';
 import { ComboboxOnSelectItem } from './Combobox.types';
 import { useAutoCompletePluginStore } from './store';
@@ -18,7 +18,7 @@ export type CreateAutoCompleteNode<TData extends Data> = (item: TComboboxItem<TD
 
 export const getAutoCompleteOnSelectItem =
   <TData extends Data = NoData>({ key = ELEMENT_AUTO_COMPLETE }: PlatePluginKey = {}): ComboboxOnSelectItem<TData> => (editor, item: TComboboxItemBase) => {
-    const { targetRange, reset } = useAutoCompletePluginStore.getState();
+    const targetRange = useAutoCompletePluginStore.get.targetRange();
     if (!targetRange) return;
 
     const {
@@ -67,5 +67,5 @@ export const getAutoCompleteOnSelectItem =
 
       replaceCurrentBlockWithParseResult(editor);
     });
-    reset();
+    useAutoCompletePluginStore.set.reset();
   };

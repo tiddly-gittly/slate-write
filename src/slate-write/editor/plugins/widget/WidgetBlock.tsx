@@ -19,9 +19,9 @@ export const TwWidgetContainerInner = styled.div`
   user-select: normal;
   white-space: normal;
 `;
-export const TwWidgetCodeContainer = styled.div`
+export const TwWidgetCodeContainer = styled.div<{ $selected?: boolean }>`
   opacity: 0;
-  ${is('selected')`
+  ${is('$selected')`
     opacity: 1;
   `}
   transition: opacity 0.1s;
@@ -39,7 +39,7 @@ export function WidgetBlock(props: WidgetBlockElementProps): JSX.Element {
         <div ref={widgetContainerReference} />
       </TwWidgetContainerInner>
       {children}
-      <TwWidgetCodeContainer selected={selected}>{selected && <WidgetCodeEditor {...props} />}</TwWidgetCodeContainer>
+      <TwWidgetCodeContainer $selected={selected}>{selected && <WidgetCodeEditor {...props} />}</TwWidgetCodeContainer>
     </TwWidgetContainerOuter>
   );
 }

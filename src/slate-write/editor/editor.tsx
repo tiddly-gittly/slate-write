@@ -11,6 +11,8 @@ import { GlobalStyle } from './config/globalStyle';
 import { useInitialValueOnChange } from './hooks/useInitialValueOnChange';
 import { usePlugins } from './hooks/usePlugins';
 import { getIdFactory } from './plugins/id/getId';
+import './style.css';
+import { TooltipProvider } from './components/plate-ui/tooltip';
 
 export interface IEditorAppProps {
   currentTiddler: string;
@@ -28,9 +30,7 @@ export interface ISaver {
 
 export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Element {
   const { currentTiddler: editorID } = props;
-
   // TODO: get dom node to add IME listener to prevent update when IME open https://github.com/udecode/plate/issues/239#issuecomment-1098052241
-
   return (
     <Plate id={editorID} editableProps={{ ...CONFIG.editableProps }}>
       <BallonToolbar />
@@ -46,8 +46,8 @@ export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Elemen
 export function App(props: IEditorAppProps & IDefaultWidgetProps): JSX.Element {
   const editorID = props.currentTiddler;
   const idCreator = useMemo(() => {
-    return getIdFactory(props.currentTiddler);
-  }, [props.currentTiddler]);
+    return getIdFactory(editorID);
+  }, [editorID]);
   const [currentAstReference, onChange] = useInitialValueOnChange({
     editorID,
     initialTiddlerText: props.initialTiddlerText,
@@ -56,19 +56,26 @@ export function App(props: IEditorAppProps & IDefaultWidgetProps): JSX.Element {
   });
   const plugins = usePlugins({ idCreator });
 
+  // prevent working in headless/test mode which might throw error
   if (typeof document === 'undefined') {
     return <div>Loading...</div>;
   }
   return (
-    <PlateProvider id={editorID} initialValue={currentAstReference.current} onChange={onChange} plugins={plugins}>
-      <ParentWidgetContext.Provider value={props.parentWidget}>
-        <GlobalStyle />
-        <DndProvider backend={HTML5Backend}>
+    <ParentWidgetContext.Provider value={props.parentWidget}>
+      <GlobalStyle />
+      <DndProvider backend={HTML5Backend}>
+        <TooltipProvider
+          disableHoverableContent
+          delayDuration={500}
+          skipDelayDuration={0}
+        >
           <div className='tw-slate-write-container'>
-            <Editor {...props} />
+            <PlateProvider id={editorID} initialValue={currentAstReference.current} onChange={onChange} plugins={plugins}>
+              <Editor {...props} />
+            </PlateProvider>
           </div>
-        </DndProvider>
-      </ParentWidgetContext.Provider>
-    </PlateProvider>
+        </TooltipProvider>
+      </DndProvider>
+    </ParentWidgetContext.Provider>
   );
 }

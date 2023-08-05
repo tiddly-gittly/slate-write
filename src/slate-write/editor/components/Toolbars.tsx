@@ -52,7 +52,7 @@ const tooltipStyle = {
 };
 
 export const BasicElementToolbarButtons = (): JSX.Element => {
-  const editor = usePlateEditorRef()!;
+  const editor = usePlateEditorRef();
 
   return (
     <>

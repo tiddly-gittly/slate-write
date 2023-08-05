@@ -10,9 +10,11 @@ import { getEditorString, getNodeString, getPointAfter, getPointBefore, getRange
 import { Location, Range } from 'slate';
 import { useAutoCompletePluginStore } from '../comboBox/store';
 import { ELEMENT_AUTO_COMPLETE_INPUT } from './createAutoCompletePlugin';
-import { findAutoCompleteInput, isNodeAutoCompleteInput, isSelectionInAutoCompleteInput } from './queries';
-import { removeAutoCompleteInputAtPath } from './transforms';
-import { AutoCompletePlugin, TAutoCompleteInputElement } from './types';
+import { findAutoCompleteInput } from './queries/findAutoCompleteInput';
+import { isNodeAutoCompleteInput } from './queries/isNodeAutoCompleteInput';
+import { isSelectionInAutoCompleteInput } from './queries/isSelectionInAutoCompleteInput';
+import { removeAutoCompleteInputAtPath } from './transforms/removeAutoCompleteInput';
+import type { AutoCompletePlugin, TAutoCompleteInputElement } from './types';
 
 export const withAutoComplete = <V extends Value = Value, E extends PlateEditor<V> = PlateEditor<V>>(
   editor: E,
@@ -103,7 +105,7 @@ export const withAutoComplete = <V extends Value = Value, E extends PlateEditor<
     if (operation.type === 'insert_text' || operation.type === 'remove_text') {
       const currentAutoCompleteInput = findAutoCompleteInput(editor);
       if (currentAutoCompleteInput) {
-        useAutoCompletePluginStore.setState({ text: getNodeString(currentAutoCompleteInput[0]) });
+        useAutoCompletePluginStore.set.text?.(getNodeString(currentAutoCompleteInput[0]));
       }
     } else if (operation.type === 'set_selection') {
       const previousAutoCompleteInputPath = Range.isRange(operation.properties) ? findAutoCompleteInput(editor, { at: operation.properties })?.[1] : undefined;
@@ -117,7 +119,7 @@ export const withAutoComplete = <V extends Value = Value, E extends PlateEditor<
       }
 
       if (currentAutoCompleteInputPath) {
-        useAutoCompletePluginStore.setState({ targetRange: selection as Range });
+        useAutoCompletePluginStore.set.targetRange?.(selection as Range);
       }
     } else if (operation.type === 'insert_node' && isNodeAutoCompleteInput(editor, operation.node as TNode)) {
       if ((operation.node as TAutoCompleteInputElement).trigger !== trigger) {
@@ -135,18 +137,16 @@ export const withAutoComplete = <V extends Value = Value, E extends PlateEditor<
           focus: { path: [...operation.path, 0], offset: text.length },
         });
 
-        useAutoCompletePluginStore.setState({
-          activeId: id!,
-          text,
-          targetRange: selection,
-        });
+        useAutoCompletePluginStore.set.text?.(text);
+        useAutoCompletePluginStore.set.activeId?.(id);
+        useAutoCompletePluginStore.set.targetRange?.(selection as Range);
       }
     } else if (operation.type === 'remove_node' && isNodeAutoCompleteInput(editor, operation.node as TNode)) {
       if ((operation.node as TAutoCompleteInputElement).trigger !== trigger) {
         return;
       }
 
-      useAutoCompletePluginStore.getState().reset();
+      useAutoCompletePluginStore.set.reset();
     }
   };
 
