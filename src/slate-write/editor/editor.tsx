@@ -56,6 +56,7 @@ export function App(props: IEditorAppProps & IDefaultWidgetProps): JSX.Element {
   });
   const plugins = usePlugins({ idCreator });
 
+  // prevent working in headless/test mode which might throw error
   if (typeof document === 'undefined') {
     return <div>Loading...</div>;
   }
