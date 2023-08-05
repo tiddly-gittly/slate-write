@@ -18,6 +18,7 @@ export const withDraggable = (
 ) => withDraggablePrimitive<DraggableProps>(Draggable, Component, options as any);
 
 export const withDraggablesPrimitive = createNodesWithHOC(withDraggable);
+export type DraggableComponents = Parameters<typeof withDraggablesPrimitive>[1];
 
 export const withDraggables = (components: any): Record<DefaultPlatePluginKey, PlatePluginComponent<any>> => {
   return withDraggablesPrimitive(components, draggableComponents);

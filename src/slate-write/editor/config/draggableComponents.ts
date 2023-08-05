@@ -7,12 +7,14 @@ import { ELEMENT_PARAGRAPH } from '@udecode/plate-paragraph';
 
 import { ELEMENT_H1, ELEMENT_H2, ELEMENT_H3, ELEMENT_H4, ELEMENT_H5, ELEMENT_H6 } from '@udecode/plate-heading';
 
+import type { DraggableComponents } from '../components';
+import { addDropHandlers } from '../plugins';
 import { ELEMENT_CODE_BLOCK } from '../plugins/codeblock/constants';
 import { ELEMENT_MACRO } from '../plugins/macro';
 import { ELEMENT_WIDGET } from '../plugins/widget';
 
 // only element that registered keys here will have dnd grabber
-export const draggableComponents = [
+export const draggableComponents: DraggableComponents = [
   {
     // allow li drag, not ul/ol, because ol/ul will move entire list tree. While user might just want to move a single line of li.
     keys: [ELEMENT_LI /* , ELEMENT_OL, ELEMENT_UL */],
@@ -94,3 +96,4 @@ export const draggableComponents = [
     level: 0,
   },
 ];
+addDropHandlers(draggableComponents);
