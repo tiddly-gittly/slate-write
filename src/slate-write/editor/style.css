@@ -1,3 +1,4 @@
-@tailwind base;
+/* we use tw's style for this */
+/* @tailwind base; */
 @tailwind components;
 @tailwind utilities;
