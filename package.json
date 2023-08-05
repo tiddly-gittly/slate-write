@@ -149,7 +149,6 @@
     "wikiast-util-from-wikitext": "^0.3.0",
     "wikiast-util-to-slate-plate-ast": "^0.3.0",
     "wikiast-util-to-wikitext": "^0.3.0",
-    "wikiast-utils": "^0.3.0",
-    "zustand": "^4.4.0"
+    "wikiast-utils": "^0.3.0"
   }
 }

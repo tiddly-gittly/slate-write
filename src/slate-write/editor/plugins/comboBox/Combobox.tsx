@@ -14,7 +14,6 @@ import { isDefined } from '@udecode/utils';
 import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import is from 'typescript-styled-is';
-import shallow from 'zustand/shallow';
 import { ComboboxProps, WidgetsListItemTextGetters } from './Combobox.types';
 import { useAutoCompletePluginStore } from './store';
 import { useComboBox } from './useComboBox';
@@ -72,17 +71,12 @@ export function Combobox<TData extends Data = NoData>({
   getRenderTextTemplate,
   getNameTemplate,
 }: ComboboxProps<TData> & WidgetsListItemTextGetters): JSX.Element | null {
-  const { activeId, highlightedIndex, popperContainer, targetRange, text, filteredItems } = useAutoCompletePluginStore(
-    ({ activeId, highlightedIndex, popperContainer, targetRange, text, filteredItems }) => ({
-      activeId,
-      highlightedIndex,
-      popperContainer,
-      targetRange,
-      text,
-      filteredItems: filteredItems[id ?? ''] ?? [],
-    }),
-    shallow,
-  );
+  const activeId = useAutoCompletePluginStore.get.activeId?.();
+  const highlightedIndex = useAutoCompletePluginStore.get.highlightedIndex?.();
+  const popperContainer = useAutoCompletePluginStore.get.popperContainer?.();
+  const targetRange = useAutoCompletePluginStore.get.targetRange?.();
+  const text = useAutoCompletePluginStore.get.text?.();
+  const filteredItems = useAutoCompletePluginStore.get.filteredItems()[id ?? ''] ?? [];
   const editor = useEditorState();
   const focusedEditorId = useEventEditorSelectors.focus?.();
 
@@ -101,7 +95,7 @@ export function Combobox<TData extends Data = NoData>({
         .slice(0, maxSuggestions);
     }
     if (activeId) {
-      useAutoCompletePluginStore.getState().setFilteredItems({ [id]: result });
+      useAutoCompletePluginStore.set.setFilteredItems({ [id]: result });
     }
     // don't let 'activeId' and 'id' cause change
     // eslint-disable-next-line react-hooks/exhaustive-deps

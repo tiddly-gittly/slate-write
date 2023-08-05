@@ -1,7 +1,7 @@
 /* eslint-disable unicorn/no-null */
 import type { TComboboxItemBase, TComboboxItemWithData } from '@udecode/plate-combobox';
+import { createStore } from '@udecode/plate-core';
 import { BaseSelection } from 'slate';
-import create from 'zustand';
 
 // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-constraint
 export type AnyComboBoxItem<T extends any = any> = TComboboxItemWithData<T> | TComboboxItemBase;
@@ -40,21 +40,23 @@ export interface IAutoCompletePluginStoreActions {
 }
 export type IAutoCompletePluginStore = IAutoCompletePluginContext & IAutoCompletePluginStoreActions;
 
-export const useAutoCompletePluginStore = create<IAutoCompletePluginStore>((set) => ({
+export const useAutoCompletePluginStore = createStore('combo-box')<IAutoCompletePluginContext>({
   highlightedIndex: -1,
   targetRange: null,
   filteredItems: {},
+}).extendActions((set) => ({
   setFilteredItems: (newState: Record<string, AnyComboBoxItem[]>) => {
-    set((state) => ({ ...state, filteredItems: { ...state.filteredItems, ...newState } }));
+    set.state((state) => ({ ...state, filteredItems: { ...state.filteredItems, ...newState } }));
   },
   reset: () => {
-    set({
+    set.state((state) => ({
+      ...state,
       activeId: undefined,
       filteredItems: {},
       highlightedIndex: -1,
       popperContainer: undefined,
       targetRange: null,
       text: undefined,
-    });
+    }));
   },
 }));

@@ -105,7 +105,7 @@ export const withAutoComplete = <V extends Value = Value, E extends PlateEditor<
     if (operation.type === 'insert_text' || operation.type === 'remove_text') {
       const currentAutoCompleteInput = findAutoCompleteInput(editor);
       if (currentAutoCompleteInput) {
-        useAutoCompletePluginStore.setState({ text: getNodeString(currentAutoCompleteInput[0]) });
+        useAutoCompletePluginStore.set.text?.(getNodeString(currentAutoCompleteInput[0]));
       }
     } else if (operation.type === 'set_selection') {
       const previousAutoCompleteInputPath = Range.isRange(operation.properties) ? findAutoCompleteInput(editor, { at: operation.properties })?.[1] : undefined;
@@ -119,7 +119,7 @@ export const withAutoComplete = <V extends Value = Value, E extends PlateEditor<
       }
 
       if (currentAutoCompleteInputPath) {
-        useAutoCompletePluginStore.setState({ targetRange: selection as Range });
+        useAutoCompletePluginStore.set.targetRange?.(selection as Range);
       }
     } else if (operation.type === 'insert_node' && isNodeAutoCompleteInput(editor, operation.node as TNode)) {
       if ((operation.node as TAutoCompleteInputElement).trigger !== trigger) {
@@ -137,18 +137,16 @@ export const withAutoComplete = <V extends Value = Value, E extends PlateEditor<
           focus: { path: [...operation.path, 0], offset: text.length },
         });
 
-        useAutoCompletePluginStore.setState({
-          activeId: id!,
-          text,
-          targetRange: selection,
-        });
+        useAutoCompletePluginStore.set.text?.(text);
+        useAutoCompletePluginStore.set.activeId?.(id);
+        useAutoCompletePluginStore.set.targetRange?.(selection as Range);
       }
     } else if (operation.type === 'remove_node' && isNodeAutoCompleteInput(editor, operation.node as TNode)) {
       if ((operation.node as TAutoCompleteInputElement).trigger !== trigger) {
         return;
       }
 
-      useAutoCompletePluginStore.getState().reset();
+      useAutoCompletePluginStore.set.reset();
     }
   };
 

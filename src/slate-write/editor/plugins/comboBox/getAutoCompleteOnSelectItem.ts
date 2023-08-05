@@ -18,7 +18,7 @@ export type CreateAutoCompleteNode<TData extends Data> = (item: TComboboxItem<TD
 
 export const getAutoCompleteOnSelectItem =
   <TData extends Data = NoData>({ key = ELEMENT_AUTO_COMPLETE }: PlatePluginKey = {}): ComboboxOnSelectItem<TData> => (editor, item: TComboboxItemBase) => {
-    const { targetRange, reset } = useAutoCompletePluginStore.getState();
+    const targetRange = useAutoCompletePluginStore.get.targetRange();
     if (!targetRange) return;
 
     const {
@@ -67,5 +67,5 @@ export const getAutoCompleteOnSelectItem =
 
       replaceCurrentBlockWithParseResult(editor);
     });
-    reset();
+    useAutoCompletePluginStore.set.reset();
   };

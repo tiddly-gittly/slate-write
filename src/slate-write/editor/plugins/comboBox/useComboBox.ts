@@ -1,17 +1,12 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { useCombobox } from 'downshift';
 import { useMemo } from 'react';
-import shallow from 'zustand/shallow';
 import { useAutoCompletePluginStore } from './store';
 
 export function useComboBox(filteredItems: unknown[]) {
-  const { highlightedIndex, isOpen } = useAutoCompletePluginStore(
-    ({ highlightedIndex, activeId }) => ({
-      highlightedIndex,
-      isOpen: activeId !== undefined,
-    }),
-    shallow,
-  );
+  const activeId = useAutoCompletePluginStore.get.activeId?.();
+  const highlightedIndex = useAutoCompletePluginStore.get.highlightedIndex?.();
+  const isOpen = activeId !== undefined;
 
   const { closeMenu, getMenuProps, getComboboxProps, getInputProps, getItemProps } = useCombobox({
     isOpen,

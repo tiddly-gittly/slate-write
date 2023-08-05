@@ -16,8 +16,9 @@ import { useAutoCompletePluginStore } from './store';
  * - tab, enter (select item)
  */
 export const onKeyDownCombobox = <V extends Value = Value, E extends PlateEditor<V> = PlateEditor<V>>(editor: E): KeyboardHandlerReturnType => (event) => {
-  const { highlightedIndex, filteredItems, activeId, reset } = useAutoCompletePluginStore.getState();
-  const currentFilteredItems: TComboboxItemBase[] = (filteredItems[activeId ?? ''] ?? []) as TComboboxItemBase[];
+  const activeId = useAutoCompletePluginStore.get.activeId?.();
+  const highlightedIndex = useAutoCompletePluginStore.get.highlightedIndex?.();
+  const filteredItems = useAutoCompletePluginStore.get.filteredItems()[activeId ?? ''] ?? [];
   const isOpen = activeId !== undefined;
 
   if (!isOpen) return;
@@ -32,15 +33,15 @@ export const onKeyDownCombobox = <V extends Value = Value, E extends PlateEditor
   if (event.key === 'ArrowDown') {
     event.preventDefault();
 
-    const newIndex = getNextWrappingIndex(1, highlightedIndex, currentFilteredItems.length, () => {}, true);
-    useAutoCompletePluginStore.setState({ highlightedIndex: newIndex });
+    const newIndex = getNextWrappingIndex(1, highlightedIndex, filteredItems.length, () => {}, true);
+    useAutoCompletePluginStore.set.highlightedIndex(newIndex);
     return;
   }
   if (event.key === 'ArrowUp') {
     event.preventDefault();
 
-    const newIndex = getNextWrappingIndex(-1, highlightedIndex, currentFilteredItems.length, () => {}, true);
-    useAutoCompletePluginStore.setState({ highlightedIndex: newIndex });
+    const newIndex = getNextWrappingIndex(-1, highlightedIndex, filteredItems.length, () => {}, true);
+    useAutoCompletePluginStore.set.highlightedIndex(newIndex);
     return;
   }
   if (event.key === 'Escape') {
@@ -50,14 +51,14 @@ export const onKeyDownCombobox = <V extends Value = Value, E extends PlateEditor
     if (keepTrigger !== true) {
       insertText(editor, trigger ?? '');
     }
-    reset();
+    useAutoCompletePluginStore.set.reset();
     return;
   }
 
   if (['Tab', 'Enter'].includes(event.key)) {
     event.preventDefault();
     event.stopPropagation();
-    const selectedItem = currentFilteredItems[highlightedIndex];
+    const selectedItem = filteredItems[highlightedIndex];
     // if item selected, insert it
     if (selectedItem !== undefined) {
       onSelectItem?.(editor, selectedItem);
