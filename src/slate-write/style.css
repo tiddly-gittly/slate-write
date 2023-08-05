@@ -15,3 +15,12 @@
 	margin: unset;
 	padding: unset;
 }
+
+.tw-slate-write-drag-handle {
+  opacity: 0;
+	cursor: default;
+}
+.tw-slate-write-drag-handle:hover {
+	opacity: unset;
+	cursor: pointer;
+}

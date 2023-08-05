@@ -19,7 +19,7 @@ export const draggableComponents = [
     draggableProps: {
       classNames: {
         // fix list item mark (dot on the left) covered by drag handle  transform: 'translateX(-200%)'
-        gutterLeft: 'transform-translate-x-[-200%]',
+        gutterLeft: '-translate-x-11',
         // fix list item mark (dot on the left) not visible
         block: 'overflow-visible',
       },
@@ -63,10 +63,18 @@ export const draggableComponents = [
     },
   },
   {
-    keys: [ELEMENT_H5, ELEMENT_H6, ELEMENT_PARAGRAPH],
+    keys: [ELEMENT_H5, ELEMENT_H6],
     draggableProps: {
       classNames: {
-        gutterLeft: 'px-0 mt-[1.05em]',
+        gutterLeft: 'px-0 -mt-1',
+      },
+    },
+  },
+  {
+    keys: [ELEMENT_PARAGRAPH],
+    draggableProps: {
+      classNames: {
+        gutterLeft: 'px-0',
       },
     },
   },

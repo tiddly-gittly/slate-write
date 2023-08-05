@@ -107,7 +107,7 @@ const Draggable = forwardRef<HTMLDivElement, DraggableProps>(
           <div className={cn('flex h-[1.5em]', classNames.blockToolbarWrapper)}>
             <div
               className={cn(
-                'pointer-events-auto mr-1 flex items-center',
+                'pointer-events-auto mr-1 flex items-center tw-slate-write-drag-handle',
                 classNames.blockToolbar,
               )}
             >
