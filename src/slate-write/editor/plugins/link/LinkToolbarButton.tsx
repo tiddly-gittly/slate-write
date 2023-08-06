@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { getPluginType, useEventPlateId, usePlateEditorState, withPlateProvider } from '@udecode/plate-core';
 import { ELEMENT_LINK } from '@udecode/plate-link';
-import { ToolbarButton, ToolbarButtonProps } from '@udecode/plate-ui-toolbar';
 import { someNode } from '@udecode/slate';
-import React from 'react';
+import { ToolbarButton, ToolbarButtonProps } from '../../components/plate-ui/toolbar';
 import { getAndUpsertLink } from './transforms/getAndUpsertLink';
 
 export interface LinkToolbarButtonProps extends ToolbarButtonProps {
@@ -14,7 +13,7 @@ export interface LinkToolbarButtonProps extends ToolbarButtonProps {
 }
 
 export const LinkToolbarButton = withPlateProvider(({ id, getLinkUrl, ...props }: LinkToolbarButtonProps) => {
-  id = useEventPlateId(id);
+  id = String(useEventPlateId(id));
   const editor = usePlateEditorState(id)!;
 
   const type = getPluginType(editor, ELEMENT_LINK);
@@ -22,7 +21,7 @@ export const LinkToolbarButton = withPlateProvider(({ id, getLinkUrl, ...props }
 
   return (
     <ToolbarButton
-      active={isLink}
+      pressed={isLink}
       onMouseDown={(event) => {
         if (!editor) return;
 

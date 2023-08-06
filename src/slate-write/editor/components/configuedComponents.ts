@@ -8,23 +8,25 @@ import { ELEMENT_LINK } from '@udecode/plate-link';
 import { ELEMENT_LI, ELEMENT_OL, ELEMENT_UL } from '@udecode/plate-list';
 import { ELEMENT_PARAGRAPH } from '@udecode/plate-paragraph';
 import { StyledElement, StyledLeaf } from '@udecode/plate-styled-components';
-import { BlockquoteElement } from '@udecode/plate-ui-block-quote';
-import { LinkElement } from '@udecode/plate-ui-link';
-import { MentionElement, MentionInputElement } from '@udecode/plate-ui-mention';
 import { css } from 'styled-components';
 
 import { PlatePluginComponent } from '@udecode/plate-core';
 import { ELEMENT_TABLE, ELEMENT_TD, ELEMENT_TH, ELEMENT_TR } from '@udecode/plate-table';
-import { PlateTableCellElement, PlateTableElement, PlateTableRowElement } from '@udecode/plate-ui-table';
 import { withProps } from '@udecode/plate-utils';
 import type { FunctionComponent } from 'react';
 import { ELEMENT_CODE_BLOCK } from 'wikiast-util-from-slate-plate-ast';
 import { DefaultPlatePluginKey } from '../config/DefaultPlatePluginKey';
-import { withStyledPlaceHolders } from '../config/withStyledPlaceHolders';
-import { CodeBlockElement, ELEMENT_AUTO_COMPLETE, ELEMENT_AUTO_COMPLETE_INPUT } from '../plugins';
+import { CodeBlockElement, ELEMENT_AUTO_COMPLETE, ELEMENT_AUTO_COMPLETE_INPUT, LinkElement } from '../plugins';
 import { ELEMENT_MACRO } from '../plugins/macro';
 import { ELEMENT_WIDGET } from '../plugins/widget';
 import { WidgetBlock } from '../plugins/widget/WidgetBlock';
+import { BlockquoteElement } from './plate-ui/blockquote-element';
+import { MentionElement } from './plate-ui/mention-element';
+import { MentionInputElement } from './plate-ui/mention-input-element';
+import { withPlaceholders } from './plate-ui/placeholder';
+import { TableCellElement } from './plate-ui/table-cell-element';
+import { TableElement } from './plate-ui/table-element';
+import { TableRowElement } from './plate-ui/table-row-element';
 import { withDraggables } from './plate-ui/with-draggables';
 
 export const createPlateUI = <
@@ -162,8 +164,8 @@ const rawComponents = createPlateUI({
       `,
     },
   }),
-  [ELEMENT_TABLE]: PlateTableElement,
-  [ELEMENT_TD]: PlateTableCellElement,
+  [ELEMENT_TABLE]: TableElement,
+  [ELEMENT_TD]: TableCellElement,
   [ELEMENT_TH]: withProps(StyledElement, {
     as: 'th',
     styles: {
@@ -182,7 +184,7 @@ const rawComponents = createPlateUI({
       ],
     },
   }),
-  [ELEMENT_TR]: PlateTableRowElement,
+  [ELEMENT_TR]: TableRowElement,
   // [ELEMENT_TODO_LI]: TodoListElement,
   [MARK_BOLD]: withProps(StyledLeaf, { as: 'strong' }),
   [MARK_CODE]: withProps(StyledLeaf, {
@@ -234,4 +236,4 @@ const rawComponents = createPlateUI({
   [MARK_SUPERSCRIPT]: withProps(StyledLeaf, { as: 'sup' }),
   [MARK_UNDERLINE]: withProps(StyledLeaf, { as: 'u' }),
 });
-export const components = withDraggables(withStyledPlaceHolders(rawComponents));
+export const components = withDraggables(withPlaceholders(rawComponents));

@@ -25,10 +25,6 @@ import { ELEMENT_BLOCKQUOTE } from '@udecode/plate-block-quote';
 import { ELEMENT_H1, ELEMENT_H2, ELEMENT_H3, ELEMENT_H4, ELEMENT_H5, ELEMENT_H6 } from '@udecode/plate-heading';
 import { ELEMENT_OL, ELEMENT_UL } from '@udecode/plate-list';
 import { deleteColumn, deleteRow, deleteTable, insertTable, insertTableColumn, insertTableRow } from '@udecode/plate-table';
-import { ListToolbarButton } from '@udecode/plate-ui-list';
-import { TableToolbarButton } from '@udecode/plate-ui-table';
-import { BalloonToolbar, BlockToolbarButton, MarkToolbarButton } from '@udecode/plate-ui-toolbar';
-import React from 'react';
 
 import { BorderAll } from '@styled-icons/material/BorderAll';
 import { BorderBottom } from '@styled-icons/material/BorderBottom';

@@ -10,6 +10,6 @@
   },
   "aliases": {
     "components": "src/slate-write/editor/components",
-    "utils": "src/slate-write/editor/lib/utils.ts"
+    "utils": "src/slate-write/editor/lib/utils"
   }
 }
