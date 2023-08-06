@@ -47,7 +47,6 @@ export function useCodeMirrorOnCmdEnter(onSave: () => void, codeMirror: MutableR
 
 export function WidgetCodeEditor(props: WidgetBlockElementProps): JSX.Element {
   const { element, children, editor } = props;
-  const store = useWidgetCodeBlockStore();
 
   const textAreaReference = useRef<HTMLTextAreaElement>(null);
 
@@ -65,10 +64,8 @@ export function WidgetCodeEditor(props: WidgetBlockElementProps): JSX.Element {
       // TODO: use idCreator here, and in every deserialize usages
       const slateNode = deserialize(latestCodeReference.current);
       const previousSlateSelection = editor.selection;
-      useWidgetCodeBlockStore.setState({
-        previousActiveId: element.id as string,
-        previousCodeMirrorSelection: codeMirror.current?.getCursor?.('from') ?? undefined,
-      });
+      useWidgetCodeBlockStore.set.previousActiveId?.(element.id as string);
+      useWidgetCodeBlockStore.set.previousCodeMirrorSelection?.(codeMirror.current?.getCursor?.('from') ?? undefined);
       withoutNormalizing(editor, () => {
         removeNodes(editor, { at: path });
         insertNodes(editor, slateNode, { at: path });
@@ -80,13 +77,15 @@ export function WidgetCodeEditor(props: WidgetBlockElementProps): JSX.Element {
   }, [editor, path, codeMirror]);
   useCodeMirrorEventListenerSettled(onCodeChange, codeMirror);
   useCodeMirrorOnCmdEnter(onSave, codeMirror);
+  const previousActiveId = useWidgetCodeBlockStore.get.previousActiveId?.();
+  const previousCodeMirrorSelection = useWidgetCodeBlockStore.get.previousCodeMirrorSelection?.();
   useEffect(() => {
     codeMirror.current?.focus?.();
     // restore selection in code mirror
-    if (store.previousActiveId === element.id && store.previousCodeMirrorSelection !== undefined) {
-      codeMirror.current?.setSelection?.(store.previousCodeMirrorSelection);
+    if (previousActiveId === element.id && previousCodeMirrorSelection !== undefined) {
+      codeMirror.current?.setSelection?.(previousCodeMirrorSelection);
     }
-  }, [codeMirror, element.id, store.previousActiveId, store.previousCodeMirrorSelection]);
+  }, [codeMirror, element.id, previousActiveId, previousCodeMirrorSelection]);
 
   // const [topLeft, topLeftSetter] = useState<{ left?: number; top?: number }>({ top: undefined, left: undefined });
   // const [{ opacity }, dragReference] = useDrag(
