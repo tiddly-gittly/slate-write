@@ -33,6 +33,7 @@ export function useOnChange(context: IUseInitialValueOnChangeContext & { current
   useEffect(() => {
     // there will be cases that triple return replaced with double return (trim),  cause here rerender, but I think it is ok, not so frequent
     if (currentTextReference.current !== initialTiddlerText) {
+      currentTextReference.current = initialTiddlerText;
       const newValue = deserialize(initialTiddlerText, { idCreator });
       currentAstReference.current = newValue;
       // reset selection, so if you delete wikitext, selection won't goto some empty space and cause error
