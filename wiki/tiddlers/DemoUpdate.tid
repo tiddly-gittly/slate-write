@@ -1,0 +1,11 @@
+title: DemoUpdate
+type: text/vnd.tiddlywiki
+
+<$button>
+  <$action-setfield $tiddler="DemoUpdateText" text="""
+  ! Title and marks A''BBB''A
+
+BBB
+"""/>
+  Update DemoUpdateText 's content, it should sync to WYSIWYG content
+</$button>
