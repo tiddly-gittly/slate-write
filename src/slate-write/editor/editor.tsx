@@ -31,7 +31,7 @@ export interface ISaver {
 }
 
 export function Editor(props: IEditorAppProps & IDefaultWidgetProps & { currentAstReference: MutableRefObject<TElement[]>; idCreator: () => string }): JSX.Element {
-  const { currentTiddler: editorID, parentWidget, currentAstReference, initialTiddlerText, saver, idCreator } = props;
+  const { currentTiddler: editorID, currentAstReference, initialTiddlerText, saver, idCreator } = props;
   useOnChange({
     editorID,
     initialTiddlerText,
@@ -42,7 +42,7 @@ export function Editor(props: IEditorAppProps & IDefaultWidgetProps & { currentA
   // TODO: get dom node to add IME listener to prevent update when IME open https://github.com/udecode/plate/issues/239#issuecomment-1098052241
   return (
     <Plate id={editorID} editableProps={{ ...CONFIG.editableProps }} onChange={console.log}>
-      <FloatingToolbar portalElement={parentWidget?.parentDomNode} floatingOptions={{ placement: 'top-end' }}>
+      <FloatingToolbar floatingOptions={{ placement: 'top-end' }}>
         <FloatingToolbarButtons />
       </FloatingToolbar>
       <SnippetCombobox id={editorID} pluginKey='/' />

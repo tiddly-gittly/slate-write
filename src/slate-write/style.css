@@ -16,6 +16,10 @@
 	padding: unset;
 	background-color: unset;
 	color: unset;
+	border-radius: unset;
+	border: unset;
+	cursor: unset;
+	transition: unset;
 }
 
 .tw-slate-write-drag-handle {
