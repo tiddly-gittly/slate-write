@@ -7,12 +7,10 @@ import { MARK_KBD } from '@udecode/plate-kbd';
 import { ELEMENT_LINK } from '@udecode/plate-link';
 import { ELEMENT_LI, ELEMENT_OL, ELEMENT_UL } from '@udecode/plate-list';
 import { ELEMENT_PARAGRAPH } from '@udecode/plate-paragraph';
-import { StyledElement, StyledLeaf } from '@udecode/plate-styled-components';
-import { css } from 'styled-components';
 
 import { PlatePluginComponent } from '@udecode/plate-core';
 import { ELEMENT_TABLE, ELEMENT_TD, ELEMENT_TH, ELEMENT_TR } from '@udecode/plate-table';
-import { withProps } from '@udecode/plate-utils';
+import { PlateElement, PlateLeaf, withProps } from '@udecode/plate-utils';
 import type { FunctionComponent } from 'react';
 import { ELEMENT_CODE_BLOCK } from 'wikiast-util-from-slate-plate-ast';
 import { DefaultPlatePluginKey } from '../config/DefaultPlatePluginKey';
@@ -56,13 +54,8 @@ const rawComponents = createPlateUI({
   [ELEMENT_MACRO]: WidgetBlock,
   [ELEMENT_LINK]: LinkElement,
   [ELEMENT_CODE_BLOCK]: CodeBlockElement,
-  [ELEMENT_PARAGRAPH]: withProps(StyledElement, {
+  [ELEMENT_PARAGRAPH]: withProps(PlateElement, {
     as: 'p',
-    styles: {
-      root: css`
-        padding: 0;
-      `,
-    },
   }),
 
   [ELEMENT_BLOCKQUOTE]: BlockquoteElement,
@@ -70,145 +63,55 @@ const rawComponents = createPlateUI({
   // [ELEMENT_CODE_SYNTAX]: CodeSyntaxLeaf,
   // TODO: use basic hr element, plate's is wiredly huge
   // [ELEMENT_HR]: HrElement,
-  [ELEMENT_H1]: withProps(StyledElement, {
+  [ELEMENT_H1]: withProps(PlateElement, {
     as: 'h1',
-    styles: {
-      root: css`
-        margin: 2em 0 4px;
-        font-size: 1.875em;
-        font-weight: 500;
-        line-height: 1.3;
-      `,
-    },
   }),
-  [ELEMENT_H2]: withProps(StyledElement, {
+  [ELEMENT_H2]: withProps(PlateElement, {
     as: 'h2',
-    styles: {
-      root: css`
-        margin: 1.4em 0 1px;
-        font-size: 1.5em;
-        font-weight: 500;
-        line-height: 1.3;
-      `,
-    },
   }),
-  [ELEMENT_H3]: withProps(StyledElement, {
+  [ELEMENT_H3]: withProps(PlateElement, {
     as: 'h3',
-    styles: {
-      root: css`
-        margin: 1em 0 1px;
-        font-size: 1.25em;
-        font-weight: 500;
-        line-height: 1.3;
-        color: #434343;
-      `,
-    },
   }),
-  [ELEMENT_H4]: withProps(StyledElement, {
+  [ELEMENT_H4]: withProps(PlateElement, {
     as: 'h4',
-    styles: {
-      root: css`
-        margin: 0.75em 0 0;
-        font-size: 1.1em;
-        font-weight: 500;
-        line-height: 1.3;
-        color: #666666;
-      `,
-    },
   }),
-  [ELEMENT_H5]: withProps(StyledElement, {
+  [ELEMENT_H5]: withProps(PlateElement, {
     as: 'h5',
-    styles: {
-      root: css`
-        margin: 0.75em 0 0;
-        font-size: 1.1em;
-        font-weight: 500;
-        line-height: 1.3;
-        color: #666666;
-      `,
-    },
   }),
-  [ELEMENT_H6]: withProps(StyledElement, {
+  [ELEMENT_H6]: withProps(PlateElement, {
     as: 'h6',
-    styles: {
-      root: css`
-        margin: 0.75em 0 0;
-        font-size: 1.1em;
-        font-weight: 500;
-        line-height: 1.3;
-        color: #666666;
-      `,
-    },
   }),
-  // TODO: use tw image widget
-  // [ELEMENT_IMAGE]: ImageElement,
-  [ELEMENT_LI]: withProps(StyledElement, { as: 'li' }),
-  // [ELEMENT_MEDIA_EMBED]: MediaEmbedElement,
-  // [ELEMENT_MENTION]: MentionElement,
-  // [ELEMENT_MENTION_INPUT]: MentionInputElement,
-  [ELEMENT_UL]: withProps(StyledElement, {
+  [ELEMENT_LI]: withProps(PlateElement, { as: 'li' }),
+  [ELEMENT_UL]: withProps(PlateElement, {
     as: 'ul',
   }),
-  [ELEMENT_OL]: withProps(StyledElement, {
+  [ELEMENT_OL]: withProps(PlateElement, {
     as: 'ol',
   }),
   [ELEMENT_TABLE]: TableElement,
   [ELEMENT_TD]: TableCellElement,
-  [ELEMENT_TH]: withProps(StyledElement, {
+  [ELEMENT_TH]: withProps(PlateElement, {
     as: 'th',
-    styles: {
-      root: [
-        css`
-          padding: 2px;
-          text-align: left;
-          background-color: rgb(244, 245, 247);
-          border: 1px solid rgb(193, 199, 208);
-          min-width: 48px;
-
-          > * {
-            margin: 0;
-          }
-        `,
-      ],
-    },
   }),
   [ELEMENT_TR]: TableRowElement,
   // [ELEMENT_TODO_LI]: TodoListElement,
-  [MARK_BOLD]: withProps(StyledLeaf, { as: 'strong' }),
-  [MARK_CODE]: withProps(StyledLeaf, {
+  [MARK_BOLD]: withProps(PlateLeaf, { as: 'strong' }),
+  [MARK_CODE]: withProps(PlateLeaf, {
     as: 'code',
   }),
-  [MARK_HIGHLIGHT]: withProps(StyledLeaf, {
+  [MARK_HIGHLIGHT]: withProps(PlateLeaf, {
     as: 'mark',
-    styles: {
-      root: css`
-        background-color: #fef3b7;
-      `,
+    style: {
+      backgroundColor: '#fef3b7',
     },
   }),
-  [MARK_ITALIC]: withProps(StyledLeaf, { as: 'em' }),
-  [MARK_KBD]: withProps(StyledLeaf, {
+  [MARK_ITALIC]: withProps(PlateLeaf, { as: 'em' }),
+  [MARK_KBD]: withProps(PlateLeaf, {
     as: 'kbd',
-    styles: {
-      root: [
-        css`
-          white-space: pre-wrap;
-          font-size: 75%;
-          font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
-          background-color: white;
-          border: 1px solid black;
-          border-radius: 3px;
-          padding: 0.2em 0.4em;
-          line-height: normal;
-          margin-right: 0.2em;
-          box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.75);
-        `,
-      ],
-    },
   }),
-  [MARK_STRIKETHROUGH]: withProps(StyledLeaf, { as: 's' }),
-  [MARK_SUBSCRIPT]: withProps(StyledLeaf, { as: 'sub' }),
-  [MARK_SUPERSCRIPT]: withProps(StyledLeaf, { as: 'sup' }),
-  [MARK_UNDERLINE]: withProps(StyledLeaf, { as: 'u' }),
+  [MARK_STRIKETHROUGH]: withProps(PlateLeaf, { as: 's' }),
+  [MARK_SUBSCRIPT]: withProps(PlateLeaf, { as: 'sub' }),
+  [MARK_SUPERSCRIPT]: withProps(PlateLeaf, { as: 'sup' }),
+  [MARK_UNDERLINE]: withProps(PlateLeaf, { as: 'u' }),
 });
 export const components = withDraggables(withPlaceholders(rawComponents));

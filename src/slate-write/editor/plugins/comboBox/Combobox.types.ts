@@ -1,9 +1,9 @@
 import type { ComboboxState, NoData, TComboboxItem } from '@udecode/plate-combobox';
-import type { PlateEditor, RenderFunction } from '@udecode/plate-core';
-import type { StyledProps } from '@udecode/plate-styled-components';
+import type { PlateEditor } from '@udecode/plate-core';
 import type { Value } from '@udecode/slate';
 import type { CSSProp } from 'styled-components';
 import type { AnyComboBoxItem } from './store';
+import { PlateElementProps } from '@udecode/plate-utils';
 
 export interface ComboboxStyleProps<TData> extends ComboboxProps<TData> {
   highlighted?: boolean;
@@ -56,7 +56,7 @@ interface ComboboxStateById<TData = NoData> {
    */
   trigger: string;
 }
-export interface ComboboxProps<TData = NoData> extends Partial<Pick<ComboboxState<TData>, 'items'>>, ComboboxStateById<TData>, StyledProps<ComboboxStyles> {
+export interface ComboboxProps<TData = NoData> extends Partial<Pick<ComboboxState<TData>, 'items'>>, ComboboxStateById<TData>, PlateElementProps<ComboboxStyles> {
   /**
    * Render combobox item.
    * @default text

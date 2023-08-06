@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { getPluginOptions } from '@udecode/plate-core';
-import { getRootProps, StyledElementProps } from '@udecode/plate-styled-components';
+import { getRootProps, PlateElementProps } from '@udecode/plate-utils';
 import { setNodes, Value } from '@udecode/slate';
 import { findNodePath } from '@udecode/slate-react';
 import useDebouncedCallback from 'beautiful-react-hooks/useDebouncedCallback';
@@ -63,7 +63,7 @@ export function useCodeMirrorEventListenerSettled(
   }, [onCodeChange, codeMirror]);
 }
 
-export function CodeBlockElement<V extends Value>(props: StyledElementProps<V, TCodeBlockElement>): JSX.Element {
+export function CodeBlockElement<V extends Value>(props: PlateElementProps<V, TCodeBlockElement>): JSX.Element {
   const { attributes, nodeProps, element, children, editor } = props;
 
   const rootProps = getRootProps(props);

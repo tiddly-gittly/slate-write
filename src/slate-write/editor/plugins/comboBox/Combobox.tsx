@@ -9,7 +9,7 @@
 import type { Data, NoData, TComboboxItem, TComboboxItemBase } from '@udecode/plate-combobox';
 import { useEditorState, useEventEditorSelectors } from '@udecode/plate-core';
 import { flip, getRangeBoundingClientRect, offset, shift, useVirtualFloating } from '@udecode/plate-floating';
-import { PortalBody } from '@udecode/plate-styled-components';
+import { PortalBody } from '@udecode/plate-utils';
 import { isDefined } from '@udecode/utils';
 import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';

@@ -2,13 +2,13 @@
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import type { TLinkElement } from '@udecode/plate-link';
-import { getRootProps, StyledElementProps } from '@udecode/plate-styled-components';
+import { getRootProps, PlateElementProps } from '@udecode/plate-utils';
 import type { Value } from '@udecode/slate';
 import React, { useCallback, useContext, useMemo } from 'react';
 import { ParentWidgetContext } from 'tw-react';
 import type { ISlateAstExtraTwMarkers } from 'wikiast-utils';
 
-export const LinkElement = <V extends Value>(props: StyledElementProps<V, TLinkElement & ISlateAstExtraTwMarkers>): JSX.Element => {
+export const LinkElement = <V extends Value>(props: PlateElementProps<V, TLinkElement & ISlateAstExtraTwMarkers>): JSX.Element => {
   const { attributes, children, nodeProps, element } = props;
 
   const rootProps = getRootProps(props);

@@ -27,13 +27,11 @@
   },
   "pnpm": {
     "overrides": {
-      "@udecode/plate-core": "$@udecode/plate-core",
       "react": "$react",
       "react-dom": "$react-dom"
     },
     "peerDependencyRules": {
       "allowedVersions": {
-        "@udecode/plate-core": "$@udecode/plate-core",
         "react": "$react",
         "react-dom": "$react-dom"
       }
@@ -115,7 +113,6 @@
     "@udecode/plate-reset-node": "^22.0.2",
     "@udecode/plate-resizable": "^23.1.0",
     "@udecode/plate-select": "22.0.2",
-    "@udecode/plate-styled-components": "21.5.0",
     "@udecode/plate-table": "23.1.0",
     "@udecode/plate-trailing-block": "22.0.2",
     "@udecode/plate-utils": "^22.0.2",

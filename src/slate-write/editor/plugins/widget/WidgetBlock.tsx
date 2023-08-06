@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { getRootProps, StyledElementProps } from '@udecode/plate-styled-components';
+import { getRootProps, PlateElementProps } from '@udecode/plate-utils';
 import { TElement, Value } from '@udecode/slate';
 import React, { useRef } from 'react';
 import { useSelected } from 'slate-react';
@@ -12,7 +12,7 @@ import { WidgetCodeEditor } from './WidgetCodeEditor';
 export interface IWidgetBlockProps {
   element: TElement & { node: IParseTreeNode };
 }
-export type WidgetBlockElementProps = StyledElementProps<Value, TElement & { node: IParseTreeNode }, IWidgetBlockProps>;
+export type WidgetBlockElementProps = PlateElementProps<Value, TElement & { node: IParseTreeNode }, IWidgetBlockProps>;
 
 export const TwWidgetContainerOuter = styled.div``;
 export const TwWidgetContainerInner = styled.div`
