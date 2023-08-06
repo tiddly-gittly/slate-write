@@ -5,14 +5,15 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { IDefaultWidgetProps, ParentWidgetContext } from 'tw-react';
 
 import { MacrosCombobox, SnippetCombobox, WidgetCombobox, WikiLinkCombobox } from './components/combobox';
-import { BallonToolbar } from './components/Toolbars';
 import { CONFIG } from './config/config';
 import { GlobalStyle } from './config/globalStyle';
 import { useInitialValueOnChange } from './hooks/useInitialValueOnChange';
 import { usePlugins } from './hooks/usePlugins';
 import { getIdFactory } from './plugins/id/getId';
 import './style.css';
+import { FloatingToolbar } from './components/plate-ui/floating-toolbar';
 import { TooltipProvider } from './components/plate-ui/tooltip';
+import { FloatingToolbarButtons } from './components/Toolbars';
 
 export interface IEditorAppProps {
   currentTiddler: string;
@@ -33,7 +34,9 @@ export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Elemen
   // TODO: get dom node to add IME listener to prevent update when IME open https://github.com/udecode/plate/issues/239#issuecomment-1098052241
   return (
     <Plate id={editorID} editableProps={{ ...CONFIG.editableProps }}>
-      <BallonToolbar />
+      <FloatingToolbar>
+        <FloatingToolbarButtons />
+      </FloatingToolbar>
       <SnippetCombobox id={editorID} pluginKey='/' />
       <WikiLinkCombobox id={editorID} pluginKey='[[' />
       <WikiLinkCombobox id={editorID} pluginKey='{{' />

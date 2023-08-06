@@ -1,18 +1,18 @@
 'use client';
 
+import { PlateElement, PlateElementProps } from '@udecode/plate-utils';
 import React from 'react';
-import { PlateElement, PlateElementProps } from '@udecode/plate-common';
 
 import { cn } from 'src/slate-write/editor/lib/utils';
 
 const BlockquoteElement = React.forwardRef<
   React.ElementRef<typeof PlateElement>,
   PlateElementProps
->(({ className, children, ...props }, ref) => {
+>(({ className, children, ...props }, reference) => {
   return (
     <PlateElement
       asChild
-      ref={ref}
+      ref={reference}
       className={cn('my-1 border-l-2 pl-6 italic', className)}
       {...props}
     >

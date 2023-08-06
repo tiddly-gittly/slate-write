@@ -1,7 +1,10 @@
+/* eslint-disable unicorn/no-null */
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
+/* eslint-disable react/prop-types */
 'use client';
 
-import * as React from 'react';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
+import * as React from 'react';
 
 import { cn } from 'src/slate-write/editor/lib/utils';
 
@@ -16,23 +19,17 @@ const TooltipPortal = TooltipPrimitive.Portal;
 const TooltipContent = React.forwardRef<
   React.ElementRef<typeof TooltipPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>
->(({ className, sideOffset = 4, ...props }, ref) => (
+>(({ className, sideOffset = 4, ...props }, reference) => (
   <TooltipPrimitive.Content
-    ref={ref}
+    ref={reference}
     sideOffset={sideOffset}
     className={cn(
       'z-50 overflow-hidden rounded-md border border-slate-200 bg-white px-3 py-1.5 text-sm text-slate-950 shadow-md dark:border-slate-800 dark:bg-slate-950 dark:text-slate-50',
-      className
+      className,
     )}
     {...props}
   />
 ));
 TooltipContent.displayName = TooltipPrimitive.Content.displayName;
 
-export {
-  Tooltip,
-  TooltipTrigger,
-  TooltipPortal,
-  TooltipContent,
-  TooltipProvider,
-};
+export { Tooltip, TooltipContent, TooltipPortal, TooltipProvider, TooltipTrigger };

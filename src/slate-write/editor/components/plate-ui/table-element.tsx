@@ -1,41 +1,28 @@
-import React, { forwardRef } from 'react';
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
+/* eslint-disable unicorn/prevent-abbreviations */
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { PopoverAnchor, PopoverContentProps } from '@radix-ui/react-popover';
-import {
-  isCollapsed,
-  PlateElement,
-  PlateElementProps,
-  someNode,
-  useElement,
-  usePlateEditorState,
-  useRemoveNodeButton,
-} from '@udecode/plate-common';
-import {
-  TTableElement,
-  useTableBordersDropdownMenuContentState,
-  useTableElement,
-  useTableElementState,
-} from '@udecode/plate-table';
+import { TTableElement, useTableBordersDropdownMenuContentState, useTableElement, useTableElementState } from '@udecode/plate-table';
+import React, { forwardRef } from 'react';
 import { useReadOnly } from 'slate-react';
 
 import { cn } from 'src/slate-write/editor/lib/utils';
-import { Icons, iconVariants } from '@/components/icons';
 
+import { BorderNone } from '@styled-icons/boxicons-regular';
+import { BorderAll, BorderBottom, BorderLeft, BorderRight, BorderTop, Delete } from '@styled-icons/material';
+import { useElement, usePlateEditorState } from '@udecode/plate-core';
+import { PlateElement, PlateElementProps, useRemoveNodeButton } from '@udecode/plate-utils';
+import { isCollapsed, someNode } from '@udecode/slate';
+import { iconVariants } from '../icons';
 import { Button } from './button';
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuPortal,
-  DropdownMenuTrigger,
-} from './dropdown-menu';
+import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuPortal, DropdownMenuTrigger } from './dropdown-menu';
 import { Popover, PopoverContent, popoverVariants } from './popover';
 import { Separator } from './separator';
 
 const TableBordersDropdownMenuContent = forwardRef<
   React.ElementRef<typeof DropdownMenuPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Content>
->((props, ref) => {
+>((props, reference) => {
   const {
     getOnSelectTableBorder,
     hasOuterBorders,
@@ -48,7 +35,7 @@ const TableBordersDropdownMenuContent = forwardRef<
 
   return (
     <DropdownMenuContent
-      ref={ref}
+      ref={reference}
       className={cn('min-w-[220px]')}
       side='right'
       align='start'
@@ -59,28 +46,28 @@ const TableBordersDropdownMenuContent = forwardRef<
         checked={hasBottomBorder}
         onCheckedChange={getOnSelectTableBorder('bottom')}
       >
-        <Icons.borderBottom className={iconVariants({ size: 'sm' })} />
+        <BorderBottom className={iconVariants({ size: 'sm' })} />
         <div>Bottom Border</div>
       </DropdownMenuCheckboxItem>
       <DropdownMenuCheckboxItem
         checked={hasTopBorder}
         onCheckedChange={getOnSelectTableBorder('top')}
       >
-        <Icons.borderTop className={iconVariants({ size: 'sm' })} />
+        <BorderTop className={iconVariants({ size: 'sm' })} />
         <div>Top Border</div>
       </DropdownMenuCheckboxItem>
       <DropdownMenuCheckboxItem
         checked={hasLeftBorder}
         onCheckedChange={getOnSelectTableBorder('left')}
       >
-        <Icons.borderLeft className={iconVariants({ size: 'sm' })} />
+        <BorderLeft className={iconVariants({ size: 'sm' })} />
         <div>Left Border</div>
       </DropdownMenuCheckboxItem>
       <DropdownMenuCheckboxItem
         checked={hasRightBorder}
         onCheckedChange={getOnSelectTableBorder('right')}
       >
-        <Icons.borderRight className={iconVariants({ size: 'sm' })} />
+        <BorderRight className={iconVariants({ size: 'sm' })} />
         <div>Right Border</div>
       </DropdownMenuCheckboxItem>
 
@@ -90,14 +77,14 @@ const TableBordersDropdownMenuContent = forwardRef<
         checked={hasNoBorders}
         onCheckedChange={getOnSelectTableBorder('none')}
       >
-        <Icons.borderNone className={iconVariants({ size: 'sm' })} />
+        <BorderNone className={iconVariants({ size: 'sm' })} />
         <div>No Border</div>
       </DropdownMenuCheckboxItem>
       <DropdownMenuCheckboxItem
         checked={hasOuterBorders}
         onCheckedChange={getOnSelectTableBorder('outer')}
       >
-        <Icons.borderAll className={iconVariants({ size: 'sm' })} />
+        <BorderAll className={iconVariants({ size: 'sm' })} />
         <div>Outside Borders</div>
       </DropdownMenuCheckboxItem>
     </DropdownMenuContent>
@@ -108,14 +95,13 @@ TableBordersDropdownMenuContent.displayName = 'TableBordersDropdownMenuContent';
 const TableFloatingToolbar = React.forwardRef<
   React.ElementRef<typeof PopoverContent>,
   PopoverContentProps
->(({ children, ...props }, ref) => {
+>(({ children, ...props }, reference) => {
   const element = useElement<TTableElement>();
   const { props: buttonProps } = useRemoveNodeButton({ element });
 
   const readOnly = useReadOnly();
   const editor = usePlateEditorState();
-  const open =
-    !readOnly &&
+  const open = !readOnly &&
     someNode(editor, {
       match: (n) => n === element,
     }) &&
@@ -125,15 +111,17 @@ const TableFloatingToolbar = React.forwardRef<
     <Popover open={open} modal={false}>
       <PopoverAnchor asChild>{children}</PopoverAnchor>
       <PopoverContent
-        ref={ref}
+        ref={reference}
         className={cn(popoverVariants(), 'flex w-[220px] flex-col gap-1 p-1')}
-        onOpenAutoFocus={(e) => e.preventDefault()}
+        onOpenAutoFocus={(e) => {
+          e.preventDefault();
+        }}
         {...props}
       >
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
             <Button variant='ghost' isMenu>
-              <Icons.borderAll className='mr-2 h-4 w-4' />
+              <BorderAll className='mr-2 h-4 w-4' />
               Borders
             </Button>
           </DropdownMenuTrigger>
@@ -144,7 +132,7 @@ const TableFloatingToolbar = React.forwardRef<
         </DropdownMenu>
 
         <Button contentEditable={false} variant='ghost' isMenu {...buttonProps}>
-          <Icons.delete className='mr-2 h-4 w-4' />
+          <Delete className='mr-2 h-4 w-4' />
           Delete
         </Button>
       </PopoverContent>
@@ -156,9 +144,8 @@ TableFloatingToolbar.displayName = 'TableFloatingToolbar';
 const TableElement = React.forwardRef<
   React.ElementRef<typeof PlateElement>,
   PlateElementProps
->(({ className, children, ...props }, ref) => {
-  const { colSizes, isSelectingCell, minColumnWidth, marginLeft } =
-    useTableElementState();
+>(({ className, children, ...props }, reference) => {
+  const { colSizes, isSelectingCell, minColumnWidth, marginLeft } = useTableElementState();
   const { props: tableProps, colGroupProps } = useTableElement();
 
   return (
@@ -166,11 +153,11 @@ const TableElement = React.forwardRef<
       <div style={{ paddingLeft: marginLeft }}>
         <PlateElement
           asChild
-          ref={ref}
+          ref={reference}
           className={cn(
             'my-4 ml-px mr-0 table h-px w-full table-fixed border-collapse',
             isSelectingCell && '[&_*::selection]:bg-none',
-            className
+            className,
           )}
           {...tableProps}
           {...props}
@@ -197,4 +184,4 @@ const TableElement = React.forwardRef<
 });
 TableElement.displayName = 'TableElement';
 
-export { TableElement, TableFloatingToolbar, TableBordersDropdownMenuContent };
+export { TableBordersDropdownMenuContent, TableElement, TableFloatingToolbar };

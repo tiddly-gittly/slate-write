@@ -1,19 +1,15 @@
+/* eslint-disable @typescript-eslint/consistent-type-assertions */
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
+import { TTableCellElement, useTableCellElement, useTableCellElementResizable, useTableCellElementResizableState, useTableCellElementState } from '@udecode/plate-table';
+import { PlateElement, PlateElementProps } from '@udecode/plate-utils';
 import React from 'react';
-import { PlateElement, PlateElementProps, Value } from '@udecode/plate-common';
-import {
-  TTableCellElement,
-  useTableCellElement,
-  useTableCellElementResizable,
-  useTableCellElementResizableState,
-  useTableCellElementState,
-} from '@udecode/plate-table';
 
 import { cn } from 'src/slate-write/editor/lib/utils';
 
 import { ResizeHandle } from './resizable';
+import { Value } from '@udecode/slate';
 
-export interface TableCellElementProps
-  extends PlateElementProps<Value, TTableCellElement> {
+export interface TableCellElementProps extends PlateElementProps<Value, TTableCellElement> {
   hideBorder?: boolean;
   isHeader?: boolean;
 }
@@ -21,7 +17,7 @@ export interface TableCellElementProps
 const TableCellElement = React.forwardRef<
   React.ElementRef<typeof PlateElement>,
   TableCellElementProps
->(({ children, className, style, hideBorder, isHeader, ...props }, ref) => {
+>(({ children, className, style, hideBorder, isHeader, ...props }, reference) => {
   const { element } = props;
 
   const {
@@ -35,20 +31,19 @@ const TableCellElement = React.forwardRef<
     borders,
     isSelectingCell,
   } = useTableCellElementState();
-  const { props: cellProps } = useTableCellElement({ element: props.element });
+  const { props: cellProps } = useTableCellElement({ element: element });
   const resizableState = useTableCellElementResizableState({
     colIndex,
     rowIndex,
   });
-  const { rightProps, bottomProps, leftProps, hiddenLeft } =
-    useTableCellElementResizable(resizableState);
+  const { rightProps, bottomProps, leftProps, hiddenLeft } = useTableCellElementResizable(resizableState);
 
   const Cell = isHeader ? 'th' : 'td';
 
   return (
     <PlateElement
       asChild
-      ref={ref}
+      ref={reference}
       className={cn(
         'relative overflow-visible border-none bg-white p-0 dark:bg-slate-950',
         hideBorder && 'before:border-none',
@@ -65,19 +60,17 @@ const TableCellElement = React.forwardRef<
                   `before:border-b before:border-b-border`,
                 borders.right?.size && `before:border-r before:border-r-border`,
                 borders.left?.size && `before:border-l before:border-l-border`,
-                borders.top?.size && `before:border-t before:border-t-border`
-              )
+                borders.top?.size && `before:border-t before:border-t-border`,
+              ),
           ),
-        className
+        className,
       )}
       {...cellProps}
       {...props}
-      style={
-        {
-          '--cellBackground': element.background,
-          ...style,
-        } as React.CSSProperties
-      }
+      style={{
+        '--cellBackground': element.background,
+        ...style,
+      } as React.CSSProperties}
     >
       <Cell>
         <div
@@ -116,7 +109,7 @@ const TableCellElement = React.forwardRef<
                   <div
                     className={cn(
                       'absolute -top-3 z-30 h-[calc(100%_+_12px)] w-1 bg-slate-400 dark:bg-slate-800',
-                      'right-[-1.5px]'
+                      'right-[-1.5px]',
                     )}
                   />
                 )}
@@ -124,7 +117,7 @@ const TableCellElement = React.forwardRef<
                   <div
                     className={cn(
                       'absolute -top-3 z-30 h-[calc(100%_+_12px)] w-1 bg-slate-400 dark:bg-slate-800',
-                      'left-[-1.5px]'
+                      'left-[-1.5px]',
                     )}
                   />
                 )}
@@ -141,8 +134,8 @@ TableCellElement.displayName = 'TableCellElement';
 const TableCellHeaderElement = React.forwardRef<
   React.ElementRef<typeof TableCellElement>,
   TableCellElementProps
->((props, ref) => {
-  return <TableCellElement ref={ref} {...props} isHeader />;
+>((props, reference) => {
+  return <TableCellElement ref={reference} {...props} isHeader />;
 });
 TableCellHeaderElement.displayName = 'TableCellHeaderElement';
 

@@ -1,5 +1,4 @@
-import React from 'react';
-import { PlateElement, PlateElementProps } from '@udecode/plate-common';
+import { PlateElement, PlateElementProps } from '@udecode/plate-utils';
 import { cva, VariantProps } from 'class-variance-authority';
 
 import { cn } from 'src/slate-write/editor/lib/utils';

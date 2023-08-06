@@ -104,3 +104,7 @@ Copied from @tailwind base; */
 /* other tailwind styles */
 @tailwind components;
 @tailwind utilities;
+
+.z-200 {
+  z-index: 200;
+}

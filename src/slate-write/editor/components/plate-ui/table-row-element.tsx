@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
+import { PlateElement, PlateElementProps } from '@udecode/plate-utils';
 import React from 'react';
-import { PlateElement, PlateElementProps } from '@udecode/plate-common';
 
 import { cn } from 'src/slate-write/editor/lib/utils';
 
@@ -10,11 +11,11 @@ export interface PlateTableRowElementProps extends PlateElementProps {
 const TableRowElement = React.forwardRef<
   React.ElementRef<typeof PlateElement>,
   PlateTableRowElementProps
->(({ hideBorder, children, ...props }, ref) => {
+>(({ hideBorder, children, ...props }, reference) => {
   return (
     <PlateElement
       asChild
-      ref={ref}
+      ref={reference}
       className={cn('h-full', hideBorder && 'border-none')}
       {...props}
     >

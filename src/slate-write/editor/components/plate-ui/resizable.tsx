@@ -1,18 +1,15 @@
 'use client';
 
-import React, { ComponentProps } from 'react';
-import {
-  Resizable as ResizablePrimitive,
-  ResizeHandle as ResizeHandlePrimitive,
-} from '@udecode/plate-resizable';
+import { Resizable as ResizablePrimitive, ResizeHandle as ResizeHandlePrimitive } from '@udecode/plate-resizable';
 import { cva, VariantProps } from 'class-variance-authority';
+import React, { ComponentProps } from 'react';
 
 import { cn } from 'src/slate-write/editor/lib/utils';
 
 export const mediaResizeHandleVariants = cva(
   cn(
     'top-0 flex w-6 select-none flex-col justify-center',
-    'after:flex after:h-16 after:w-[3px] after:rounded-[6px] after:bg-slate-400 after:opacity-0 after:content-[_] group-hover:after:opacity-100 dark:after:bg-slate-800'
+    'after:flex after:h-16 after:w-[3px] after:rounded-[6px] after:bg-slate-400 after:opacity-0 after:content-[_] group-hover:after:opacity-100 dark:after:bg-slate-800',
   ),
   {
     variants: {
@@ -21,7 +18,7 @@ export const mediaResizeHandleVariants = cva(
         right: '-right-3 -mr-3 items-end pr-3',
       },
     },
-  }
+  },
 );
 
 const resizeHandleVariants = cva(cn('absolute z-40'), {
@@ -37,14 +34,14 @@ const resizeHandleVariants = cva(cn('absolute z-40'), {
 
 const ResizeHandle = React.forwardRef<
   React.ElementRef<typeof ResizeHandlePrimitive>,
-  ComponentProps<typeof ResizeHandlePrimitive> &
-    Omit<VariantProps<typeof resizeHandleVariants>, 'direction'>
->(({ className, ...props }, ref) => (
+  & ComponentProps<typeof ResizeHandlePrimitive>
+  & Omit<VariantProps<typeof resizeHandleVariants>, 'direction'>
+>(({ className, ...props }, reference) => (
   <ResizeHandlePrimitive
-    ref={ref}
+    ref={reference}
     className={cn(
       resizeHandleVariants({ direction: props.options?.direction }),
-      className
+      className,
     )}
     {...props}
   />
@@ -63,11 +60,11 @@ const resizableVariants = cva('', {
 
 const Resizable = React.forwardRef<
   React.ElementRef<typeof ResizablePrimitive>,
-  ComponentProps<typeof ResizablePrimitive> &
-    VariantProps<typeof resizableVariants>
->(({ className, align, ...props }, ref) => (
+  & ComponentProps<typeof ResizablePrimitive>
+  & VariantProps<typeof resizableVariants>
+>(({ className, align, ...props }, reference) => (
   <ResizablePrimitive
-    ref={ref}
+    ref={reference}
     className={cn(resizableVariants({ align }), className)}
     {...props}
   />

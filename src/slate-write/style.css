@@ -11,9 +11,11 @@
 	font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
 }
 
-.tw-slate-write-container button:not(.tc-btn-invisible) {
+.tw-slate-write-container button:not(.tc-btn-invisible), div[role=toolbar] button:not(.tc-btn-invisible) {
 	margin: unset;
 	padding: unset;
+	background-color: unset;
+	color: unset;
 }
 
 .tw-slate-write-drag-handle {
