@@ -1,7 +1,7 @@
 import { usePlateActions, usePlateEditorRef, useResetPlateEditor } from '@udecode/plate-core';
 import { TElement, TNode } from '@udecode/slate';
 import useDebouncedCallback from 'beautiful-react-hooks/useDebouncedCallback';
-import { useCallback, useEffect, useRef } from 'react';
+import { MutableRefObject, useCallback, useEffect, useRef } from 'react';
 import { ReactEditor } from 'slate-react';
 
 import { deserialize, serialize } from '../../transform/serialize';
@@ -13,14 +13,19 @@ interface IUseInitialValueOnChangeContext {
   initialTiddlerText: string;
   saver: ISaver;
 }
-export function useInitialValueOnChange(context: IUseInitialValueOnChangeContext) {
-  const { editorID, initialTiddlerText, saver: { onSave, interval, lock }, idCreator } = context;
-  const resetEditor = useResetPlateEditor(editorID);
-  const editorReference = usePlateEditorRef(editorID);
-  const { value: updateEditorValue } = usePlateActions(editorID);
-
+export function useInitialValue(context: IUseInitialValueOnChangeContext) {
+  const { initialTiddlerText, idCreator } = context;
   // Add the initial value when setting up our state.
   const currentAstReference = useRef<TElement[]>(deserialize(initialTiddlerText, { idCreator }));
+  return currentAstReference;
+}
+
+export function useOnChange(context: IUseInitialValueOnChangeContext & { currentAstReference: MutableRefObject<TElement[]> }) {
+  const { editorID, initialTiddlerText, saver: { onSave, interval, lock }, idCreator, currentAstReference } = context;
+  const setOnChange = usePlateActions(editorID).onChange();
+  const resetEditor = useResetPlateEditor(editorID);
+  const editorReference = usePlateEditorRef(editorID);
+  const setValue = usePlateActions(editorID).value();
   /** current text is only used for compare, we don't want it trigger rerender, so use ref to store it */
   const currentTextReference = useRef<string>(initialTiddlerText);
 
@@ -32,9 +37,9 @@ export function useInitialValueOnChange(context: IUseInitialValueOnChangeContext
       currentAstReference.current = newValue;
       // reset selection, so if you delete wikitext, selection won't goto some empty space and cause error
       resetEditor();
-      updateEditorValue(newValue);
+      setValue(newValue);
     }
-  }, [initialTiddlerText, currentTextReference, updateEditorValue, resetEditor, idCreator]);
+  }, [initialTiddlerText, currentTextReference, setValue, resetEditor, idCreator, currentAstReference]);
   const saver = useCallback(
     (newValue: TNode[]) => {
       const newText = serialize(newValue);
@@ -59,8 +64,13 @@ export function useInitialValueOnChange(context: IUseInitialValueOnChangeContext
       lock();
       debouncedSaver(newValue);
     },
-    [debouncedSaver, editorReference, lock],
+    [currentAstReference, debouncedSaver, editorReference, lock],
   );
+  useEffect(() => {
+    setOnChange({
+      fn: onChange,
+    });
+  }, [onChange, setOnChange]);
 
   useEffect(() => {
     // reset selection, so if you delete wikitext, selection won't goto some empty space and cause error
@@ -72,6 +82,4 @@ export function useInitialValueOnChange(context: IUseInitialValueOnChangeContext
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  return [currentAstReference, onChange] as const;
 }

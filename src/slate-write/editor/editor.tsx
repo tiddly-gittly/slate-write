@@ -1,5 +1,5 @@
 import { Plate, PlateProvider } from '@udecode/plate-core';
-import React, { useCallback, useMemo } from 'react';
+import { MutableRefObject, useMemo } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { IDefaultWidgetProps, ParentWidgetContext } from 'tw-react';
@@ -7,10 +7,11 @@ import { IDefaultWidgetProps, ParentWidgetContext } from 'tw-react';
 import { MacrosCombobox, SnippetCombobox, WidgetCombobox, WikiLinkCombobox } from './components/combobox';
 import { CONFIG } from './config/config';
 import { GlobalStyle } from './config/globalStyle';
-import { useInitialValueOnChange } from './hooks/useInitialValueOnChange';
+import { useInitialValue, useOnChange } from './hooks/useInitialValueOnChange';
 import { usePlugins } from './hooks/usePlugins';
 import { getIdFactory } from './plugins/id/getId';
 import './style.css';
+import { TElement } from '@udecode/slate';
 import { FloatingToolbar } from './components/plate-ui/floating-toolbar';
 import { TooltipProvider } from './components/plate-ui/tooltip';
 import { FloatingToolbarButtons } from './components/Toolbars';
@@ -29,11 +30,18 @@ export interface ISaver {
   onSave: (value: string) => void;
 }
 
-export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Element {
-  const { currentTiddler: editorID, parentWidget } = props;
+export function Editor(props: IEditorAppProps & IDefaultWidgetProps & { currentAstReference: MutableRefObject<TElement[]>; idCreator: () => string }): JSX.Element {
+  const { currentTiddler: editorID, parentWidget, currentAstReference, initialTiddlerText, saver, idCreator } = props;
+  useOnChange({
+    editorID,
+    initialTiddlerText,
+    saver,
+    idCreator,
+    currentAstReference,
+  });
   // TODO: get dom node to add IME listener to prevent update when IME open https://github.com/udecode/plate/issues/239#issuecomment-1098052241
   return (
-    <Plate id={editorID} editableProps={{ ...CONFIG.editableProps }}>
+    <Plate id={editorID} editableProps={{ ...CONFIG.editableProps }} onChange={console.log}>
       <FloatingToolbar portalElement={parentWidget?.parentDomNode} floatingOptions={{ placement: 'top-end' }}>
         <FloatingToolbarButtons />
       </FloatingToolbar>
@@ -51,7 +59,7 @@ export function App(props: IEditorAppProps & IDefaultWidgetProps): JSX.Element {
   const idCreator = useMemo(() => {
     return getIdFactory(editorID);
   }, [editorID]);
-  const [currentAstReference, onChange] = useInitialValueOnChange({
+  const currentAstReference = useInitialValue({
     editorID,
     initialTiddlerText: props.initialTiddlerText,
     saver: props.saver,
@@ -73,8 +81,8 @@ export function App(props: IEditorAppProps & IDefaultWidgetProps): JSX.Element {
           skipDelayDuration={0}
         >
           <div className='tw-slate-write-container'>
-            <PlateProvider id={editorID} initialValue={currentAstReference.current} onChange={onChange} plugins={plugins}>
-              <Editor {...props} />
+            <PlateProvider id={editorID} initialValue={currentAstReference.current} plugins={plugins}>
+              <Editor {...props} currentAstReference={currentAstReference} idCreator={idCreator} />
             </PlateProvider>
           </div>
         </TooltipProvider>
