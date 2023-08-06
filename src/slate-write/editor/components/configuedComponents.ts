@@ -148,21 +148,9 @@ const rawComponents = createPlateUI({
   // [ELEMENT_MENTION_INPUT]: MentionInputElement,
   [ELEMENT_UL]: withProps(StyledElement, {
     as: 'ul',
-    styles: {
-      root: css`
-        margin: 0;
-        padding-inline-start: 24px;
-      `,
-    },
   }),
   [ELEMENT_OL]: withProps(StyledElement, {
     as: 'ol',
-    styles: {
-      root: css`
-        margin: 0;
-        padding-inline-start: 24px;
-      `,
-    },
   }),
   [ELEMENT_TABLE]: TableElement,
   [ELEMENT_TD]: TableCellElement,
@@ -189,19 +177,6 @@ const rawComponents = createPlateUI({
   [MARK_BOLD]: withProps(StyledLeaf, { as: 'strong' }),
   [MARK_CODE]: withProps(StyledLeaf, {
     as: 'code',
-    styles: {
-      root: [
-        css`
-          white-space: pre-wrap;
-          font-size: 85%;
-          font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
-          background-color: rgba(135, 131, 120, 0.15);
-          border-radius: 3px;
-          padding: 0.2em 0.4em;
-          line-height: normal;
-        `,
-      ],
-    },
   }),
   [MARK_HIGHLIGHT]: withProps(StyledLeaf, {
     as: 'mark',
