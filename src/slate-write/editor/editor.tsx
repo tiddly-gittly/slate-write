@@ -1,5 +1,5 @@
 import { Plate, PlateProvider } from '@udecode/plate-core';
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { IDefaultWidgetProps, ParentWidgetContext } from 'tw-react';
@@ -30,11 +30,11 @@ export interface ISaver {
 }
 
 export function Editor(props: IEditorAppProps & IDefaultWidgetProps): JSX.Element {
-  const { currentTiddler: editorID } = props;
+  const { currentTiddler: editorID, parentWidget } = props;
   // TODO: get dom node to add IME listener to prevent update when IME open https://github.com/udecode/plate/issues/239#issuecomment-1098052241
   return (
     <Plate id={editorID} editableProps={{ ...CONFIG.editableProps }}>
-      <FloatingToolbar>
+      <FloatingToolbar portalElement={parentWidget?.parentDomNode} floatingOptions={{ placement: 'top-end' }}>
         <FloatingToolbarButtons />
       </FloatingToolbar>
       <SnippetCombobox id={editorID} pluginKey='/' />

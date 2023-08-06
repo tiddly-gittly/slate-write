@@ -36,7 +36,7 @@ const TableBordersDropdownMenuContent = forwardRef<
   return (
     <DropdownMenuContent
       ref={reference}
-      className={cn('min-w-[220px]')}
+      className={cn('min-w-[220px]', 'z-200')}
       side='right'
       align='start'
       sideOffset={0}

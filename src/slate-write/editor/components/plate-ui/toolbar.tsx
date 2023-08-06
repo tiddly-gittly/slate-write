@@ -143,7 +143,7 @@ const ToolbarButton = React.forwardRef<
           <TooltipTrigger>{content}</TooltipTrigger>
 
           <TooltipPortal>
-            <TooltipContent>{tooltip}</TooltipContent>
+            <TooltipContent className='z-200'>{tooltip}</TooltipContent>
           </TooltipPortal>
         </Tooltip>
       )

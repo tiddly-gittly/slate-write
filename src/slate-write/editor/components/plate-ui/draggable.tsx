@@ -115,7 +115,7 @@ const Draggable = forwardRef<HTMLDivElement, DraggableProps>(
                 <TooltipTrigger ref={handleRef}>
                   <DragHandle className='h-4 w-4 text-slate-500 dark:text-slate-400' />
                 </TooltipTrigger>
-                <TooltipContent>Drag to move</TooltipContent>
+                <TooltipContent align='end'>Drag to move</TooltipContent>
               </Tooltip>
             </div>
           </div>
