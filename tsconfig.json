@@ -5,7 +5,7 @@
     "esModuleInterop": true,
     "jsx": "react-jsx",
     "baseUrl": "./",
-    "typeRoots" : ["node_modules/@types", "node_modules/tw5-typed"],
+    "typeRoots" : ["node_modules/@types", "node_modules/tw5-typed", "node_modules/tw-react/dist/lib"],
     "lib": ["DOM", "ESNext"]
   },
   "include": ["src"],
