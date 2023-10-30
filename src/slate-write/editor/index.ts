@@ -60,7 +60,6 @@ class SlateWriteWidget extends Widget<IEditorAppProps> {
         return;
       }
       $tw.wiki.setText(this.editTitle, undefined, undefined, newText);
-      notifyNavigatorSaveTiddler(this.editTitle, this.parentWidget);
       this.unlock();
     };
     return {
@@ -171,21 +170,6 @@ class SlateWriteWidget extends Widget<IEditorAppProps> {
     }
     return false;
   }
-}
-
-function notifyNavigatorSaveTiddler(title: string, parentWidget?: TWWidget) {
-  window.requestIdleCallback(
-    () => {
-      parentWidget?.dispatchEvent({
-        type: 'tm-save-tiddler',
-        // param: param,
-        paramObject: { suppressNavigation: 'yes' },
-        tiddlerTitle: title,
-      });
-      parentWidget?.dispatchEvent({ type: 'tm-auto-save-wiki' });
-    },
-    { timeout: 2000 },
-  );
 }
 
 declare let exports: {
