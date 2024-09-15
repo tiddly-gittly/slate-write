@@ -7,6 +7,6 @@
   "plugin-type": "plugin",
   "version": "0.5.2",
   "dependents": ["$:/plugins/linonetwo/tw-react"],
-  "Modern.TiddlyDev#ExternalModules": "react react-dom",
+  "Modern.TiddlyDev#ExternalModules": "react react-dom @udecode/plate-common/server",
   "list": "readme develop"
 }

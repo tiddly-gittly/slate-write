@@ -1,9 +1,13 @@
-import { createPluginFactory } from '@udecode/plate-core';
+import { toPlatePlugin } from '@udecode/plate-common/react';
+import { createSlatePlugin } from '@udecode/plate-core';
 
 export const ELEMENT_WIDGET = 'widget';
 
-export const createWidgetPlugin = createPluginFactory({
+export const reactWidgetPlugin = toPlatePlugin(createSlatePlugin({
   key: ELEMENT_WIDGET,
-  isElement: true,
-  isVoid: true,
-});
+  node: {
+    isElement: true,
+    isVoid: true,
+  },
+}));
+ 
