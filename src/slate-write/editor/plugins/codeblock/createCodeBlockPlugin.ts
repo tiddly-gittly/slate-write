@@ -1,14 +1,16 @@
-import { createPluginFactory } from '@udecode/plate-core';
+import { toPlatePlugin } from '@udecode/plate-common/react'; 
+import { createSlatePlugin } from '@udecode/plate-core';
 import { ELEMENT_CODE_BLOCK } from './constants';
-import { CodeBlockPlugin } from './types';
 
 /**
  * Enables support for pre-formatted code blocks.
  */
-export const createCodeBlockPlugin = createPluginFactory<CodeBlockPlugin>({
+export const createCodeBlockPlugin = toPlatePlugin(createSlatePlugin({
   key: ELEMENT_CODE_BLOCK,
-  isElement: true,
-  isVoid: true,
+  node: {
+    isElement: true,
+    isVoid: true,
+  },
   handlers: {
     // onKeyDown: onKeyDownCodeBlock,
   },
@@ -17,4 +19,4 @@ export const createCodeBlockPlugin = createPluginFactory<CodeBlockPlugin>({
     syntaxPopularFirst: true,
     showSyntaxSwitcher: true,
   },
-});
+}));

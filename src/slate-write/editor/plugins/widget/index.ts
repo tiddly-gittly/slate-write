@@ -10,4 +10,3 @@ export const reactWidgetPlugin = toPlatePlugin(createSlatePlugin({
     isVoid: true,
   },
 }));
- 

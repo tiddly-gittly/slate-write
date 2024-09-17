@@ -3,7 +3,8 @@
  * Files copied from plate's `packages/nodes/mention` to support `[[` two char trigger
  */
 import type { TComboboxItemBase } from '@udecode/plate-combobox';
-import { createPluginFactory } from '@udecode/plate-core';
+import { toPlatePlugin } from '@udecode/plate-common/react'; 
+import { createSlatePlugin } from '@udecode/plate-core';
 import { isSelectionInMentionInput, mentionOnKeyDownHandler } from '@udecode/plate-mention';
 import { ELEMENT_PARAGRAPH } from '@udecode/plate-paragraph';
 import { AutoCompletePlugin } from './types';
@@ -13,13 +14,15 @@ export const ELEMENT_AUTO_COMPLETE = 'auto_complete';
 export const ELEMENT_AUTO_COMPLETE_INPUT = 'auto_complete_input';
 
 /**
- * Enables support for autocompleting `/` and `[[`
+ * Enables support for auto-completing `/` and `[[`
  */
-export const createAutoCompletePlugin = createPluginFactory<AutoCompletePlugin>({
+export const reactAutoCompletePlugin = toPlatePlugin(createSlatePlugin<AutoCompletePlugin>({
   key: ELEMENT_AUTO_COMPLETE,
-  isElement: true,
-  isInline: true,
-  isVoid: true,
+  node: {
+    isElement: true,
+    isInline: true,
+    isVoid: true,
+  },
   handlers: {
     onKeyDown: mentionOnKeyDownHandler({ query: isSelectionInMentionInput }),
   },
@@ -36,14 +39,16 @@ export const createAutoCompletePlugin = createPluginFactory<AutoCompletePlugin>(
   plugins: [
     {
       key: ELEMENT_AUTO_COMPLETE_INPUT,
-      isElement: true,
-      isInline: true,
+      node: {
+        isElement: true,
+        isInline: true,
+      },
     },
   ],
-  then: (editor, { key, options: { trigger } }) => ({
+  then: (editor: any, { key, options: { trigger } }: { key: any; options: { trigger: any } }) => ({
     options: {
       id: key,
       trigger: trigger ?? key,
     },
   }),
-});
+}));

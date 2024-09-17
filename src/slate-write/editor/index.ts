@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import 'requestidlecallback-polyfill';
-import { IChangedTiddlers, IParseTreeNode, IWidgetInitialiseOptions, Widget as TWWidget } from 'tiddlywiki';
+import { IChangedTiddlers, IParseTreeNode, IWidgetInitialiseOptions } from 'tiddlywiki';
 
 import { SAVE_DEBOUNCE_INTERVAL } from './config/config';
 import { App, IEditorAppProps } from './editor';

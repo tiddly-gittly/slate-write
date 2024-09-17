@@ -29,5 +29,4 @@ export * from './link/transforms/getAndUpsertLink';
 export * from './link/transforms/upsertLinkAtSelection';
 export * from './link/transforms/wrapLink';
 export * from './macro/index';
-export * from './set/index';
 export * from './widget/index';
