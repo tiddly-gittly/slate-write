@@ -3,8 +3,8 @@
   "compilerOptions": {
     "declaration": false,
     "esModuleInterop": true,
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "UMD",
+    "moduleResolution": "bundler",
     "jsx": "react-jsx",
     "baseUrl": "./",
     "typeRoots" : ["node_modules/@types", "node_modules/tw5-typed", "node_modules/tw-react/dist/lib"],
