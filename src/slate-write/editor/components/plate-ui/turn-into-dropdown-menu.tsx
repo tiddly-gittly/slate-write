@@ -16,7 +16,7 @@ import {
 } from '@udecode/plate-common/react';
 import { HEADING_KEYS } from '@udecode/plate-heading';
 
-import { Icons } from '@/components/icons';
+import { Icons } from 'src/slate-write/editor/components/icons';
 
 import {
   DropdownMenu,

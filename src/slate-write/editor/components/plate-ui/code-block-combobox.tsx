@@ -12,7 +12,7 @@ import {
 // Prism must be imported before all language files
 import Prism from 'prismjs';
 
-import { Icons } from '@/components/icons';
+import { Icons } from 'src/slate-write/editor/components/icons';
 
 import { Button } from './button';
 import {

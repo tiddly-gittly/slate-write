@@ -1,20 +1,15 @@
 import { IDefaultWidgetProps, ParentWidgetContext } from '$:/plugins/linonetwo/tw-react/index.js';
 import { Plate } from '@udecode/plate-common/react';
-import { MutableRefObject, useMemo } from 'react';
+import { useMemo } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
-import { MacrosCombobox, SnippetCombobox, WidgetCombobox, WikiLinkCombobox } from './components/combobox';
-import { CONFIG } from './config/config';
 import { GlobalStyle } from './config/globalStyle';
-import { useInitialValue, useOnChange } from './hooks/useInitialValueOnChange';
-import { usePlugins } from './hooks/usePlugins';
+import { useInitialValue } from './hooks/useInitialValueOnChange';
 import { getIdFactory } from './plugins/id/getId';
 import './style.css';
-import { TElement } from '@udecode/slate';
-import { FloatingToolbar } from './components/plate-ui/floating-toolbar';
+import { Editor } from './components/plate-ui/editor';
 import { TooltipProvider } from './components/plate-ui/tooltip';
-import { FloatingToolbarButtons } from './components/Toolbars';
 import { useSlateWriteEditor } from './useEditor';
 
 export interface IEditorAppProps {
@@ -31,29 +26,29 @@ export interface ISaver {
   onSave: (value: string) => void;
 }
 
-export function Editor(props: IEditorAppProps & IDefaultWidgetProps & { currentAstReference: MutableRefObject<TElement[]>; idCreator: () => string }): JSX.Element {
-  const { currentTiddler: editorID, currentAstReference, initialTiddlerText, saver, idCreator } = props;
-  useOnChange({
-    editorID,
-    initialTiddlerText,
-    saver,
-    idCreator,
-    currentAstReference,
-  });
-  // TODO: get dom node to add IME listener to prevent update when IME open https://github.com/udecode/plate/issues/239#issuecomment-1098052241
-  return (
-    <Plate id={editorID} editableProps={{ ...CONFIG.editableProps }} onChange={console.log}>
-      <FloatingToolbar floatingOptions={{ placement: 'top-end' }}>
-        <FloatingToolbarButtons />
-      </FloatingToolbar>
-      <SnippetCombobox id={editorID} pluginKey='/' />
-      <WikiLinkCombobox id={editorID} pluginKey='[[' />
-      <WikiLinkCombobox id={editorID} pluginKey='{{' />
-      <MacrosCombobox id={editorID} pluginKey='<<' />
-      <WidgetCombobox id={editorID} pluginKey='<$' />
-    </Plate>
-  );
-}
+// export function Editor(props: IEditorAppProps & IDefaultWidgetProps & { currentAstReference: MutableRefObject<TElement[]>; idCreator: () => string }): JSX.Element {
+//   const { currentTiddler: editorID, currentAstReference, initialTiddlerText, saver, idCreator } = props;
+//   useOnChange({
+//     editorID,
+//     initialTiddlerText,
+//     saver,
+//     idCreator,
+//     currentAstReference,
+//   });
+//   // TODO: get dom node to add IME listener to prevent update when IME open https://github.com/udecode/plate/issues/239#issuecomment-1098052241
+//   return (
+//     <Plate id={editorID} editableProps={{ ...CONFIG.editableProps }} onChange={console.log}>
+//       <FloatingToolbar floatingOptions={{ placement: 'top-end' }}>
+//         <FloatingToolbarButtons />
+//       </FloatingToolbar>
+//       <SnippetCombobox id={editorID} pluginKey='/' />
+//       <WikiLinkCombobox id={editorID} pluginKey='[[' />
+//       <WikiLinkCombobox id={editorID} pluginKey='{{' />
+//       <MacrosCombobox id={editorID} pluginKey='<<' />
+//       <WidgetCombobox id={editorID} pluginKey='<$' />
+//     </Plate>
+//   );
+// }
 
 export function App(props: IEditorAppProps & IDefaultWidgetProps): JSX.Element {
   const editorID = props.currentTiddler;
@@ -69,7 +64,6 @@ export function App(props: IEditorAppProps & IDefaultWidgetProps): JSX.Element {
     saver: props.saver,
     idCreator,
   });
-  const plugins = usePlugins({ idCreator });
 
   // prevent working in headless/test mode which might throw error
   if (typeof document === 'undefined') {
@@ -85,9 +79,9 @@ export function App(props: IEditorAppProps & IDefaultWidgetProps): JSX.Element {
           skipDelayDuration={0}
         >
           <div className='tw-slate-write-container'>
-            <PlateProvider id={editorID} initialValue={currentAstReference.current} plugins={plugins}>
-              <Editor {...props} currentAstReference={currentAstReference} idCreator={idCreator} />
-            </PlateProvider>
+            <Plate editor={editor}>
+              <Editor />
+            </Plate>
           </div>
         </TooltipProvider>
       </DndProvider>

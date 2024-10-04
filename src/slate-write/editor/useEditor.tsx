@@ -1,53 +1,35 @@
-
-
-
 import { AutoformatPlugin } from '@udecode/plate-autoformat/react';
-import {
-  BoldPlugin,
-  CodePlugin,
-  ItalicPlugin,
-  StrikethroughPlugin,
-  SubscriptPlugin,
-  SuperscriptPlugin,
-  UnderlinePlugin,
-} from '@udecode/plate-basic-marks/react';
+import { BoldPlugin, CodePlugin, ItalicPlugin, StrikethroughPlugin, SubscriptPlugin, SuperscriptPlugin, UnderlinePlugin } from '@udecode/plate-basic-marks/react';
 import { BlockquotePlugin } from '@udecode/plate-block-quote/react';
-import { SingleLinePlugin } from '@udecode/plate-break/react';
+import { ExitBreakPlugin, SingleLinePlugin, SoftBreakPlugin } from '@udecode/plate-break/react';
 import { CodeBlockPlugin } from '@udecode/plate-code-block/react';
-import {
-  ParagraphPlugin,
-  usePlateEditor,
-} from '@udecode/plate-common/react';
+import { ParagraphPlugin, usePlateEditor } from '@udecode/plate-common/react';
 import { DndPlugin } from '@udecode/plate-dnd';
 import { HEADING_KEYS } from '@udecode/plate-heading';
 import { HeadingPlugin, TocPlugin } from '@udecode/plate-heading/react';
 import { HorizontalRulePlugin } from '@udecode/plate-horizontal-rule/react';
-import { IndentPlugin } from '@udecode/plate-indent/react';
 import { IndentListPlugin } from '@udecode/plate-indent-list/react';
+import { IndentPlugin } from '@udecode/plate-indent/react';
 import { KbdPlugin } from '@udecode/plate-kbd/react';
+import { LineHeightPlugin } from '@udecode/plate-line-height/react';
 import { LinkPlugin } from '@udecode/plate-link/react';
 import { ListPlugin, TodoListPlugin } from '@udecode/plate-list/react';
+import { ImagePlugin, MediaEmbedPlugin } from '@udecode/plate-media/react';
 import { MentionPlugin } from '@udecode/plate-mention/react';
 import { NodeIdPlugin } from '@udecode/plate-node-id';
 import { NormalizeTypesPlugin } from '@udecode/plate-normalizers';
 import { DeletePlugin, SelectOnBackspacePlugin } from '@udecode/plate-select';
 import { BlockSelectionPlugin } from '@udecode/plate-selection/react';
 import { SlashPlugin } from '@udecode/plate-slash-command/react';
+import { TabbablePlugin } from '@udecode/plate-tabbable/react';
 import { TablePlugin } from '@udecode/plate-table/react';
 import { TrailingBlockPlugin } from '@udecode/plate-trailing-block';
-import { createPlateUI } from './components';
+import { LinkFloatingToolbar } from './components/plate-ui/link-floating-toolbar';
 
 export const useSlateWriteEditor = (editorId: string = '', scrollSelector?: string) => {
   const a = usePlateEditor(
     {
       id: editorId,
-      override: {
-        components: createPlateUI({
-          draggable: isEnabled('dnd', id),
-          placeholder: isEnabled('placeholder', id),
-        }),
-        plugins: overridePlugins,
-      },
       plugins: [
         // Nodes
         HeadingPlugin,
@@ -61,7 +43,7 @@ export const useSlateWriteEditor = (editorId: string = '', scrollSelector?: stri
         BlockquotePlugin,
         CodeBlockPlugin.configure({
           options: {
-            prism: Prism,
+            // prism: Prism,
           },
         }),
         HorizontalRulePlugin,
@@ -69,31 +51,16 @@ export const useSlateWriteEditor = (editorId: string = '', scrollSelector?: stri
           render: { afterEditable: () => <LinkFloatingToolbar /> },
         }),
         ListPlugin,
-        ImagePlugin.extend({
-          render: { afterEditable: ImagePreview },
-        }),
+        ImagePlugin,
         MediaEmbedPlugin,
-        CaptionPlugin.configure({
-          options: {
-            plugins: [ImagePlugin, MediaEmbedPlugin],
-          },
-        }),
-        DatePlugin,
         MentionPlugin.configure({
           options: {
             triggerPreviousCharPattern: /^$|^[\s"']$/,
           },
         }),
         SlashPlugin,
-        TablePlugin.configure({
-          options: {
-            enableMerging: id === 'tableMerge',
-          },
-        }),
+        TablePlugin,
         TodoListPlugin,
-        TogglePlugin,
-        ExcalidrawPlugin,
-
         // Marks
         BoldPlugin,
         ItalicPlugin,
@@ -132,20 +99,6 @@ export const useSlateWriteEditor = (editorId: string = '', scrollSelector?: stri
               CodeBlockPlugin.key,
             ],
           },
-          options: {
-            listStyleTypes: {
-              fire: {
-                liComponent: FireLiComponent,
-                markerComponent: FireMarker,
-                type: 'fire',
-              },
-              todo: {
-                liComponent: TodoLi,
-                markerComponent: TodoMarker,
-                type: 'todo',
-              },
-            },
-          },
         }),
         LineHeightPlugin.extend({
           inject: {
@@ -166,29 +119,27 @@ export const useSlateWriteEditor = (editorId: string = '', scrollSelector?: stri
         }),
 
         // Functionality
-        AutoformatPlugin.configure({ options: autoformatOptions }),
+        AutoformatPlugin,
         BlockSelectionPlugin.configure({
-          enabled: !!scrollSelector,
-          options: {
-            areaOptions: {
-              boundaries: `#${scrollSelector}`,
-              container: `#${scrollSelector}`,
-              selectables: [`#${scrollSelector} .slate-selectable`],
-              selectionAreaClass: 'slate-selection-area',
-            },
-            enableContextMenu: false,
-          },
+          // enabled: !!scrollSelector,
+          // options: {
+          //   areaOptions: {
+          //     boundaries: `#${scrollSelector}`,
+          //     container: `#${scrollSelector}`,
+          //     selectables: [`#${scrollSelector} .slate-selectable`],
+          //     selectionAreaClass: 'slate-selection-area',
+          //   },
+          //   enableContextMenu: false,
+          // },
         }),
         DndPlugin.configure({ options: { enableScroller: true } }),
-        EmojiPlugin,
-        exitBreakPlugin,
+        ExitBreakPlugin,
         NodeIdPlugin,
         NormalizeTypesPlugin.configure({
           options: {
             rules: [{ path: [0], strictType: HEADING_KEYS.h1 }],
           },
         }),
-        resetBlockTypePlugin,
         SelectOnBackspacePlugin.configure({
           options: {
             query: {
@@ -198,36 +149,14 @@ export const useSlateWriteEditor = (editorId: string = '', scrollSelector?: stri
         }),
         DeletePlugin,
         SingleLinePlugin,
-        softBreakPlugin,
-        tabbablePlugin,
+        SoftBreakPlugin,
+        TabbablePlugin,
         TrailingBlockPlugin.configure({
           options: { type: ParagraphPlugin.key },
         }),
-        DragOverCursorPlugin,
-
-        // Collaboration
-        CommentsPlugin.configure({
-          options: {
-            comments: commentsData,
-            myUserId: '1',
-            users: usersData,
-          },
-        }),
-
-        // Deserialization
-        DocxPlugin,
-        MarkdownPlugin,
-        JuicePlugin,
-        ColumnPlugin,
-
-        // Testing
-        PlaywrightPlugin.configure({
-          enabled: process.env.NODE_ENV !== 'production',
-        }),
       ],
-      value: value,
     },
-    []
+    [],
   );
 
   return a;

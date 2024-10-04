@@ -6,7 +6,7 @@ import { DatePlugin } from '@udecode/plate-date/react';
 import { HEADING_KEYS } from '@udecode/plate-heading';
 import { ListStyleType, toggleIndentList } from '@udecode/plate-indent-list';
 
-import { Icons } from '@/components/icons';
+import { Icons } from 'src/slate-write/editor/components/icons';
 
 import {
   InlineCombobox,

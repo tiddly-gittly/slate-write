@@ -16,7 +16,7 @@ import {
 } from '@udecode/plate-media/react';
 import { useReadOnly, useSelected } from 'slate-react';
 
-import { Icons } from '@/components/icons';
+import { Icons } from 'src/slate-write/editor/components/icons';
 
 import { Button, buttonVariants } from './button';
 import { CaptionButton } from './caption';
