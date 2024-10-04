@@ -1,8 +1,8 @@
-import { Plate, PlateProvider } from '@udecode/plate-core';
+import { IDefaultWidgetProps, ParentWidgetContext } from '$:/plugins/linonetwo/tw-react/index.js';
+import { Plate } from '@udecode/plate-common/react';
 import { MutableRefObject, useMemo } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { IDefaultWidgetProps, ParentWidgetContext } from 'tw-react';
 
 import { MacrosCombobox, SnippetCombobox, WidgetCombobox, WikiLinkCombobox } from './components/combobox';
 import { CONFIG } from './config/config';
@@ -15,6 +15,7 @@ import { TElement } from '@udecode/slate';
 import { FloatingToolbar } from './components/plate-ui/floating-toolbar';
 import { TooltipProvider } from './components/plate-ui/tooltip';
 import { FloatingToolbarButtons } from './components/Toolbars';
+import { useSlateWriteEditor } from './useEditor';
 
 export interface IEditorAppProps {
   currentTiddler: string;
@@ -56,6 +57,9 @@ export function Editor(props: IEditorAppProps & IDefaultWidgetProps & { currentA
 
 export function App(props: IEditorAppProps & IDefaultWidgetProps): JSX.Element {
   const editorID = props.currentTiddler;
+  const scrollSelector = '.tw-slate-write-container';
+  const editor = useSlateWriteEditor(editorID, scrollSelector);
+
   const idCreator = useMemo(() => {
     return getIdFactory(editorID);
   }, [editorID]);

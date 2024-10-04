@@ -1,23 +1,22 @@
-/* eslint-disable @typescript-eslint/consistent-type-assertions */
-import { MARK_BOLD, MARK_CODE, MARK_ITALIC, MARK_STRIKETHROUGH, MARK_SUBSCRIPT, MARK_SUPERSCRIPT, MARK_UNDERLINE } from '@udecode/plate-basic-marks';
-import { ELEMENT_BLOCKQUOTE } from '@udecode/plate-block-quote';
-import { ELEMENT_H1, ELEMENT_H2, ELEMENT_H3, ELEMENT_H4, ELEMENT_H5, ELEMENT_H6 } from '@udecode/plate-heading';
-import { MARK_HIGHLIGHT } from '@udecode/plate-highlight';
-import { MARK_KBD } from '@udecode/plate-kbd';
-import { ELEMENT_LINK } from '@udecode/plate-link';
-import { ELEMENT_LI, ELEMENT_OL, ELEMENT_UL } from '@udecode/plate-list';
-import { ELEMENT_PARAGRAPH } from '@udecode/plate-paragraph';
 
-import { PlatePluginComponent } from '@udecode/plate-core';
-import { ELEMENT_TABLE, ELEMENT_TD, ELEMENT_TH, ELEMENT_TR } from '@udecode/plate-table';
-import { PlateElement, PlateLeaf, withProps } from '@udecode/plate-utils';
-import type { FunctionComponent } from 'react';
-import { ELEMENT_CODE_BLOCK } from 'wikiast-util-from-slate-plate-ast';
-import { DefaultPlatePluginKey } from '../config/DefaultPlatePluginKey';
-import { CodeBlockElement, ELEMENT_AUTO_COMPLETE, ELEMENT_AUTO_COMPLETE_INPUT, LinkElement } from '../plugins';
-import { ELEMENT_MACRO } from '../plugins/macro';
-import { ELEMENT_WIDGET } from '../plugins/widget';
-import { WidgetBlock } from '../plugins/widget/WidgetBlock';
+import { withProps } from '@udecode/cn';
+import { BoldPlugin, CodePlugin, ItalicPlugin, StrikethroughPlugin, SubscriptPlugin, SuperscriptPlugin, UnderlinePlugin } from '@udecode/plate-basic-marks/react';
+import { BlockquotePlugin } from '@udecode/plate-block-quote/react';
+import { CodeBlockPlugin, CodeLinePlugin, CodeSyntaxPlugin } from '@udecode/plate-code-block/react';
+import { ParagraphPlugin } from '@udecode/plate-common/react';
+import { type NodeComponent, PlateElement, PlateLeaf } from '@udecode/plate-common/react';
+import { FindReplacePlugin } from '@udecode/plate-find-replace';
+import { HEADING_KEYS } from '@udecode/plate-heading';
+import { TocPlugin } from '@udecode/plate-heading/react';
+import { HighlightPlugin } from '@udecode/plate-highlight/react';
+import { HorizontalRulePlugin } from '@udecode/plate-horizontal-rule/react';
+import { KbdPlugin } from '@udecode/plate-kbd/react';
+import { LinkPlugin } from '@udecode/plate-link/react';
+import { BulletedListPlugin, ListItemPlugin, NumberedListPlugin, TodoListPlugin } from '@udecode/plate-list/react';
+import { ImagePlugin, MediaEmbedPlugin } from '@udecode/plate-media/react';
+import { MentionInputPlugin, MentionPlugin } from '@udecode/plate-mention/react';
+import { SlashInputPlugin } from '@udecode/plate-slash-command/react';
+import { TableCellHeaderPlugin, TableCellPlugin, TablePlugin, TableRowPlugin } from '@udecode/plate-table/react';
 import { BlockquoteElement } from './plate-ui/blockquote-element';
 import { MentionElement } from './plate-ui/mention-element';
 import { MentionInputElement } from './plate-ui/mention-input-element';
@@ -27,91 +26,56 @@ import { TableElement } from './plate-ui/table-element';
 import { TableRowElement } from './plate-ui/table-row-element';
 import { withDraggables } from './plate-ui/with-draggables';
 
-export const createPlateUI = <
-  T extends string = string,
-  R extends Record<DefaultPlatePluginKey | T, PlatePluginComponent | FunctionComponent<any>> = Record<DefaultPlatePluginKey | T, PlatePluginComponent | FunctionComponent<any>>,
->(
-  overrideByKey?: Partial<R>,
-): R => {
-  const components = {} as R;
+export const createPlateUI = () => {
+  let components: Record<string, NodeComponent> = {
+    [BlockquotePlugin.key]: BlockquoteElement,
+    [BoldPlugin.key]: withProps(PlateLeaf, { as: 'strong' }),
+    [BulletedListPlugin.key]: withProps(ListElement, { variant: 'ul' }),
+    [CodeBlockPlugin.key]: CodeBlockElement,
+    [CodeLinePlugin.key]: CodeLineElement,
+    [CodePlugin.key]: CodeLeaf,
+    [CodeSyntaxPlugin.key]: CodeSyntaxLeaf,
+    [ColumnItemPlugin.key]: ColumnElement,
+    [ColumnPlugin.key]: ColumnGroupElement,
+    [CommentsPlugin.key]: CommentLeaf,
+    [DatePlugin.key]: DateElement,
+    [EmojiInputPlugin.key]: EmojiInputElement,
+    [ExcalidrawPlugin.key]: ExcalidrawElement,
+    [FindReplacePlugin.key]: SearchHighlightLeaf,
+    [HEADING_KEYS.h1]: withProps(HeadingElement, { variant: 'h1' }),
+    [HEADING_KEYS.h2]: withProps(HeadingElement, { variant: 'h2' }),
+    [HEADING_KEYS.h3]: withProps(HeadingElement, { variant: 'h3' }),
+    [HEADING_KEYS.h4]: withProps(HeadingElement, { variant: 'h4' }),
+    [HEADING_KEYS.h5]: withProps(HeadingElement, { variant: 'h5' }),
+    [HEADING_KEYS.h6]: withProps(HeadingElement, { variant: 'h6' }),
+    [HighlightPlugin.key]: HighlightLeaf,
+    [HorizontalRulePlugin.key]: HrElement,
+    [ImagePlugin.key]: ImageElement,
+    [ItalicPlugin.key]: withProps(PlateLeaf, { as: 'em' }),
+    [KbdPlugin.key]: KbdLeaf,
+    [LinkPlugin.key]: LinkElement,
+    [ListItemPlugin.key]: withProps(PlateElement, { as: 'li' }),
+    [MediaEmbedPlugin.key]: MediaEmbedElement,
+    [MentionInputPlugin.key]: MentionInputElement,
+    [MentionPlugin.key]: MentionElement,
+    [NumberedListPlugin.key]: withProps(ListElement, { variant: 'ol' }),
+    [ParagraphPlugin.key]: ParagraphElement,
+    [SlashInputPlugin.key]: SlashInputElement,
+    [StrikethroughPlugin.key]: withProps(PlateLeaf, { as: 's' }),
+    [SubscriptPlugin.key]: withProps(PlateLeaf, { as: 'sub' }),
+    [SuperscriptPlugin.key]: withProps(PlateLeaf, { as: 'sup' }),
+    [TableCellHeaderPlugin.key]: TableCellHeaderElement,
+    [TableCellPlugin.key]: TableCellElement,
+    [TablePlugin.key]: TableElement,
+    [TableRowPlugin.key]: TableRowElement,
+    [TocPlugin.key]: TocElement,
+    [TodoListPlugin.key]: TodoListElement,
+    [TogglePlugin.key]: ToggleElement,
+    [UnderlinePlugin.key]: withProps(PlateLeaf, { as: 'u' }),
+  };
 
-  if (overrideByKey !== undefined) {
-    Object.keys(overrideByKey).forEach((key) => {
-      const newOne = overrideByKey[key as keyof R];
-      if (newOne !== undefined) {
-        components[key as keyof R] = newOne;
-      }
-    });
-  }
+  components = withPlaceholders(components);
+  components = withDraggables(components);
+
   return components;
 };
-
-// only component defined here will be wrapped by withDraggables and withStyledPlaceHolders
-const rawComponents = createPlateUI({
-  [ELEMENT_AUTO_COMPLETE]: MentionElement,
-  [ELEMENT_AUTO_COMPLETE_INPUT]: MentionInputElement,
-  [ELEMENT_WIDGET]: WidgetBlock,
-  [ELEMENT_MACRO]: WidgetBlock,
-  [ELEMENT_LINK]: LinkElement,
-  [ELEMENT_CODE_BLOCK]: CodeBlockElement,
-  [ELEMENT_PARAGRAPH]: withProps(PlateElement, {
-    as: 'p',
-  }),
-
-  [ELEMENT_BLOCKQUOTE]: BlockquoteElement,
-  // [ELEMENT_CODE_LINE]: CodeLineElement,
-  // [ELEMENT_CODE_SYNTAX]: CodeSyntaxLeaf,
-  // TODO: use basic hr element, plate's is wiredly huge
-  // [ELEMENT_HR]: HrElement,
-  [ELEMENT_H1]: withProps(PlateElement, {
-    as: 'h1',
-  }),
-  [ELEMENT_H2]: withProps(PlateElement, {
-    as: 'h2',
-  }),
-  [ELEMENT_H3]: withProps(PlateElement, {
-    as: 'h3',
-  }),
-  [ELEMENT_H4]: withProps(PlateElement, {
-    as: 'h4',
-  }),
-  [ELEMENT_H5]: withProps(PlateElement, {
-    as: 'h5',
-  }),
-  [ELEMENT_H6]: withProps(PlateElement, {
-    as: 'h6',
-  }),
-  [ELEMENT_LI]: withProps(PlateElement, { as: 'li' }),
-  [ELEMENT_UL]: withProps(PlateElement, {
-    as: 'ul',
-  }),
-  [ELEMENT_OL]: withProps(PlateElement, {
-    as: 'ol',
-  }),
-  [ELEMENT_TABLE]: TableElement,
-  [ELEMENT_TD]: TableCellElement,
-  [ELEMENT_TH]: withProps(PlateElement, {
-    as: 'th',
-  }),
-  [ELEMENT_TR]: TableRowElement,
-  // [ELEMENT_TODO_LI]: TodoListElement,
-  [MARK_BOLD]: withProps(PlateLeaf, { as: 'strong' }),
-  [MARK_CODE]: withProps(PlateLeaf, {
-    as: 'code',
-  }),
-  [MARK_HIGHLIGHT]: withProps(PlateLeaf, {
-    as: 'mark',
-    style: {
-      backgroundColor: '#fef3b7',
-    },
-  }),
-  [MARK_ITALIC]: withProps(PlateLeaf, { as: 'em' }),
-  [MARK_KBD]: withProps(PlateLeaf, {
-    as: 'kbd',
-  }),
-  [MARK_STRIKETHROUGH]: withProps(PlateLeaf, { as: 's' }),
-  [MARK_SUBSCRIPT]: withProps(PlateLeaf, { as: 'sub' }),
-  [MARK_SUPERSCRIPT]: withProps(PlateLeaf, { as: 'sup' }),
-  [MARK_UNDERLINE]: withProps(PlateLeaf, { as: 'u' }),
-});
-export const components = withDraggables(withPlaceholders(rawComponents));
