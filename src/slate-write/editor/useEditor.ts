@@ -21,7 +21,6 @@ import {
 import { DndPlugin } from '@udecode/plate-dnd';
 import { HEADING_KEYS } from '@udecode/plate-heading';
 import { HeadingPlugin, TocPlugin } from '@udecode/plate-heading/react';
-import { HighlightPlugin } from '@udecode/plate-highlight/react';
 import { HorizontalRulePlugin } from '@udecode/plate-horizontal-rule/react';
 import { IndentPlugin } from '@udecode/plate-indent/react';
 import { IndentListPlugin } from '@udecode/plate-indent-list/react';
@@ -103,28 +102,7 @@ export const useSlateWriteEditor = (editorId: string = '', scrollSelector?: stri
         CodePlugin,
         SubscriptPlugin,
         SuperscriptPlugin,
-        FontColorPlugin,
-        FontBackgroundColorPlugin,
-        FontSizePlugin,
-        HighlightPlugin,
         KbdPlugin,
-
-        // Block Style
-        AlignPlugin.extend({
-          inject: {
-            targetPlugins: [
-              ParagraphPlugin.key,
-              MediaEmbedPlugin.key,
-              HEADING_KEYS.h1,
-              HEADING_KEYS.h2,
-              HEADING_KEYS.h3,
-              HEADING_KEYS.h4,
-              HEADING_KEYS.h5,
-              ImagePlugin.key,
-              HEADING_KEYS.h6,
-            ],
-          },
-        }),
         IndentPlugin.extend({
           inject: {
             targetPlugins: [
@@ -137,7 +115,6 @@ export const useSlateWriteEditor = (editorId: string = '', scrollSelector?: stri
               HEADING_KEYS.h6,
               BlockquotePlugin.key,
               CodeBlockPlugin.key,
-              TogglePlugin.key,
             ],
           },
         }),
@@ -153,7 +130,6 @@ export const useSlateWriteEditor = (editorId: string = '', scrollSelector?: stri
               HEADING_KEYS.h6,
               BlockquotePlugin.key,
               CodeBlockPlugin.key,
-              TogglePlugin.key,
             ],
           },
           options: {
