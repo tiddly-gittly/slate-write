@@ -5,7 +5,7 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import { GlobalStyle } from './config/globalStyle';
-import { useInitialValue } from './hooks/useInitialValueOnChange';
+import { useInitialValue, useOnChange } from './hooks/useInitialValueOnChange';
 import { getIdFactory } from './plugins/id/getId';
 import './style.css';
 import { Editor } from './components/plate-ui/editor';
@@ -28,13 +28,7 @@ export interface ISaver {
 
 // export function Editor(props: IEditorAppProps & IDefaultWidgetProps & { currentAstReference: MutableRefObject<TElement[]>; idCreator: () => string }): JSX.Element {
 //   const { currentTiddler: editorID, currentAstReference, initialTiddlerText, saver, idCreator } = props;
-//   useOnChange({
-//     editorID,
-//     initialTiddlerText,
-//     saver,
-//     idCreator,
-//     currentAstReference,
-//   });
+
 //   // TODO: get dom node to add IME listener to prevent update when IME open https://github.com/udecode/plate/issues/239#issuecomment-1098052241
 //   return (
 //     <Plate id={editorID} editableProps={{ ...CONFIG.editableProps }} onChange={console.log}>
@@ -50,8 +44,7 @@ export interface ISaver {
 //   );
 // }
 
-export function App(props: IEditorAppProps & IDefaultWidgetProps): JSX.Element {
-  const editorID = props.currentTiddler;
+export function App({ initialTiddlerText, saver, currentTiddler: editorID, parentWidget }: IEditorAppProps & IDefaultWidgetProps): JSX.Element {
   const scrollSelector = '.tw-slate-write-container';
   const editor = useSlateWriteEditor(editorID, scrollSelector);
 
@@ -59,10 +52,16 @@ export function App(props: IEditorAppProps & IDefaultWidgetProps): JSX.Element {
     return getIdFactory(editorID);
   }, [editorID]);
   const currentAstReference = useInitialValue({
-    editorID,
-    initialTiddlerText: props.initialTiddlerText,
-    saver: props.saver,
+    initialTiddlerText,
+    saver,
     idCreator,
+  });
+  const onChange = useOnChange({
+    editor,
+    initialTiddlerText,
+    saver,
+    idCreator,
+    currentAstReference,
   });
 
   // prevent working in headless/test mode which might throw error
@@ -70,7 +69,7 @@ export function App(props: IEditorAppProps & IDefaultWidgetProps): JSX.Element {
     return <div>Loading...</div>;
   }
   return (
-    <ParentWidgetContext.Provider value={props.parentWidget}>
+    <ParentWidgetContext.Provider value={parentWidget}>
       <GlobalStyle />
       <DndProvider backend={HTML5Backend}>
         <TooltipProvider
@@ -79,7 +78,7 @@ export function App(props: IEditorAppProps & IDefaultWidgetProps): JSX.Element {
           skipDelayDuration={0}
         >
           <div className='tw-slate-write-container'>
-            <Plate editor={editor}>
+            <Plate editor={editor} onChange={onChange}>
               <Editor />
             </Plate>
           </div>
