@@ -4,7 +4,7 @@
             "w": 1,
             "h": 1,
             "x": 0,
-            "y": 10,
+            "y": 9,
             "i": "$:/core/ui/SideBar/Open",
             "moved": false,
             "static": false
@@ -49,8 +49,8 @@
             "w": 1,
             "h": 1,
             "x": 0,
-            "y": 9,
-            "i": "$:/plugins/linonetwo/itonnote/Sidebar/Locator Fields",
+            "y": 10,
+            "i": "$:/plugins/linonetwo/tw-mobile-sync/ui/Sidebar/SidebarTab",
             "moved": false,
             "static": false
         },
@@ -59,7 +59,7 @@
             "h": 1,
             "x": 0,
             "y": 11,
-            "i": "$:/plugins/linonetwo/tw-mobile-sync/ui/Sidebar/SidebarTab",
+            "i": "路线图",
             "moved": false,
             "static": false
         },
