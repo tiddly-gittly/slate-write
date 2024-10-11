@@ -17,4 +17,4 @@ type: text/vnd.tiddlywiki
 
 <<reuse-tiddler "优先待办列表">>
 
-<$echarts $tiddler="$:/plugins/Gk0Wk/echarts/addons/oflg/CalendarHeatmap.js" $height="150px" />
+<$echarts $tiddler="$:/plugins/Gk0Wk/echarts/addons/GitHubHeatMap.js" $height="150px" />
