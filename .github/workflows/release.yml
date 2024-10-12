@@ -4,13 +4,6 @@ on:
   push:
     tags:
       - 'v*.*.*'
-    paths-ignore:
-      - 'README.md'
-      - 'wiki/**'
-      - 'public/**'
-      - 'scripts/**'
-      - '.vscode'
-      - '.idea'
   pull_request:
     branches:
       - master
@@ -69,3 +62,17 @@ jobs:
             dist/*.json
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # WISIWYG Editor is easy to break during development, so we only release demo page on a stable plugin version is released.
+      - name: Build Library and static website
+        run: pnpm run publish
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          # Upload entire repository
+          path: ./dist
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
+  
