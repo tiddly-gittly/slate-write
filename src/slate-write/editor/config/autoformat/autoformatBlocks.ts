@@ -1,66 +1,66 @@
 import { AutoformatRule } from '@udecode/plate-autoformat';
-import { ELEMENT_BLOCKQUOTE } from '@udecode/plate-block-quote';
-import { ELEMENT_DEFAULT, getPluginType } from '@udecode/plate-core';
-import { ELEMENT_H1, ELEMENT_H2, ELEMENT_H3, ELEMENT_H4, ELEMENT_H5, ELEMENT_H6 } from '@udecode/plate-heading';
-import { ELEMENT_HR } from '@udecode/plate-horizontal-rule';
-import { insertNodes, setElements } from '@udecode/slate';
+import { BlockquotePlugin } from '@udecode/plate-block-quote/react';
+import { insertEmptyCodeBlock } from '@udecode/plate-code-block';
+import { ParagraphPlugin } from '@udecode/plate-core/react';
+import { HEADING_KEYS } from '@udecode/plate-heading';
+import { HorizontalRulePlugin } from '@udecode/plate-horizontal-rule/react';
+import { insertNodes, setNodes } from '@udecode/slate';
 import { ELEMENT_CODE_BLOCK } from 'wikiast-util-from-slate-plate-ast';
-import { insertEmptyCodeBlock } from '../../plugins/codeblock/transforms/insertEmptyCodeBlock';
-import { clearBlockFormat } from './autoformatUtils';
+import { preFormat } from './autoformatUtils';
 
 export const autoformatBlocks: AutoformatRule[] = [
   {
     mode: 'block',
-    type: ELEMENT_H1,
+    type: HEADING_KEYS.h1,
     match: ['! ', '！ '],
-    preFormat: clearBlockFormat,
+    preFormat,
   },
   {
     mode: 'block',
-    type: ELEMENT_H2,
+    type: HEADING_KEYS.h2,
     match: ['!! ', '！！ '],
-    preFormat: clearBlockFormat,
+    preFormat,
   },
   {
     mode: 'block',
-    type: ELEMENT_H3,
+    type: HEADING_KEYS.h3,
     match: ['!!! ', '！！！ '],
-    preFormat: clearBlockFormat,
+    preFormat,
   },
   {
     mode: 'block',
-    type: ELEMENT_H4,
+    type: HEADING_KEYS.h4,
     match: ['!!!! ', '！！！！ '],
-    preFormat: clearBlockFormat,
+    preFormat,
   },
   {
     mode: 'block',
-    type: ELEMENT_H5,
+    type: HEADING_KEYS.h5,
     match: ['!!!!! ', '！！！！！ '],
-    preFormat: clearBlockFormat,
+    preFormat,
   },
   {
     mode: 'block',
-    type: ELEMENT_H6,
+    type: HEADING_KEYS.h6,
     match: ['!!!!!! ', '！！！！！！ '],
-    preFormat: clearBlockFormat,
+    preFormat,
   },
   {
     mode: 'block',
-    type: ELEMENT_BLOCKQUOTE,
+    type: BlockquotePlugin.key,
     match: ['> ', '》 '],
-    preFormat: clearBlockFormat,
+    preFormat,
   },
   {
     mode: 'block',
-    type: ELEMENT_HR,
+    type: HorizontalRulePlugin.key,
     match: ['---', '—-'],
-    preFormat: clearBlockFormat,
+    preFormat,
     format: (editor) => {
-      setElements(editor, { type: ELEMENT_HR });
+      setNodes(editor, { type: HorizontalRulePlugin.key });
       insertNodes(editor, {
-        type: ELEMENT_DEFAULT,
         children: [{ text: '' }],
+        type: ParagraphPlugin.key,
       });
     },
   },
@@ -69,10 +69,10 @@ export const autoformatBlocks: AutoformatRule[] = [
     type: ELEMENT_CODE_BLOCK,
     match: '```',
     triggerAtBlockStart: false,
-    preFormat: clearBlockFormat,
+    preFormat,
     format: (editor) => {
       insertEmptyCodeBlock(editor, {
-        defaultType: getPluginType(editor, ELEMENT_DEFAULT),
+        defaultType: ParagraphPlugin.key,
         insertNodesOptions: { select: true },
       });
     },

@@ -2,25 +2,18 @@ import React, { type ComponentType, type SVGProps } from 'react';
 
 import { withRef } from '@udecode/cn';
 import { type PlateEditor, PlateElement } from '@udecode/plate-common/react';
-import { DatePlugin } from '@udecode/plate-date/react';
 import { HEADING_KEYS } from '@udecode/plate-heading';
 import { ListStyleType, toggleIndentList } from '@udecode/plate-indent-list';
 
 import { Icons } from 'src/slate-write/editor/components/icons';
 
-import {
-  InlineCombobox,
-  InlineComboboxContent,
-  InlineComboboxEmpty,
-  InlineComboboxInput,
-  InlineComboboxItem,
-} from './inline-combobox';
+import { InlineCombobox, InlineComboboxContent, InlineComboboxEmpty, InlineComboboxInput, InlineComboboxItem } from './inline-combobox';
 
 interface SlashCommandRule {
   icon: ComponentType<SVGProps<SVGSVGElement>>;
+  keywords?: string[];
   onSelect: (editor: PlateEditor) => void;
   value: string;
-  keywords?: string[];
 }
 
 const rules: SlashCommandRule[] = [
@@ -65,23 +58,15 @@ const rules: SlashCommandRule[] = [
       });
     },
   },
-  {
-    icon: Icons.add,
-    keywords: ['inline', 'date'],
-    value: 'Date',
-    onSelect: (editor) => {
-      editor.getTransforms(DatePlugin).insert.date();
-    },
-  },
 ];
 
 export const SlashInputElement = withRef<typeof PlateElement>(
-  ({ className, ...props }, ref) => {
+  ({ className, ...props }, reference) => {
     const { children, editor, element } = props;
 
     return (
       <PlateElement
-        ref={ref}
+        ref={reference}
         as='span'
         data-slate-value={element.value}
         {...props}
@@ -98,7 +83,9 @@ export const SlashInputElement = withRef<typeof PlateElement>(
               <InlineComboboxItem
                 key={value}
                 value={value}
-                onClick={() => onSelect(editor)}
+                onClick={() => {
+                  onSelect(editor);
+                }}
                 keywords={keywords}
               >
                 <Icon className='mr-2 size-4' aria-hidden />
@@ -111,5 +98,5 @@ export const SlashInputElement = withRef<typeof PlateElement>(
         {children}
       </PlateElement>
     );
-  }
+  },
 );

@@ -1,60 +1,60 @@
 import { AutoformatRule } from '@udecode/plate-autoformat';
-import { MARK_BOLD, MARK_CODE, MARK_ITALIC, MARK_STRIKETHROUGH, MARK_SUBSCRIPT, MARK_SUPERSCRIPT, MARK_UNDERLINE } from '@udecode/plate-basic-marks';
+import { BoldPlugin, CodePlugin, ItalicPlugin, StrikethroughPlugin, SubscriptPlugin, SuperscriptPlugin, UnderlinePlugin } from '@udecode/plate-basic-marks/react';
 
 export const autoformatMarks: AutoformatRule[] = [
   // {
   //   mode: 'mark',
-  //   type: [MARK_BOLD, MARK_ITALIC],
+  //   type: [BoldPlugin.key, ItalicPlugin.key],
   //   match: '***',
   // },
   // {
   //   mode: 'mark',
-  //   type: [MARK_UNDERLINE, MARK_ITALIC],
+  //   type: [UnderlinePlugin.key, ItalicPlugin.key],
   //   match: '__*',
   // },
   // {
   //   mode: 'mark',
-  //   type: [MARK_UNDERLINE, MARK_BOLD],
+  //   type: [UnderlinePlugin.key, BoldPlugin.key],
   //   match: '__**',
   // },
   // {
   //   mode: 'mark',
-  //   type: [MARK_UNDERLINE, MARK_BOLD, MARK_ITALIC],
+  //   type: [UnderlinePlugin.key, BoldPlugin.key, ItalicPlugin.key],
   //   match: '___***',
   // },
   {
     mode: 'mark',
-    type: MARK_BOLD,
+    type: BoldPlugin.key,
     match: ["''"],
   },
   {
     mode: 'mark',
-    type: MARK_UNDERLINE,
+    type: UnderlinePlugin.key,
     match: '__',
   },
   {
     mode: 'mark',
-    type: MARK_ITALIC,
+    type: ItalicPlugin.key,
     match: ['//'],
   },
   {
     mode: 'mark',
-    type: MARK_STRIKETHROUGH,
+    type: StrikethroughPlugin.key,
     match: '~~',
   },
   {
     mode: 'mark',
-    type: MARK_SUPERSCRIPT,
+    type: SuperscriptPlugin.key,
     match: '^^',
   },
   {
     mode: 'mark',
-    type: MARK_SUBSCRIPT,
+    type: SubscriptPlugin.key,
     match: [',,', '，，'],
   },
   {
     mode: 'mark',
-    type: MARK_CODE,
+    type: CodePlugin.key,
     match: '`',
   },
 ];

@@ -6,37 +6,37 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { AutoformatBlockRule } from '@udecode/plate-autoformat';
-import { type PlateEditor } from '@udecode/plate-core';
+import { CodeBlockPlugin, CodeLinePlugin } from '@udecode/plate-code-block/react';
+import { SlateEditor } from '@udecode/plate-core';
 import { toggleList, unwrapList } from '@udecode/plate-list';
 import { isType } from '@udecode/plate-utils';
-import { getParentNode, isElement, Value } from '@udecode/slate';
-import { ELEMENT_CODE_BLOCK, ELEMENT_CODE_LINE } from '../../plugins/codeblock/constants';
+import { getParentNode, isElement } from '@udecode/slate';
 
-export const clearBlockFormat: AutoformatBlockRule['preFormat'] = (editor) => {
+export const preFormat: AutoformatBlockRule['preFormat'] = (editor) => {
   unwrapList(editor);
 };
 
-export const format = <V extends Value>(editor: PlateEditor<V>, customFormatting: any) => {
+export const format = (editor: SlateEditor, customFormatting: CallableFunction) => {
   if (editor.selection) {
     const parentEntry = getParentNode(editor, editor.selection);
+
     if (!parentEntry) return;
+
     const [node] = parentEntry;
-    if (isElement(node) && !isType(editor, node, ELEMENT_CODE_BLOCK) && !isType(editor, node, ELEMENT_CODE_LINE)) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+
+    if (
+      isElement(node) &&
+      !isType(editor, node, CodeBlockPlugin.key) &&
+      !isType(editor, node, CodeLinePlugin.key)
+    ) {
       customFormatting();
     }
   }
 };
 
-export const formatList = <V extends Value>(editor: PlateEditor<V>, elementType: string) => {
+export const formatList = (editor: SlateEditor, elementType: string) => {
   format(editor, () =>
     toggleList(editor, {
       type: elementType,
     }));
-};
-
-export const formatText = <V extends Value>(editor: PlateEditor<V>, text: string) => {
-  format(editor, () => {
-    editor.insertText(text);
-  });
 };

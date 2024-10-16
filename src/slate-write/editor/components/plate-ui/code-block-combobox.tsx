@@ -5,23 +5,14 @@
 import React, { useState } from 'react';
 
 import { cn } from '@udecode/cn';
-import {
-  useCodeBlockCombobox,
-  useCodeBlockComboboxState,
-} from '@udecode/plate-code-block/react';
+import { useCodeBlockCombobox, useCodeBlockComboboxState } from '@udecode/plate-code-block/react';
 // Prism must be imported before all language files
-import Prism from 'prismjs';
+// import Prism from 'prismjs';
 
 import { Icons } from 'src/slate-write/editor/components/icons';
 
 import { Button } from './button';
-import {
-  Command,
-  CommandEmpty,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from './command';
+import { Command, CommandEmpty, CommandInput, CommandItem, CommandList } from './command';
 import { Popover, PopoverContent, PopoverTrigger } from './popover';
 
 // import 'prismjs/components/prism-antlr4.js';
@@ -75,7 +66,7 @@ import { Popover, PopoverContent, PopoverTrigger } from './popover';
 
 export { Prism };
 
-const languages: { label: string; value: string }[] = [
+const languages: Array<{ label: string; value: string }> = [
   { label: 'Plain Text', value: 'text' },
   { label: 'Bash', value: 'bash' },
   { label: 'CSS', value: 'css' },
@@ -145,7 +136,7 @@ export function CodeBlockCombobox() {
     (language) =>
       !value ||
       language.label.toLowerCase().includes(value.toLowerCase()) ||
-      language.value.toLowerCase().includes(value.toLowerCase())
+      language.value.toLowerCase().includes(value.toLowerCase()),
   );
 
   return (
@@ -160,7 +151,7 @@ export function CodeBlockCombobox() {
         >
           {state.value
             ? languages.find((language) => language.value === state.value)
-                ?.label
+              ?.label
             : 'Plain Text'}
           <Icons.chevronsUpDown className='ml-2 size-4 shrink-0 opacity-50' />
         </Button>
@@ -169,7 +160,9 @@ export function CodeBlockCombobox() {
         <Command shouldFilter={false}>
           <CommandInput
             value={value}
-            onValueChange={(value) => setValue(value)}
+            onValueChange={(value) => {
+              setValue(value);
+            }}
             placeholder='Search language...'
           />
           <CommandEmpty>No language found.</CommandEmpty>
@@ -188,7 +181,7 @@ export function CodeBlockCombobox() {
                 <Icons.check
                   className={cn(
                     'mr-2 size-4',
-                    state.value === language.value ? 'opacity-100' : 'opacity-0'
+                    state.value === language.value ? 'opacity-100' : 'opacity-0',
                   )}
                 />
                 {language.label}
