@@ -26,11 +26,15 @@ import { TablePlugin } from '@udecode/plate-table/react';
 import { TrailingBlockPlugin } from '@udecode/plate-trailing-block';
 import { MutableRefObject } from 'react';
 import { LinkFloatingToolbar } from './components/plate-ui/link-floating-toolbar';
+import { createPlateUI } from './components';
 
 export const useSlateWriteEditor = (editorId: string = '', idCreator: () => string, currentAstReference: MutableRefObject<ValueOf<SlateEditor>>, scrollSelector?: string) => {
   const a = usePlateEditor(
     {
       id: editorId,
+      override: {
+        components: createPlateUI(),
+      },
       plugins: [
         // Nodes
         HeadingPlugin.configure({ options: { levels: 6 } }),

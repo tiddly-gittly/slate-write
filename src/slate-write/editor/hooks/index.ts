@@ -4,4 +4,3 @@
 
 export * from './useInitialValueOnChange';
 export * from './useMouseEnterFixDrag';
-export * from './usePlugins';

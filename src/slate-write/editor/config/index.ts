@@ -4,8 +4,6 @@
 
 export * from './autoformat/index';
 export * from './config';
-export * from './DefaultPlatePluginKey';
 export * from './draggableComponents';
 export * from './globalStyle';
 export * from './placeHoldersComponents';
-export * from './plugins';

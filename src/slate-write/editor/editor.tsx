@@ -8,6 +8,7 @@ import { GlobalStyle } from './config/globalStyle';
 import { useInitialValue, useOnChange } from './hooks/useInitialValueOnChange';
 import { getIdFactory } from './plugins/id/getId';
 import './style.css';
+import './plate-global.css';
 import { Editor } from './components/plate-ui/editor';
 import { TooltipProvider } from './components/plate-ui/tooltip';
 import { useSlateWriteEditor } from './useEditor';

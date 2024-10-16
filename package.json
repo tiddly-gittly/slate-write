@@ -75,6 +75,7 @@
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "rimraf": "^6.0.1",
+    "tailwindcss": "^3.4.14",
     "ts-node": "^10.9.2",
     "tw-react": "^0.6.4",
     "tw5-typed": "^0.5.12",
