@@ -3,7 +3,9 @@ import { BoldPlugin, CodePlugin, ItalicPlugin, StrikethroughPlugin, SubscriptPlu
 import { BlockquotePlugin } from '@udecode/plate-block-quote/react';
 import { ExitBreakPlugin, SingleLinePlugin, SoftBreakPlugin } from '@udecode/plate-break/react';
 import { CodeBlockPlugin } from '@udecode/plate-code-block/react';
+import { ValueOf } from '@udecode/plate-common';
 import { ParagraphPlugin, usePlateEditor } from '@udecode/plate-common/react';
+import { SlateEditor } from '@udecode/plate-core';
 import { DndPlugin } from '@udecode/plate-dnd';
 import { HEADING_KEYS } from '@udecode/plate-heading';
 import { HeadingPlugin } from '@udecode/plate-heading/react';
@@ -22,15 +24,16 @@ import { SlashPlugin } from '@udecode/plate-slash-command/react';
 import { TabbablePlugin } from '@udecode/plate-tabbable/react';
 import { TablePlugin } from '@udecode/plate-table/react';
 import { TrailingBlockPlugin } from '@udecode/plate-trailing-block';
+import { MutableRefObject } from 'react';
 import { LinkFloatingToolbar } from './components/plate-ui/link-floating-toolbar';
 
-export const useSlateWriteEditor = (editorId: string = '', idCreator: () => string, scrollSelector?: string) => {
+export const useSlateWriteEditor = (editorId: string = '', idCreator: () => string, currentAstReference: MutableRefObject<ValueOf<SlateEditor>>, scrollSelector?: string) => {
   const a = usePlateEditor(
     {
       id: editorId,
       plugins: [
         // Nodes
-        HeadingPlugin,
+        HeadingPlugin.configure({ options: { levels: 6 } }),
         BlockquotePlugin,
         CodeBlockPlugin.configure({
           options: {
@@ -135,6 +138,7 @@ export const useSlateWriteEditor = (editorId: string = '', idCreator: () => stri
           options: { type: ParagraphPlugin.key },
         }),
       ],
+      value: currentAstReference.current,
     },
     [],
   );

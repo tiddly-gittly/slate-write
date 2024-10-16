@@ -49,13 +49,13 @@ export function App({ initialTiddlerText, saver, currentTiddler: editorID, paren
   const idCreator = useMemo(() => {
     return getIdFactory(editorID);
   }, [editorID]);
-  const editor = useSlateWriteEditor(editorID, idCreator, scrollSelector);
-
   const currentAstReference = useInitialValue({
     initialTiddlerText,
     saver,
     idCreator,
   });
+  const editor = useSlateWriteEditor(editorID, idCreator, currentAstReference, scrollSelector);
+
   const onChange = useOnChange({
     editor,
     initialTiddlerText,
