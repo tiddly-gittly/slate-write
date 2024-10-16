@@ -2,9 +2,9 @@ import { SlateEditor } from '@udecode/plate-core';
 import type { ValueOf } from '@udecode/slate';
 import type { IWikiASTNode } from 'tiddlywiki';
 import { wikiAstFromSlateAst } from 'wikiast-util-from-slate-plate-ast';
-import { wikiAstFromWikiText } from 'wikiast-util-from-wikitext';
 import { wikiAstToSlateAst } from 'wikiast-util-to-slate-plate-ast';
-import { wikiAstToWikiText } from 'wikiast-util-to-wikitext';
+import { wikiAstFromWikiText } from './wikiAstFromWikiText';
+import { wikiAstToWikiText } from './wikiAstToWikiText';
 
 export function serialize(value: ValueOf<SlateEditor>): string {
   const wikiAst = wikiAstFromSlateAst(value);

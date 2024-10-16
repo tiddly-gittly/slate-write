@@ -6,18 +6,16 @@ import { CodeBlockPlugin } from '@udecode/plate-code-block/react';
 import { ParagraphPlugin, usePlateEditor } from '@udecode/plate-common/react';
 import { DndPlugin } from '@udecode/plate-dnd';
 import { HEADING_KEYS } from '@udecode/plate-heading';
-import { HeadingPlugin, TocPlugin } from '@udecode/plate-heading/react';
+import { HeadingPlugin } from '@udecode/plate-heading/react';
 import { HorizontalRulePlugin } from '@udecode/plate-horizontal-rule/react';
 import { IndentListPlugin } from '@udecode/plate-indent-list/react';
 import { IndentPlugin } from '@udecode/plate-indent/react';
 import { KbdPlugin } from '@udecode/plate-kbd/react';
 import { LineHeightPlugin } from '@udecode/plate-line-height/react';
 import { LinkPlugin } from '@udecode/plate-link/react';
-import { ListPlugin, TodoListPlugin } from '@udecode/plate-list/react';
+import { ListPlugin } from '@udecode/plate-list/react';
 import { ImagePlugin, MediaEmbedPlugin } from '@udecode/plate-media/react';
-import { MentionPlugin } from '@udecode/plate-mention/react';
 import { NodeIdPlugin } from '@udecode/plate-node-id';
-import { NormalizeTypesPlugin } from '@udecode/plate-normalizers';
 import { DeletePlugin, SelectOnBackspacePlugin } from '@udecode/plate-select';
 import { BlockSelectionPlugin } from '@udecode/plate-selection/react';
 import { SlashPlugin } from '@udecode/plate-slash-command/react';
@@ -26,20 +24,13 @@ import { TablePlugin } from '@udecode/plate-table/react';
 import { TrailingBlockPlugin } from '@udecode/plate-trailing-block';
 import { LinkFloatingToolbar } from './components/plate-ui/link-floating-toolbar';
 
-export const useSlateWriteEditor = (editorId: string = '', scrollSelector?: string) => {
+export const useSlateWriteEditor = (editorId: string = '', idCreator: () => string, scrollSelector?: string) => {
   const a = usePlateEditor(
     {
       id: editorId,
       plugins: [
         // Nodes
         HeadingPlugin,
-        TocPlugin.configure({
-          options: {
-            isScroll: true,
-            scrollContainerSelector: `#${scrollSelector}`,
-            topOffset: 80,
-          },
-        }),
         BlockquotePlugin,
         CodeBlockPlugin.configure({
           options: {
@@ -53,14 +44,8 @@ export const useSlateWriteEditor = (editorId: string = '', scrollSelector?: stri
         ListPlugin,
         ImagePlugin,
         MediaEmbedPlugin,
-        MentionPlugin.configure({
-          options: {
-            triggerPreviousCharPattern: /^$|^[\s"']$/,
-          },
-        }),
         SlashPlugin,
         TablePlugin,
-        TodoListPlugin,
         // Marks
         BoldPlugin,
         ItalicPlugin,
@@ -134,12 +119,7 @@ export const useSlateWriteEditor = (editorId: string = '', scrollSelector?: stri
         }),
         DndPlugin.configure({ options: { enableScroller: true } }),
         ExitBreakPlugin,
-        NodeIdPlugin,
-        NormalizeTypesPlugin.configure({
-          options: {
-            rules: [{ path: [0], strictType: HEADING_KEYS.h1 }],
-          },
-        }),
+        NodeIdPlugin.configure({ options: { idCreator } }),
         SelectOnBackspacePlugin.configure({
           options: {
             query: {

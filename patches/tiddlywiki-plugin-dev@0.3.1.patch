@@ -1,0 +1,39 @@
+diff --git a/dist/js/dev.js b/dist/js/dev.js
+index cf557e4e6d1bdc9eadf1e154a8d0bb9e17281dd0..2f90c058dccc65b1a1d56255ce01651114403dd7 100644
+--- a/dist/js/dev.js
++++ b/dist/js/dev.js
+@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
+ exports.runDev = void 0;
+ var _fs = _interopRequireDefault(require("fs"));
+ var _path = _interopRequireDefault(require("path"));
+-var _tiddlywiki = _interopRequireDefault(require("tiddlywiki"));
++var _tiddlywiki = _interopRequireDefault(require("@tiddlygit/tiddlywiki-pr-nightly"));
+ var _chokidar = _interopRequireDefault(require("chokidar"));
+ var _getPortPlease = require("get-port-please");
+ var _ws = require("ws");
+diff --git a/dist/js/test.js b/dist/js/test.js
+index c8cf9f7e1e96fefff47dd89c59c432811960d0db..a2f023be594f1611fef86a5cda6d437248b70bd9 100644
+--- a/dist/js/test.js
++++ b/dist/js/test.js
+@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+ exports.runTest = void 0;
+-var _tiddlywiki = _interopRequireDefault(require("tiddlywiki"));
++var _tiddlywiki = _interopRequireDefault(require("@tiddlygit/tiddlywiki-pr-nightly"));
+ var _packup = require("./packup");
+ var _utils = require("./utils");
+ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+diff --git a/dist/js/utils.js b/dist/js/utils.js
+index b9df2f3d12bc09fa32bbbfd29f07518b65d4d16f..95f8645ddd1d183f8ceb024b7ac987022600e9ce 100644
+--- a/dist/js/utils.js
++++ b/dist/js/utils.js
+@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
+ exports.walkFilesSync = exports.waitForFile = exports.tryCopy = exports.tiddlywiki = exports.sleep = exports.mkdirsForFileSync = void 0;
+ var _fs = _interopRequireDefault(require("fs"));
+ var _path = require("path");
+-var _tiddlywiki = require("tiddlywiki");
++var _tiddlywiki = require("@tiddlygit/tiddlywiki-pr-nightly");
+ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+ /**
+  * 初始化 TiddlyWiki

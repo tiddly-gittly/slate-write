@@ -46,11 +46,11 @@ export interface ISaver {
 
 export function App({ initialTiddlerText, saver, currentTiddler: editorID, parentWidget }: IEditorAppProps & IDefaultWidgetProps): JSX.Element {
   const scrollSelector = '.tw-slate-write-container';
-  const editor = useSlateWriteEditor(editorID, scrollSelector);
-
   const idCreator = useMemo(() => {
     return getIdFactory(editorID);
   }, [editorID]);
+  const editor = useSlateWriteEditor(editorID, idCreator, scrollSelector);
+
   const currentAstReference = useInitialValue({
     initialTiddlerText,
     saver,

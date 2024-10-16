@@ -8,6 +8,11 @@ overrides:
   react: 18.3.1
   react-dom: 18.3.1
 
+patchedDependencies:
+  tiddlywiki-plugin-dev@0.3.1:
+    hash: 6ejrvlavnvc6uwo2oh2ow63doi
+    path: patches/tiddlywiki-plugin-dev@0.3.1.patch
+
 importers:
 
   .:
@@ -126,14 +131,8 @@ importers:
       '@udecode/plate-media':
         specifier: ^39.0.0
         version: 39.0.0(@udecode/plate-common@39.1.3(@types/react@18.3.11)(immer@10.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(scheduler@0.23.2)(slate-history@0.109.0(slate@0.103.0))(slate-hyperscript@0.100.0(slate@0.103.0))(slate-react@0.110.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(slate@0.103.0))(slate@0.103.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(slate-history@0.109.0(slate@0.103.0))(slate-hyperscript@0.100.0(slate@0.103.0))(slate-react@0.110.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(slate@0.103.0))(slate@0.103.0)
-      '@udecode/plate-mention':
-        specifier: 39.0.0
-        version: 39.0.0(@udecode/plate-common@39.1.3(@types/react@18.3.11)(immer@10.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(scheduler@0.23.2)(slate-history@0.109.0(slate@0.103.0))(slate-hyperscript@0.100.0(slate@0.103.0))(slate-react@0.110.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(slate@0.103.0))(slate@0.103.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(slate-history@0.109.0(slate@0.103.0))(slate-hyperscript@0.100.0(slate@0.103.0))(slate-react@0.110.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(slate@0.103.0))(slate@0.103.0)
       '@udecode/plate-node-id':
         specifier: 39.0.0
-        version: 39.0.0(@udecode/plate-common@39.1.3(@types/react@18.3.11)(immer@10.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(scheduler@0.23.2)(slate-history@0.109.0(slate@0.103.0))(slate-hyperscript@0.100.0(slate@0.103.0))(slate-react@0.110.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(slate@0.103.0))(slate@0.103.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(slate-history@0.109.0(slate@0.103.0))(slate-hyperscript@0.100.0(slate@0.103.0))(slate-react@0.110.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(slate@0.103.0))(slate@0.103.0)
-      '@udecode/plate-normalizers':
-        specifier: ^39.0.0
         version: 39.0.0(@udecode/plate-common@39.1.3(@types/react@18.3.11)(immer@10.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(scheduler@0.23.2)(slate-history@0.109.0(slate@0.103.0))(slate-hyperscript@0.100.0(slate@0.103.0))(slate-react@0.110.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(slate@0.103.0))(slate@0.103.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(slate-history@0.109.0(slate@0.103.0))(slate-hyperscript@0.100.0(slate@0.103.0))(slate-react@0.110.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(slate@0.103.0))(slate@0.103.0)
       '@udecode/plate-paragraph':
         specifier: 36.0.0
@@ -239,23 +238,20 @@ importers:
         version: 5.3.5
       tiddlywiki-plugin-dev:
         specifier: ^0.3.1
-        version: 0.3.1(@babel/core@7.22.5)(postcss-load-config@4.0.1(postcss@8.4.24)(ts-node@10.9.2(@types/node@22.7.4)(typescript@5.6.2)))(postcss@8.4.24)(svelte@4.2.19)(ts-node@10.9.2(@types/node@22.7.4)(typescript@5.6.2))(typescript@5.6.2)
+        version: 0.3.1(patch_hash=6ejrvlavnvc6uwo2oh2ow63doi)(@babel/core@7.22.5)(postcss-load-config@4.0.1(postcss@8.4.24)(ts-node@10.9.2(@types/node@22.7.4)(typescript@5.6.2)))(postcss@8.4.24)(svelte@4.2.19)(ts-node@10.9.2(@types/node@22.7.4)(typescript@5.6.2))(typescript@5.6.2)
       tippy.js:
         specifier: ^6.3.7
         version: 6.3.7
       typescript-styled-is:
         specifier: ^2.1.0
         version: 2.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+      unist-util-parents:
+        specifier: ^3.0.0
+        version: 3.0.0
       wikiast-util-from-slate-plate-ast:
         specifier: ^0.3.0
         version: 0.3.0
-      wikiast-util-from-wikitext:
-        specifier: ^0.3.0
-        version: 0.3.0
       wikiast-util-to-slate-plate-ast:
-        specifier: ^0.3.0
-        version: 0.3.0
-      wikiast-util-to-wikitext:
         specifier: ^0.3.0
         version: 0.3.0
       wikiast-utils:
@@ -265,6 +261,9 @@ importers:
       '@modern-js/tsconfig':
         specifier: ^2.60.2
         version: 2.60.2
+      '@tiddlygit/tiddlywiki-pr-nightly':
+        specifier: 5.3.6-prerelease-20241011-pr-8258-6
+        version: 5.3.6-prerelease-20241011-pr-8258-6
       '@types/node':
         specifier: ^22.7.4
         version: 22.7.4
@@ -517,41 +516,49 @@ packages:
     resolution: {integrity: sha512-lJ7s/pOQWRJ0mstjZQnVyX2/3QRXZ9cpFHJDZ7e81Y8QSn/iqxTrnK0DPgxUrDG8hYKQmWQdQLU4sP5DKBz0Jg==}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
 
   '@dprint/linux-arm64-glibc@0.47.2':
     resolution: {integrity: sha512-B0m1vT5LdVtrNOVdkqpLPrSxuCD+l5bTIgRzPaDoIB1ChWQkler9IlX8C+RStpujjPj6SYvwo5vTzjQSvRdQkA==}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
 
   '@dprint/linux-arm64-musl@0.45.1':
     resolution: {integrity: sha512-un2awe1L1sAJLsCPSEUrE0/cgupdzbYFoyBOutyU1zHR9KQn47AtIDw+chvuinU4xleHDuEGyXGuJ6NE+Ky6vw==}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
 
   '@dprint/linux-arm64-musl@0.47.2':
     resolution: {integrity: sha512-zID6wZZqpg2/Q2Us+ERQkbhLwlW3p3xaeEr00MPf49bpydmEjMiPuSjWPkNv+slQSIyIsVovOxF4lbNZjsdtvw==}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
 
   '@dprint/linux-x64-glibc@0.45.1':
     resolution: {integrity: sha512-5Civht90S/g8zlyYB7n4oH78p+sLbNqeFCFuImJRK7uRxZwCRya7lji6RwlB6DQ7qngVqovTHj9RLOYfZzfVlg==}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   '@dprint/linux-x64-glibc@0.47.2':
     resolution: {integrity: sha512-rB3WXMdINnRd33DItIp7mObS7dzHW90ZzeJSsoKJLPp+Z7wXjjb27UUowfqVI4baa/1pd7sdbX54DPohMtfu/A==}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   '@dprint/linux-x64-musl@0.45.1':
     resolution: {integrity: sha512-p2/gjnHDd8GRCvtey5HZO4o/He6pSmY/zpcCuIXprFW9P0vNlEj3DFhz4FPpOKXM+csrsVWWs2E0T/xr5QZtVg==}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
 
   '@dprint/linux-x64-musl@0.47.2':
     resolution: {integrity: sha512-E0+TNbzYdTXJ/jCVjUctVxkda/faw++aDQLfyWGcmdMJnbM7NZz+W4fUpDXzMPsjy+zTWxXcPK7/q2DZz2gnbg==}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
 
   '@dprint/markdown@0.15.3':
     resolution: {integrity: sha512-QCpvOQZtvq8HNbUobh9lAW5V4PrEncpfKLltxgM/DjLymDHUQ5EOnHUHaBlKu0ze+xtApBFnJpZS2xhjoNpj9g==}
@@ -1435,6 +1442,12 @@ packages:
       react: 18.3.1
       styled-components: '>=4.1.0 <6'
 
+  '@tiddlygit/tiddlywiki-pr-nightly@5.3.6-prerelease-20241011-pr-8258-6':
+    resolution: {integrity: sha512-VKvLdFz7qwQTVGIUe9s5q/qhptbErNW5t4shvIzIb/ljDRw6/J2WBAqQpoSh7/vxrbZHSAMMUXLMr0qpNqYj1g==}
+    engines: {node: '>=0.8.2'}
+    hasBin: true
+    bundledDependencies: []
+
   '@tippyjs/react@4.2.6':
     resolution: {integrity: sha512-91RicDR+H7oDSyPycI13q3b7o4O60wa2oRbjlz2fyRLmHImc4vyDwuUP8NtZaN0VARJY5hybvDYrFzhY9+Lbyw==}
     peerDependencies:
@@ -1513,6 +1526,9 @@ packages:
 
   '@types/tern@0.23.4':
     resolution: {integrity: sha512-JAUw1iXGO1qaWwEOzxTKJZ/5JxVeON9kvGZ/osgZaJImBnyjyn0cjovPsf6FNLmyGY8Vw9DoXZCMlfMkMwHRWg==}
+
+  '@types/unist@3.0.3':
+    resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==}
 
   '@types/yargs-parser@21.0.0':
     resolution: {integrity: sha512-iO9ZQHkZxHn4mSakYV0vFHAVDyEOIJQrV2uZ06HxEPcx+mt8swXoZHIbaaJ2crJYFfErySgktuTZ3BeLz+XmFA==}
@@ -1875,17 +1891,6 @@ packages:
 
   '@udecode/plate-media@39.0.0':
     resolution: {integrity: sha512-LGX8Kk4AVzfJrb3cm6TpjgKmve/N0oxo4mb1RclGSwfxWTjb03Y8B4XNL22CTyz9rsmEDtoJ9ji6A63+RF4cug==}
-    peerDependencies:
-      '@udecode/plate-common': '>=39.0.0'
-      react: 18.3.1
-      react-dom: 18.3.1
-      slate: '>=0.103.0'
-      slate-history: '>=0.93.0'
-      slate-hyperscript: '>=0.66.0'
-      slate-react: '>=0.108.0'
-
-  '@udecode/plate-mention@39.0.0':
-    resolution: {integrity: sha512-5ikECX8Ap2orI+2pVyYOTlbuwtV2fegdF0bOcKmvLunzsMUb/dPGf4gVuZOCKw8li0yhUm3spHg9XPg3vSfgmQ==}
     peerDependencies:
       '@udecode/plate-common': '>=39.0.0'
       react: 18.3.1
@@ -4942,6 +4947,9 @@ packages:
   undici-types@6.19.8:
     resolution: {integrity: sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw==}
 
+  unist-util-parents@3.0.0:
+    resolution: {integrity: sha512-3DVSfp+MkJhcJbGn/W7aOlZYVpsMQQ054cpfbPHZAqYPu/lvu5rCdzjuIt4eEMriLkCWLcnJjax97Awm1Bkhtg==}
+
   universalify@2.0.0:
     resolution: {integrity: sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ==}
     engines: {node: '>= 10.0.0'}
@@ -5073,14 +5081,8 @@ packages:
   wikiast-util-from-slate-plate-ast@0.3.0:
     resolution: {integrity: sha512-lAYEzkAcWXQpM2TzB1xebshCdi/PHXZbEq2aQY/RmDrxN5dVMKmRU0lrcQR2hEhfBiijFQfGmTUo9MGC7+bECw==}
 
-  wikiast-util-from-wikitext@0.3.0:
-    resolution: {integrity: sha512-ioc79Gx0u2PmCOEoZv9yqf1Og2ZTDOR4AClEUkVhIhPmzkV0AURPlSncq80oNNVOzHFxPcSKyilQoCavCYZ9Og==}
-
   wikiast-util-to-slate-plate-ast@0.3.0:
     resolution: {integrity: sha512-7BI39SHesvwQz+AHwgQe4gdD49/2KEgoW38KeQ33ZAN7jvlqtwRjbYAnI3eYPwz1CMxpXuqH+Fu0YPMTB0eyzg==}
-
-  wikiast-util-to-wikitext@0.3.0:
-    resolution: {integrity: sha512-s1lUBCj+d3c/qViJeaIZMUgssViaTxy6q3eBG2OkIIdM4d7zUj2WEfAofKi+Zof4TVS7pMoT3+CrfmrBqpkCVg==}
 
   wikiast-utils@0.3.0:
     resolution: {integrity: sha512-iLLiFj6Lh3abo8UI7O5tuZWba+ZSP2aoPxfOoLgdfefOFAIALcD3TT6HTGslHU2QtTZwlyyTkWt87CubQTP/wQ==}
@@ -6243,6 +6245,8 @@ snapshots:
       react: 18.3.1
       styled-components: 6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
+  '@tiddlygit/tiddlywiki-pr-nightly@5.3.6-prerelease-20241011-pr-8258-6': {}
+
   '@tippyjs/react@4.2.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       react: 18.3.1
@@ -6328,6 +6332,8 @@ snapshots:
     dependencies:
       '@types/estree': 1.0.1
 
+  '@types/unist@3.0.3': {}
+
   '@types/yargs-parser@21.0.0': {}
 
   '@types/yargs@17.0.24':
@@ -6409,7 +6415,7 @@ snapshots:
     dependencies:
       '@typescript-eslint/typescript-estree': 7.1.0(typescript@5.6.2)
       '@typescript-eslint/utils': 7.1.0(eslint@8.57.0)(typescript@5.6.2)
-      debug: 4.3.4
+      debug: 4.3.7
       eslint: 8.57.0
       ts-api-utils: 1.3.0(typescript@5.6.2)
     optionalDependencies:
@@ -6456,7 +6462,7 @@ snapshots:
     dependencies:
       '@typescript-eslint/types': 7.1.0
       '@typescript-eslint/visitor-keys': 7.1.0
-      debug: 4.3.4
+      debug: 4.3.7
       globby: 11.1.0
       is-glob: 4.0.3
       minimatch: 9.0.3
@@ -6775,17 +6781,6 @@ snapshots:
     dependencies:
       '@udecode/plate-common': 39.1.3(@types/react@18.3.11)(immer@10.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(scheduler@0.23.2)(slate-history@0.109.0(slate@0.103.0))(slate-hyperscript@0.100.0(slate@0.103.0))(slate-react@0.110.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(slate@0.103.0))(slate@0.103.0)
       js-video-url-parser: 0.5.1
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      slate: 0.103.0
-      slate-history: 0.109.0(slate@0.103.0)
-      slate-hyperscript: 0.100.0(slate@0.103.0)
-      slate-react: 0.110.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(slate@0.103.0)
-
-  '@udecode/plate-mention@39.0.0(@udecode/plate-common@39.1.3(@types/react@18.3.11)(immer@10.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(scheduler@0.23.2)(slate-history@0.109.0(slate@0.103.0))(slate-hyperscript@0.100.0(slate@0.103.0))(slate-react@0.110.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(slate@0.103.0))(slate@0.103.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(slate-history@0.109.0(slate@0.103.0))(slate-hyperscript@0.100.0(slate@0.103.0))(slate-react@0.110.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(slate@0.103.0))(slate@0.103.0)':
-    dependencies:
-      '@udecode/plate-combobox': 39.0.0(@udecode/plate-common@39.1.3(@types/react@18.3.11)(immer@10.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(scheduler@0.23.2)(slate-history@0.109.0(slate@0.103.0))(slate-hyperscript@0.100.0(slate@0.103.0))(slate-react@0.110.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(slate@0.103.0))(slate@0.103.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(slate-history@0.109.0(slate@0.103.0))(slate-hyperscript@0.100.0(slate@0.103.0))(slate-react@0.110.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(slate@0.103.0))(slate@0.103.0)
-      '@udecode/plate-common': 39.1.3(@types/react@18.3.11)(immer@10.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(scheduler@0.23.2)(slate-history@0.109.0(slate@0.103.0))(slate-hyperscript@0.100.0(slate@0.103.0))(slate-react@0.110.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(slate@0.103.0))(slate@0.103.0)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       slate: 0.103.0
@@ -10054,7 +10049,7 @@ snapshots:
 
   through@2.3.8: {}
 
-  tiddlywiki-plugin-dev@0.3.1(@babel/core@7.22.5)(postcss-load-config@4.0.1(postcss@8.4.24)(ts-node@10.9.2(@types/node@22.7.4)(typescript@5.6.2)))(postcss@8.4.24)(svelte@4.2.19)(ts-node@10.9.2(@types/node@22.7.4)(typescript@5.6.2))(typescript@5.6.2):
+  tiddlywiki-plugin-dev@0.3.1(patch_hash=6ejrvlavnvc6uwo2oh2ow63doi)(@babel/core@7.22.5)(postcss-load-config@4.0.1(postcss@8.4.24)(ts-node@10.9.2(@types/node@22.7.4)(typescript@5.6.2)))(postcss@8.4.24)(svelte@4.2.19)(ts-node@10.9.2(@types/node@22.7.4)(typescript@5.6.2))(typescript@5.6.2):
     dependencies:
       autoprefixer: 10.4.14(postcss@8.4.24)
       browserslist: 4.21.9
@@ -10250,6 +10245,10 @@ snapshots:
 
   undici-types@6.19.8: {}
 
+  unist-util-parents@3.0.0:
+    dependencies:
+      '@types/unist': 3.0.3
+
   universalify@2.0.0: {}
 
   update-browserslist-db@1.0.11(browserslist@4.21.9):
@@ -10388,13 +10387,7 @@ snapshots:
     dependencies:
       wikiast-utils: 0.3.0
 
-  wikiast-util-from-wikitext@0.3.0: {}
-
   wikiast-util-to-slate-plate-ast@0.3.0:
-    dependencies:
-      wikiast-utils: 0.3.0
-
-  wikiast-util-to-wikitext@0.3.0:
     dependencies:
       wikiast-utils: 0.3.0
 
