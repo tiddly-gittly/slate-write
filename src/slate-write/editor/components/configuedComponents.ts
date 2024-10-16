@@ -12,7 +12,6 @@ import { KbdPlugin } from '@udecode/plate-kbd/react';
 import { LinkPlugin } from '@udecode/plate-link/react';
 import { BulletedListPlugin, ListItemPlugin, NumberedListPlugin } from '@udecode/plate-list/react';
 import { ImagePlugin } from '@udecode/plate-media/react';
-import { MentionInputPlugin, MentionPlugin } from '@udecode/plate-mention/react';
 import { SlashInputPlugin } from '@udecode/plate-slash-command/react';
 import { TableCellHeaderPlugin, TableCellPlugin, TablePlugin, TableRowPlugin } from '@udecode/plate-table/react';
 import { LinkElement } from '../plugins';
@@ -26,8 +25,6 @@ import { HrElement } from './plate-ui/hr-element';
 import { ImageElement } from './plate-ui/image-element';
 import { KbdLeaf } from './plate-ui/kbd-leaf';
 import { ListElement } from './plate-ui/list-element';
-import { MentionElement } from './plate-ui/mention-element';
-import { MentionInputElement } from './plate-ui/mention-input-element';
 import { ParagraphElement } from './plate-ui/paragraph-element';
 import { withPlaceholders } from './plate-ui/placeholder';
 import { SearchHighlightLeaf } from './plate-ui/search-highlight-leaf';
@@ -59,8 +56,6 @@ export const createPlateUI = () => {
     [KbdPlugin.key]: KbdLeaf,
     [LinkPlugin.key]: LinkElement,
     [ListItemPlugin.key]: withProps(PlateElement, { as: 'li' }),
-    [MentionInputPlugin.key]: MentionInputElement,
-    [MentionPlugin.key]: MentionElement,
     [NumberedListPlugin.key]: withProps(ListElement, { variant: 'ol' }),
     [ParagraphPlugin.key]: ParagraphElement,
     [SlashInputPlugin.key]: SlashInputElement,
