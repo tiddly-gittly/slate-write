@@ -3,6 +3,9 @@
  */
 
 export * from './configuedComponents';
+export * from './plate-ui/floating-toolbar-buttons';
+export * from './plate-ui/more-dropdown-menu';
+export * from './plate-ui/turn-into-dropdown-menu';
 export * from './icons';
 export * from './plate-ui/blockquote-element';
 export * from './plate-ui/button';
@@ -12,7 +15,6 @@ export * from './plate-ui/code-block-element';
 export * from './plate-ui/code-leaf';
 export * from './plate-ui/code-line-element';
 export * from './plate-ui/code-syntax-leaf';
-export * from './plate-ui/command';
 export * from './plate-ui/dialog';
 export * from './plate-ui/draggable';
 export * from './plate-ui/dropdown-menu';
@@ -26,6 +28,7 @@ export * from './plate-ui/input';
 export * from './plate-ui/kbd-leaf';
 export * from './plate-ui/link-element';
 export * from './plate-ui/link-floating-toolbar';
+export * from './plate-ui/link-toolbar-button';
 export * from './plate-ui/list-element';
 export * from './plate-ui/list-toolbar-button';
 export * from './plate-ui/mark-toolbar-button';
@@ -46,4 +49,3 @@ export * from './plate-ui/toolbar';
 export * from './plate-ui/tooltip';
 export * from './plate-ui/turn-into-dropdown-menu';
 export * from './plate-ui/with-draggables';
-export * from './Toolbars';

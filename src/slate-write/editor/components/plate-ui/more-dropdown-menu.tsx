@@ -1,55 +1,67 @@
+/** Copy from plate/apps/www/src/components/plate-ui/playground-more-dropdown-menu.tsx */
 
-import { DropdownMenuProps } from '@radix-ui/react-dropdown-menu';
-import { MARK_SUBSCRIPT, MARK_SUPERSCRIPT } from '@udecode/plate-basic-marks';
 
-import { More } from '@styled-icons/material/More';
-import { Subscript } from '@styled-icons/material/Subscript';
-import { Superscript } from '@styled-icons/material/Superscript';
-import { usePlateEditorState } from '@udecode/plate-core';
-import { focusEditor } from '@udecode/slate-react';
-import { toggleMark } from '@udecode/slate-utils';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, useOpenState } from './dropdown-menu';
-import { ToolbarButton } from './toolbar';
+import type { DropdownMenuProps } from '@radix-ui/react-dropdown-menu';
+
+import { SubscriptPlugin, SuperscriptPlugin } from '@udecode/plate-basic-marks/react';
+import { collapseSelection } from '@udecode/plate-common';
+import { focusEditor, useEditorRef } from '@udecode/plate-common/react';
+import { KbdPlugin } from '@udecode/plate-kbd/react';
+
+import { Icons } from 'src/slate-write/editor/components/icons';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, useOpenState } from 'src/slate-write/editor/components/plate-ui/dropdown-menu';
+import { ToolbarButton } from 'src/slate-write/editor/components/plate-ui/toolbar';
 
 export function MoreDropdownMenu(props: DropdownMenuProps) {
-  const editor = usePlateEditorState();
+  const editor = useEditorRef();
   const openState = useOpenState();
 
   return (
     <DropdownMenu modal={false} {...openState} {...props}>
       <DropdownMenuTrigger asChild>
         <ToolbarButton pressed={openState.open} tooltip='Insert'>
-          <More />
+          <Icons.more />
         </ToolbarButton>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
+        className='ignore-click-outside/toolbar flex max-h-[500px] min-w-[180px] flex-col gap-0.5 overflow-y-auto'
         align='start'
-        className='flex max-h-[500px] min-w-[180px] flex-col gap-0.5 overflow-y-auto z-200'
       >
         <DropdownMenuItem
           onSelect={() => {
-            toggleMark(editor, {
-              key: MARK_SUBSCRIPT,
-              clear: MARK_SUPERSCRIPT,
+            editor.tf.toggle.mark({ key: KbdPlugin.key });
+            collapseSelection(editor, { edge: 'end' });
+            focusEditor(editor);
+          }}
+        >
+          <Icons.kbd className='mr-2 size-5' />
+          Keyboard input
+        </DropdownMenuItem>
+
+        <DropdownMenuItem
+          onSelect={() => {
+            editor.tf.toggle.mark({
+              key: SuperscriptPlugin.key,
+              clear: [SubscriptPlugin.key, SuperscriptPlugin.key],
             });
             focusEditor(editor);
           }}
         >
-          <Superscript className='mr-2 h-5 w-5' />
+          <Icons.superscript className='mr-2 size-5' />
           Superscript
           {/* (⌘+,) */}
         </DropdownMenuItem>
         <DropdownMenuItem
           onSelect={() => {
-            toggleMark(editor, {
-              key: MARK_SUPERSCRIPT,
-              clear: MARK_SUBSCRIPT,
+            editor.tf.toggle.mark({
+              key: SubscriptPlugin.key,
+              clear: [SuperscriptPlugin.key, SubscriptPlugin.key],
             });
             focusEditor(editor);
           }}
         >
-          <Subscript className='mr-2 h-5 w-5' />
+          <Icons.subscript className='mr-2 size-5' />
           Subscript
           {/* (⌘+.) */}
         </DropdownMenuItem>

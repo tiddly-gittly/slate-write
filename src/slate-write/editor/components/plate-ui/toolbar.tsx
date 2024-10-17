@@ -1,179 +1,151 @@
-/* eslint-disable unicorn/no-null */
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
-/* eslint-disable react/prop-types */
 'use client';
 
-import * as ToolbarPrimitive from '@radix-ui/react-toolbar';
-import { cva, VariantProps } from 'class-variance-authority';
 import * as React from 'react';
-import { ReactNode } from 'react';
 
-import { cn } from 'src/slate-write/editor/lib/utils';
+import * as ToolbarPrimitive from '@radix-ui/react-toolbar';
+import { cn, withCn, withRef, withVariants } from '@udecode/cn';
+import { type VariantProps, cva } from 'class-variance-authority';
 
-import { ArrowDown } from '@styled-icons/foundation/ArrowDown';
+import { Icons } from 'src/slate-write/editor/components/icons';
+
 import { Separator } from './separator';
-import { ToggleProps, toggleVariants } from './toggle';
-import { Tooltip, TooltipContent, TooltipPortal, TooltipTrigger } from './tooltip';
+import { withTooltip } from './tooltip';
 
-const toolbarVariants = cva(
-  'relative flex select-none items-stretch gap-1 bg-white dark:bg-slate-950',
+export const Toolbar = withCn(
+  ToolbarPrimitive.Root,
+  'relative flex select-none items-center gap-1 bg-white dark:bg-slate-950'
 );
 
-export const linkVariants = cva('font-medium underline underline-offset-4');
+export const ToolbarToggleGroup = withCn(
+  ToolbarPrimitive.ToolbarToggleGroup,
+  'flex items-center'
+);
 
-const ToolbarToggleGroup = ToolbarPrimitive.ToggleGroup;
+export const ToolbarLink = withCn(
+  ToolbarPrimitive.Link,
+  'font-medium underline underline-offset-4'
+);
 
-export interface ToolbarProps extends React.ComponentPropsWithoutRef<typeof Toolbar> {}
+export const ToolbarSeparator = withCn(
+  ToolbarPrimitive.Separator,
+  'my-1 w-px shrink-0 bg-slate-200 dark:bg-slate-800'
+);
 
-const Toolbar = React.forwardRef<
-  React.ElementRef<typeof ToolbarPrimitive.Root>,
-  & React.ComponentPropsWithoutRef<typeof ToolbarPrimitive.Root>
-  & VariantProps<typeof toolbarVariants>
->(({ className, ...props }, reference) => (
-  <ToolbarPrimitive.Root
-    ref={reference}
-    className={cn(toolbarVariants(), className)}
-    {...props}
-  />
-));
-Toolbar.displayName = ToolbarPrimitive.Root.displayName;
-
-const ToolbarLink = React.forwardRef<
-  React.ElementRef<typeof ToolbarPrimitive.Link>,
-  & React.ComponentPropsWithoutRef<typeof ToolbarPrimitive.Link>
-  & VariantProps<typeof linkVariants>
->(({ className, ...props }, reference) => (
-  <ToolbarPrimitive.Link
-    ref={reference}
-    className={cn(linkVariants(), className)}
-    {...props}
-  />
-));
-ToolbarLink.displayName = ToolbarPrimitive.Link.displayName;
-
-const ToolbarSeparator = React.forwardRef<
-  React.ElementRef<typeof ToolbarPrimitive.Separator>,
-  React.ComponentPropsWithoutRef<typeof ToolbarPrimitive.Separator>
->(({ className, ...props }, reference) => (
-  <ToolbarPrimitive.Separator
-    ref={reference}
-    className={cn('shrink-0 bg-slate-200 dark:bg-slate-800', 'my-1 w-[1px]', className)}
-    {...props}
-  />
-));
-ToolbarSeparator.displayName = ToolbarPrimitive.Separator.displayName;
-
-export interface ToolbarButtonProps extends React.ComponentPropsWithoutRef<typeof ToolbarPrimitive.Button>, VariantProps<typeof toggleVariants>, Omit<ToggleProps, 'type'> {
-  buttonType?: 'button' | 'toggle';
-  isDropdown?: boolean;
-  pressed?: boolean;
-  tooltip?: ReactNode;
-}
-
-const ToolbarButton = React.forwardRef<
-  React.ElementRef<typeof ToolbarPrimitive.Button>,
-  ToolbarButtonProps
->(
-  (
-    {
-      className,
-      variant,
-      size = 'sm',
-      isDropdown,
-      children,
-      pressed,
-      value,
-      tooltip,
-      ...props
+const toolbarButtonVariants = cva(
+  cn(
+    'inline-flex items-center justify-center rounded-md text-sm font-medium text-slate-950 ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:text-slate-50 dark:ring-offset-slate-950 dark:focus-visible:ring-slate-300',
+    '[&_svg:not([data-icon])]:size-5'
+  ),
+  {
+    defaultVariants: {
+      size: 'sm',
+      variant: 'default',
     },
-    reference,
-  ) => {
-    const [isLoaded, setIsLoaded] = React.useState(false);
+    variants: {
+      size: {
+        default: 'h-10 px-3',
+        lg: 'h-11 px-5',
+        sm: 'h-9 px-2',
+      },
+      variant: {
+        default:
+          'bg-transparent hover:bg-slate-100 hover:text-slate-500 aria-checked:bg-slate-100 aria-checked:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-400 dark:aria-checked:bg-slate-800 dark:aria-checked:text-slate-50',
+        outline:
+          'border border-slate-200 bg-transparent hover:bg-slate-100 hover:text-slate-900 dark:border-slate-800 dark:hover:bg-slate-800 dark:hover:text-slate-50',
+      },
+    },
+  }
+);
 
-    React.useEffect(() => {
-      setIsLoaded(true);
-    }, []);
-
-    const content = typeof pressed === 'boolean'
-      ? (
+const ToolbarButton = withTooltip(
+  // eslint-disable-next-line react/display-name
+  React.forwardRef<
+    React.ElementRef<typeof ToolbarToggleItem>,
+    {
+      isDropdown?: boolean;
+      pressed?: boolean;
+    } & Omit<
+      React.ComponentPropsWithoutRef<typeof ToolbarToggleItem>,
+      'asChild' | 'value'
+    > &
+      VariantProps<typeof toolbarButtonVariants>
+  >(
+    (
+      { children, className, isDropdown, pressed, size, variant, ...props },
+      ref
+    ) => {
+      return typeof pressed === 'boolean' ? (
         <ToolbarToggleGroup
+          disabled={props.disabled}
+          value='single'
           type='single'
-          value={pressed ? 'single' : undefined}
         >
           <ToolbarToggleItem
-            ref={reference}
+            ref={ref}
             className={cn(
-              toggleVariants({
-                variant,
+              toolbarButtonVariants({
                 size,
+                variant,
               }),
               isDropdown && 'my-1 justify-between pr-1',
-              className,
+              className
             )}
-            value='single'
+            value={pressed ? 'single' : ''}
             {...props}
           >
-            <div className='flex flex-1'>{children}</div>
-            <div>
-              {isDropdown && <ArrowDown className='ml-0.5 h-4 w-4' data-icon />}
-            </div>
+            {isDropdown ? (
+              <>
+                <div className='flex flex-1'>{children}</div>
+                <div>
+                  <Icons.arrowDown className='ml-0.5 size-4' data-icon />
+                </div>
+              </>
+            ) : (
+              children
+            )}
           </ToolbarToggleItem>
         </ToolbarToggleGroup>
-      )
-      : (
+      ) : (
         <ToolbarPrimitive.Button
-          ref={reference}
+          ref={ref}
           className={cn(
-            toggleVariants({
-              variant,
+            toolbarButtonVariants({
               size,
+              variant,
             }),
             isDropdown && 'pr-1',
-            className,
+            className
           )}
           {...props}
         >
           {children}
         </ToolbarPrimitive.Button>
       );
-
-    return isLoaded && tooltip
-      ? (
-        <Tooltip>
-          <TooltipTrigger>{content}</TooltipTrigger>
-
-          <TooltipPortal>
-            <TooltipContent className='z-200'>{tooltip}</TooltipContent>
-          </TooltipPortal>
-        </Tooltip>
-      )
-      : <>{content}</>;
-  },
+    }
+  )
 );
-ToolbarButton.displayName = ToolbarPrimitive.Button.displayName;
+ToolbarButton.displayName = 'ToolbarButton';
 
-const ToolbarToggleItem = React.forwardRef<
-  React.ElementRef<typeof ToolbarPrimitive.ToggleItem>,
-  & React.ComponentPropsWithoutRef<typeof ToolbarPrimitive.ToggleItem>
-  & VariantProps<typeof toggleVariants>
->(({ className, variant, size, ...props }, reference) => (
-  <ToolbarPrimitive.ToggleItem
-    ref={reference}
-    className={cn(toggleVariants({ variant, size }), className)}
-    {...props}
-  />
-));
-ToolbarToggleItem.displayName = ToolbarPrimitive.ToggleItem.displayName;
+export { ToolbarButton };
 
-const ToolbarGroup = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & { noSeparator?: boolean }
->(({ noSeparator, className, children }, reference) => {
-  const childArray = React.Children.map(children, (c) => c);
-  if (!childArray || childArray.length === 0) return null;
+export const ToolbarToggleItem = withVariants(
+  ToolbarPrimitive.ToggleItem,
+  toolbarButtonVariants,
+  ['variant', 'size']
+);
+
+export const ToolbarGroup = withRef<
+  'div',
+  {
+    noSeparator?: boolean;
+  }
+>(({ children, className, noSeparator }, ref) => {
+  const childArr = React.Children.map(children, (c) => c);
+
+  if (!childArr || childArr.length === 0) return null;
 
   return (
-    <div ref={reference} className={cn('flex', className)}>
+    <div ref={ref} className={cn('flex', className)}>
       {!noSeparator && (
         <div className='h-full py-1'>
           <Separator orientation='vertical' />
@@ -184,6 +156,3 @@ const ToolbarGroup = React.forwardRef<
     </div>
   );
 });
-ToolbarGroup.displayName = 'ToolbarGroup';
-
-export { Toolbar, ToolbarButton, ToolbarGroup, ToolbarLink, ToolbarSeparator, ToolbarToggleGroup, ToolbarToggleItem };

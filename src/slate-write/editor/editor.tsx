@@ -9,6 +9,8 @@ import { useInitialValue, useOnChange } from './hooks/useInitialValueOnChange';
 import { getIdFactory } from './plugins/id/getId';
 import './style.css';
 import './plate-global.css';
+import { FloatingToolbar } from './components';
+import { FloatingToolbarButtons } from './components/plate-ui/floating-toolbar-buttons';
 import { Editor } from './components/plate-ui/editor';
 import { TooltipProvider } from './components/plate-ui/tooltip';
 import { useSlateWriteEditor } from './useEditor';
@@ -26,24 +28,6 @@ export interface ISaver {
   lock: () => void;
   onSave: (value: string) => void;
 }
-
-// export function Editor(props: IEditorAppProps & IDefaultWidgetProps & { currentAstReference: MutableRefObject<TElement[]>; idCreator: () => string }): JSX.Element {
-//   const { currentTiddler: editorID, currentAstReference, initialTiddlerText, saver, idCreator } = props;
-
-//   // TODO: get dom node to add IME listener to prevent update when IME open https://github.com/udecode/plate/issues/239#issuecomment-1098052241
-//   return (
-//     <Plate id={editorID} editableProps={{ ...CONFIG.editableProps }} onChange={console.log}>
-//       <FloatingToolbar floatingOptions={{ placement: 'top-end' }}>
-//         <FloatingToolbarButtons />
-//       </FloatingToolbar>
-//       <SnippetCombobox id={editorID} pluginKey='/' />
-//       <WikiLinkCombobox id={editorID} pluginKey='[[' />
-//       <WikiLinkCombobox id={editorID} pluginKey='{{' />
-//       <MacrosCombobox id={editorID} pluginKey='<<' />
-//       <WidgetCombobox id={editorID} pluginKey='<$' />
-//     </Plate>
-//   );
-// }
 
 export function App({ initialTiddlerText, saver, currentTiddler: editorID, parentWidget }: IEditorAppProps & IDefaultWidgetProps): JSX.Element {
   const scrollSelector = '.tw-slate-write-container';
@@ -81,6 +65,9 @@ export function App({ initialTiddlerText, saver, currentTiddler: editorID, paren
           <div className='tw-slate-write-container'>
             <Plate editor={editor} onChange={onChange}>
               <Editor />
+              <FloatingToolbar>
+                <FloatingToolbarButtons />
+              </FloatingToolbar>
             </Plate>
           </div>
         </TooltipProvider>

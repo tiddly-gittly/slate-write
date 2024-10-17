@@ -1,52 +1,82 @@
-/* eslint-disable unicorn/no-null */
-import { useFloatingToolbar, UseVirtualFloatingOptions } from '@udecode/plate-floating';
-import { PortalBody } from '@udecode/plate-utils';
-import { ReactNode } from 'react';
+'use client';
 
-import { cn } from 'src/slate-write/editor/lib/utils';
+import React from 'react';
 
-import { Toolbar, ToolbarProps } from './toolbar';
+import { cn, withRef } from '@udecode/cn';
+import {
+  useComposedRef,
+  useEditorId,
+  useEditorRef,
+  useEventEditorSelectors,
+} from '@udecode/plate-common/react';
+import {
+  type FloatingToolbarState,
+  flip,
+  offset,
+  useFloatingToolbar,
+  useFloatingToolbarState,
+} from '@udecode/plate-floating';
+import { LinkPlugin } from '@udecode/plate-link/react';
 
-export interface FloatingToolbarProps extends ToolbarProps {
-  children: ReactNode;
+import { Toolbar } from './toolbar';
 
-  floatingOptions?: UseVirtualFloatingOptions;
+export const FloatingToolbar = withRef<
+  typeof Toolbar,
+  {
+    state?: FloatingToolbarState;
+  }
+>(({ children, state, ...props }, componentRef) => {
+  const editor = useEditorRef();
+  const editorId = useEditorId();
+  const focusedEditorId = useEventEditorSelectors.focus();
+  const isFloatingLinkOpen = !!editor.useOption(LinkPlugin, 'mode');
 
-  hideToolbar?: boolean;
-
-  ignoreReadOnly?: boolean;
-
-  portalElement?: Element;
-}
-
-export function FloatingToolbar({
-  portalElement,
-  floatingOptions,
-  ignoreReadOnly,
-  hideToolbar,
-  children,
-  ...props
-}: FloatingToolbarProps) {
-  const { refs, style, open } = useFloatingToolbar({
-    floatingOptions,
-    ignoreReadOnly,
-    hideToolbar,
+  const floatingToolbarState = useFloatingToolbarState({
+    editorId,
+    focusedEditorId,
+    hideToolbar: isFloatingLinkOpen,
+    ...state,
+    floatingOptions: {
+      middleware: [
+        offset(12),
+        flip({
+          fallbackPlacements: [
+            'top-start',
+            'top-end',
+            'bottom-start',
+            'bottom-end',
+          ],
+          padding: 12,
+        }),
+      ],
+      placement: 'top',
+      ...state?.floatingOptions,
+    },
   });
 
-  if (!open) return null;
+  const {
+    clickOutsideRef,
+    hidden,
+    props: rootProps,
+    ref: floatingRef,
+  } = useFloatingToolbar(floatingToolbarState);
+
+  const ref = useComposedRef<HTMLDivElement>(componentRef, floatingRef);
+
+  if (hidden) return null;
 
   return (
-    <PortalBody element={portalElement}>
+    <div ref={clickOutsideRef}>
       <Toolbar
+        ref={ref}
         className={cn(
-          'absolute z-200 whitespace-nowrap border border-slate-200 bg-white px-1 opacity-100 shadow-md dark:border-slate-800 dark:bg-slate-950',
+          'absolute z-50 whitespace-nowrap rounded-md border border-slate-200 bg-white px-1 opacity-100 shadow-md print:hidden dark:border-slate-800 dark:bg-slate-950'
         )}
-        ref={refs.setFloating}
-        style={style}
+        {...rootProps}
         {...props}
       >
         {children}
       </Toolbar>
-    </PortalBody>
+    </div>
   );
-}
+});

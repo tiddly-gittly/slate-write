@@ -4,7 +4,6 @@
 
 export * from './dnd/postDropNormalize';
 export * from './heading/index';
-export * from './id/getId';
 export * from './link/LinkElement/index';
 export * from './link/LinkToolbarButton';
 export * from './link/transforms/getAndUpsertLink';
