@@ -1,23 +1,35 @@
-import { ELEMENT_UL, useListToolbarButton, useListToolbarButtonState } from '@udecode/plate-list';
+import React from 'react';
 
-import { FormatListBulleted } from '@styled-icons/material/FormatListBulleted';
-import { FormatListNumbered } from '@styled-icons/material/FormatListNumbered';
+import { withRef } from '@udecode/cn';
+import {
+  BulletedListPlugin,
+  useListToolbarButton,
+  useListToolbarButtonState,
+} from '@udecode/plate-list/react';
+
+import { Icons } from 'src/slate-write/editor/components/icons';
+
 import { ToolbarButton } from './toolbar';
 
-export function ListToolbarButton({
-  nodeType = ELEMENT_UL,
-}: {
-  nodeType?: string;
-}) {
+export const ListToolbarButton = withRef<
+  typeof ToolbarButton,
+  {
+    nodeType?: string;
+  }
+>(({ nodeType = BulletedListPlugin.key, ...rest }, ref) => {
   const state = useListToolbarButtonState({ nodeType });
   const { props } = useListToolbarButton(state);
 
   return (
     <ToolbarButton
-      tooltip={nodeType === ELEMENT_UL ? 'UnorderedList (-) (*)' : 'OrderedList (#) (1.)'}
+      ref={ref}
+      tooltip={
+        nodeType === BulletedListPlugin.key ? 'Bulleted List' : 'Numbered List'
+      }
       {...props}
+      {...rest}
     >
-      {nodeType === ELEMENT_UL ? <FormatListBulleted /> : <FormatListNumbered />}
+      {nodeType === BulletedListPlugin.key ? <Icons.ul /> : <Icons.ol />}
     </ToolbarButton>
   );
-}
+});

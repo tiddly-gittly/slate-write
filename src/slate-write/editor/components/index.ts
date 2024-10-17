@@ -3,10 +3,8 @@
  */
 
 export * from './configuedComponents';
-export * from './plate-ui/floating-toolbar-buttons';
-export * from './plate-ui/more-dropdown-menu';
-export * from './plate-ui/turn-into-dropdown-menu';
 export * from './icons';
+export * from './plate-ui/block-selection';
 export * from './plate-ui/blockquote-element';
 export * from './plate-ui/button';
 export * from './plate-ui/caption';
@@ -20,6 +18,7 @@ export * from './plate-ui/draggable';
 export * from './plate-ui/dropdown-menu';
 export * from './plate-ui/editor';
 export * from './plate-ui/floating-toolbar';
+export * from './plate-ui/floating-toolbar-buttons';
 export * from './plate-ui/heading-element';
 export * from './plate-ui/hr-element';
 export * from './plate-ui/image-element';
@@ -36,6 +35,7 @@ export * from './plate-ui/media-popover';
 export * from './plate-ui/more-dropdown-menu';
 export * from './plate-ui/paragraph-element';
 export * from './plate-ui/placeholder';
+export * from './plate-ui/plate-element';
 export * from './plate-ui/popover';
 export * from './plate-ui/resizable';
 export * from './plate-ui/search-highlight-leaf';

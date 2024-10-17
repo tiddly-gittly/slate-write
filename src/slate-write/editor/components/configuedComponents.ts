@@ -14,7 +14,7 @@ import { BulletedListPlugin, ListItemPlugin, NumberedListPlugin } from '@udecode
 import { ImagePlugin } from '@udecode/plate-media/react';
 import { SlashInputPlugin } from '@udecode/plate-slash-command/react';
 import { TableCellHeaderPlugin, TableCellPlugin, TablePlugin, TableRowPlugin } from '@udecode/plate-table/react';
-import { LinkElement } from '../plugins';
+import { LinkElement } from './plate-ui/link-element';
 import { BlockquoteElement } from './plate-ui/blockquote-element';
 import { CodeBlockElement } from './plate-ui/code-block-element';
 import { CodeLeaf } from './plate-ui/code-leaf';

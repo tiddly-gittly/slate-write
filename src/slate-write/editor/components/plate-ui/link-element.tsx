@@ -1,28 +1,31 @@
-import { TLinkElement, useLink } from '@udecode/plate-link';
-import { PlateElement, PlateElementProps } from '@udecode/plate-utils';
-import { Value } from '@udecode/slate';
 import React from 'react';
 
-import { cn } from 'src/slate-write/editor/lib/utils';
+import type { TLinkElement } from '@udecode/plate-link';
 
-const LinkElement = React.forwardRef<
-  React.ElementRef<typeof PlateElement>,
-  PlateElementProps<Value, TLinkElement>
->(({ className, children, ...props }, reference) => {
-  const { props: linkProps } = useLink({ element: props.element });
+import { cn, withRef } from '@udecode/cn';
+import { useElement } from '@udecode/plate-common/react';
+import { useLink } from '@udecode/plate-link/react';
 
-  return (
-    <PlateElement
-      asChild
-      ref={reference}
-      className={cn('font-medium underline underline-offset-4', className)}
-      {...linkProps}
-      {...(props as any)}
-    >
-      <a>{children}</a>
-    </PlateElement>
-  );
-});
-LinkElement.displayName = 'LinkElement';
+import { PlateElement } from './plate-element';
 
-export { LinkElement };
+export const LinkElement = withRef<typeof PlateElement>(
+  ({ children, className, ...props }, ref) => {
+    const element = useElement<TLinkElement>();
+    const { props: linkProps } = useLink({ element });
+
+    return (
+      <PlateElement
+        ref={ref}
+        as='a'
+        className={cn(
+          'font-medium text-slate-900 underline decoration-primary underline-offset-4 dark:text-slate-50',
+          className
+        )}
+        {...(linkProps as any)}
+        {...props}
+      >
+        {children}
+      </PlateElement>
+    );
+  }
+);
