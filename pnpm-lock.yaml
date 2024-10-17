@@ -7197,7 +7197,7 @@ snapshots:
 
   builtins@5.0.1:
     dependencies:
-      semver: 7.5.3
+      semver: 7.6.3
 
   call-bind@1.0.2:
     dependencies:
@@ -9574,7 +9574,7 @@ snapshots:
 
   resolve@2.0.0-next.4:
     dependencies:
-      is-core-module: 2.12.1
+      is-core-module: 2.15.1
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
 

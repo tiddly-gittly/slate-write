@@ -1,6 +1,7 @@
 import { WithDraggableOptions } from '@udecode/plate-dnd';
 import { findNode, getParentNode, type TEditor, type TElement, type Value, wrapNodes } from '@udecode/slate';
-import { DraggableComponents, DraggableProps } from '../../components';
+import { DraggableProps } from '../../components';
+import { DraggableComponents } from '../../config/draggableComponents';
 
 function postDropListNormalize<V extends Value>(editor: TEditor<V>, dragItem: { id: string; parentType: string; type: string }): void {
   if ('parentType' in dragItem) {
