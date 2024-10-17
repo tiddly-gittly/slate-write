@@ -25,8 +25,9 @@ import { TabbablePlugin } from '@udecode/plate-tabbable/react';
 import { TablePlugin } from '@udecode/plate-table/react';
 import { TrailingBlockPlugin } from '@udecode/plate-trailing-block';
 import { MutableRefObject } from 'react';
-import { LinkFloatingToolbar } from './components/plate-ui/link-floating-toolbar';
 import { createPlateUI } from './components';
+import { LinkFloatingToolbar } from './components/plate-ui/link-floating-toolbar';
+import { autoformatRules } from './config';
 
 export const useSlateWriteEditor = (editorId: string = '', idCreator: () => string, currentAstReference: MutableRefObject<ValueOf<SlateEditor>>, scrollSelector?: string) => {
   const a = usePlateEditor(
@@ -111,7 +112,12 @@ export const useSlateWriteEditor = (editorId: string = '', idCreator: () => stri
         }),
 
         // Functionality
-        AutoformatPlugin,
+        AutoformatPlugin.configure({
+          options: {
+            rules: autoformatRules,
+            enableUndoOnDelete: true,
+          },
+        }),
         BlockSelectionPlugin.configure({
           // enabled: !!scrollSelector,
           // options: {
