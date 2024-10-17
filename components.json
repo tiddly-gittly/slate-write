@@ -1,5 +1,5 @@
 {
-  "$schema": "https://platejs.org/schema.json",
+  "$schema": "https://ui.shadcn.com/schema.json",
   "style": "default",
   "rsc": false,
   "tailwind": {
@@ -11,5 +11,14 @@
   "aliases": {
     "components": "src/slate-write/editor/components",
     "utils": "src/slate-write/editor/lib/utils"
+  },
+  "registries": {
+    "plate-ui": {
+      "url": "https://platejs.org/r",
+      "style": "default",
+      "aliases": {
+        "ui": "src/slate-write/editor/components/plate-ui"
+      }
+    }
   }
 }
