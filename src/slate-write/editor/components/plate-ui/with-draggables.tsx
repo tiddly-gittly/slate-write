@@ -7,11 +7,12 @@ import { draggableComponents } from '../../config/draggableComponents';
 
 import { Draggable, type DraggableProps } from './draggable';
 
+export type DraggableComponents = WithDraggableOptions<
+  Partial<Omit<DraggableProps, 'children' | 'editor' | 'element'>>
+>;
 export const withDraggable = (
   Component: FC,
-  options?: WithDraggableOptions<
-    Partial<Omit<DraggableProps, 'children' | 'editor' | 'element'>>
-  >,
+  options?: DraggableComponents,
 ) => withDraggablePrimitive<DraggableProps>(Draggable, Component, options as any);
 
 export const withDraggablesPrimitive = createNodesWithHOC(withDraggable);

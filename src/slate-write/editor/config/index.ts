@@ -6,4 +6,3 @@ export * from './autoformat/index';
 export * from './config';
 export * from './draggableComponents';
 export * from './globalStyle';
-export * from './placeHoldersComponents';

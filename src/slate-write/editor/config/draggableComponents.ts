@@ -1,14 +1,13 @@
 /* eslint-disable unicorn/no-null */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { ELEMENT_PARAGRAPH } from '@udecode/plate-paragraph';
-
 import { HEADING_KEYS } from '@udecode/plate-heading';
 
 import { BlockquotePlugin } from '@udecode/plate-block-quote/react';
+import { ParagraphPlugin } from '@udecode/plate-core/react';
 import { ListPlugin } from '@udecode/plate-list/react';
 import { ELEMENT_CODE_BLOCK } from 'wikiast-utils';
-import type { DraggableComponents } from '../components';
+import { DraggableComponents } from '../components/plate-ui/with-draggables';
 import { addDropHandlers } from '../plugins';
 
 // only element that registered keys here will have dnd grabber
@@ -71,7 +70,7 @@ export const draggableComponents: DraggableComponents = [
     },
   },
   {
-    keys: [ELEMENT_PARAGRAPH],
+    keys: [ParagraphPlugin.key],
     draggableProps: {
       classNames: {
         gutterLeft: 'px-0',

@@ -13,6 +13,7 @@ export * from './plate-ui/code-block-element';
 export * from './plate-ui/code-leaf';
 export * from './plate-ui/code-line-element';
 export * from './plate-ui/code-syntax-leaf';
+export * from './plate-ui/command';
 export * from './plate-ui/dialog';
 export * from './plate-ui/draggable';
 export * from './plate-ui/dropdown-menu';

@@ -3,3 +3,4 @@
  */
 
 export * from './dnd/postDropNormalize';
+export * from './id/getId';
