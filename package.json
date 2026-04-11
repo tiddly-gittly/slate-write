@@ -28,7 +28,8 @@
   "pnpm": {
     "overrides": {
       "react": "$react",
-      "react-dom": "$react-dom"
+      "react-dom": "$react-dom",
+      "esbuild-plugin-browserslist": "1.0.2"
     },
     "peerDependencyRules": {
       "allowedVersions": {
