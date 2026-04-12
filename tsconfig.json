@@ -2,23 +2,13 @@
   "extends": "@modern-js/tsconfig/base.json",
   "compilerOptions": {
     "declaration": false,
-    "esModuleInterop": true,
     "jsx": "react-jsx",
-    "typeRoots": [
-      "node_modules/@types",
-      "node_modules/tw5-typed",
-      "node_modules/tw-react/dist/lib"
-    ],
-    "lib": [
-      "DOM",
-      "ESNext"
-    ],
-    "baseUrl": "./"
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "noEmit": true,
+    "types": ["node", "tw5-typed"],
+    "lib": ["DOM", "ESNext"]
   },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "./**/*.js"
-  ]
+  "include": ["src", "*.json", "wiki/*.info", "*.mjs", "*.js", "src/**/*.d.ts", "wiki/tiddlers/tests/playwright/**/*.ts"]
 }
+
