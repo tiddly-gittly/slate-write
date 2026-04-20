@@ -20,16 +20,24 @@
     "reset": "rimraf ./**/node_modules",
     "clean": "rimraf dist",
     "prepare": "husky",
-    "update": "npm-check-updates -u",
+    "update": "npm-check-updates -u && dprint config update",
     "new": "tiddlywiki-plugin-dev new",
     "build:library": "npm run clean && tiddlywiki-plugin-dev build --library --output dist/library",
-    "publish:offline": "npm run clean && tiddlywiki-plugin-dev publish --offline"
+    "publish:offline": "npm run clean && tiddlywiki-plugin-dev publish --offline",
+    "dev:lan": "tiddlywiki-plugin-dev dev --lan",
+    "dev:wiki": "tiddlywiki-plugin-dev dev --write-wiki",
+    "test": "tiddlywiki-plugin-dev test",
+    "test:playwright": "playwright test",
+    "test:playwright:headed": "playwright test --headed",
+    "test:playwright:debug": "playwright test --debug",
+    "lint": "eslint ./src --ext js,ts,tsx,json",
+    "lint:fix": "eslint ./src --ext ts,tsx,json --fix",
+    "check": "tsc --noEmit --skipLibCheck"
   },
   "pnpm": {
     "overrides": {
       "react": "$react",
-      "react-dom": "$react-dom",
-      "esbuild-plugin-browserslist": "1.0.2"
+      "react-dom": "$react-dom"
     },
     "peerDependencyRules": {
       "allowedVersions": {
@@ -73,7 +81,10 @@
     "ts-node": "^10.9.2",
     "tw-react": "^0.6.1",
     "tw5-typed": "^1.1.5",
-    "typescript": "^6.0.2"
+    "typescript": "^6.0.2",
+    "@playwright/test": "^1.59.1",
+    "@types/jasmine": "^6.0.0",
+    "postcss": "^8.5.9"
   },
   "dependencies": {
     "@radix-ui/react-dropdown-menu": "^2.0.5",
@@ -140,13 +151,14 @@
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.6",
     "tiddlywiki": "^5.3.8",
-    "tiddlywiki-plugin-dev": "^0.5.3",
+    "tiddlywiki-plugin-dev": "^0.5.7",
     "tippy.js": "^6.3.7",
     "typescript-styled-is": "^2.1.0",
     "wikiast-util-from-slate-plate-ast": "^0.3.0",
     "wikiast-util-from-wikitext": "^0.3.0",
     "wikiast-util-to-slate-plate-ast": "^0.3.0",
     "wikiast-util-to-wikitext": "^0.3.0",
-    "wikiast-utils": "^0.3.0"
+    "wikiast-utils": "^0.3.0",
+    "npm-check-updates": "^20.0.1"
   }
 }
